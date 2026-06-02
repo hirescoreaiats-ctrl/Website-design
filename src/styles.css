@@ -81,23 +81,25 @@ img {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
   color: var(--white);
   font-size: 1.02rem;
   font-weight: 900;
   white-space: nowrap;
 }
 
-.brand-mark {
-  width: 40px;
-  height: 40px;
-  display: grid;
-  place-items: center;
+.brand-logo {
+  width: clamp(210px, 19vw, 282px);
+  height: 54px;
+  display: block;
+  object-fit: contain;
   border-radius: var(--radius);
-  background:
-    radial-gradient(circle at 30% 22%, rgba(255,255,255,0.95), transparent 14%),
-    linear-gradient(135deg, var(--blue), var(--cyan) 58%, var(--violet));
-  box-shadow: 0 18px 44px rgba(25, 216, 255, 0.26);
+  background: #fff;
+  box-shadow: 0 16px 42px rgba(25, 216, 255, 0.14);
+}
+
+.footer-logo {
+  width: min(290px, 100%);
+  height: auto;
 }
 
 .nav-links {

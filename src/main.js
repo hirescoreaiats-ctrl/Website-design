@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import htm from "htm";
 import { motion, AnimatePresence } from "framer-motion";
 import dashboardImage from "../assets/hirescore-ai-dashboard.png";
+import logoFull from "../assets/hirescore-logo-full.png";
 import {
   Activity,
   AreaChart,
@@ -33,7 +34,6 @@ import {
   Minus,
   Plus,
   Rocket,
-  ScanSearch,
   SearchX,
   Send,
   ShieldCheck,
@@ -98,8 +98,7 @@ function Nav({ route }) {
     <header className="nav">
       <div className="nav-inner">
         <a className="brand" href="index.html" aria-label="HireScore AI home">
-          <span className="brand-mark"><${ScanSearch} size=${23} /></span>
-          <span>HireScore AI</span>
+          <img className="brand-logo" src=${logoFull} alt="HireScore AI" />
         </a>
         <nav className="nav-links" aria-label="Primary navigation">
           ${pages.map(
@@ -599,7 +598,7 @@ function Footer() {
     <footer className="footer">
       <div className="container footer-grid">
         <div className="footer-col">
-          <a className="brand" href="index.html"><span className="brand-mark"><${ScanSearch} size=${23} /></span><span>HireScore AI</span></a>
+          <a className="brand" href="index.html"><img className="brand-logo footer-logo" src=${logoFull} alt="HireScore AI" /></a>
           <p>AI ATS and recruitment intelligence for faster, evidence-backed hiring decisions.</p>
           <div className="social"><a href="#" aria-label="LinkedIn"><${Globe} size=${18} /></a><a href="#" aria-label="Twitter"><${Share2} size=${18} /></a><a href="#" aria-label="YouTube"><${RadioTower} size=${18} /></a></div>
         </div>
