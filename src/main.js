@@ -245,7 +245,7 @@ function HomePage() {
         <div className="container hero-inner">
           <${motion.div} className="hero-copy" initial=${{ opacity: 0, x: -24 }} animate=${{ opacity: 1, x: 0 }} transition=${{ duration: 0.58 }}>
             <p className="eyebrow"><span className="dot"></span>AI recruitment intelligence platform</p>
-            <h1>Hire smarter with <span>AI-powered hiring intelligence.</span></h1>
+            <h1><span>AI Hiring Intelligence</span> for Modern Recruiters</h1>
             <p className="lead">HireScore AI helps recruiters screen resumes, rank candidates, analyze job fit, and move the best talent through the hiring pipeline faster.</p>
             <div className="actions">
               <a className="btn btn-primary" href="contact.html"><${CalendarCheck} size=${18} />Book a Demo</a>
@@ -394,7 +394,7 @@ function PricingPage() {
           )}
         </div>
       </section>
-      <FAQ
+      <${FAQ}
         title="Pricing FAQ"
         items=${[
           ["Can I start with a free trial?", "Yes. Contact the team to set up a trial or guided product walkthrough."],
@@ -404,7 +404,7 @@ function PricingPage() {
           ["Can HireScore AI work for any job role?", "Yes. The JD matching engine evaluates candidates against role-specific requirements."],
           ["Do you support recruitment agencies?", "Yes. Agencies can process high resume volume and present stronger shortlists to clients."]
         ]}
-      />
+      ></${FAQ}>
       <${CTA} title="Find the right HireScore AI plan." text="Talk to us about your hiring volume and workflow." primary="Choose Your Plan" secondary="Talk to Sales" />
     </main>
   `;
@@ -458,7 +458,7 @@ function ResourcesPage() {
       <section className="section">
         <div className="container newsletter">
           <div><h2>Get smarter hiring insights in your inbox.</h2><p className="muted">Receive product updates, hiring guides, and AI recruiting ideas.</p></div>
-          <SignupForm label="Subscribe" />
+          <${SignupForm} label="Subscribe" />
         </div>
       </section>
       <${CTA} title="Explore HireScore AI." text="Turn hiring resources into faster recruiter workflows." primary="Explore Product" primaryHref="product.html" />
@@ -474,7 +474,7 @@ function ContactPage() {
         <div className="container contact-layout">
           <${Reveal} className="card">
             <${SectionHead} eyebrow="Book a demo" title="Tell us about your hiring workflow." />
-            <ContactForm />
+            <${ContactForm} />
           </${Reveal}>
           <${Reveal} className="card">
             <h2>How can we help?</h2>
@@ -487,7 +487,7 @@ function ContactPage() {
           </${Reveal}>
         </div>
       </section>
-      <FAQ
+      <${FAQ}
         title="Contact FAQ"
         items=${[
           ["How does HireScore AI score candidates?", "It evaluates skills, experience, education, semantic matching, and recruiter-visible evidence."],
@@ -496,7 +496,7 @@ function ContactPage() {
           ["Can we integrate it with our existing system?", "Enterprise plans can discuss custom workflows and API integrations."],
           ["Can we use our own database?", "Enterprise setup can include database flexibility for internal architecture requirements."]
         ]}
-      />
+      ></${FAQ}>
       <${CTA} title="Schedule a demo." text="Bring AI-powered confidence to your next shortlist." primary="Schedule a Demo" />
     </main>
   `;
