@@ -20,7 +20,6 @@ import {
   Copy,
   DatabaseZap,
   FileScan,
-  FileSearch,
   Files,
   Gauge,
   Globe,
@@ -43,7 +42,6 @@ import {
   RadioTower,
   Share2,
   Users,
-  Workflow,
 } from "lucide-react";
 
 const html = htm.bind(React.createElement);
@@ -250,16 +248,6 @@ function HomePage() {
             <div className="actions">
               <a className="btn btn-primary" href="contact.html"><${CalendarCheck} size=${18} />Book a Demo</a>
               <a className="btn btn-dark" href="product.html"><${ArrowRight} size=${19} />Explore Product</a>
-            </div>
-            <div className="hero-pills">
-              <span className="pill"><${FileSearch} size=${17} />AI Resume Screening</span>
-              <span className="pill"><${BarChart3} size=${17} />Smart Candidate Ranking</span>
-              <span className="pill"><${Workflow} size=${17} />Recruiter Workflow Automation</span>
-            </div>
-            <div className="hero-proof">
-              <div className="proof-card"><strong>70%</strong><span>less screening time</span></div>
-              <div className="proof-card"><strong>88%</strong><span>fit confidence signals</span></div>
-              <div className="proof-card"><strong>1</strong><span>connected shortlist workflow</span></div>
             </div>
           </${motion.div}>
           <${HeroDashboard} />

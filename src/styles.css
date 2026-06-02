@@ -269,12 +269,6 @@ img {
   gap: 12px;
 }
 
-.hero-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-}
-
 .pill {
   min-height: 34px;
   display: inline-flex;
@@ -287,35 +281,6 @@ img {
   background: rgba(255,255,255,0.08);
   font-size: 0.8rem;
   font-weight: 850;
-}
-
-.hero-proof {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 6px;
-}
-
-.proof-card {
-  padding: 14px;
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: var(--radius);
-  background: rgba(255,255,255,0.065);
-  backdrop-filter: blur(18px);
-}
-
-.proof-card strong {
-  display: block;
-  font-size: 1.35rem;
-  line-height: 1;
-}
-
-.proof-card span {
-  display: block;
-  margin-top: 7px;
-  color: #aebfe1;
-  font-size: 0.78rem;
-  font-weight: 800;
 }
 
 .hero-visual {
@@ -1064,17 +1029,11 @@ p {
     width: 100%;
   }
 
-  .hero-pills,
-  .hero-proof,
   .flow,
   .grid.two,
   .grid.three,
   .grid.four {
     grid-template-columns: 1fr;
-  }
-
-  .hero-pills {
-    display: grid;
   }
 
   .pill {
