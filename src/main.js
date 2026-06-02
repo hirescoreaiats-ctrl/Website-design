@@ -1,7 +1,8 @@
-import React, { useMemo, useState } from "https://esm.sh/react@18.3.1";
-import { createRoot } from "https://esm.sh/react-dom@18.3.1/client";
-import htm from "https://esm.sh/htm@3.1.1";
-import { motion, AnimatePresence } from "https://esm.sh/framer-motion@11.18.2?deps=react@18.3.1";
+import React, { useMemo, useState } from "react";
+import { createRoot } from "react-dom/client";
+import htm from "htm";
+import { motion, AnimatePresence } from "framer-motion";
+import dashboardImage from "../assets/hirescore-ai-dashboard.png";
 import {
   Activity,
   AreaChart,
@@ -21,11 +22,11 @@ import {
   FileSearch,
   Files,
   Gauge,
+  Globe,
   Handshake,
   Kanban,
   Layers,
   LayoutDashboard,
-  Linkedin,
   Mail,
   Menu,
   MessageSquare,
@@ -39,11 +40,11 @@ import {
   Sparkles,
   Target,
   TimerOff,
-  Twitter,
+  RadioTower,
+  Share2,
   Users,
   Workflow,
-  Youtube
-} from "https://esm.sh/lucide-react@0.468.0?deps=react@18.3.1";
+} from "lucide-react";
 
 const html = htm.bind(React.createElement);
 
@@ -132,7 +133,7 @@ function HeroDashboard() {
       transition=${{ duration: 0.68, delay: 0.12 }}
     >
       <div className="dashboard-frame">
-        <img src="assets/hirescore-ai-dashboard.png" alt="AI hiring dashboard with candidate ranking, score gauges, and analytics" />
+        <img src=${dashboardImage} alt="AI hiring dashboard with candidate ranking, score gauges, and analytics" />
       </div>
       <${motion.div} className="floating-card" animate=${{ y: [0, -8, 0] }} transition=${{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
         <strong>AI recommendation ready</strong>
@@ -600,7 +601,7 @@ function Footer() {
         <div className="footer-col">
           <a className="brand" href="index.html"><span className="brand-mark"><${ScanSearch} size=${23} /></span><span>HireScore AI</span></a>
           <p>AI ATS and recruitment intelligence for faster, evidence-backed hiring decisions.</p>
-          <div className="social"><a href="#" aria-label="LinkedIn"><${Linkedin} size=${18} /></a><a href="#" aria-label="Twitter"><${Twitter} size=${18} /></a><a href="#" aria-label="YouTube"><${Youtube} size=${18} /></a></div>
+          <div className="social"><a href="#" aria-label="LinkedIn"><${Globe} size=${18} /></a><a href="#" aria-label="Twitter"><${Share2} size=${18} /></a><a href="#" aria-label="YouTube"><${RadioTower} size=${18} /></a></div>
         </div>
         <div className="footer-col"><h3>Product</h3><a href="product.html">Resume Parser</a><a href="product.html">JD Matching</a><a href="product.html">Candidate Ranking</a><a href="product.html">Analytics</a></div>
         <div className="footer-col"><h3>Company</h3><a href="contact.html">Contact Us</a><a href="pricing.html">Pricing</a><a href="contact.html">Book a Demo</a><a href="contact.html">Partnerships</a></div>
