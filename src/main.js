@@ -203,6 +203,71 @@ function FeatureCard({ icon, title, text }) {
   `;
 }
 
+function PainCard({ icon: Icon, title, text, metric }) {
+  return html`
+    <${Reveal} className="pain-card">
+      <div className="pain-top">
+        <span className="card-icon"><${Icon} size=${21} /></span>
+        <strong>${metric}</strong>
+      </div>
+      <h3>${title}</h3>
+      <p>${text}</p>
+    </${Reveal}>
+  `;
+}
+
+function SignalPanel() {
+  const rows = [
+    ["Resume queue", "248", "Needs AI triage"],
+    ["High-fit profiles", "31", "Ready for review"],
+    ["Skill gaps found", "74", "Explainable signals"],
+    ["Duplicate records", "12", "Merge recommended"]
+  ];
+
+  return html`
+    <${Reveal} className="signal-panel">
+      <div className="signal-header">
+        <span className="live-dot"></span>
+        <strong>Recruiter workload snapshot</strong>
+      </div>
+      <div className="signal-rows">
+        ${rows.map((row) => html`
+          <div className="signal-row" key=${row[0]}>
+            <span>${row[0]}</span>
+            <strong>${row[1]}</strong>
+            <small>${row[2]}</small>
+          </div>
+        `)}
+      </div>
+      <div className="signal-note">
+        <${Activity} size=${18} />
+        AI prioritizes the candidates that deserve human attention first.
+      </div>
+    </${Reveal}>
+  `;
+}
+
+function SolutionStrip() {
+  const items = [
+    ["01", "Parse", "Convert messy resumes into structured candidate profiles."],
+    ["02", "Match", "Compare every profile against the real job description."],
+    ["03", "Explain", "Show strengths, missing skills, and risk signals clearly."],
+    ["04", "Shortlist", "Move best-fit candidates forward with confidence."]
+  ];
+
+  return html`
+    <div className="solution-strip">
+      ${items.map((item) => html`
+        <${Reveal} className="solution-step" key=${item[0]}>
+          <span>${item[0]}</span>
+          <h3>${item[1]}</h3>
+          <p>${item[2]}</p>
+        </${Reveal}>
+      `)}
+    </div>
+  `;
+}
+
 function SectionHead({ eyebrow, title, text, center = false }) {
   return html`
     <div className=${`section-head ${center ? "center" : ""}`}>
@@ -215,20 +280,20 @@ function SectionHead({ eyebrow, title, text, center = false }) {
 
 function HomePage() {
   const pain = [
-    [Clock, "Manual screening", "Recruiters lose hours reading resumes before they can focus on top talent."],
-    [SearchX, "Weak resume matching", "Keyword systems miss context, adjacent skills, and real experience quality."],
-    [Copy, "Duplicate candidates", "Candidate records spread across jobs, sources, and manual spreadsheets."],
-    [TimerOff, "Slow shortlisting", "The best candidates wait while teams debate incomplete hiring signals."]
+    [Clock, "Resume review is eating your day", "A single role can bury recruiters under hundreds of profiles before they even know who deserves attention.", "Hours lost"],
+    [SearchX, "Keyword matching misses real fit", "Great candidates get buried when tools only look for exact words instead of skills, context, and role relevance.", "Hidden talent"],
+    [Copy, "Candidate data gets messy fast", "Duplicate profiles, scattered spreadsheets, and unclear history make recruiter decisions slower and harder to defend.", "Data noise"],
+    [TimerOff, "Shortlists arrive too late", "Hiring managers wait while recruiters manually compare profiles, explain fit, and chase the next best action.", "Slow pipeline"]
   ];
   const features = [
-    [FileScan, "AI Resume Parsing", "Extract contact details, skills, experience, education, projects, and roles."],
-    [Target, "JD Matching", "Compare resumes against any job description with semantic matching."],
-    [BarChart3, "Candidate Ranking", "Rank large candidate pools by job fit and confidence signals."],
-    [Gauge, "Skill Gap Analysis", "Identify matched skills, missing requirements, and experience depth."],
-    [ClipboardCheck, "Decision Evidence", "Explain why a candidate is strong, average, or risky."],
-    [CheckCheck, "Shortlist Workflow", "Move candidates forward with clean review and shortlist stages."],
-    [MessageSquare, "Communication Pipeline", "Track outreach and follow-up inside the hiring process."],
-    [AreaChart, "Analytics Dashboard", "Monitor job performance, candidate quality, and source performance."]
+    [FileScan, "Resume intelligence extraction", "Turn every resume into clean candidate data: skills, roles, education, projects, companies, and experience history."],
+    [Target, "Semantic JD matching", "Match candidates to the meaning of the job description, not just exact keywords."],
+    [BarChart3, "Ranked candidate queue", "Give recruiters a sorted list of strongest-fit candidates with confidence scores."],
+    [Gauge, "Skill gap breakdown", "See matched skills, missing requirements, adjacent strengths, and experience depth at a glance."],
+    [ClipboardCheck, "Decision evidence panel", "Explain why a candidate is strong, average, or risky with recruiter-readable evidence."],
+    [CheckCheck, "Shortlist operating system", "Move candidates from applied to review, shortlist, communication, and rejection without losing context."],
+    [MessageSquare, "Communication visibility", "Keep outreach and follow-up status connected to the candidate pipeline."],
+    [AreaChart, "Hiring analytics layer", "Understand source quality, job performance, candidate quality, and recurring skill gaps."]
   ];
   const useCases = [
     [BriefcaseBusiness, "Recruitment agencies", "Process high-volume resume pools and send sharper shortlists to clients."],
@@ -254,17 +319,20 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="section soft">
-        <div className="container">
-          <${SectionHead} center=${true} eyebrow="The recruiter bottleneck" title="Hiring teams need speed, clarity, and evidence before interviews begin." text="HireScore AI turns scattered resume review into a ranked, explainable, and recruiter-friendly workflow." />
-          <div className="grid four">${pain.map((item) => html`<${FeatureCard} key=${item[1]} icon=${item[0]} title=${item[1]} text=${item[2]} />`)}</div>
+      <section className="section intelligence-band">
+        <div className="container intelligence-layout">
+          <div>
+            <${SectionHead} eyebrow="The recruiter bottleneck" title="Recruiters do not need more resumes. They need decision-ready hiring signals." text="Manual screening turns every open role into a guessing game: too many resumes, weak matching, scattered evidence, and slow shortlists." />
+            <div className="pain-grid">${pain.map((item) => html`<${PainCard} key=${item[1]} icon=${item[0]} title=${item[1]} text=${item[2]} metric=${item[3]} />`)}</div>
+          </div>
+          <${SignalPanel} />
         </div>
       </section>
 
       <section className="section">
-        <div className="container grid two" style=${{ alignItems: "center" }}>
+        <div className="container solution-layout">
           <${Reveal}>
-            <${SectionHead} eyebrow="The HireScore AI solution" title="Screen, rank, explain, and move candidates with confidence." text="Recruiters see fit signals, missing skills, risk notes, shortlist status, and AI recommendations in one modern ATS workspace." />
+            <${SectionHead} eyebrow="The HireScore AI solution" title="One AI workspace for screening, ranking, evidence, and recruiter action." text="HireScore AI reads every resume, compares it with the job description, scores the fit, explains the decision, and helps recruiters move the right people forward." />
             <div className="actions">
               <a className="btn btn-primary" href="product.html"><${Sparkles} size=${18} />Explore Product</a>
               <a className="btn btn-soft" href="contact.html"><${MessageSquare} size=${18} />Talk to Sales</a>
@@ -272,12 +340,13 @@ function HomePage() {
           </${Reveal}>
           <${Reveal}><${AppPreview} /></${Reveal}>
         </div>
+        <div className="container"><${SolutionStrip} /></div>
       </section>
 
-      <section className="section soft">
+      <section className="section feature-band">
         <div className="container">
-          <${SectionHead} center=${true} eyebrow="Platform features" title="Everything modern recruiters expect from an AI hiring system." />
-          <div className="grid four">${features.map((item) => html`<${FeatureCard} key=${item[1]} icon=${item[0]} title=${item[1]} text=${item[2]} />`)}</div>
+          <${SectionHead} center=${true} eyebrow="Platform features" title="A recruitment intelligence layer built around recruiter judgment." text="The platform does the heavy analysis. Your team keeps control of the hiring decision." />
+          <div className="feature-mosaic">${features.map((item) => html`<${FeatureCard} key=${item[1]} icon=${item[0]} title=${item[1]} text=${item[2]} />`)}</div>
         </div>
       </section>
 

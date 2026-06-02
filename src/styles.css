@@ -357,7 +357,10 @@ img {
 }
 
 .section.soft {
-  background: var(--soft);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(37, 99, 255, 0.08), transparent 24rem),
+    radial-gradient(circle at 88% 12%, rgba(25, 216, 255, 0.1), transparent 22rem),
+    var(--soft);
 }
 
 .section.dark {
@@ -465,6 +468,254 @@ p {
 .card p {
   margin-top: 10px;
   color: var(--muted);
+}
+
+.intelligence-band {
+  position: relative;
+  overflow: hidden;
+  color: white;
+  background:
+    linear-gradient(135deg, rgba(5, 8, 20, 0.96), rgba(8, 21, 43, 0.94)),
+    radial-gradient(circle at 18% 22%, rgba(37,99,255,0.28), transparent 30rem),
+    radial-gradient(circle at 84% 4%, rgba(25,216,255,0.18), transparent 28rem),
+    var(--navy);
+}
+
+.intelligence-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.24;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+.intelligence-band .container {
+  position: relative;
+  z-index: 1;
+}
+
+.intelligence-band h2,
+.intelligence-band h3 {
+  color: white;
+}
+
+.intelligence-band .muted,
+.intelligence-band .section-head > p:last-child {
+  color: #b8c8e3;
+}
+
+.intelligence-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.pain-card {
+  min-height: 230px;
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding: 22px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.105), rgba(255,255,255,0.035)),
+    rgba(255,255,255,0.04);
+  box-shadow: 0 22px 60px rgba(0,0,0,0.2);
+  backdrop-filter: blur(20px);
+}
+
+.pain-card p {
+  margin: 0;
+  color: #b8c8e3;
+  line-height: 1.62;
+}
+
+.pain-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.pain-top strong {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  color: #8bf1ff;
+  border-radius: 999px;
+  background: rgba(25,216,255,0.1);
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.signal-panel {
+  position: sticky;
+  top: 98px;
+  padding: 22px;
+  border: 1px solid rgba(255,255,255,0.13);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(25,216,255,0.18), transparent 16rem),
+    rgba(255,255,255,0.065);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(24px);
+}
+
+.signal-header,
+.signal-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.live-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 8px rgba(54, 211, 153, 0.13);
+}
+
+.signal-rows {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.signal-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 5px 14px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.055);
+}
+
+.signal-row span {
+  color: #dceaff;
+  font-weight: 850;
+}
+
+.signal-row strong {
+  color: white;
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
+.signal-row small {
+  grid-column: 1 / -1;
+  color: #92a7c9;
+  font-weight: 750;
+}
+
+.signal-note {
+  padding: 14px;
+  color: #dceaff;
+  border-radius: var(--radius);
+  background: rgba(37,99,255,0.18);
+  font-weight: 850;
+  line-height: 1.45;
+}
+
+.solution-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(430px, 1.08fr);
+  gap: 34px;
+  align-items: center;
+}
+
+.solution-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.solution-step {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.95), rgba(245,248,252,0.92));
+  box-shadow: 0 18px 48px rgba(11, 22, 43, 0.07);
+}
+
+.solution-step span {
+  display: inline-flex;
+  margin-bottom: 16px;
+  color: var(--blue);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.solution-step p {
+  margin-top: 9px;
+  color: var(--muted);
+  line-height: 1.62;
+}
+
+.feature-band {
+  background:
+    radial-gradient(circle at 8% 18%, rgba(25,216,255,0.1), transparent 22rem),
+    radial-gradient(circle at 92% 4%, rgba(139,92,246,0.13), transparent 22rem),
+    linear-gradient(180deg, #ffffff 0%, #f6f9fd 100%);
+}
+
+.feature-mosaic {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.feature-mosaic .card {
+  min-height: 270px;
+  overflow: hidden;
+  background:
+    linear-gradient(150deg, rgba(255,255,255,0.94), rgba(238,246,255,0.82));
+}
+
+.feature-mosaic .card::after {
+  content: "";
+  position: absolute;
+  right: -42px;
+  bottom: -42px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(25,216,255,0.22), transparent 68%);
+}
+
+.feature-mosaic .card:nth-child(1),
+.feature-mosaic .card:nth-child(5) {
+  grid-column: span 2;
+  background:
+    linear-gradient(135deg, rgba(5,8,20,0.96), rgba(12,31,64,0.94));
+}
+
+.feature-mosaic .card:nth-child(1) h3,
+.feature-mosaic .card:nth-child(1) p,
+.feature-mosaic .card:nth-child(5) h3,
+.feature-mosaic .card:nth-child(5) p {
+  color: white;
+}
+
+.feature-mosaic .card:nth-child(1) p,
+.feature-mosaic .card:nth-child(5) p {
+  color: #bdd0ec;
 }
 
 .app-preview {
@@ -938,6 +1189,8 @@ p {
   .page-hero-inner,
   .module,
   .contact-layout,
+  .intelligence-layout,
+  .solution-layout,
   .cta-inner {
     grid-template-columns: 1fr;
   }
@@ -947,8 +1200,15 @@ p {
   }
 
   .grid.four,
-  .grid.three {
+  .grid.three,
+  .feature-mosaic,
+  .solution-strip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .signal-panel {
+    position: relative;
+    top: auto;
   }
 
   .footer-grid {
@@ -1030,10 +1290,18 @@ p {
   }
 
   .flow,
+  .pain-grid,
+  .solution-strip,
   .grid.two,
   .grid.three,
-  .grid.four {
+  .grid.four,
+  .feature-mosaic {
     grid-template-columns: 1fr;
+  }
+
+  .feature-mosaic .card:nth-child(1),
+  .feature-mosaic .card:nth-child(5) {
+    grid-column: auto;
   }
 
   .pill {
