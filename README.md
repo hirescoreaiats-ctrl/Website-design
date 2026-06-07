@@ -34,3 +34,20 @@ The deployable output will be generated in `dist/`.
 4. Deploy.
 
 No backend integration is required for the current contact form. The form UI is ready for future API wiring.
+
+## Deploy to Cloudflare Pages
+
+Use these settings:
+
+```bash
+Build command: npm run build
+Output directory: dist
+```
+
+The `public/_redirects` file rewrites nested routes to `index.html`, so refreshes on URLs like `/product/ai-candidate-ranking` work after deployment.
+
+## Production URLs
+
+- Main website: `https://hirescoreai.com`
+- App and product CTAs: `https://app.hirescoreai.com`
+- Backend API URL: `https://api.hirescoreai.com`

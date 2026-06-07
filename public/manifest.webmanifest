@@ -1,0 +1,16 @@
+{
+  "name": "HireScore AI",
+  "short_name": "HireScore AI",
+  "description": "AI-powered recruitment and ATS platform for resume screening, candidate ranking, and hiring automation.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070b16",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/hirescore-logo-mark.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
