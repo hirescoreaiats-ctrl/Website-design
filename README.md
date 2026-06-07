@@ -44,7 +44,13 @@ Build command: npm run build
 Output directory: dist
 ```
 
-The `public/_redirects` file rewrites nested routes to `index.html`, so refreshes on URLs like `/product/ai-candidate-ranking` work after deployment.
+Cloudflare SPA refresh handling is configured in `wrangler.jsonc` with:
+
+```json
+"not_found_handling": "single-page-application"
+```
+
+Do not add a Netlify-style `_redirects` file. Nested routes like `/product/ai-candidate-ranking`, `/pricing`, `/resources/blogs`, and `/contact` are handled by Wrangler assets config.
 
 ## Production URLs
 
