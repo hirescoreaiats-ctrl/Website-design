@@ -1157,3 +1157,65 @@ h3 {
     border-radius: 26px;
   }
 }
+
+
+/* ============================= */
+/* Blog readability fix */
+/* ============================= */
+
+.blogDetail {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  padding: 52px 0 84px;
+}
+
+.blogDetail .container {
+  max-width: 980px;
+}
+
+.blogDetailHero h1,
+.blogContentSection h2,
+.blogRelatedBox h2 {
+  color: #0f172a !important;
+}
+
+.blogDetailIntro,
+.blogContentSection p {
+  color: rgba(15, 23, 42, 0.78) !important;
+}
+
+.blogContent {
+  background: #ffffff !important;
+}
+
+.blogContentSection {
+  background: #ffffff !important;
+}
+
+.blogDetailImage {
+  margin-top: 28px;
+  margin-bottom: 36px;
+}
+
+.blogRelatedBox {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+.blogRelatedLinks a {
+  background: #ffffff !important;
+  color: #4f46e5 !important;
+}
+
+.blogMetaRow {
+  color: #0f172a !important;
+}
+
+.blogCategory {
+  background: rgba(79, 70, 229, 0.12) !important;
+  color: #4f46e5 !important;
+}
+
+.blogReadTime {
+  color: rgba(15, 23, 42, 0.6) !important;
+}
