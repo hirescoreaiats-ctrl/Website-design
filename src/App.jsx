@@ -1167,24 +1167,6 @@ function BlogPost({ post }) {
   )
 }
 
-function BlogPost({ post }) {
-  return (
-    <>
-      <SEO title={`${post.title} | HireScore AI Blog`} description={post.meta} path={post.slug} />
-      <PageHero eyebrow="Blog" title={post.title} intro={post.meta} cta={false} />
-      <Breadcrumbs items={[['/resources/blogs', 'Blogs'], [post.slug, post.title]]} />
-      <section className="section">
-        <article className="container articleCard">
-          <p>{post.meta}</p>
-          {post.sections.map(([heading, text]) => <section key={heading}><h2>{heading}</h2><p>{text}</p></section>)}
-          <h2>Related HireScore AI pages</h2>
-          <div className="inlineLinks">{post.links.map((href) => <Link href={href} key={href}>{titleByPath(href)}</Link>)}</div>
-          <ButtonRow />
-        </article>
-      </section>
-    </>
-  )
-}
 
 function CaseStudyList() {
   return (
