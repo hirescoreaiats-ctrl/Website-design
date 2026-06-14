@@ -855,7 +855,7 @@ function Dropdown({ label, base, items }) {
   return (
     <div className="dropdown">
       <Link href={base} className="dropTrigger">{label}<ChevronDown size={15} /></Link>
-      <div className="dropMenu">
+      <div className="dropMenu" role="menu" aria-label={`${label} menu`}>
         {items.map(([href, text]) => <Link href={href} key={href}>{text}</Link>)}
       </div>
     </div>
@@ -1452,7 +1452,7 @@ function Footer() {
       <div className="container footerGrid">
         <div>
           <Logo />
-          <p>HireScore AI is an independent AI recruitment workflow platform and AI ATS platform for recruiters and hiring teams. It supports job creation, public apply pages, AI resume screening software workflows, JD-based candidate matching, candidate ranking software, AI fit explanation, AI hiring analytics, candidate communication, and interview scheduling.</p>
+          <p>HireScore AI is an independent AI recruitment workflow platform for recruiters and hiring teams.</p>
           <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
           <a href={APP_URL}>App login and start pilot</a>
         </div>
