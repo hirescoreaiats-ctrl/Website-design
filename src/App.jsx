@@ -803,7 +803,6 @@ function Logo() {
 
 function Header() {
   const [open, setOpen] = useState(false)
-  const [activeDropdown, setActiveDropdown] = useState(null)
   const productNav = productPages.filter((page) => [
     '/product/ai-resume-parsing',
     '/product/ai-candidate-ranking',
@@ -830,18 +829,14 @@ function Header() {
           <Link href="/">Home</Link>
           <Dropdown
             label="Product"
+            base="/product"
             items={productNav.map((p) => [p.slug, p.navLabel])}
-            isOpen={activeDropdown === 'Product'}
-            onToggle={() => setActiveDropdown(activeDropdown === 'Product' ? null : 'Product')}
-            onClose={() => setActiveDropdown(null)}
           />
           <Link href="/solutions">Solutions</Link>
           <Dropdown
             label="Resources"
+            base="/resources"
             items={resourceNav}
-            isOpen={activeDropdown === 'Resources'}
-            onToggle={() => setActiveDropdown(activeDropdown === 'Resources' ? null : 'Resources')}
-            onClose={() => setActiveDropdown(null)}
           />
           <Link href="/pricing">Pricing</Link>
           <Link href="/contact">Contact</Link>
@@ -866,14 +861,12 @@ function Header() {
   )
 }
 
-function Dropdown({ label, items, isOpen, onToggle, onClose }) {
+function Dropdown({ label, base, items }) {
   return (
-    <div className={`dropdown ${isOpen ? 'open' : ''}`} onMouseLeave={onClose}>
-      <button className="dropTrigger" type="button" aria-expanded={isOpen} onClick={onToggle}>
-        {label}<ChevronDown size={15} />
-      </button>
+    <div className="dropdown">
+      <Link href={base} className="dropTrigger">{label}<ChevronDown size={15} /></Link>
       <div className="dropMenu" role="menu" aria-label={`${label} menu`}>
-        {items.map(([href, text]) => <Link href={href} key={href} onClick={onClose}>{text}</Link>)}
+        {items.map(([href, text]) => <Link href={href} key={href}>{text}</Link>)}
       </div>
     </div>
   )
