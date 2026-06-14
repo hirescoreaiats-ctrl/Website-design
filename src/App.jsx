@@ -17,6 +17,8 @@ import {
   GitBranch,
   Globe2,
   HelpCircle,
+  Instagram,
+  Linkedin,
   MailCheck,
   Menu,
   MessageSquareText,
@@ -1473,8 +1475,8 @@ function Footer() {
           <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
           <a href={APP_URL}>App login and start pilot</a>
           <div className="socialLinks" aria-label="Social links">
-            <a href="https://www.linkedin.com/company/hire-score-ai" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="https://www.instagram.com/hirescore_ai/" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="https://www.linkedin.com/company/hire-score-ai" target="_blank" rel="noreferrer" aria-label="HireScore AI on LinkedIn"><Linkedin size={17} />LinkedIn</a>
+            <a href="https://www.instagram.com/hirescore_ai/" target="_blank" rel="noreferrer" aria-label="HireScore AI on Instagram"><Instagram size={17} />Instagram</a>
           </div>
         </div>
         <FooterCol title="Product" links={productPages.slice(0, 8).map((p) => [p.slug, p.navLabel])} />

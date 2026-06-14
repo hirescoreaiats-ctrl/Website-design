@@ -267,9 +267,9 @@ h3 {
 }
 
 .homeHero h1 {
-  max-width: 760px;
-  font-size: clamp(2.7rem, 4.9vw, 4.35rem);
-  line-height: 1;
+  max-width: 680px;
+  font-size: clamp(2.25rem, 4vw, 3.45rem);
+  line-height: 1.03;
 }
 
 .titleHighlight {
@@ -281,7 +281,7 @@ h3 {
   border-radius: 14px;
   color: #e0f2fe;
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.22), rgba(6, 182, 212, 0.14));
-  font-size: clamp(1.35rem, 2.4vw, 2.15rem);
+  font-size: clamp(1.05rem, 1.75vw, 1.55rem);
   line-height: 1.12;
 }
 
@@ -800,6 +800,9 @@ h3 {
 }
 
 .socialLinks a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   margin: 0;
   padding: 8px 11px;
   border: 1px solid rgba(125, 211, 252, 0.18);
