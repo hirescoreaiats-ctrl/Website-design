@@ -801,6 +801,7 @@ function Logo() {
 
 function Header() {
   const [open, setOpen] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState(null)
   const productNav = productPages.filter((page) => [
     '/product/ai-resume-parsing',
     '/product/ai-candidate-ranking',
@@ -825,9 +826,21 @@ function Header() {
         <Logo />
         <nav className="desktopNav" aria-label="Primary navigation">
           <Link href="/">Home</Link>
-          <Dropdown label="Product" base="/product" items={productNav.map((p) => [p.slug, p.navLabel])} />
+          <Dropdown
+            label="Product"
+            items={productNav.map((p) => [p.slug, p.navLabel])}
+            isOpen={activeDropdown === 'Product'}
+            onToggle={() => setActiveDropdown(activeDropdown === 'Product' ? null : 'Product')}
+            onClose={() => setActiveDropdown(null)}
+          />
           <Link href="/solutions">Solutions</Link>
-          <Dropdown label="Resources" base="/resources" items={resourceNav} />
+          <Dropdown
+            label="Resources"
+            items={resourceNav}
+            isOpen={activeDropdown === 'Resources'}
+            onToggle={() => setActiveDropdown(activeDropdown === 'Resources' ? null : 'Resources')}
+            onClose={() => setActiveDropdown(null)}
+          />
           <Link href="/pricing">Pricing</Link>
           <Link href="/contact">Contact</Link>
         </nav>
@@ -851,12 +864,14 @@ function Header() {
   )
 }
 
-function Dropdown({ label, base, items }) {
+function Dropdown({ label, items, isOpen, onToggle, onClose }) {
   return (
-    <div className="dropdown">
-      <Link href={base} className="dropTrigger">{label}<ChevronDown size={15} /></Link>
+    <div className={`dropdown ${isOpen ? 'open' : ''}`} onMouseLeave={onClose}>
+      <button className="dropTrigger" type="button" aria-expanded={isOpen} onClick={onToggle}>
+        {label}<ChevronDown size={15} />
+      </button>
       <div className="dropMenu" role="menu" aria-label={`${label} menu`}>
-        {items.map(([href, text]) => <Link href={href} key={href}>{text}</Link>)}
+        {items.map(([href, text]) => <Link href={href} key={href} onClick={onClose}>{text}</Link>)}
       </div>
     </div>
   )
@@ -876,13 +891,13 @@ function labelFor(path) {
   return labels[path] || path
 }
 
-function PageHero({ eyebrow, title, intro, cta = true }) {
+function PageHero({ eyebrow, title, titleHighlight, intro, cta = true, className = '' }) {
   return (
-    <section className="pageHero">
+    <section className={`pageHero ${className}`}>
       <div className="container heroGrid">
         <div>
           <span className="eyebrow"><Sparkles size={14} />{eyebrow}</span>
-          <h1>{title}</h1>
+          <h1>{title}{titleHighlight && <span className="titleHighlight">{titleHighlight}</span>}</h1>
           <p>{intro}</p>
           {cta && <ButtonRow />}
         </div>
@@ -1011,8 +1026,10 @@ function HomePage() {
       <SEO title="HireScore AI | Independent AI Recruitment Workflow Platform" description="HireScore AI is an independent AI recruitment workflow platform for job creation, public apply pages, AI resume screening, candidate ranking, AI fit explanations, hiring analytics, candidate communication, and interview scheduling." path="/" schema={homeSchema()} />
       <PageHero
         eyebrow="AI recruitment software"
-        title="HireScore AI - Independent AI Recruitment Workflow Platform"
+        title="HireScore AI"
+        titleHighlight="Independent AI Recruitment Workflow Platform"
         intro="Create jobs, launch public apply pages, collect applications, screen resumes with AI, rank candidates, review AI fit explanations, track hiring analytics, manage communication, and schedule interviews from one AI ATS platform."
+        className="homeHero"
       />
       <TrustStrip />
       <section className="section">
@@ -1455,6 +1472,10 @@ function Footer() {
           <p>HireScore AI is an independent AI recruitment workflow platform for recruiters and hiring teams.</p>
           <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
           <a href={APP_URL}>App login and start pilot</a>
+          <div className="socialLinks" aria-label="Social links">
+            <a href="https://www.linkedin.com/company/hire-score-ai" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://www.instagram.com/hirescore_ai/" target="_blank" rel="noreferrer">Instagram</a>
+          </div>
         </div>
         <FooterCol title="Product" links={productPages.slice(0, 8).map((p) => [p.slug, p.navLabel])} />
         <FooterCol title="Resources" links={[['/resources/user-guide', 'User Guide'], ['/resources/blogs', 'Blogs'], ['/resources/case-studies', 'Case Studies'], ['/resources/faqs', 'FAQs']]} />
