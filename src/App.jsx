@@ -625,7 +625,8 @@ const caseStudies = [
 ]
 
 const faqs = [
-  ['What is HireScore AI?', 'HireScore AI is an AI-powered recruitment and ATS platform for creating jobs, collecting applications, screening resumes, ranking candidates, explaining AI decisions, and managing hiring workflows.'],
+  ['What is HireScore AI?', 'HireScore AI is an independent AI-powered recruitment workflow platform that helps recruiters create jobs, generate public apply pages, collect candidate applications, upload resumes, screen resumes with AI, rank candidates, view AI fit explanations, track hiring analytics, manage candidate communication, and schedule interviews from one platform.'],
+  ['Is HireScore AI the same as HiredScore or Workday?', 'No. HireScore AI is an independent recruitment workflow platform and is not affiliated with HiredScore, HireScore.com, or Workday.'],
   ['Where do product CTAs go?', `All product and app CTAs point to ${APP_URL}.`],
   ['Can recruiters use it for high-volume roles?', 'Yes. HireScore AI is designed to help recruiters screen and rank large candidate pools faster.'],
   ['Does HireScore AI replace recruiters?', 'No. It supports recruiter decisions with structured insights, scores, and explanations. Human review stays important.'],
@@ -667,20 +668,25 @@ function Link({ href, children, className, onClick, ...props }) {
   )
 }
 
-function SEO({ title, description, path = '/' }) {
+function SEO({ title, description, path = '/', type = 'website', schema }) {
   useEffect(() => {
-    const canonical = `${SITE_URL}${path === '/' ? '' : path}`
+    const canonical = `${SITE_URL}${path === '/' ? '/' : path}`
     document.title = title
     setMeta('description', description)
     setMeta('og:title', title, 'property')
     setMeta('og:description', description, 'property')
     setMeta('og:url', canonical, 'property')
-    setMeta('og:type', 'website', 'property')
+    setMeta('og:type', type, 'property')
+    setMeta('og:site_name', 'HireScore AI', 'property')
+    setMeta('og:image', `${SITE_URL}/hirescore-logo-full.png`, 'property')
+    setMeta('og:image:alt', 'HireScore AI logo', 'property')
     setMeta('twitter:card', 'summary_large_image')
     setMeta('twitter:title', title)
     setMeta('twitter:description', description)
+    setMeta('twitter:image', `${SITE_URL}/hirescore-logo-full.png`)
     setCanonical(canonical)
-  }, [title, description, path])
+    setJsonLd('route-schema', schema || baseSchema(path))
+  }, [title, description, path, type, schema])
   return null
 }
 
@@ -702,6 +708,86 @@ function setCanonical(href) {
     document.head.appendChild(tag)
   }
   tag.setAttribute('href', href)
+}
+
+function setJsonLd(id, payload) {
+  let tag = document.getElementById(id)
+  if (!tag) {
+    tag = document.createElement('script')
+    tag.type = 'application/ld+json'
+    tag.id = id
+    document.head.appendChild(tag)
+  }
+  tag.textContent = JSON.stringify(payload)
+}
+
+function baseSchema(path) {
+  const routeUrl = `${SITE_URL}${path === '/' ? '/' : path}`
+  const softwareDescription = 'HireScore AI is an independent AI recruitment workflow platform for job creation, public apply pages, AI resume screening, candidate ranking, AI fit explanations, hiring analytics, candidate communication, and interview scheduling.'
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': `${SITE_URL}/#organization`,
+        name: 'HireScore AI',
+        alternateName: ['HireScoreAI', 'HireScore AI ATS'],
+        url: `${SITE_URL}/`,
+        logo: `${SITE_URL}/hirescore-logo-full.png`,
+        email: CONTACT_EMAIL,
+        description: 'HireScore AI is an independent AI recruitment workflow platform for recruiters, HR teams, staffing agencies, and companies.',
+        disambiguatingDescription: 'HireScore AI is independent and is not affiliated with HiredScore, HireScore.com, or Workday.',
+      },
+      {
+        '@type': 'SoftwareApplication',
+        '@id': `${SITE_URL}/#software`,
+        name: 'HireScore AI',
+        applicationCategory: 'BusinessApplication',
+        applicationSubCategory: 'AI recruiting software',
+        operatingSystem: 'Web',
+        url: routeUrl,
+        description: softwareDescription,
+        publisher: { '@id': `${SITE_URL}/#organization` },
+        featureList: [
+          'Job creation',
+          'Public apply pages',
+          'AI resume screening',
+          'JD-based candidate matching',
+          'Candidate ranking',
+          'AI fit explanation',
+          'AI hiring analytics',
+          'Candidate communication',
+          'Interview scheduling',
+        ],
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', description: '7-day free pilot access available for selected clients.' },
+      },
+      {
+        '@type': 'WebSite',
+        '@id': `${SITE_URL}/#website`,
+        name: 'HireScore AI',
+        url: `${SITE_URL}/`,
+        publisher: { '@id': `${SITE_URL}/#organization` },
+        description: softwareDescription,
+      },
+    ],
+  }
+}
+
+function homeSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      ...baseSchema('/')['@graph'],
+      {
+        '@type': 'FAQPage',
+        mainEntity: faqs.slice(0, 2).map(([question, answer]) => ({
+          '@type': 'Question',
+          name: question,
+          acceptedAnswer: { '@type': 'Answer', text: answer },
+        })),
+      },
+    ],
+  }
 }
 
 function Logo() {
@@ -922,11 +1008,11 @@ function CTASection({ title = 'Start your free HireScore AI pilot', text = 'Test
 function HomePage() {
   return (
     <>
-      <SEO title="HireScore AI | AI Hiring Intelligence for Modern Recruiters" description="Create jobs, collect applications, screen resumes, rank candidates, explain AI decisions, schedule interviews, and manage hiring from one platform." path="/" />
+      <SEO title="HireScore AI | Independent AI Recruitment Workflow Platform" description="HireScore AI is an independent AI recruitment workflow platform for job creation, public apply pages, AI resume screening, candidate ranking, AI fit explanations, hiring analytics, candidate communication, and interview scheduling." path="/" schema={homeSchema()} />
       <PageHero
         eyebrow="AI recruitment software"
-        title="AI Hiring Intelligence for Modern Recruiters"
-        intro="Create jobs, collect applications, screen resumes, rank candidates, explain AI decisions, schedule interviews, and manage your complete hiring process from one platform."
+        title="HireScore AI - Independent AI Recruitment Workflow Platform"
+        intro="Create jobs, launch public apply pages, collect applications, screen resumes with AI, rank candidates, review AI fit explanations, track hiring analytics, manage communication, and schedule interviews from one AI ATS platform."
       />
       <TrustStrip />
       <section className="section">
@@ -937,14 +1023,14 @@ function HomePage() {
       </section>
       <section className="section">
         <div className="container">
-          <SectionHeader eyebrow="Features" title="Product-focused AI hiring features" text="HireScore AI brings resume screening, candidate scoring, ranking, explanations, and interview workflows together." />
+          <SectionHeader eyebrow="Features" title="Product-focused AI hiring features" text="HireScore AI brings AI resume screening software, JD-based candidate matching, candidate ranking software, AI fit explanation, hiring analytics, communication, and interview workflows together." />
           <div className="featureGrid">{productPages.map((page) => <FeatureCard page={page} key={page.slug} />)}</div>
         </div>
       </section>
       <section className="section splitSection">
         <div className="container splitGrid">
           <div>
-            <SectionHeader eyebrow="How it works" title="Simple enough for recruiters, powerful enough for hiring teams" text="Launch a job, collect applications, let AI structure and score candidate profiles, then move the best candidates forward." />
+            <SectionHeader eyebrow="How it works" title="Simple enough for recruiters, powerful enough for hiring teams" text="Launch a job, collect applications, let AI structure and score candidate profiles, then move the best candidates forward. HireScore AI is independent and is not affiliated with HiredScore, HireScore.com, or Workday." />
             <ButtonRow />
           </div>
           <div className="stepsPanel">
@@ -1366,7 +1452,7 @@ function Footer() {
       <div className="container footerGrid">
         <div>
           <Logo />
-          <p>HireScore AI is an AI-powered recruitment and ATS platform for resume screening, candidate ranking, explainable AI, and hiring workflow automation.</p>
+          <p>HireScore AI is an independent AI recruitment workflow platform and AI ATS platform for recruiters and hiring teams. It supports job creation, public apply pages, AI resume screening software workflows, JD-based candidate matching, candidate ranking software, AI fit explanation, AI hiring analytics, candidate communication, and interview scheduling.</p>
           <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
           <a href={APP_URL}>App login and start pilot</a>
         </div>

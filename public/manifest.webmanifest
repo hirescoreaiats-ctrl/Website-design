@@ -1,7 +1,7 @@
 {
   "name": "HireScore AI",
   "short_name": "HireScore AI",
-  "description": "AI-powered recruitment and ATS platform for resume screening, candidate ranking, and hiring automation.",
+  "description": "Independent AI recruitment workflow platform for AI resume screening, candidate ranking, AI fit explanations, hiring analytics, communication, and interview scheduling.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#070b16",
