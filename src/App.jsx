@@ -766,48 +766,21 @@ function Logo() {
 
 function Header({ isHome = false }) {
   const [open, setOpen] = useState(false)
-  const productNav = productPages.filter((page) => [
-    '/product/ai-resume-parsing',
-    '/product/ai-candidate-ranking',
-    '/product/ai-explanation-engine',
-    '/product/public-apply-page',
-    '/product/ai-screening-test',
-    '/product/interview-scheduling',
-    '/product/candidate-communication',
-    '/product/hiring-pipeline',
-  ].includes(page.slug))
-  const resourceNav = [
-    ['/resources/user-guide', 'User Guide'],
-    ['/resources/blogs', 'Blogs'],
-    ['/resources/case-studies', 'Case Studies'],
-    ['/resources/faqs', 'FAQs'],
-    ['/resources/release-notes', 'Release Notes'],
-  ]
 
   return (
     <header className="siteHeader">
       <div className="navShell">
-        {isHome ? <Link className="homeFullLogo" href="/" aria-label="HireScore AI home"><img src="/hirescore-logo-white.png" alt="HireScore AI" /></Link> : <Logo />}
-        {isHome ? (
-          <nav className="desktopNav homeNav" aria-label="Primary navigation">
-            <a href="#about">About Us</a>
-            <a href="#product">Product</a>
-            <a href="#intelligence">Resources</a>
-            <Link href="/pricing">Pricing</Link>
-            <Link href="/contact">Contact Us</Link>
-          </nav>
-        ) : (
-          <nav className="desktopNav" aria-label="Primary navigation">
-            <Link href="/">Home</Link>
-            <Dropdown label="Product" base="/product" items={productNav.map((p) => [p.slug, p.navLabel])} />
-            <Link href="/solutions">Solutions</Link>
-            <Dropdown label="Resources" base="/resources" items={resourceNav} />
-            <Link href="/pricing">Pricing</Link>
-            <Link href="/contact">Contact</Link>
-          </nav>
-        )}
+        <Link className="homeFullLogo" href="/" aria-label="HireScore AI home"><img src="/hirescore-logo-white.png" alt="HireScore AI" /></Link>
+        <nav className="desktopNav homeNav unifiedNav" aria-label="Primary navigation">
+          <a href={isHome ? '#about' : '/#about'}>About Us</a>
+          <Link href="/product">Product</Link>
+          <Link href="/solutions">Solutions</Link>
+          <Link href="/resources">Resources</Link>
+          <Link href="/pricing">Pricing</Link>
+          <Link href="/contact">Contact Us</Link>
+        </nav>
         <div className="navActions">
-          {isHome ? <a className="homeLogin" href={APP_URL}>Login</a> : <Link className="btn btnGhost" href="/contact">Book Demo</Link>}
+          <a className="homeLogin" href={APP_URL}>Login</a>
           <a className="btn btnPrimary" href={APP_URL}>Start Free Pilot</a>
         </div>
         <button className="menuButton" type="button" aria-label="Toggle navigation" onClick={() => setOpen(!open)}>
@@ -816,7 +789,7 @@ function Header({ isHome = false }) {
       </div>
       {open && (
         <nav className="mobileNav" aria-label="Mobile navigation">
-          {['/', '/product', '/solutions', '/resources/user-guide', '/resources/blogs', '/resources/case-studies', '/pricing', '/contact'].map((path) => (
+          {['/', '/product', '/solutions', '/resources', '/pricing', '/contact'].map((path) => (
             <Link key={path} href={path} onClick={() => setOpen(false)}>{labelFor(path)}</Link>
           ))}
           <a className="btn btnPrimary" href={APP_URL}>Start Free Pilot</a>
@@ -842,6 +815,7 @@ function labelFor(path) {
     '/': 'Home',
     '/product': 'Product',
     '/solutions': 'Solutions',
+    '/resources': 'Resources',
     '/resources/user-guide': 'User Guide',
     '/resources/blogs': 'Blogs',
     '/resources/case-studies': 'Case Studies',
@@ -889,7 +863,7 @@ function SectionHeader({ eyebrow, title, text }) {
 function DashboardMockup() {
   return (
     <div className="dashboardFrame">
-      <img src="/hirescore-logo-full.png" alt="HireScore AI logo and product identity" className="dashLogo" />
+      <img src="/hirescore-logo-white.png" alt="HireScore AI logo and product identity" className="dashLogo" />
       <div className="mockGrid">
         <div className="metric"><span>AI Score</span><strong>86%</strong></div>
         <div className="metric"><span>Parsed resumes</span><strong>129</strong></div>
@@ -1664,7 +1638,11 @@ function Breadcrumbs({ items }) {
   )
 }
 
-function Footer({ isHome = false }) {
+function Footer() {
+  return <footer className="commandFooter"><div className="commandContainer commandFooterGrid"><div><Link className="homeFullLogo footerLogo" href="/" aria-label="HireScore AI home"><img src="/hirescore-logo-white.png" alt="HireScore AI" /></Link><p>The enterprise-grade HireScore AI operating system built for the next era of human potential.</p><div className="footerDots"><a href="https://www.linkedin.com/company/hire-score-ai" target="_blank" rel="noreferrer" aria-label="HireScore AI on LinkedIn"><Linkedin size={14}/></a><a href="https://www.instagram.com/hirescore_ai/" target="_blank" rel="noreferrer" aria-label="HireScore AI on Instagram"><Instagram size={14}/></a></div></div><div><h3>Company</h3><a href="/#about">About Us</a><Link href="/product">Product</Link><Link href="/solutions">Solutions</Link><Link href="/pricing">Pricing</Link><Link href="/contact">Contact Us</Link></div><div><h3>Resources</h3><Link href="/resources">Resource Hub</Link><Link href="/resources/user-guide">User Guide</Link><Link href="/resources/blogs">Blogs</Link><Link href="/resources/case-studies">Case Studies</Link><Link href="/resources/faqs">FAQs</Link></div></div><div className="commandContainer commandFooterBottom"><span>© 2026 HireScore AI Technologies</span><div><Link href="/privacy">Privacy Policy</Link><Link href="/terms">Legal Intelligence</Link><a href={`mailto:${CONTACT_EMAIL}`}>Security Policy</a></div></div></footer>
+}
+
+function LegacyFooter({ isHome = false }) {
   if (isHome) return <footer className="commandFooter"><div className="commandContainer commandFooterGrid"><div><Link className="homeFullLogo footerLogo" href="/" aria-label="HireScore AI home"><img src="/hirescore-logo-white.png" alt="HireScore AI" /></Link><p>The enterprise-grade HireScore AI operating system built for the next era of human potential.</p><div className="footerDots"><span>●</span><span>●</span></div></div><div><h3>Company</h3><a href="#about">About Us</a><a href="#product">Product</a><a href="#intelligence">Resources</a><Link href="/pricing">Pricing</Link><Link href="/contact">Contact Us</Link></div><div><h3>Newsletter</h3><label><span className="srOnly">Email address</span><input type="email" aria-label="Email address" /></label><button>Join HireScore AI Insights</button></div></div><div className="commandContainer commandFooterBottom"><span>© 2026 HireScore AI Technologies</span><div><Link href="/privacy">Privacy Policy</Link><Link href="/terms">Legal Intelligence</Link><a href="mailto:hirescoreaiats@gmail.com">Security Policy</a></div></div></footer>
   return (
     <footer className="siteFooter">
@@ -1742,10 +1720,10 @@ export default function App() {
   const path = usePath()
   const isHome = path === '/'
   return (
-    <div className={`app ${isHome ? 'stitchHome' : ''}`}>
+    <div className={`app ${isHome ? 'stitchHome' : 'commandInner'}`}>
       <Header isHome={isHome} />
       <main>{renderRoute(path)}</main>
-      <Footer isHome={isHome} />
+      <Footer />
     </div>
   )
 }
