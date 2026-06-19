@@ -1,0 +1,65 @@
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import path from 'node:path'
+import { SEO_ROUTES, buildRouteSchema } from '../src/seoConfig.js'
+
+const root = process.cwd()
+const dist = path.join(root, 'dist')
+const templatePath = path.join(dist, 'index.html')
+const template = await readFile(templatePath, 'utf8')
+
+const escapeHtml = (value) => String(value)
+  .replaceAll('&', '&amp;')
+  .replaceAll('<', '&lt;')
+  .replaceAll('>', '&gt;')
+  .replaceAll('"', '&quot;')
+
+function renderSeo(config) {
+  const robots = config.noindex
+    ? 'noindex, follow'
+    : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+  const jsonLd = JSON.stringify(buildRouteSchema(config)).replaceAll('<', '\\u003c')
+  return `<!-- route-seo:start -->
+    <link rel="canonical" href="${escapeHtml(config.canonical)}" />
+    <link rel="alternate" hreflang="en" href="${escapeHtml(config.canonical)}" />
+    <link rel="alternate" hreflang="x-default" href="${escapeHtml(config.canonical)}" />
+    <meta name="description" content="${escapeHtml(config.description)}" />
+    <meta name="robots" content="${robots}" />
+    <meta name="googlebot" content="${robots}" />
+    <meta name="author" content="HireScore AI" />
+    <meta name="application-name" content="HireScore AI" />
+    <meta name="theme-color" content="#100d18" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="keywords" content="${escapeHtml(config.keywords)}" />
+    <title>${escapeHtml(config.title)}</title>
+    <meta property="og:site_name" content="HireScore AI" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="${escapeHtml(config.title)}" />
+    <meta property="og:description" content="${escapeHtml(config.description)}" />
+    <meta property="og:type" content="${config.ogType || 'website'}" />
+    <meta property="og:url" content="${escapeHtml(config.canonical)}" />
+    <meta property="og:image" content="${escapeHtml(config.image)}" />
+    <meta property="og:image:secure_url" content="${escapeHtml(config.image)}" />
+    <meta property="og:image:alt" content="HireScore AI – AI recruitment workflow platform" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${escapeHtml(config.title)}" />
+    <meta name="twitter:description" content="${escapeHtml(config.description)}" />
+    <meta name="twitter:image" content="${escapeHtml(config.image)}" />
+    <meta name="twitter:image:alt" content="HireScore AI – AI recruitment workflow platform" />
+    <script id="route-schema" type="application/ld+json">${jsonLd}</script>
+    <!-- route-seo:end -->`
+}
+
+for (const config of SEO_ROUTES) {
+  const html = template.replace(
+    /<!-- route-seo:start -->[\s\S]*?<!-- route-seo:end -->/,
+    renderSeo(config),
+  )
+  const outputPath = config.path === '/'
+    ? templatePath
+    : path.join(dist, config.path.slice(1), 'index.html')
+  await mkdir(path.dirname(outputPath), { recursive: true })
+  await writeFile(outputPath, html)
+}
+
+console.log(`Generated route-specific SEO HTML for ${SEO_ROUTES.length} routes.`)

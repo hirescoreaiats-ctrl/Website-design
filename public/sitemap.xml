@@ -1,37 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://hirescoreai.com/</loc></url>
-  <url><loc>https://hirescoreai.com/product</loc></url>
-  <url><loc>https://hirescoreai.com/pricing</loc></url>
-  <url><loc>https://hirescoreai.com/resources</loc></url>
-  <url><loc>https://hirescoreai.com/user-guide</loc></url>
-  <url><loc>https://hirescoreai.com/contact</loc></url>
-  <url><loc>https://hirescoreai.com/ai-resume-screening-software</loc></url>
-  <url><loc>https://hirescoreai.com/resume-parser-software</loc></url>
-  <url><loc>https://hirescoreai.com/candidate-ranking-software</loc></url>
-  <url><loc>https://hirescoreai.com/jd-resume-matching-software</loc></url>
-  <url><loc>https://hirescoreai.com/bulk-resume-screening-software</loc></url>
-  <url><loc>https://hirescoreai.com/recruitment-automation-software</loc></url>
-  <url><loc>https://hirescoreai.com/ats-software-for-recruiters</loc></url>
-  <url><loc>https://hirescoreai.com/recruitment-agency-software</loc></url>
-  <url><loc>https://hirescoreai.com/staffing-agency-ats-software</loc></url>
-  <url><loc>https://hirescoreai.com/ai-recruitment-software-india</loc></url>
-  <url><loc>https://hirescoreai.com/resources/blog/what-is-ai-resume-screening</loc></url>
-  <url><loc>https://hirescoreai.com/resources/blog/how-ai-resume-screening-works</loc></url>
-  <url><loc>https://hirescoreai.com/resources/blog/best-ai-resume-screening-software-for-recruiters</loc></url>
-  <url><loc>https://hirescoreai.com/resources/blog/resume-screening-process-guide</loc></url>
-  <url><loc>https://hirescoreai.com/resources/blog/resume-screening-ai-tools-compared</loc></url>
-  <url><loc>https://hirescoreai.com/resources/blog/what-is-resume-parsing</loc></url>
-  <url><loc>https://hirescoreai.com/resources/blog/candidate-ranking-explained</loc></url>
-  <url><loc>https://hirescoreai.com/resources/blog/bulk-resume-screening-guide</loc></url>
-  <url><loc>https://hirescoreai.com/resources/case-study/recruitment-agency-reduced-resume-screening-time</loc></url>
-  <url><loc>https://hirescoreai.com/resources/case-study/data-analyst-candidate-ranking</loc></url>
-  <url><loc>https://hirescoreai.com/resources/case-study/full-stack-developer-bulk-shortlisting</loc></url>
-  <url><loc>https://hirescoreai.com/resources/case-study/ai-explanation-shortlisting-decisions</loc></url>
-  <url><loc>https://hirescoreai.com/resources/news/introducing-hirescore-ai</loc></url>
-  <url><loc>https://hirescoreai.com/resources/news/bulk-resume-analyzer</loc></url>
-  <url><loc>https://hirescoreai.com/resources/news/recruiter-explanation-panel</loc></url>
-  <url><loc>https://hirescoreai.com/resources/news/public-job-apply-page</loc></url>
-  <url><loc>https://hirescoreai.com/resources/news/communication-pipeline</loc></url>
-  <url><loc>https://hirescoreai.com/resources/news/ai-screening-test-interview-scheduling</loc></url>
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap><loc>https://hirescoreai.com/page-sitemap.xml</loc><lastmod>2026-06-19</lastmod></sitemap>
+  <sitemap><loc>https://hirescoreai.com/blog-sitemap.xml</loc><lastmod>2026-06-19</lastmod></sitemap>
+</sitemapindex>

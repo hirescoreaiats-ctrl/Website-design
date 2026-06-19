@@ -39,8 +39,8 @@ import {
   Zap,
 } from 'lucide-react'
 import './App.css'
+import { BRAND_NAME, buildRouteSchema, getSeoConfig } from './seoConfig.js'
 
-const SITE_URL = 'https://hirescoreai.com'
 const APP_URL = 'https://app.hirescoreai.com'
 const CONTACT_EMAIL = 'hirescoreaiats@gmail.com'
 
@@ -670,25 +670,42 @@ function Link({ href, children, className, onClick, ...props }) {
   )
 }
 
-function SEO({ title, description, path = '/', type = 'website', schema }) {
+function SEO({ title, description, path = '/', type = 'website' }) {
   useEffect(() => {
-    const canonical = `${SITE_URL}${path === '/' ? '/' : path}`
-    document.title = title
-    setMeta('description', description)
-    setMeta('og:title', title, 'property')
-    setMeta('og:description', description, 'property')
-    setMeta('og:url', canonical, 'property')
-    setMeta('og:type', type, 'property')
-    setMeta('og:site_name', 'HireScore AI', 'property')
-    setMeta('og:image', `${SITE_URL}/hirescore-logo-full.png`, 'property')
-    setMeta('og:image:alt', 'HireScore AI logo', 'property')
+    const config = getSeoConfig(path, { title, description, type })
+    const robots = config.noindex
+      ? 'noindex, follow'
+      : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+    document.title = config.title
+    document.documentElement.lang = 'en'
+    setMeta('description', config.description)
+    setMeta('keywords', config.keywords)
+    setMeta('robots', robots)
+    setMeta('googlebot', robots)
+    setMeta('author', BRAND_NAME)
+    setMeta('application-name', BRAND_NAME)
+    setMeta('theme-color', '#100d18')
+    setMeta('referrer', 'strict-origin-when-cross-origin')
+    setMeta('format-detection', 'telephone=no')
+    setMeta('og:title', config.title, 'property')
+    setMeta('og:description', config.description, 'property')
+    setMeta('og:url', config.canonical, 'property')
+    setMeta('og:type', config.ogType || 'website', 'property')
+    setMeta('og:site_name', BRAND_NAME, 'property')
+    setMeta('og:locale', 'en_US', 'property')
+    setMeta('og:image', config.image, 'property')
+    setMeta('og:image:secure_url', config.image, 'property')
+    setMeta('og:image:alt', `${BRAND_NAME} – AI recruitment workflow platform`, 'property')
     setMeta('twitter:card', 'summary_large_image')
-    setMeta('twitter:title', title)
-    setMeta('twitter:description', description)
-    setMeta('twitter:image', `${SITE_URL}/hirescore-logo-full.png`)
-    setCanonical(canonical)
-    setJsonLd('route-schema', schema || baseSchema(path))
-  }, [title, description, path, type, schema])
+    setMeta('twitter:title', config.title)
+    setMeta('twitter:description', config.description)
+    setMeta('twitter:image', config.image)
+    setMeta('twitter:image:alt', `${BRAND_NAME} – AI recruitment workflow platform`)
+    setCanonical(config.canonical)
+    setAlternate('en', config.canonical)
+    setAlternate('x-default', config.canonical)
+    setJsonLd('route-schema', buildRouteSchema(config))
+  }, [title, description, path, type])
   return null
 }
 
@@ -712,8 +729,23 @@ function setCanonical(href) {
   tag.setAttribute('href', href)
 }
 
+function setAlternate(lang, href) {
+  let tag = document.head.querySelector(`link[rel="alternate"][hreflang="${lang}"]`)
+  if (!tag) {
+    tag = document.createElement('link')
+    tag.setAttribute('rel', 'alternate')
+    tag.setAttribute('hreflang', lang)
+    document.head.appendChild(tag)
+  }
+  tag.setAttribute('href', href)
+}
+
 function setJsonLd(id, payload) {
   let tag = document.getElementById(id)
+  if (!payload) {
+    if (tag) tag.remove()
+    return
+  }
   if (!tag) {
     tag = document.createElement('script')
     tag.type = 'application/ld+json'
@@ -721,75 +753,6 @@ function setJsonLd(id, payload) {
     document.head.appendChild(tag)
   }
   tag.textContent = JSON.stringify(payload)
-}
-
-function baseSchema(path) {
-  const routeUrl = `${SITE_URL}${path === '/' ? '/' : path}`
-  const softwareDescription = 'HireScore AI is an independent AI recruitment workflow platform for job creation, public apply pages, AI resume screening, candidate ranking, AI fit explanations, hiring analytics, candidate communication, and interview scheduling.'
-  return {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'Organization',
-        '@id': `${SITE_URL}/#organization`,
-        name: 'HireScore AI',
-        alternateName: ['HireScoreAI', 'HireScore AI ATS'],
-        url: `${SITE_URL}/`,
-        logo: `${SITE_URL}/hirescore-logo-full.png`,
-        email: CONTACT_EMAIL,
-        description: 'HireScore AI is an independent AI recruitment workflow platform for recruiters, HR teams, staffing agencies, and companies.',
-        disambiguatingDescription: 'HireScore AI is independent and is not affiliated with HiredScore, HireScore.com, or Workday.',
-      },
-      {
-        '@type': 'SoftwareApplication',
-        '@id': `${SITE_URL}/#software`,
-        name: 'HireScore AI',
-        applicationCategory: 'BusinessApplication',
-        applicationSubCategory: 'AI recruiting software',
-        operatingSystem: 'Web',
-        url: routeUrl,
-        description: softwareDescription,
-        publisher: { '@id': `${SITE_URL}/#organization` },
-        featureList: [
-          'Job creation',
-          'Public apply pages',
-          'AI resume screening',
-          'JD-based candidate matching',
-          'Candidate ranking',
-          'AI fit explanation',
-          'AI hiring analytics',
-          'Candidate communication',
-          'Interview scheduling',
-        ],
-        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', description: '7-day free pilot access available for selected clients.' },
-      },
-      {
-        '@type': 'WebSite',
-        '@id': `${SITE_URL}/#website`,
-        name: 'HireScore AI',
-        url: `${SITE_URL}/`,
-        publisher: { '@id': `${SITE_URL}/#organization` },
-        description: softwareDescription,
-      },
-    ],
-  }
-}
-
-function homeSchema() {
-  return {
-    '@context': 'https://schema.org',
-    '@graph': [
-      ...baseSchema('/')['@graph'],
-      {
-        '@type': 'FAQPage',
-        mainEntity: faqs.slice(0, 2).map(([question, answer]) => ({
-          '@type': 'Question',
-          name: question,
-          acceptedAnswer: { '@type': 'Answer', text: answer },
-        })),
-      },
-    ],
-  }
 }
 
 function Logo() {
@@ -824,10 +787,10 @@ function Header({ isHome = false }) {
   return (
     <header className="siteHeader">
       <div className="navShell">
-        <Logo />
+        {isHome ? <Link className="homeFullLogo" href="/" aria-label="HireScore AI home"><img src="/hirescore-logo-white.png" alt="HireScore AI" /></Link> : <Logo />}
         {isHome ? (
           <nav className="desktopNav homeNav" aria-label="Primary navigation">
-            <a href="#advantage">About Us</a>
+            <a href="#about">About Us</a>
             <a href="#product">Product</a>
             <a href="#intelligence">Resources</a>
             <Link href="/pricing">Pricing</Link>
@@ -1018,6 +981,100 @@ function CTASection({ title = 'Start your free HireScore AI pilot', text = 'Test
 }
 
 function HomePage() {
+  useEffect(() => {
+    const root = document.querySelector('.commandHome')
+    const canvas = root?.querySelector('.commandCosmos')
+    if (!root || !canvas) return undefined
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const ctx = canvas.getContext('2d')
+    let stars = []
+    let animationFrame = 0
+
+    const resizeCanvas = () => {
+      const ratio = Math.min(window.devicePixelRatio || 1, 2)
+      canvas.width = window.innerWidth * ratio
+      canvas.height = window.innerHeight * ratio
+      canvas.style.width = `${window.innerWidth}px`
+      canvas.style.height = `${window.innerHeight}px`
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0)
+      stars = Array.from({ length: 150 }, () => ({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        size: Math.random() * 1.8 + 0.2,
+        speed: Math.random() * 0.5 + 0.1,
+        opacity: Math.random() * 0.8 + 0.15,
+      }))
+    }
+
+    const drawStars = () => {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
+      stars.forEach((star) => {
+        ctx.fillStyle = `rgba(210, 187, 255, ${star.opacity})`
+        ctx.beginPath()
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2)
+        ctx.fill()
+        star.y -= star.speed
+        if (star.y < -2) star.y = window.innerHeight + 2
+      })
+      animationFrame = window.requestAnimationFrame(drawStars)
+    }
+
+    resizeCanvas()
+    if (!reducedMotion) drawStars()
+    window.addEventListener('resize', resizeCanvas)
+
+    const animateCounter = (element) => {
+      if (element.dataset.animated) return
+      element.dataset.animated = 'true'
+      const target = Number(element.dataset.target)
+      const decimals = Number(element.dataset.decimals ?? (Number.isInteger(target) ? 0 : 1))
+      if (reducedMotion) {
+        element.textContent = target.toFixed(decimals)
+        return
+      }
+      const startTime = performance.now()
+      const tick = (time) => {
+        const progress = Math.min((time - startTime) / 2000, 1)
+        element.textContent = (target * (1 - Math.pow(1 - progress, 3))).toFixed(decimals)
+        if (progress < 1) window.requestAnimationFrame(tick)
+      }
+      window.requestAnimationFrame(tick)
+    }
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return
+        entry.target.classList.add('active')
+        entry.target.querySelectorAll('.counterAnimate').forEach(animateCounter)
+        entry.target.querySelectorAll('.commandBar, .commandBarVertical').forEach((bar) => bar.classList.add('active'))
+        revealObserver.unobserve(entry.target)
+      })
+    }, { threshold: 0.14, rootMargin: '0px 0px -45px 0px' })
+
+    root.querySelectorAll('.commandReveal').forEach((element) => revealObserver.observe(element))
+
+    const tiltCard = root.querySelector('#candidate-command-card')
+    const tilt = (event) => {
+      if (!tiltCard || reducedMotion || !tiltCard.classList.contains('active')) return
+      const rect = tiltCard.getBoundingClientRect()
+      const x = (event.clientX - rect.left) / rect.width - 0.5
+      const y = (event.clientY - rect.top) / rect.height - 0.5
+      tiltCard.style.transform = `perspective(1200px) rotateX(${y * -4}deg) rotateY(${x * 4}deg) scale(1.005)`
+    }
+    const resetTilt = () => { if (tiltCard) tiltCard.style.transform = 'perspective(1200px) rotateX(0) rotateY(0) scale(1)' }
+    window.addEventListener('mousemove', tilt)
+    tiltCard?.addEventListener('mouseleave', resetTilt)
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame)
+      window.removeEventListener('resize', resizeCanvas)
+      window.removeEventListener('mousemove', tilt)
+      tiltCard?.removeEventListener('mouseleave', resetTilt)
+      revealObserver.disconnect()
+    }
+  }, [])
+
   const advantageCards = [
     [Network, 'HireScore AI Ingestion', 'Centralize resumes from LinkedIn, Indeed, Naukri, and your own custom “Instant Apply” pages automatically via HireScore AI Sync.', '01'],
     [BrainCircuit, 'Neural Engine', 'Explainable ranking powered by HireScore AI Neural Intelligence. Understand exactly why a candidate is or isn’t a match.', 'AI VERIFIED'],
@@ -1032,27 +1089,31 @@ function HomePage() {
   ]
   return (
     <div className="commandHome">
-      <SEO title="HireScore AI | Independent AI Recruitment Workflow Platform" description="HireScore AI is an independent AI recruitment workflow platform for job creation, public apply pages, AI resume screening, candidate ranking, AI fit explanations, hiring analytics, candidate communication, and interview scheduling." path="/" schema={homeSchema()} />
+      <canvas className="commandCosmos" aria-hidden="true" />
+      <SEO title="HireScore AI | AI Recruitment & Resume Screening Software" description="Screen resumes, match candidates to job descriptions, explain fit, rank talent, manage shortlists, communicate, and schedule interviews with HireScore AI." path="/" />
       <section className="commandHero">
         <div className="commandGlow commandGlowOne" />
         <div className="commandContainer heroCenter">
-          <span className="commandPill"><Sparkles size={12} /> The ultimate HireScore AI experience</span>
-          <h1>HireScore AI: Your Global<br />Recruitment <span>Command Center</span></h1>
-          <p>Experience the HireScore AI advantage. From high-resolution multi-source ingestion to board-ready executive reporting, manage every hire in a single, explainable intelligence environment.</p>
-          <div className="commandActions">
+          <span className="commandPill commandReveal"><Rocket size={12} /> The ultimate HireScore AI experience</span>
+          <h1 className="commandReveal commandDelay1"><span className="heroBrand">HireScore AI:</span> Your Global<br /><span>Recruitment Command Center</span></h1>
+          <p className="commandReveal commandDelay2">Experience the HireScore AI advantage. From high-resolution multi-source ingestion to board-ready executive reporting, manage every hire in a single, explainable intelligence environment.</p>
+          <div className="commandActions commandReveal commandDelay3">
             <a className="commandButton commandButtonPrimary" href={APP_URL}>Join the HireScore AI Revolution</a>
             <Link className="commandButton commandButtonGhost" href="/contact">Book Executive Demo</Link>
           </div>
-          <div className="heroProof"><span><BadgeCheck size={15} /> HireScore AI certified</span><span><ShieldCheck size={15} /> Enterprise ready</span></div>
+          <div className="heroProof commandReveal commandDelay4"><span><BadgeCheck size={15} /> HireScore AI certified</span><i /><span><Zap size={15} /> Enterprise ready</span></div>
           <CandidateCommandCard />
         </div>
       </section>
+      <AboutCommandSection />
+      <CompleteHiringWorkflowSection />
+      <JDMatchIntelligence />
       <section className="commandSection advantageSection" id="advantage">
         <div className="commandContainer">
           <CommandHeading title={<>The <span>HireScore AI Advantage</span></>} text="A One-Stop Recruitment OS that unifies every aspect of your talent acquisition engine." />
-          <div className="advantageGrid">
-            {advantageCards.map(([Icon, title, text, label]) => (
-              <article className="advantageCard" key={title}>
+          <div className="advantageGrid commandReveal commandDelay1">
+            {advantageCards.map(([Icon, title, text, label], index) => (
+              <article className="advantageCard" key={title} style={{ '--card-delay': `${index * 90}ms` }}>
                 <div className="commandIcon"><Icon size={22} /></div>
                 <h3>{title}</h3><p>{text}</p><small>{label}</small>
               </article>
@@ -1062,22 +1123,22 @@ function HomePage() {
       </section>
       <section className="commandSection sourcingSection" id="product">
         <div className="commandContainer sourcingGrid">
-          <div className="sourcingCopy">
+          <div className="sourcingCopy commandReveal">
             <h2>Precision Sourcing by<br /><span>HireScore AI</span></h2>
             <p>Eliminate guesswork. The HireScore AI Command Center tracks exactly which source yields your highest-quality hires, allowing you to optimize your recruitment spend with total confidence.</p>
-            <div className="yieldCard"><small>Yield by channel</small>{[['LinkedIn','76%'],['Indeed','48%'],['Naukri','66%']].map(([name,value]) => <div className="yieldRow" key={name}><b>{name}</b><i><span style={{width:value}} /></i><em>{value}</em></div>)}</div>
+            <div className="yieldCard"><small>Yield by channel</small>{[['LinkedIn',76],['Indeed',48],['Naukri',66]].map(([name,value]) => <div className="yieldRow" key={name}><b>{name}</b><i><span className="commandBar" style={{ '--bar-width': `${value}%` }} /></i><em><span className="counterAnimate" data-target={value}>0</span>%</em></div>)}</div>
             <div className="statusPills"><span>● HireScore AI Command Center Active</span><span>↻ Multi-Source Sync</span></div>
           </div>
-          <div className="pipelineCard">
+          <div className="pipelineCard commandReveal commandDelay2">
             <div className="pipelineTop"><small>HireScore AI pipeline stream</small><b>Syncing sources...</b></div>
-            {[['AS','Alice Smith','88'],['RK','Rahul Kumar','82'],['LJ','Leo Jackson','71']].map(([initials,name,score], i) => <div className={`pipelineRow p${i+1}`} key={name}><span>{initials}</span><div><strong>{name}</strong><small>via HireScore AI talent cloud</small></div><b>{score}</b></div>)}
+            {[['AS','Alice Smith',88],['RK','Rahul Kumar',82],['LJ','Leo Jackson',71]].map(([initials,name,score], i) => <div className={`pipelineRow p${i+1}`} key={name}><span>{initials}</span><div><strong>{name}</strong><small>via HireScore AI talent cloud</small></div><b><span className="counterAnimate" data-target={score}>0</span><small>match</small></b></div>)}
           </div>
         </div>
       </section>
       <section className="commandSection shortlistSection">
         <div className="commandContainer">
           <CommandHeading title={<>HireScore AI Neural <span>Shortlisting</span></>} text="How our explainable intelligence transforms thousands of applicants into your elite top 1%." />
-          <div className="shortlistGrid">
+          <div className="shortlistGrid commandReveal commandDelay1">
             {shortlistSteps.map(([Icon,title,text], index) => <article className="shortlistCard" key={title}><b className="stepNumber">{index+1}</b><div className="commandIcon"><Icon size={20} /></div><h3>{title}</h3><p>{text}</p></article>)}
           </div>
         </div>
@@ -1085,22 +1146,131 @@ function HomePage() {
       <section className="commandSection intelligenceSection" id="intelligence">
         <div className="commandContainer">
           <CommandHeading title={<>Board-Ready <span>HireScore AI Intelligence</span></>} text="Transform raw recruitment data into sophisticated executive insights. Demonstrate hire quality and efficiency gains with HireScore AI’s data-driven clarity." />
-          <div className="intelligenceGrid"><AnalyticsCard /><div className="qualityStack"><MetricCard label="Hire quality index" value="4.9" suffix="/ 5.0" text="Average stakeholder rating for shortlists sourced via HireScore AI Intelligence." /><MetricCard label="Efficiency multiplier" value="72" suffix="%" text="Reduction in manual screening hours per role since HireScore AI deployment." /></div></div>
+          <div className="intelligenceGrid commandReveal commandDelay1"><AnalyticsCard /><div className="qualityStack"><MetricCard label="Hire quality index" value="4.9" suffix="/ 5.0" text="Average stakeholder rating for shortlists sourced via HireScore AI Intelligence." /><MetricCard label="Efficiency multiplier" value="72" suffix="%" text="Reduction in manual screening hours per role since HireScore AI deployment." /></div></div>
         </div>
       </section>
-      <section className="commandCta"><div className="commandContainer commandCtaBox"><h2>Scale Your Global<br /><span>HireScore AI Talent Engine</span></h2><p>Join hundreds of world-class recruitment teams using the HireScore AI Command Center to build elite organizations.</p><div className="commandActions"><a className="commandButton commandButtonPrimary" href={APP_URL}>Join the HireScore AI Revolution</a><Link className="commandButton commandButtonGhost" href="/contact">Consult With Specialists</Link></div></div></section>
+      <section className="commandCta"><div className="commandContainer commandCtaBox commandReveal"><h2>Scale Your Global<br /><span>HireScore AI Talent Engine</span></h2><p>Join hundreds of world-class recruitment teams using the HireScore AI Command Center to build elite organizations.</p><div className="commandActions"><a className="commandButton commandButtonPrimary" href={APP_URL}>Join the HireScore AI Revolution</a><Link className="commandButton commandButtonGhost" href="/contact">Consult With Specialists</Link></div></div></section>
     </div>
   )
 }
 
-function CommandHeading({ title, text }) { return <div className="commandHeading"><h2>{title}</h2><p>{text}</p></div> }
+function CommandHeading({ title, text }) { return <div className="commandHeading commandReveal"><h2>{title}</h2><p>{text}</p></div> }
 
-function CandidateCommandCard() {
-  return <div className="candidateCommandCard"><div className="candidateHead"><div className="candidateAvatar"><UsersRound size={28} /><small>Top 1%</small></div><div><h2>Marcus Chen</h2><p>Singapore • Senior Full-Stack Engineer (Rust/Node)</p><div className="candidateTags"><span>Exp: 8.5 Years</span><span>Source: HireScore AI Sync</span></div></div><div className="candidateScore"><strong>96.4<small>%</small></strong><span>HireScore AI confidence score</span></div></div><div className="candidateBody"><div className="explainPanel"><small><BrainCircuit size={13} /> HireScore AI explainable intelligence</small><blockquote>“Marcus is a validated high-performer identified by HireScore AI’s neural matching. He bridges the gap between infrastructure efficiency and product delivery, matching your ‘Scale Phase’ requirement perfectly.”</blockquote><div className="evidenceGrid"><div><b>HireScore AI evidence</b><span>Web3 Runtime Architecture <em>Expert</em></span><span>Distributed SQL Internals <em>Expert</em></span></div><div><b>Strategic alignment</b><span>Scale-up experience matches Series C trajectory</span><span>Previous ownership of checkout core</span></div></div></div><aside><small>Pipeline status</small><div className="shortlisted">Shortlisted <b>Rank 42 of 488</b></div><i><span /></i><button><Sparkles size={15} /> Approve &amp; Schedule</button><button className="profileButton"><FileSearch size={15} /> View Unified Profile</button></aside></div></div>
+function AboutCommandSection() {
+  const capabilities = [
+    [BrainCircuit, 'Explainable by design', 'Every score is supported by role-specific evidence, matched skills, and transparent reasoning.'],
+    [Workflow, 'One connected workflow', 'Jobs, applications, resume intelligence, shortlisting, communication, and interviews stay connected.'],
+    [ShieldCheck, 'Recruiter-controlled AI', 'AI accelerates the analysis while your hiring team stays in control of every decision.'],
+  ]
+  return (
+    <section className="commandSection aboutCommandSection" id="about">
+      <div className="commandContainer aboutCommandGrid">
+        <div className="aboutCommandCopy commandReveal">
+          <span className="sectionKicker"><Sparkles size={13} /> About HireScore AI</span>
+          <h2>Recruitment intelligence built for <span>clarity, speed, and better decisions.</span></h2>
+          <p>HireScore AI is an independent AI recruitment workflow platform that turns disconnected hiring activity into one explainable command center—from job creation and resume screening to candidate ranking and interview coordination.</p>
+          <div className="aboutStats">
+            <div><strong><span className="counterAnimate" data-target="12">0</span><em>+</em></strong><small>Connected workflow modules</small></div>
+            <div><strong><span className="counterAnimate" data-target="1">0</span></strong><small>Unified hiring workspace</small></div>
+            <div><strong><span className="counterAnimate" data-target="24">0</span><em>/7</em></strong><small>Recruitment intelligence</small></div>
+          </div>
+        </div>
+        <div className="aboutCapabilityStack commandReveal commandDelay2">
+          {capabilities.map(([Icon,title,text],index)=><article key={title} style={{'--about-delay':`${index * 110}ms`}}><div className="commandIcon"><Icon size={20}/></div><div><h3>{title}</h3><p>{text}</p></div><span>{String(index+1).padStart(2,'0')}</span></article>)}
+        </div>
+      </div>
+    </section>
+  )
 }
 
-function AnalyticsCard() { return <div className="analyticsCard"><div><h3>HireScore AI Performance Analytics</h3><p>Automated analysis of hire quality vs. acquisition cost across all channels</p></div><button>Export Executive Report</button><div className="barChart">{[['LinkedIn','74%'],['Indeed','46%'],['Referrals','91%'],['HireScore AI ROI','100%']].map(([label,value],i)=><div key={label}><i style={{height:value}} className={`bar${i+1}`} /><small>{label}</small></div>)}</div></div> }
-function MetricCard({ label, value, suffix, text }) { return <div className="qualityCard"><small>{label}</small><strong>{value}<em>{suffix}</em></strong><p>{text}</p></div> }
+function CompleteHiringWorkflowSection() {
+  const hiringWorkflow = [
+    [BriefcaseBusiness, 'Create Job', 'Define the role and requirements'],
+    [Globe2, 'Apply Page', 'Publish and share the opening'],
+    [Files, 'Collect Resumes', 'Centralize every applicant'],
+    [SearchCheck, 'AI Screening', 'Parse skills and experience'],
+    [Target, 'JD Matching', 'Score and rank role fit'],
+    [BadgeCheck, 'Shortlist', 'Advance the best candidates'],
+    [Send, 'Communicate', 'Keep candidates engaged'],
+    [CalendarCheck, 'Schedule Interview', 'Move confidently to interview'],
+  ]
+  return (
+    <section className="commandSection completeWorkflowSection" id="complete-workflow">
+      <div className="commandContainer">
+        <div className="workflowSectionIntro commandReveal">
+          <span className="sectionKicker"><Workflow size={13}/> How HireScore AI works</span>
+          <h2>One platform. <span>Every hiring step connected.</span></h2>
+          <p>Follow the complete hiring journey from creating a job to scheduling an interview. As the live signal moves, the active stage lights up to show exactly what HireScore AI is doing.</p>
+        </div>
+        <div className="aboutWorkflowPanel commandReveal commandDelay1">
+          <div className="aboutWorkflowHeading"><div><small>Complete hiring process in one place</small><h3>From job creation to interview scheduling</h3></div><span className="workflowLive"><i/> Live workflow</span></div>
+          <div className="workflowRail">
+            {hiringWorkflow.map(([Icon,title,text],index)=><div className="workflowNode" key={title} style={{'--workflow-index':index}}><div className="workflowNodeIcon"><Icon size={19}/><span>{index+1}</span></div><strong>{title}</strong><small>{text}</small>{index < hiringWorkflow.length-1 && <ArrowRight className="workflowArrow" size={14}/>}</div>)}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function JDMatchIntelligence() {
+  const presentSkills = [['React / Next.js',96],['Node.js / APIs',92],['TypeScript',88],['PostgreSQL',84]]
+  const skillGaps = [['Kubernetes',42],['Terraform',28],['GraphQL federation',18]]
+  return (
+    <section className="commandSection jdIntelligenceSection" id="jd-match">
+      <div className="commandContainer">
+        <CommandHeading
+          title={<>JD Match <span>Intelligence</span></>}
+          text="See how a candidate matches the job description, which required skills are already present, where gaps remain, and why the profile deserves recruiter attention."
+        />
+        <div className="jdIntelligenceShell commandReveal commandDelay1">
+          <div className="jdTopbar">
+            <div>
+              <span className="sectionKicker"><Target size={13}/> Live role analysis</span>
+              <h3>Senior Full-Stack Engineer</h3>
+              <p>Job description × Marcus Chen profile</p>
+            </div>
+            <div className="jdSignal"><span>Neural evidence synced</span><i/></div>
+          </div>
+          <div className="jdIntelligenceGrid">
+            <div className="jdScorePanel">
+              <small>Overall JD matching score</small>
+              <div className="jdScoreRing"><div><strong><span className="counterAnimate" data-target="91.8" data-decimals="1">0</span><em>%</em></strong><span>Excellent fit</span></div></div>
+              <div className="jdScoreLegend"><span><i/>Required skills</span><b><span className="counterAnimate" data-target="12">0</span>/<span className="counterAnimate" data-target="15">0</span></b></div>
+              <p>High-confidence alignment across architecture, backend delivery, product ownership, and scale-up experience.</p>
+            </div>
+            <div className="skillGraphPanel">
+              <div className="graphHeading"><div><small>Skills present</small><strong><span className="counterAnimate" data-target="12">0</span> verified</strong></div><BadgeCheck size={20}/></div>
+              <div className="skillBars">
+                {presentSkills.map(([skill,value]) => <div className="skillBarRow" key={skill}><div><span>{skill}</span><em><span className="counterAnimate" data-target={value}>0</span>%</em></div><i><span className="commandBar" style={{'--bar-width':`${value}%`}}/></i></div>)}
+              </div>
+            </div>
+            <div className="skillGraphPanel gapPanel">
+              <div className="graphHeading"><div><small>Skill gap analysis</small><strong><span className="counterAnimate" data-target="3">0</span> development areas</strong></div><SearchCheck size={20}/></div>
+              <div className="skillBars">
+                {skillGaps.map(([skill,value]) => <div className="skillBarRow" key={skill}><div><span>{skill}</span><em><span className="counterAnimate" data-target={value}>0</span>% gap</em></div><i><span className="commandBar gapBar" style={{'--bar-width':`${value}%`}}/></i></div>)}
+              </div>
+              <div className="gapNote"><ShieldCheck size={16}/><span>No critical blocker detected</span></div>
+            </div>
+            <div className="aiFitExplanation">
+              <div className="aiFitHeader"><div className="commandIcon"><BrainCircuit size={22}/></div><div><small>HireScore AI explanation</small><h3>Why this candidate fits the role</h3></div><span>High confidence</span></div>
+              <p>Marcus demonstrates strong full-stack architecture experience, direct ownership of high-scale systems, and measurable product-delivery impact. His React, Node.js, TypeScript, and database expertise closely matches the role’s core requirements.</p>
+              <div className="fitReasons"><span><CheckCircle2 size={15}/> Proven scale-up engineering ownership</span><span><CheckCircle2 size={15}/> Strong semantic match beyond keywords</span><span><CheckCircle2 size={15}/> Skill gaps are learnable, not blocking</span></div>
+              <div className="aiRecommendation"><Sparkles size={17}/><div><small>Recommended next action</small><strong>Advance to technical leadership interview</strong></div><ArrowRight size={18}/></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function CandidateCommandCard() {
+  return <div className="candidateCommandCard commandReveal commandDelay5" id="candidate-command-card"><div className="candidateAura" /><div className="candidateScanline" /><div className="candidateHead"><div className="candidateAvatar"><span className="avatarOrbit" /><UsersRound size={34} /><small>HireScore AI Top <span className="counterAnimate" data-target="1">1</span>%</small></div><div className="candidateIdentity"><div className="candidateNameRow"><h2>Marcus Chen</h2><span><BadgeCheck size={13} /> Neural match verified</span></div><p>Singapore • Senior Full-Stack Engineer (Rust/Node)</p><div className="candidateTags"><span>Exp: <b className="counterAnimate" data-target="8.5" data-decimals="1">8.5</b> Years</span><span>Source: HireScore AI Sync</span></div></div><div className="candidateScore"><small className="scoreLive">● Live intelligence</small><strong><span className="counterAnimate" data-target="96.4" data-decimals="1">96.4</span><small>%</small></strong><span>HireScore AI confidence score</span><div className="scoreDots"><i /><i /><i /><i /><i /></div></div></div><div className="candidateBody"><div className="explainPanel"><small><BrainCircuit size={13} /> HireScore AI explainable intelligence</small><blockquote>“Marcus is a validated high-performer identified by HireScore AI’s neural matching. He bridges the gap between infrastructure efficiency and product delivery, matching your ‘Scale Phase’ requirement perfectly.”</blockquote><div className="evidenceGrid"><div><b>HireScore AI evidence</b><span>WASM Runtime Architecture <em>Expert</em></span><i><span className="commandBar" style={{ '--bar-width': '94%' }} /></i><span>Distributed SQL Internals <em>Expert</em></span><i><span className="commandBar" style={{ '--bar-width': '88%' }} /></i></div><div><b>Strategic alignment</b><span>Scale-up experience matches Series C trajectory</span><span>Previous ownership of checkout core (<em><span className="counterAnimate" data-target="40">40</span>% latency reduction</em>)</span></div></div></div><aside><small>Pipeline status</small><div className="shortlisted">Shortlisted <b>Rank #<span className="counterAnimate" data-target="2">2</span> of <span className="counterAnimate" data-target="480">480</span></b></div><i><span className="commandBar" style={{ '--bar-width': '85%' }} /></i><div className="pipelineConfidence"><span>Pipeline confidence</span><b><span className="counterAnimate" data-target="85">85</span>%</b></div><button><Sparkles size={15} /> Approve &amp; Schedule</button><button className="profileButton"><FileSearch size={15} /> View Unified Profile</button></aside></div></div>
+}
+
+function AnalyticsCard() { return <div className="analyticsCard"><div><h3>HireScore AI Performance Analytics</h3><p>Automated analysis of hire quality vs. acquisition cost across all channels</p></div><button>Export Executive Report</button><div className="barChart">{[['LinkedIn','74%'],['Indeed','46%'],['Referrals','91%'],['HireScore AI ROI','100%']].map(([label,value],i)=><div key={label}><i style={{ '--bar-height': value }} className={`bar${i+1} commandBarVertical`} /><small>{label}</small></div>)}</div></div> }
+function MetricCard({ label, value, suffix, text }) { return <div className="qualityCard"><small>{label}</small><strong><span className="counterAnimate" data-target={value} data-decimals={value.includes('.') ? '1' : '0'}>0</span><em>{suffix}</em></strong><p>{text}</p></div> }
 
 function TrustStrip() {
   return (
@@ -1220,7 +1390,7 @@ function GuidePage({ guide }) {
         <div className="container guideLayout">
           <article className="articleCard">
             <h2>Steps</h2>
-            {guide.steps.map((step, index) => <p key={step}><strong>Step {index + 1}:</strong> {step}</p>)}
+            {guide.steps.map((step, index) => <p id={`step-${index + 1}`} key={step}><strong>Step {index + 1}:</strong> {step}</p>)}
             <h2>Common mistakes</h2>
             <p>Avoid using the wrong job pipeline, incomplete job descriptions, or skipping AI explanations before shortlisting.</p>
             <h2>Best practices</h2>
@@ -1495,7 +1665,7 @@ function Breadcrumbs({ items }) {
 }
 
 function Footer({ isHome = false }) {
-  if (isHome) return <footer className="commandFooter"><div className="commandContainer commandFooterGrid"><div><Logo /><p>The enterprise-grade HireScore AI operating system built for the next era of human potential.</p><div className="footerDots"><span>●</span><span>●</span></div></div><div><h3>Company</h3><a href="#advantage">About Us</a><a href="#product">Product</a><a href="#intelligence">Resources</a><Link href="/pricing">Pricing</Link><Link href="/contact">Contact Us</Link></div><div><h3>Newsletter</h3><label><span className="srOnly">Email address</span><input type="email" aria-label="Email address" /></label><button>Join HireScore AI Insights</button></div></div><div className="commandContainer commandFooterBottom"><span>© 2026 HireScore AI Technologies</span><div><Link href="/privacy">Privacy Policy</Link><Link href="/terms">Legal Intelligence</Link><a href="mailto:hirescoreaiats@gmail.com">Security Policy</a></div></div></footer>
+  if (isHome) return <footer className="commandFooter"><div className="commandContainer commandFooterGrid"><div><Link className="homeFullLogo footerLogo" href="/" aria-label="HireScore AI home"><img src="/hirescore-logo-white.png" alt="HireScore AI" /></Link><p>The enterprise-grade HireScore AI operating system built for the next era of human potential.</p><div className="footerDots"><span>●</span><span>●</span></div></div><div><h3>Company</h3><a href="#about">About Us</a><a href="#product">Product</a><a href="#intelligence">Resources</a><Link href="/pricing">Pricing</Link><Link href="/contact">Contact Us</Link></div><div><h3>Newsletter</h3><label><span className="srOnly">Email address</span><input type="email" aria-label="Email address" /></label><button>Join HireScore AI Insights</button></div></div><div className="commandContainer commandFooterBottom"><span>© 2026 HireScore AI Technologies</span><div><Link href="/privacy">Privacy Policy</Link><Link href="/terms">Legal Intelligence</Link><a href="mailto:hirescoreaiats@gmail.com">Security Policy</a></div></div></footer>
   return (
     <footer className="siteFooter">
       <div className="container footerGrid">
