@@ -42,7 +42,7 @@ import './App.css'
 import { BRAND_NAME, buildRouteSchema, getSeoConfig } from './seoConfig.js'
 
 const APP_URL = 'https://app.hirescoreai.com'
-const CONTACT_EMAIL = 'hirescoreaiats@gmail.com'
+const CONTACT_EMAIL = 'info@hirescoreai.com'
 
 const iconMap = {
   job: BriefcaseBusiness,
@@ -1643,7 +1643,7 @@ function Footer() {
 }
 
 function LegacyFooter({ isHome = false }) {
-  if (isHome) return <footer className="commandFooter"><div className="commandContainer commandFooterGrid"><div><Link className="homeFullLogo footerLogo" href="/" aria-label="HireScore AI home"><img src="/hirescore-logo-white.png" alt="HireScore AI" /></Link><p>The enterprise-grade HireScore AI operating system built for the next era of human potential.</p><div className="footerDots"><span>●</span><span>●</span></div></div><div><h3>Company</h3><a href="#about">About Us</a><a href="#product">Product</a><a href="#intelligence">Resources</a><Link href="/pricing">Pricing</Link><Link href="/contact">Contact Us</Link></div><div><h3>Newsletter</h3><label><span className="srOnly">Email address</span><input type="email" aria-label="Email address" /></label><button>Join HireScore AI Insights</button></div></div><div className="commandContainer commandFooterBottom"><span>© 2026 HireScore AI Technologies</span><div><Link href="/privacy">Privacy Policy</Link><Link href="/terms">Legal Intelligence</Link><a href="mailto:hirescoreaiats@gmail.com">Security Policy</a></div></div></footer>
+  if (isHome) return <footer className="commandFooter"><div className="commandContainer commandFooterGrid"><div><Link className="homeFullLogo footerLogo" href="/" aria-label="HireScore AI home"><img src="/hirescore-logo-white.png" alt="HireScore AI" /></Link><p>The enterprise-grade HireScore AI operating system built for the next era of human potential.</p><div className="footerDots"><span>●</span><span>●</span></div></div><div><h3>Company</h3><a href="#about">About Us</a><a href="#product">Product</a><a href="#intelligence">Resources</a><Link href="/pricing">Pricing</Link><Link href="/contact">Contact Us</Link></div><div><h3>Newsletter</h3><label><span className="srOnly">Email address</span><input type="email" aria-label="Email address" /></label><button>Join HireScore AI Insights</button></div></div><div className="commandContainer commandFooterBottom"><span>© 2026 HireScore AI Technologies</span><div><Link href="/privacy">Privacy Policy</Link><Link href="/terms">Legal Intelligence</Link><a href="mailto:info@hirescoreai.com">Security Policy</a></div></div></footer>
   return (
     <footer className="siteFooter">
       <div className="container footerGrid">

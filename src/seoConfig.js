@@ -121,14 +121,14 @@ const organization = {
     caption: BRAND_NAME,
   },
   image: { '@id': `${SITE_URL}/#logo` },
-  email: 'hirescoreaiats@gmail.com',
+  email: 'info@hirescoreai.com',
   description: 'HireScore AI is an independent AI recruitment workflow platform for recruiters, HR teams, staffing agencies, and growing companies.',
   disambiguatingDescription: 'HireScore AI is independent and is not affiliated with HiredScore, HireScore.com, Workday, or similarly named products.',
   sameAs: ['https://www.linkedin.com/company/hire-score-ai', 'https://www.instagram.com/hirescore_ai/'],
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'sales and customer support',
-    email: 'hirescoreaiats@gmail.com',
+    email: 'info@hirescoreai.com',
     availableLanguage: ['English', 'Hindi'],
   },
 }
