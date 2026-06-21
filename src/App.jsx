@@ -1067,16 +1067,22 @@ function HomePage() {
       <SEO title="HireScore AI | AI Recruitment & Resume Screening Software" description="Screen resumes, match candidates to job descriptions, explain fit, rank talent, manage shortlists, communicate, and schedule interviews with HireScore AI." path="/" />
       <section className="commandHero">
         <div className="commandGlow commandGlowOne" />
-        <div className="commandContainer heroCenter">
-          <span className="commandPill commandReveal"><Rocket size={12} /> The ultimate HireScore AI experience</span>
-          <h1 className="commandReveal commandDelay1"><span className="heroBrand">HireScore AI:</span> Your Global<br /><span>Recruitment Command Center</span></h1>
-          <p className="commandReveal commandDelay2">Experience the HireScore AI advantage. From high-resolution multi-source ingestion to board-ready executive reporting, manage every hire in a single, explainable intelligence environment.</p>
-          <div className="commandActions commandReveal commandDelay3">
-            <a className="commandButton commandButtonPrimary" href={APP_URL}>Join the HireScore AI Revolution</a>
-            <Link className="commandButton commandButtonGhost" href="/contact">Book Executive Demo</Link>
+        <div className="commandContainer commandHeroGrid">
+          <div className="commandHeroCopy">
+            <span className="commandPill commandReveal"><Rocket size={12} /> The recruitment command center</span>
+            <h1 className="commandReveal commandDelay1"><span className="heroBrand">HireScore AI</span> turns hiring complexity into <span>clear decisions.</span></h1>
+            <p className="commandReveal commandDelay2">Screen resumes, understand candidate fit, rank stronger talent, and move every hiring workflow forward from one explainable AI workspace.</p>
+            <div className="commandActions commandReveal commandDelay3">
+              <a className="commandButton commandButtonPrimary" href={APP_URL}>Start Free Pilot <ArrowRight size={17} /></a>
+              <Link className="commandButton commandButtonGhost" href="/contact">Book Product Demo</Link>
+            </div>
+            <div className="heroProof commandReveal commandDelay4"><span><BadgeCheck size={15} /> Explainable AI</span><i /><span><Zap size={15} /> Recruiter controlled</span></div>
           </div>
-          <div className="heroProof commandReveal commandDelay4"><span><BadgeCheck size={15} /> HireScore AI certified</span><i /><span><Zap size={15} /> Enterprise ready</span></div>
-          <CandidateCommandCard />
+          <div className="commandHeroVisual commandReveal commandDelay3">
+            <div className="commandHeroVisualTop"><span><i /> Live candidate intelligence</span><small>One connected workspace</small></div>
+            <ProductHeroDashboard />
+            <div className="commandHeroVisualFoot"><span>Resume intelligence</span><span>Explainable ranking</span><span>Pipeline visibility</span></div>
+          </div>
         </div>
       </section>
       <AboutCommandSection />
@@ -1256,18 +1262,310 @@ function TrustStrip() {
   )
 }
 
+const productWorkflow = [
+  [BriefcaseBusiness, 'Create Job', 'Define the role, skills, and hiring criteria.'],
+  [Files, 'Upload Resumes', 'Add candidate resumes in bulk to the job.'],
+  [SearchCheck, 'AI Screening', 'Parse profiles into structured hiring data.'],
+  [Target, 'Fit Scoring', 'Measure each candidate against the JD.'],
+  [Trophy, 'Candidate Ranking', 'Bring the strongest matches to the top.'],
+  [BadgeCheck, 'Smart Shortlisting', 'Advance candidates with clear evidence.'],
+  [MessageSquareText, 'Communication', 'Keep outreach and follow-ups organized.'],
+  [ClipboardCheck, 'Assessment Tracking', 'Track tests, scores, and readiness.'],
+  [CalendarCheck, 'Interview Pipeline', 'Move candidates into interview stages.'],
+  [BarChart3, 'Job Analytics', 'Monitor quality, progress, and bottlenecks.'],
+]
+
+const productCapabilities = [
+  [SearchCheck, 'AI Resume Screening', 'Parse resumes and extract candidate details, skills, education, experience, and profile insights in seconds.'],
+  [Target, 'JD-Based Fit Scoring', 'Compare every candidate against the job description and generate a clear fit score based on skills, experience, and role relevance.'],
+  [Trophy, 'Candidate Ranking', 'Automatically rank candidates from strongest fit to weakest fit so recruiters can review the best profiles first.'],
+  [BadgeCheck, 'Smart Shortlisting', 'Shortlist the right candidates faster with AI-powered recommendations based on real job fit.'],
+  [BrainCircuit, 'AI Recruiter-Ready Explanation', 'Show matched skills, missing skills, relevant experience, seniority fit, and hiring risks in a recruiter-friendly format.'],
+  [MessageSquareText, 'AI Communication Workflow', 'Manage candidate outreach, follow-ups, interview updates, and hiring communication from one place.'],
+  [ClipboardCheck, 'AI Assessment Tracking', 'Track candidate assessment status, test scores, results, and readiness before moving them to interviews.'],
+  [GitBranch, 'Interview & Pipeline Management', 'Move candidates through stages like shortlisted, communication, assessment, interview, and offer from one dashboard.'],
+  [BarChart3, 'AI Job Analytics', 'Analyze job performance, candidate quality, source insights, pipeline progress, and hiring bottlenecks.'],
+]
+
+const productBenefits = [
+  'Save hours of manual resume screening',
+  'Improve shortlist quality',
+  'Reduce guesswork in candidate selection',
+  'Explain every AI recommendation',
+  'Keep communication organized',
+  'Track assessments and interviews',
+  'Understand job-level hiring performance',
+]
+
+const productUseCases = [
+  [Building2, 'Recruitment Agencies', 'Rank high-volume applicant pools quickly and send stronger shortlists to clients.'],
+  [UsersRound, 'HR Teams', 'Keep screening, communication, assessments, and interviews in one shared workflow.'],
+  [Network, 'Staffing Firms', 'Manage multiple roles and candidate pipelines without spreadsheet-heavy coordination.'],
+  [Rocket, 'Startups & Growing Companies', 'Build a repeatable hiring process without adding more manual admin work.'],
+  [ShieldCheck, 'Enterprise Hiring Teams', 'Give recruiters consistent scoring evidence and job-level pipeline visibility.'],
+  [Zap, 'Bulk Hiring Drives', 'Screen and prioritize large resume batches while keeping every decision reviewable.'],
+]
+
+const productFaqs = [
+  ['Is HireScore AI only a resume parser?', 'No. Resume parsing is one part of HireScore AI. The platform also supports JD-based scoring, candidate ranking, explanations, shortlisting, communication, assessments, interview pipelines, and job analytics.'],
+  ['How does JD-based scoring work?', 'HireScore AI compares candidate skills, experience, education, seniority, and profile evidence with the requirements in the job description to produce a clear fit score.'],
+  ['Can recruiters see why a candidate is recommended?', 'Yes. Each recommendation includes recruiter-ready evidence such as matched skills, missing skills, relevant experience, seniority fit, and potential hiring risks.'],
+  ['Can I upload multiple resumes?', 'Yes. Recruiters can add multiple resumes to a job and review the resulting candidate profiles, fit scores, and rankings in one place.'],
+  ['Does HireScore AI support communication workflow?', 'Yes. Teams can organize candidate outreach, follow-ups, interview updates, and hiring communication within the workflow.'],
+  ['Can I track assessments?', 'Yes. HireScore AI can track assessment status, test results, scores, and candidate readiness before interview stages.'],
+  ['Does it support interview pipeline management?', 'Yes. Candidates can move through shortlist, communication, assessment, interview, and offer stages from one dashboard.'],
+  ['Does it provide job analytics?', 'Yes. Job analytics surface candidate quality, source insights, pipeline progress, and hiring bottlenecks for each role.'],
+  ['Is there a free pilot?', 'Yes. Hiring teams can request a free 7-day pilot and test HireScore AI with a real job and real resumes.'],
+]
+
+function ProductCandidateRow({ rank, name, score, status }) {
+  return (
+    <div className="productPage-candidateRow">
+      <span className="productPage-rank">{rank}</span>
+      <span className="productPage-candidateName"><strong>{name}</strong><small>Data Analyst</small></span>
+      <span className="productPage-score">{score}%</span>
+      <span className={`productPage-status productPage-status${status.replace(' ', '')}`}>{status}</span>
+    </div>
+  )
+}
+
+function ProductHeroDashboard() {
+  return (
+    <div className="productPage-heroDashboard" aria-label="HireScore AI candidate ranking dashboard preview">
+      <div className="productPage-dashTop">
+        <div><i className="productPage-windowDots"><b /><b /><b /></i><small>Neural match analysis</small></div>
+        <span><span className="productPage-liveDot" />Live analysis</span>
+      </div>
+      <div className="productPage-featuredCandidate">
+        <div className="productPage-featuredIdentity"><span><UsersRound size={22} /></span><div><strong>Jane Smith</strong><small>Data Analyst &bull; San Francisco</small></div></div>
+        <div className="productPage-fitRing"><div><strong>92%</strong><small>AI fit score</small></div></div>
+      </div>
+      <div className="productPage-heroInsights">
+        <div className="productPage-skillSummary"><small>Matched skills</small><div><span>SQL</span><span>Power BI</span><span>Python</span><span>Reporting</span></div></div>
+        <div className="productPage-skillSummary isMissing"><small>Missing skills</small><div><span>Advanced statistics</span></div></div>
+        <div className="productPage-insight">
+          <BrainCircuit size={19} />
+          <div><small>AI shortlist recommendation</small><p>Strong analytics experience, close JD alignment, and proven stakeholder reporting.</p></div>
+        </div>
+      </div>
+      <div className="productPage-dashLabel"><span>Candidate ranking</span><small>AI fit</small></div>
+      <div className="productPage-candidates">
+        <ProductCandidateRow rank="01" name="Jane Smith" score="92" status="Shortlist" />
+        <ProductCandidateRow rank="02" name="Rahul Sharma" score="86" status="Review" />
+        <ProductCandidateRow rank="03" name="Ananya Rao" score="79" status="Assessment" />
+      </div>
+      <div className="productPage-dashFooter">
+        <div><span>Applied</span><i /><span>Screened</span><i /><span>Shortlisted</span><i /><span>Interview</span></div>
+        <button type="button">Move to Interview <ArrowRight size={15} /></button>
+      </div>
+    </div>
+  )
+}
+
+function ProductDashboardPreview() {
+  const rows = [
+    ['Priya Mehta', 'SQL, Power BI, Python', '92%', 'Shortlisted'],
+    ['Rahul Sharma', 'SQL, Tableau, Reporting', '86%', 'Assessment'],
+    ['Ananya Rao', 'Excel, Power BI, Statistics', '79%', 'Review'],
+    ['Vikram Singh', 'SQL, Excel, ETL', '74%', 'New'],
+  ]
+  return (
+    <div className="productPage-appShell" id="product-dashboard">
+      <div className="productPage-appBar"><span><img src="/hirescore-logo-mark.png" alt="" />HireScore AI</span><small>Recruiter workspace</small><button type="button" aria-label="Open notifications"><MailCheck size={17} /></button></div>
+      <div className="productPage-appGrid">
+        <aside className="productPage-jobsPanel">
+          <div className="productPage-panelTitle"><span>Open jobs</span><button type="button" aria-label="Create job">+</button></div>
+          <button type="button" className="isActive"><strong>Data Analyst</strong><small>129 candidates</small></button>
+          <button type="button"><strong>Product Manager</strong><small>78 candidates</small></button>
+          <button type="button"><strong>Backend Engineer</strong><small>64 candidates</small></button>
+          <button type="button"><strong>UX Researcher</strong><small>31 candidates</small></button>
+        </aside>
+        <section className="productPage-rankingPanel" aria-label="Ranked candidate list">
+          <div className="productPage-panelTitle"><span>Candidate ranking</span><small>129 profiles screened</small></div>
+          <div className="productPage-tableHead"><span>Candidate</span><span>Matched skills</span><span>Fit</span><span>Status</span></div>
+          {rows.map(([name, skills, score, status], index) => (
+            <button type="button" className={index === 0 ? 'isActive' : ''} key={name}>
+              <span><i>{name.split(' ').map((part) => part[0]).join('')}</i><strong>{name}</strong></span>
+              <span>{skills}</span><b>{score}</b><em>{status}</em>
+            </button>
+          ))}
+        </section>
+        <aside className="productPage-explainPanel">
+          <div className="productPage-panelTitle"><span>AI candidate insight</span><BrainCircuit size={17} /></div>
+          <div className="productPage-profile"><span>PM</span><div><strong>Priya Mehta</strong><small>Top candidate for Data Analyst</small></div><b>92%</b></div>
+          <div className="productPage-skillGroup"><small>Matched skills</small><div><span>SQL</span><span>Power BI</span><span>Python</span><span>Dashboards</span></div></div>
+          <div className="productPage-skillGroup isMissing"><small>Missing skills</small><div><span>Advanced statistics</span></div></div>
+          <p>Priya closely matches the role across analytics tooling, reporting ownership, and stakeholder communication. Her recent experience supports a strong shortlist recommendation.</p>
+          <button type="button">Shortlist candidate <ArrowRight size={15} /></button>
+        </aside>
+      </div>
+      <div className="productPage-appBottom">
+        <div className="productPage-pipeline"><span>Pipeline</span>{[['Applied','129'],['Screened','82'],['Shortlisted','14'],['Assessment','8'],['Interview','5']].map(([label,value]) => <div key={label}><strong>{value}</strong><small>{label}</small></div>)}</div>
+        <div className="productPage-analytics"><span>Job health</span><div><i style={{ width: '78%' }} /><small>78% pipeline quality</small></div><strong>12 days<small> average time to shortlist</small></strong></div>
+      </div>
+    </div>
+  )
+}
+
 function ProductOverview() {
   return (
     <>
-      <SEO title="Product | HireScore AI Recruitment Platform" description="Explore HireScore AI product features for jobs, apply pages, resume parsing, AI scoring, ranking, shortlisting, communication, interviews, and hiring pipelines." path="/product" />
-      <PageHero eyebrow="Product overview" title="One AI hiring platform for the complete recruiter workflow" intro="HireScore AI helps recruiters create jobs, collect applications, parse resumes, rank candidates, explain scores, and move candidates to interviews." />
-      <section className="section">
-        <div className="container">
-          <SectionHeader eyebrow="Product modules" title="Explore every HireScore AI workflow" />
-          <div className="featureGrid">{productPages.map((page) => <FeatureCard page={page} key={page.slug} />)}</div>
-        </div>
-      </section>
-      <CTASection />
+      <SEO title="HireScore AI Product | AI-Powered ATS for Recruiters" description="Screen resumes, score candidates against job descriptions, rank talent, track assessments, manage interviews, and analyze hiring from one AI-powered ATS." path="/product" />
+      <div className="productPage-root">
+        <section className="productPage-hero">
+          <div className="container productPage-heroGrid">
+            <div className="productPage-heroCopy">
+              <span className="productPage-eyebrow"><Sparkles size={14} />HireScore AI product</span>
+              <h1>One AI hiring workspace for <span>faster, clearer decisions.</span></h1>
+              <p>HireScore AI helps recruiters screen resumes, score candidates against job descriptions, rank top talent, manage communication, track assessments, schedule interviews, and monitor job performance from one intelligent hiring dashboard.</p>
+              <div className="productPage-actions">
+                <Link className="btn btnPrimary btnLarge" href="/contact">Book Free 7-Day Pilot <ArrowRight size={17} /></Link>
+                <a className="btn btnGhost btnLarge" href="#product-dashboard">View Product Demo</a>
+              </div>
+              <div className="productPage-proof"><span><CheckCircle2 size={15} />Explainable scoring</span><span><CheckCircle2 size={15} />Full pipeline visibility</span><span><CheckCircle2 size={15} />Recruiter controlled</span></div>
+            </div>
+            <div className="productPage-heroVisual">
+              <div className="productPage-heroVisualTop"><span><i /> Live hiring intelligence</span><small>Candidate ranking workspace</small></div>
+              <ProductHeroDashboard />
+              <div className="productPage-heroVisualFoot"><span>129 profiles screened</span><span>92% top fit</span><span>Explainable evidence</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section className="productPage-section productPage-workflowSection" aria-labelledby="product-workflow-title">
+          <div className="container productPage-workflowLayout">
+            <aside className="productPage-workflowIntro">
+              <div className="productPage-heading productPage-headingLeft"><span>One connected workflow</span><h2 id="product-workflow-title">From Job Description to Interview-Ready Candidates</h2><p>Every hiring step stays connected, reviewable, and ready for recruiter action.</p></div>
+              <div className="productPage-workflowVisual" aria-label="HireScore AI connected workflow map">
+                <div className="productPage-visualTop"><span><GitBranch size={15} />Workflow intelligence</span><small><i />Live</small></div>
+                <div className="productPage-orbitMap">
+                  <span className="productPage-orbit productPage-orbitOne"><BriefcaseBusiness size={18} /></span>
+                  <span className="productPage-orbit productPage-orbitTwo"><BrainCircuit size={18} /></span>
+                  <span className="productPage-orbit productPage-orbitThree"><MessageSquareText size={18} /></span>
+                  <span className="productPage-orbit productPage-orbitFour"><BarChart3 size={18} /></span>
+                  <div className="productPage-orbitCore"><img src="/hirescore-logo-mark.png" alt="" /><strong>HireScore AI</strong><small>Connected command center</small></div>
+                </div>
+                <div className="productPage-visualFoot"><span><strong>10</strong> stages</span><i /><span><strong>1</strong> workspace</span><i /><span><strong>0</strong> handoffs</span></div>
+              </div>
+            </aside>
+            <div className="productPage-workflowPhases">
+              {[
+                ['01', 'Source & understand', productWorkflow.slice(0, 5)],
+                ['02', 'Engage & decide', productWorkflow.slice(5)],
+              ].map(([number, label, stages], phaseIndex) => (
+                <section className="productPage-workflowPhase" key={label}>
+                  <header><span>{number}</span><div><small>Hiring phase</small><h3>{label}</h3></div></header>
+                  <div className="productPage-phaseStages">
+                    {stages.map(([Icon, title, text], index) => (
+                      <article key={title}>
+                        <div><Icon size={18} /><span>{String(phaseIndex * 5 + index + 1).padStart(2, '0')}</span></div>
+                        <div><h4>{title}</h4><p>{text}</p></div>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="productPage-section" aria-labelledby="product-capabilities-title">
+          <div className="container">
+            <div className="productPage-heading"><span>Core capabilities</span><h2 id="product-capabilities-title">Everything Recruiters Need in One AI Hiring Platform</h2><p>Practical AI tools that support recruiter judgment instead of hiding it.</p></div>
+            <div className="productPage-capabilityMarquee">
+              <div className="productPage-capabilityTrack">
+                {[...productCapabilities, ...productCapabilities].map(([Icon, title, text], index) => {
+                  const originalIndex = index % productCapabilities.length
+                  const duplicate = index >= productCapabilities.length
+                  return <article aria-hidden={duplicate ? 'true' : undefined} className={`productPage-capabilityTone${originalIndex % 3 + 1}`} key={`${title}-${duplicate ? 'duplicate' : 'original'}`}><div className="productPage-cardIcon"><Icon size={23} /></div><span>{String(originalIndex + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{text}</p><div className="productPage-capabilitySignal"><small>Recruiter-ready intelligence</small><ArrowRight size={15} /></div></article>
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="productPage-section productPage-dashboardSection" aria-labelledby="product-dashboard-title">
+          <div className="container">
+            <div className="productPage-dashboardLayout">
+              <div className="productPage-dashboardCopy">
+                <span>Product preview</span>
+                <h2 id="product-dashboard-title">A Hiring <em>Command Center</em> Recruiters Can Actually Use</h2>
+                <p>Review jobs, rankings, evidence, pipeline stages, and job health without switching tools.</p>
+                <div className="productPage-dashboardPoints">
+                  <div><CheckCircle2 size={17} /><span><strong>One shared workspace</strong><small>Move from job intake to interview without disconnected tools.</small></span></div>
+                  <div><CheckCircle2 size={17} /><span><strong>Explainable decisions</strong><small>See the evidence behind every candidate score and ranking.</small></span></div>
+                  <div><CheckCircle2 size={17} /><span><strong>Live hiring visibility</strong><small>Track pipeline progress, job health, and recruiter action in real time.</small></span></div>
+                </div>
+                <div className="productPage-dashboardStats"><span><strong>129</strong><small>Profiles screened</small></span><span><strong>92%</strong><small>Top candidate fit</small></span></div>
+              </div>
+              <div className="productPage-dashboardVisual">
+                <div className="productPage-dashboardGlow" />
+                <div className="productPage-dashboardStageLabel"><span><Sparkles size={14} />Live recruitment intelligence</span><small><i />Updated now</small></div>
+                <ProductDashboardPreview />
+                <div className="productPage-dashboardStageNote"><ShieldCheck size={14} /><span>Evidence-led</span><i /><span>Recruiter controlled</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="productPage-section productPage-benefitsSection" aria-labelledby="product-benefits-title">
+          <div className="container">
+            <div className="productPage-benefitsHeader">
+              <div className="productPage-heading productPage-headingLeft"><span>The HireScore advantage</span><h2 id="product-benefits-title">Built to Help Recruiters <em>Move Faster</em></h2></div>
+              <div className="productPage-benefitsIntro"><Sparkles size={17} /><p>Spend less time sorting profiles and more time talking to the right candidates.</p><span><i />Seven practical workflow gains</span></div>
+            </div>
+            <div className="productPage-benefitsLayout">
+              <div className="productPage-benefitGrid">{productBenefits.map((benefit, index) => <article key={benefit}><span>{String(index + 1).padStart(2, '0')}</span><CheckCircle2 size={19} /><h3>{benefit}</h3></article>)}</div>
+              <aside className="productPage-impactPanel">
+                <div className="productPage-impactTop"><small>Performance impact</small><span><i />Pilot workflow signal</span></div>
+                <div className="productPage-impactHero"><strong>72%</strong><div><b>Faster progression</b><p>Less time spent moving qualified candidates to interview.</p></div></div>
+                <div className="productPage-impactBars"><span><small>Resume review</small><b>72%</b><i><em style={{ width: '72%' }} /></i></span><span><small>Screening coverage</small><b>99%</b><i><em style={{ width: '99%' }} /></i></span></div>
+                <div className="productPage-impactMetrics"><span><b>4.9/5</b><small>Recruiter clarity</small></span><span><b>99%</b><small>Screening coverage</small></span><span><b>1</b><small>Connected workflow</small></span></div>
+              </aside>
+            </div>
+          </div>
+        </section>
+
+        <section className="productPage-section productPage-useCaseSection" aria-labelledby="product-use-cases-title">
+          <div className="container productPage-useCaseLayout">
+            <div className="productPage-useCaseIntro">
+              <div className="productPage-heading productPage-headingLeft">
+                <span>Built for your team</span>
+                <h2 id="product-use-cases-title">One hiring workspace, shaped around <em>how your team works.</em></h2>
+                <p>From specialist recruiting desks to fast-growing internal teams, HireScore AI keeps every hiring workflow clear, connected, and ready to scale.</p>
+              </div>
+              <div className="productPage-useCasePromise">
+                <div><Sparkles size={16} /><span>Built for real hiring operations</span></div>
+                <strong>Flexible enough for every team. Consistent enough for every decision.</strong>
+                <div className="productPage-useCaseTags"><span>Explainable AI</span><span>Shared workflow</span><span>Human review</span></div>
+              </div>
+            </div>
+            <div className="productPage-useCaseGrid">
+              {productUseCases.map(([Icon, title, text], index) => (
+                <article key={title}>
+                  <div className="productPage-useCaseCardTop"><span><Icon size={21} /></span><b>{String(index + 1).padStart(2, '0')}</b></div>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="productPage-section productPage-ctaSection">
+          <div className="container productPage-cta">
+            <div><span>Free 7-day pilot</span><h2>Try HireScore AI with Your Real Hiring Workflow</h2><p>Start with one job, upload real resumes, and see how AI screening, ranking, assessment tracking, interview pipeline management, and job analytics can speed up your hiring process.</p></div>
+            <Link className="btn btnPrimary btnLarge" href="/contact">Book Your Free 7-Day Pilot Access <ArrowRight size={18} /></Link>
+          </div>
+        </section>
+
+        <section className="productPage-section productPage-faqSection" aria-labelledby="product-faq-title">
+          <div className="container productPage-faqLayout">
+            <div className="productPage-heading productPage-headingLeft"><span>Product FAQs</span><h2 id="product-faq-title">Questions Before You Start</h2><p>Clear answers about the HireScore AI product workflow.</p></div>
+            <div className="productPage-faqList">{productFaqs.map(([question, answer]) => <details key={question}><summary>{question}<ChevronDown size={18} /></summary><p>{answer}</p></details>)}</div>
+          </div>
+        </section>
+      </div>
     </>
   )
 }
@@ -1719,8 +2017,9 @@ function renderRoute(path) {
 export default function App() {
   const path = usePath()
   const isHome = path === '/'
+  const isProductOverview = path === '/product'
   return (
-    <div className={`app ${isHome ? 'stitchHome' : 'commandInner'}`}>
+    <div className={`app ${isHome ? 'stitchHome' : 'commandInner'} ${isProductOverview ? 'productView' : ''}`}>
       <Header isHome={isHome} />
       <main>{renderRoute(path)}</main>
       <Footer />
