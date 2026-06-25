@@ -1806,3 +1806,830 @@ h3 {
 .productPage-hero{min-height:auto;padding:86px 0 82px}.productPage-hero::after{left:30%;top:145px;width:250px;height:250px}.productPage-heroGrid{display:grid;grid-template-columns:minmax(350px,.82fr) minmax(0,1.18fr);gap:64px;align-items:center}.productPage-heroCopy{text-align:left}.productPage-eyebrow{margin:0 0 21px}.productPage-heroCopy h1{max-width:620px;font-size:clamp(3.1rem,4.7vw,4.65rem);line-height:1.02}.productPage-heroCopy>p{max-width:580px;margin:21px 0 0;font-size:.9rem;line-height:1.7}.productPage-actions{justify-content:flex-start}.productPage-proof{display:flex;justify-content:flex-start;gap:15px;margin-top:25px}.productPage-proof span{font-size:.56rem}.productPage-heroVisual{position:relative;min-width:0;padding:50px 16px 42px}.productPage-heroVisual::before{content:"";position:absolute;inset:66px 0 28px 30px;border:1px solid rgba(210,187,255,.105);border-radius:25px;transform:rotate(1.2deg);background:linear-gradient(145deg,rgba(124,58,237,.11),rgba(76,215,246,.04));box-shadow:0 34px 90px rgba(0,0,0,.23)}.productPage-heroVisual .productPage-heroDashboard{width:100%;padding:0 16px 16px;border-radius:22px}.productPage-heroVisualTop{position:absolute;z-index:4;top:5px;left:29px;right:27px;display:flex;align-items:center;justify-content:space-between;padding-bottom:13px;border-bottom:1px solid rgba(210,187,255,.1)}.productPage-heroVisualTop span,.productPage-heroVisualTop small{font-size:.52rem;font-weight:850;letter-spacing:.07em;text-transform:uppercase}.productPage-heroVisualTop span{display:flex;align-items:center;gap:8px;color:#d2bbff}.productPage-heroVisualTop span i{width:7px;height:7px;border-radius:50%;background:#55dfa0;box-shadow:0 0 11px rgba(85,223,160,.62)}.productPage-heroVisualTop small{color:#716978}.productPage-heroVisualFoot{position:absolute;z-index:4;right:28px;bottom:5px;display:flex;gap:17px}.productPage-heroVisualFoot span{color:#766e7b;font-size:.48rem;font-weight:850;text-transform:uppercase}.productPage-heroVisualFoot span::before{content:"";display:inline-block;width:4px;height:4px;margin-right:6px;border-radius:50%;background:#4cd7f6}
 @media(max-width:1050px){.commandHeroGrid,.productPage-heroGrid{grid-template-columns:1fr;gap:42px}.commandHeroCopy,.productPage-heroCopy{max-width:760px}.commandHeroCopy h1,.productPage-heroCopy h1{max-width:730px}.commandHeroVisual,.productPage-heroVisual{width:100%;max-width:860px;margin:0 auto}}
 @media(max-width:700px){.commandHero,.productPage-hero{padding:64px 0 58px}.commandHeroGrid,.productPage-heroGrid{gap:30px}.commandHeroCopy h1,.productPage-heroCopy h1{font-size:2.6rem}.commandHeroCopy>p,.productPage-heroCopy>p{font-size:.82rem}.commandHeroCopy .commandActions,.productPage-actions{align-items:stretch;flex-direction:column}.commandHeroCopy .commandButton,.productPage-actions .btn{width:100%}.commandHeroCopy .heroProof,.productPage-proof{align-items:flex-start;flex-direction:column;gap:10px}.commandHeroVisual,.productPage-heroVisual{padding:48px 0 36px}.commandHeroVisual::before,.productPage-heroVisual::before{inset:61px 1px 23px 17px}.commandHeroVisualTop,.productPage-heroVisualTop{left:14px;right:14px}.commandHeroVisualTop small,.productPage-heroVisualTop small{display:none}.commandHeroVisualFoot,.productPage-heroVisualFoot{right:14px;gap:10px}.commandHeroVisualFoot span:nth-child(2),.productPage-heroVisualFoot span:nth-child(2){display:none}.commandHeroVisual .productPage-heroDashboard,.productPage-heroVisual .productPage-heroDashboard{padding-inline:11px;border-radius:18px}.commandHeroVisual .productPage-featuredCandidate,.productPage-heroVisual .productPage-featuredCandidate{grid-template-columns:1fr 86px;gap:12px}.commandHeroVisual .productPage-fitRing,.productPage-heroVisual .productPage-fitRing{width:76px;height:76px}.commandHeroVisual .productPage-fitRing::before,.productPage-heroVisual .productPage-fitRing::before{width:61px;height:61px}.commandHeroVisual .productPage-heroInsights,.productPage-heroVisual .productPage-heroInsights{grid-template-columns:1fr}.commandHeroVisual .productPage-skillSummary.isMissing,.productPage-heroVisual .productPage-skillSummary.isMissing{display:none}}
+
+/* Premium Solutions page: buyer-focused sections using the home/product visual language. */
+.solutionPage-hero{position:relative;overflow:hidden;padding:96px 0 88px;border-bottom:1px solid rgba(210,187,255,.06);background:radial-gradient(circle at 18% 18%,rgba(124,58,237,.16),transparent 32rem),radial-gradient(circle at 82% 28%,rgba(76,215,246,.09),transparent 27rem),linear-gradient(180deg,rgba(20,16,29,.85),rgba(12,10,17,.96))}.solutionPage-hero::before,.solutionPage-section::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.19;background-image:radial-gradient(circle,rgba(210,187,255,.78) 1px,transparent 1.35px);background-size:91px 91px;background-position:17px 29px}.solutionPage-heroGrid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(360px,.86fr) minmax(0,1.14fr);gap:66px;align-items:center}.solutionPage-heroCopy h1{max-width:720px;margin:26px 0 22px;color:#f2ebf5;font-family:var(--font-display);font-size:clamp(3.15rem,5vw,4.95rem);line-height:1.02;letter-spacing:-.06em}.solutionPage-heroCopy p{max-width:650px;margin:0;color:#aaa1b4;font-size:.96rem;line-height:1.75}.solutionPage-eyebrow,.solutionPage-sectionHeader>span,.solutionPage-splitHeader span,.solutionPage-stickyCopy>span,.solutionPage-roleLayout>div:first-child>span,.solutionPage-finalCtaBox>span{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border:1px solid rgba(210,187,255,.16);border-radius:999px;color:#c8afff;background:rgba(124,58,237,.075);font-size:.62rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.solutionPage-actions{justify-content:flex-start;margin-top:32px}.solutionPage-supportLine{display:flex;align-items:center;gap:10px;max-width:610px;margin-top:24px;color:#7f7586;font-size:.72rem;font-weight:750;line-height:1.5}.solutionPage-supportLine svg{color:#4cd7f6;flex:0 0 auto}
+.solutionPage-visual{position:relative;min-height:520px;padding:56px 20px 34px}.solutionPage-visual::before{content:"";position:absolute;inset:74px 16px 34px 52px;border:1px solid rgba(210,187,255,.11);border-radius:29px;transform:rotate(1.1deg);background:linear-gradient(145deg,rgba(124,58,237,.12),rgba(76,215,246,.045));box-shadow:0 36px 98px rgba(0,0,0,.25)}.solutionPage-visual::after{content:"";position:absolute;inset:16% -6% 8%;z-index:-1;border-radius:50%;filter:blur(66px);opacity:.72;background:radial-gradient(circle at 30% 45%,rgba(124,58,237,.26),transparent 48%),radial-gradient(circle at 76% 58%,rgba(76,215,246,.17),transparent 44%)}.solutionPage-visualTop{position:absolute;z-index:4;top:6px;left:48px;right:36px;display:flex;align-items:center;justify-content:space-between;padding-bottom:13px;border-bottom:1px solid rgba(210,187,255,.1)}.solutionPage-visualTop span,.solutionPage-visualTop small{font-size:.52rem;font-weight:850;letter-spacing:.07em;text-transform:uppercase}.solutionPage-visualTop span{display:flex;align-items:center;gap:8px;color:#d2bbff}.solutionPage-visualTop i{width:7px;height:7px;border-radius:50%;background:#55dfa0;box-shadow:0 0 11px rgba(85,223,160,.62)}.solutionPage-visualTop small{color:#716978}.solutionPage-orbit{position:relative;z-index:2;min-height:430px;border:1px solid rgba(210,187,255,.12);border-radius:28px;background:radial-gradient(circle at 50% 42%,rgba(76,215,246,.08),transparent 34%),linear-gradient(145deg,rgba(25,21,35,.98),rgba(14,13,23,.99));box-shadow:0 44px 115px rgba(0,0,0,.42),0 0 62px rgba(124,58,237,.09)}.solutionPage-core{position:absolute;top:50%;left:50%;width:190px;height:190px;display:grid;place-items:center;align-content:center;gap:8px;transform:translate(-50%,-50%);border:1px solid rgba(210,187,255,.16);border-radius:50%;background:radial-gradient(circle at 45% 30%,rgba(210,187,255,.2),rgba(22,18,30,.96) 62%);box-shadow:inset 0 1px rgba(255,255,255,.05),0 0 55px rgba(124,58,237,.18)}.solutionPage-core img{width:52px}.solutionPage-core strong{color:#f0e9f4;font-size:1.08rem}.solutionPage-core small{color:#756d7c;font-size:.56rem;font-weight:850;text-transform:uppercase;letter-spacing:.08em}.solutionPage-floatingCard{position:absolute;width:205px;display:flex;align-items:center;gap:12px;padding:16px 17px;border:1px solid rgba(210,187,255,.13);border-radius:18px;color:#ddd6e3;background:linear-gradient(145deg,rgba(36,30,48,.88),rgba(21,19,29,.92));box-shadow:0 24px 64px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.035);animation:solutionFloat 6.5s ease-in-out infinite}.solutionPage-floatingCard svg{padding:8px;width:36px;height:36px;border:1px solid rgba(76,215,246,.18);border-radius:11px;color:#4cd7f6;background:rgba(76,215,246,.055)}.solutionPage-floatingCard span{font-size:.78rem;font-weight:850}.solutionPage-floatingCard.card1{top:50px;left:42px}.solutionPage-floatingCard.card2{top:78px;right:36px;animation-delay:-1.1s}.solutionPage-floatingCard.card3{top:246px;right:44px;animation-delay:-2.2s}.solutionPage-floatingCard.card4{bottom:42px;left:82px;animation-delay:-3.3s}.solutionPage-floatingCard.card5{top:220px;left:20px;animation-delay:-4.4s}.solutionPage-floatingCard:nth-child(2n) svg{border-color:rgba(210,187,255,.18);color:#d2bbff;background:rgba(124,58,237,.07)}.solutionPage-floatingCard:nth-child(3n) svg{border-color:rgba(255,183,132,.18);color:#ffb784;background:rgba(255,183,132,.05)}
+.solutionPage-section{position:relative;overflow:hidden;padding:92px 0;background:#120f19}.solutionPage-section>.container{position:relative;z-index:1}.solutionPage-sectionHeader{max-width:820px;margin:0 auto 46px;text-align:center}.solutionPage-sectionHeader h2,.solutionPage-splitHeader h2,.solutionPage-stickyCopy h2,.solutionPage-roleLayout h2,.solutionPage-finalCtaBox h2{margin:18px 0 0;color:#f0e9f4;font-family:var(--font-display);font-size:clamp(2.45rem,4.2vw,4.1rem);line-height:1.04;letter-spacing:-.055em}.solutionPage-sectionHeader p,.solutionPage-splitHeader p,.solutionPage-stickyCopy p,.solutionPage-roleLayout>div:first-child p{color:#a59cab;font-size:.88rem;line-height:1.75}.solutionPage-sectionHeader p{max-width:780px;margin:20px auto 0}.solutionPage-painGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.solutionPage-painGrid article,.solutionPage-featureGrid article,.solutionPage-roleGrid article{position:relative;overflow:hidden;border:1px solid rgba(210,187,255,.1);background:linear-gradient(145deg,rgba(31,27,42,.78),rgba(20,18,27,.88));box-shadow:0 20px 58px rgba(0,0,0,.16),inset 0 1px rgba(255,255,255,.025)}.solutionPage-painGrid article{min-height:245px;padding:24px;border-radius:20px}.solutionPage-painGrid article::before,.solutionPage-featureGrid article::before,.solutionPage-roleGrid article::before{content:"";position:absolute;top:0;left:24px;width:62px;height:2px;background:linear-gradient(90deg,#d2bbff,transparent)}.solutionPage-painGrid article:nth-child(2n)::before,.solutionPage-featureGrid article:nth-child(3n+2)::before,.solutionPage-roleGrid article:nth-child(3n+2)::before{background:linear-gradient(90deg,#4cd7f6,transparent)}.solutionPage-painGrid article:nth-child(3n)::before,.solutionPage-featureGrid article:nth-child(3n)::before,.solutionPage-roleGrid article:nth-child(3n)::before{background:linear-gradient(90deg,#ffb784,transparent)}.solutionPage-painGrid article>span{position:absolute;top:21px;right:22px;color:#5d5664;font-family:monospace;font-size:.62rem;font-weight:900}.solutionPage-painGrid svg{width:42px;height:42px;margin-bottom:42px;padding:10px;border:1px solid rgba(210,187,255,.16);border-radius:13px;color:#d2bbff;background:rgba(124,58,237,.07)}.solutionPage-painGrid h3,.solutionPage-solutionCard h3,.solutionPage-stepGrid h3,.solutionPage-featureGrid h3,.solutionPage-roleGrid h3{margin:0;color:#e8e1ec;font-size:.98rem;letter-spacing:0}.solutionPage-painGrid p,.solutionPage-solutionCard p,.solutionPage-stepGrid p,.solutionPage-featureGrid p,.solutionPage-roleGrid p{margin:12px 0 0;color:#928997;font-size:.7rem;line-height:1.65}
+.solutionPage-solutionCardsSection{background:linear-gradient(180deg,#120f19,#0f0c15)}.solutionPage-splitHeader{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(280px,.62fr);gap:70px;align-items:end;margin-bottom:46px}.solutionPage-splitHeader p{margin:0;padding-left:24px;border-left:1px solid rgba(210,187,255,.14)}.solutionPage-cardGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.solutionPage-solutionCard{position:relative;display:flex;flex-direction:column;min-height:474px;padding:25px;border:1px solid rgba(210,187,255,.11);border-radius:23px;background:radial-gradient(circle at 88% 0,rgba(76,215,246,.065),transparent 32%),linear-gradient(145deg,rgba(33,28,44,.86),rgba(18,16,25,.94));box-shadow:0 26px 72px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.03);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}.solutionPage-solutionCard:hover{transform:translateY(-6px);border-color:rgba(210,187,255,.24);box-shadow:0 34px 88px rgba(0,0,0,.28),0 0 36px rgba(124,58,237,.06)}.solutionPage-cardTop{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}.solutionPage-cardTop>span{width:46px;height:46px;display:grid;place-items:center;border:1px solid rgba(76,215,246,.18);border-radius:14px;color:#4cd7f6;background:rgba(76,215,246,.055)}.solutionPage-cardTop>b{color:#5f5666;font-family:monospace;font-size:.62rem}.solutionPage-solutionCard strong{display:block;margin:10px 0 0;color:#cfc6d5;font-size:.8rem;line-height:1.45}.solutionPage-bestFor{display:grid;gap:8px;margin:24px 0}.solutionPage-bestFor small{margin-bottom:2px;color:#c8afff;font-size:.55rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.solutionPage-bestFor em{display:flex;align-items:center;gap:8px;color:#a69cac;font-style:normal;font-size:.64rem}.solutionPage-bestFor svg{color:#4cd7f6;flex:0 0 auto}.solutionPage-cardLink{display:inline-flex;align-items:center;gap:7px;margin-top:auto;color:#4cd7f6;font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em}
+.solutionPage-stepsSection{background:radial-gradient(circle at 70% 18%,rgba(124,58,237,.09),transparent 34rem),#100d16}.solutionPage-stepsLayout{display:grid;grid-template-columns:minmax(300px,.72fr) minmax(0,1.28fr);gap:70px;align-items:start}.solutionPage-stickyCopy{position:sticky;top:108px}.solutionPage-stickyCopy p{max-width:460px;margin:20px 0 0}.solutionPage-stepGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.solutionPage-stepGrid article{min-height:260px;padding:25px;border:1px solid rgba(210,187,255,.11);border-radius:22px;background:linear-gradient(145deg,rgba(31,27,42,.82),rgba(18,16,25,.91));box-shadow:0 24px 64px rgba(0,0,0,.18),inset 0 1px rgba(255,255,255,.025)}.solutionPage-stepGrid article>div{display:flex;align-items:center;justify-content:space-between;margin-bottom:38px}.solutionPage-stepGrid svg{width:44px;height:44px;padding:10px;border:1px solid rgba(210,187,255,.16);border-radius:13px;color:#d2bbff;background:rgba(124,58,237,.07)}.solutionPage-stepGrid article:nth-child(2n) svg{border-color:rgba(76,215,246,.18);color:#4cd7f6;background:rgba(76,215,246,.05)}.solutionPage-stepGrid article>div span{color:#625a68;font-size:.56rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em}
+.solutionPage-compareSection{background:#120f19}.solutionPage-compareTable{overflow:hidden;border:1px solid rgba(210,187,255,.13);border-radius:24px;background:linear-gradient(145deg,rgba(29,25,39,.9),rgba(16,14,22,.96));box-shadow:0 30px 85px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.03)}.solutionPage-compareHead,.solutionPage-compareRow{display:grid;grid-template-columns:.75fr 1fr 1fr;gap:0}.solutionPage-compareHead{background:rgba(210,187,255,.055)}.solutionPage-compareHead span{padding:18px 22px;color:#c8afff;font-size:.6rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.solutionPage-compareRow{border-top:1px solid rgba(210,187,255,.075)}.solutionPage-compareRow strong,.solutionPage-compareRow span{padding:20px 22px;color:#d8d0dd;font-size:.74rem;line-height:1.5}.solutionPage-compareRow span{color:#938a99;border-left:1px solid rgba(210,187,255,.065)}.solutionPage-compareRow span:last-child{color:#b7effa;background:linear-gradient(90deg,rgba(76,215,246,.04),transparent)}
+.solutionPage-platformSection{background:radial-gradient(circle at 18% 20%,rgba(124,58,237,.08),transparent 30rem),#100d16}.solutionPage-platformMatrix{overflow:hidden;border:1px solid rgba(210,187,255,.14);border-radius:25px;background:linear-gradient(145deg,rgba(29,25,39,.92),rgba(15,13,21,.98));box-shadow:0 34px 92px rgba(0,0,0,.26),inset 0 1px rgba(255,255,255,.035)}.solutionPage-platformHead,.solutionPage-platformRow{display:grid;grid-template-columns:.7fr repeat(4,1fr)}.solutionPage-platformHead{background:linear-gradient(90deg,rgba(124,58,237,.12),rgba(76,215,246,.045))}.solutionPage-platformHead span{padding:18px 18px;color:#c8afff;font-size:.56rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.solutionPage-platformHead span:nth-child(2){color:#4cd7f6}.solutionPage-platformRow{border-top:1px solid rgba(210,187,255,.075)}.solutionPage-platformRow strong,.solutionPage-platformRow span{padding:20px 18px;font-size:.68rem;line-height:1.55}.solutionPage-platformRow strong{color:#ebe4ef;font-weight:900}.solutionPage-platformRow span{color:#938a99;border-left:1px solid rgba(210,187,255,.06)}.solutionPage-platformRow span:nth-child(2){color:#c9f6ff;background:linear-gradient(180deg,rgba(76,215,246,.045),rgba(124,58,237,.025))}.solutionPage-platformRow span:nth-child(3)::before,.solutionPage-platformRow span:nth-child(4)::before,.solutionPage-platformRow span:nth-child(5)::before{content:"";display:block;width:24px;height:2px;margin-bottom:10px;border-radius:99px;background:linear-gradient(90deg,#d2bbff,transparent)}.solutionPage-platformRow span:nth-child(4)::before{background:linear-gradient(90deg,#4cd7f6,transparent)}.solutionPage-platformRow span:nth-child(5)::before{background:linear-gradient(90deg,#ffb784,transparent)}
+.solutionPage-featureSection{background:linear-gradient(180deg,#100d16,#120f19)}.solutionPage-featureGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.solutionPage-featureGrid article{min-height:202px;padding:22px;border-radius:19px}.solutionPage-featureGrid svg,.solutionPage-roleGrid svg{width:39px;height:39px;margin-bottom:28px;padding:9px;border:1px solid rgba(76,215,246,.18);border-radius:12px;color:#4cd7f6;background:rgba(76,215,246,.05)}
+.solutionPage-roleSection{background:radial-gradient(circle at 16% 20%,rgba(76,215,246,.06),transparent 27rem),#100d16}.solutionPage-roleLayout{display:grid;grid-template-columns:minmax(300px,.72fr) minmax(0,1.28fr);gap:62px;align-items:start}.solutionPage-roleLayout>div:first-child{position:sticky;top:108px}.solutionPage-roleLayout>div:first-child p{max-width:470px;margin-top:20px}.solutionPage-roleGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.solutionPage-roleGrid article{min-height:172px;padding:20px;border-radius:18px}.solutionPage-roleGrid svg{margin-bottom:18px}
+.solutionPage-finalCta{padding-bottom:112px;background:radial-gradient(circle at 50% 10%,rgba(124,58,237,.13),transparent 33rem),#120f19}.solutionPage-finalCtaBox{position:relative;z-index:1;overflow:hidden;padding:72px 34px;border:1px solid rgba(210,187,255,.14);border-radius:34px;text-align:center;background:radial-gradient(circle at 18% 0,rgba(76,215,246,.09),transparent 32%),radial-gradient(circle at 86% 18%,rgba(124,58,237,.17),transparent 35%),linear-gradient(145deg,rgba(31,27,42,.92),rgba(16,14,22,.97));box-shadow:0 34px 95px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.035)}.solutionPage-finalCtaBox h2{max-width:760px;margin-left:auto;margin-right:auto}.solutionPage-finalCtaBox p{max-width:710px;margin:20px auto 0;color:#aaa1b4;font-size:.9rem;line-height:1.72}.solutionPage-finalCtaBox .solutionPage-actions{justify-content:center}.solutionPage-finalCtaBox small{display:block;margin-top:22px;color:#756d7c;font-size:.64rem;font-weight:750}
+@keyframes solutionFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}@media(max-width:1100px){.solutionPage-heroGrid,.solutionPage-stepsLayout,.solutionPage-roleLayout{grid-template-columns:1fr;gap:44px}.solutionPage-visual{max-width:820px;width:100%;margin:0 auto}.solutionPage-stickyCopy,.solutionPage-roleLayout>div:first-child{position:static}.solutionPage-painGrid,.solutionPage-featureGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.solutionPage-cardGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.solutionPage-splitHeader{grid-template-columns:1fr;gap:22px}.solutionPage-splitHeader p{max-width:640px}.solutionPage-platformMatrix{overflow-x:auto}.solutionPage-platformHead,.solutionPage-platformRow{min-width:1050px}}@media(max-width:760px){.solutionPage-hero{padding:66px 0 58px}.solutionPage-section{padding:66px 0}.solutionPage-heroCopy h1,.solutionPage-sectionHeader h2,.solutionPage-splitHeader h2,.solutionPage-stickyCopy h2,.solutionPage-roleLayout h2,.solutionPage-finalCtaBox h2{font-size:2.45rem}.solutionPage-heroCopy p,.solutionPage-sectionHeader p,.solutionPage-splitHeader p,.solutionPage-stickyCopy p,.solutionPage-roleLayout>div:first-child p{font-size:.8rem}.solutionPage-actions{align-items:stretch;flex-direction:column}.solutionPage-actions .btn{width:100%}.solutionPage-visual{min-height:560px;padding:52px 0 30px}.solutionPage-visual::before{inset:70px 2px 25px 18px}.solutionPage-visualTop{left:14px;right:14px}.solutionPage-visualTop small{display:none}.solutionPage-orbit{min-height:476px}.solutionPage-core{top:48%;width:156px;height:156px}.solutionPage-floatingCard{width:178px;padding:13px}.solutionPage-floatingCard.card1{top:34px;left:18px}.solutionPage-floatingCard.card2{top:116px;right:14px}.solutionPage-floatingCard.card3{top:260px;right:18px}.solutionPage-floatingCard.card4{bottom:38px;left:18px}.solutionPage-floatingCard.card5{top:202px;left:8px}.solutionPage-painGrid,.solutionPage-cardGrid,.solutionPage-stepGrid,.solutionPage-featureGrid,.solutionPage-roleGrid{grid-template-columns:1fr}.solutionPage-solutionCard{min-height:auto}.solutionPage-compareTable,.solutionPage-platformMatrix{border-radius:20px;background:transparent;border:0;box-shadow:none;overflow:visible}.solutionPage-compareHead,.solutionPage-platformHead{display:none}.solutionPage-compareRow,.solutionPage-platformRow{display:grid;grid-template-columns:1fr;min-width:0;margin-bottom:12px;border:1px solid rgba(210,187,255,.11);border-radius:18px;background:linear-gradient(145deg,rgba(31,27,42,.84),rgba(18,16,25,.93));overflow:hidden}.solutionPage-compareRow strong,.solutionPage-compareRow span,.solutionPage-platformRow strong,.solutionPage-platformRow span{padding:15px 17px}.solutionPage-compareRow span,.solutionPage-platformRow span{border-left:0;border-top:1px solid rgba(210,187,255,.06)}.solutionPage-compareRow strong::before{content:"Task";display:block;margin-bottom:5px;color:#c8afff;font-size:.5rem;text-transform:uppercase;letter-spacing:.08em}.solutionPage-compareRow span:nth-child(2)::before{content:"Without HireScore AI";display:block;margin-bottom:5px;color:#716978;font-size:.5rem;text-transform:uppercase;letter-spacing:.08em}.solutionPage-compareRow span:nth-child(3)::before{content:"With HireScore AI";display:block;margin-bottom:5px;color:#4cd7f6;font-size:.5rem;text-transform:uppercase;letter-spacing:.08em}.solutionPage-platformRow strong::before{content:"Comparison point";display:block;margin-bottom:5px;color:#c8afff;font-size:.5rem;text-transform:uppercase;letter-spacing:.08em}.solutionPage-platformRow span:nth-child(2)::before{content:"HireScore AI";display:block;margin-bottom:5px;color:#4cd7f6;font-size:.5rem;text-transform:uppercase;letter-spacing:.08em;background:none;width:auto;height:auto}.solutionPage-platformRow span:nth-child(3)::before{content:"HireScore";display:block;margin-bottom:5px;color:#c8afff;font-size:.5rem;text-transform:uppercase;letter-spacing:.08em;background:none;width:auto;height:auto}.solutionPage-platformRow span:nth-child(4)::before{content:"Greenhouse";display:block;margin-bottom:5px;color:#4cd7f6;font-size:.5rem;text-transform:uppercase;letter-spacing:.08em;background:none;width:auto;height:auto}.solutionPage-platformRow span:nth-child(5)::before{content:"Workday";display:block;margin-bottom:5px;color:#ffb784;font-size:.5rem;text-transform:uppercase;letter-spacing:.08em;background:none;width:auto;height:auto}.solutionPage-finalCtaBox{padding:48px 20px;border-radius:24px}}@media(prefers-reduced-motion:reduce){.solutionPage-floatingCard{animation:none}.solutionPage-solutionCard{transition:none}.solutionPage-solutionCard:hover{transform:none}}
+
+/* Legibility pass: brighter text and larger readable body copy across the site. */
+.app,
+.commandInner,
+.productPage-root {
+  --text-primary: #ffffff;
+  --text-secondary: #d8e3f4;
+  --text-muted: #b5c3d8;
+}
+
+.app {
+  font-size: 1rem;
+}
+
+.desktopNav a,
+.dropTrigger,
+.mobileNav a:not(.btn),
+.btn,
+.commandInner .desktopNav > a,
+.stitchHome .desktopNav > a,
+.commandInner .homeLogin,
+.stitchHome .homeLogin {
+  font-size: 0.98rem;
+  color: #f2f7ff;
+}
+
+.pageHero p,
+.sectionHeader p,
+.infoCard p,
+.featureCard p,
+.resourceCard p,
+.articleCard p,
+.pricingCard p,
+.pricingCard li,
+.sideCard p,
+.ctaBox p,
+.siteFooter p,
+.siteFooter a,
+.blogCard p,
+.blogDetailIntro,
+.blogContentSection p,
+.commandHeading p,
+.commandHeroCopy > p,
+.sourcingCopy > p,
+.aboutCommandCopy > p,
+.workflowSectionIntro p,
+.commandCtaBox p,
+.commandFooterGrid > div:first-child p,
+.commandFooterGrid > div:nth-child(2) a,
+.solutionPage-heroCopy p,
+.solutionPage-sectionHeader p,
+.solutionPage-splitHeader p,
+.solutionPage-stickyCopy p,
+.solutionPage-roleLayout > div:first-child p,
+.solutionPage-finalCtaBox p,
+.productPage-heroCopy > p,
+.productPage-benefitsIntro p,
+.productPage-useCaseIntro .productPage-heading p {
+  color: #dce6f6 !important;
+  font-size: 1.06rem !important;
+  line-height: 1.78 !important;
+}
+
+.advantageCard p,
+.shortlistCard p,
+.analyticsCard p,
+.qualityCard p,
+.aboutCapabilityStack p,
+.jdTopbar p,
+.jdScorePanel > p,
+.aiFitExplanation > p,
+.productPage-phaseStages p,
+.solutionPage-painGrid p,
+.solutionPage-solutionCard p,
+.solutionPage-stepGrid p,
+.solutionPage-featureGrid p,
+.solutionPage-roleGrid p {
+  color: #d1ddec !important;
+  font-size: 0.98rem !important;
+  line-height: 1.7 !important;
+}
+
+.featureCard h3,
+.infoCard h2,
+.resourceCard h2,
+.pricingCard h2,
+.articleCard h2,
+.advantageCard h3,
+.shortlistCard h3,
+.aboutCapabilityStack h3,
+.productPage-workflowPhase header h3,
+.productPage-phaseStages h4,
+.solutionPage-painGrid h3,
+.solutionPage-solutionCard h3,
+.solutionPage-stepGrid h3,
+.solutionPage-featureGrid h3,
+.solutionPage-roleGrid h3 {
+  color: #ffffff !important;
+  font-size: 1.12rem !important;
+  line-height: 1.35 !important;
+}
+
+.metric span,
+.tableRow small,
+.breadcrumbs,
+.blogCategory,
+.blogReadTime,
+.sectionKicker,
+.heroProof span,
+.candidateTags span,
+.explainPanel > small,
+.evidenceGrid b,
+.evidenceGrid span,
+.candidateBody aside > small,
+.advantageCard small,
+.yieldCard > small,
+.pipelineTop small,
+.pipelineRow small,
+.aboutStats small,
+.jdTopbar p,
+.jdSignal,
+.jdScorePanel > small,
+.graphHeading small,
+.aiFitHeader small,
+.jdScoreLegend > span,
+.jdScorePanel > p,
+.skillBarRow > div,
+.gapNote,
+.fitReasons span,
+.aiRecommendation small,
+.aboutPromiseRow span,
+.aboutWorkflowHeading small,
+.workflowLive,
+.workflowNode strong,
+.workflowNode small,
+.commandFooter h3,
+.commandFooter button,
+.commandFooterBottom,
+.solutionPage-eyebrow,
+.solutionPage-sectionHeader > span,
+.solutionPage-splitHeader span,
+.solutionPage-stickyCopy > span,
+.solutionPage-roleLayout > div:first-child > span,
+.solutionPage-finalCtaBox > span,
+.solutionPage-supportLine,
+.solutionPage-visualTop span,
+.solutionPage-visualTop small,
+.solutionPage-core small,
+.solutionPage-floatingCard span,
+.solutionPage-painGrid article > span,
+.solutionPage-solutionCard strong,
+.solutionPage-bestFor small,
+.solutionPage-bestFor em,
+.solutionPage-cardLink,
+.solutionPage-stepGrid article > div span,
+.solutionPage-compareHead span,
+.solutionPage-compareRow strong,
+.solutionPage-compareRow span,
+.solutionPage-platformHead span,
+.solutionPage-platformRow strong,
+.solutionPage-platformRow span,
+.solutionPage-finalCtaBox small,
+.productPage-workflowPhase header small,
+.productPage-phaseStages p,
+.productPage-benefitsIntro > span,
+.productPage-impactTop > small,
+.productPage-impactTop > span,
+.productPage-proof span,
+.productPage-heroVisualTop span,
+.productPage-heroVisualTop small,
+.productPage-heroVisualFoot span {
+  color: #c9d6e8 !important;
+  font-size: 0.86rem !important;
+  line-height: 1.55 !important;
+}
+
+.eyebrow,
+.blogCtaEyebrow,
+.solutionPage-eyebrow,
+.solutionPage-sectionHeader > span,
+.solutionPage-splitHeader span,
+.solutionPage-stickyCopy > span,
+.solutionPage-roleLayout > div:first-child > span,
+.solutionPage-finalCtaBox > span {
+  color: #d7c8ff !important;
+}
+
+.titleHighlight,
+.featureCard span,
+.resourceCard span,
+.inlineLinks a,
+.sideCard a:not(.btn),
+.blogReadMore,
+.socialLinks a,
+.solutionPage-cardLink {
+  color: #9de9ff !important;
+}
+
+.blogReadTime,
+.footerBottom,
+.commandFooterBottom,
+.solutionPage-supportLine,
+.solutionPage-core small,
+.solutionPage-finalCtaBox small {
+  color: #b9c7da !important;
+}
+
+@media (max-width: 760px) {
+  body {
+    font-size: 16px;
+  }
+
+  .pageHero p,
+  .sectionHeader p,
+  .infoCard p,
+  .featureCard p,
+  .resourceCard p,
+  .articleCard p,
+  .pricingCard p,
+  .pricingCard li,
+  .sideCard p,
+  .ctaBox p,
+  .blogCard p,
+  .blogDetailIntro,
+  .blogContentSection p,
+  .commandHeroCopy > p,
+  .solutionPage-heroCopy p,
+  .solutionPage-sectionHeader p,
+  .solutionPage-splitHeader p,
+  .solutionPage-stickyCopy p,
+  .solutionPage-roleLayout > div:first-child p,
+  .solutionPage-finalCtaBox p,
+  .productPage-heroCopy > p {
+    font-size: 1rem !important;
+    line-height: 1.72 !important;
+  }
+}
+
+/* Solutions page premium pass: richer cards and winner-focused comparison tables. */
+.solutionPage-solutionCardsSection,
+.solutionPage-stepsSection,
+.solutionPage-compareSection,
+.solutionPage-platformSection {
+  background:
+    linear-gradient(180deg, rgba(18, 15, 25, 0.98), rgba(10, 9, 16, 0.98)),
+    #100d17 !important;
+}
+
+.solutionPage-splitHeader h2,
+.solutionPage-sectionHeader h2,
+.solutionPage-stickyCopy h2 {
+  color: transparent !important;
+  background: linear-gradient(90deg, #fff7ed 0%, #d7c8ff 42%, #8cecff 78%, #ffbf86 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-shadow: 0 18px 48px rgba(124, 58, 237, 0.18);
+}
+
+.solutionPage-cardGrid,
+.solutionPage-stepGrid {
+  perspective: 1300px;
+}
+
+.solutionPage-solutionCard {
+  isolation: isolate;
+  overflow: hidden;
+  border-color: rgba(120, 225, 255, 0.2) !important;
+  background:
+    linear-gradient(135deg, rgba(76, 215, 246, 0.12), transparent 34%),
+    linear-gradient(155deg, rgba(44, 37, 61, 0.96), rgba(16, 14, 24, 0.98) 68%) !important;
+  box-shadow:
+    0 24px 0 rgba(4, 7, 16, 0.7),
+    0 42px 95px rgba(0, 0, 0, 0.42),
+    inset 0 1px rgba(255, 255, 255, 0.08) !important;
+  transform: rotateX(0deg) translateZ(0);
+}
+
+.solutionPage-solutionCard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.12), transparent 28%, transparent 68%, rgba(76, 215, 246, 0.1));
+  opacity: 0.72;
+}
+
+.solutionPage-solutionCard > * {
+  position: relative;
+  z-index: 1;
+}
+
+.solutionPage-solutionCard:nth-child(2n) {
+  border-color: rgba(210, 187, 255, 0.28) !important;
+  background:
+    linear-gradient(135deg, rgba(210, 187, 255, 0.14), transparent 36%),
+    linear-gradient(155deg, rgba(42, 34, 59, 0.96), rgba(16, 14, 24, 0.98) 68%) !important;
+}
+
+.solutionPage-solutionCard:nth-child(3n) {
+  border-color: rgba(255, 191, 134, 0.24) !important;
+  background:
+    linear-gradient(135deg, rgba(255, 191, 134, 0.13), transparent 34%),
+    linear-gradient(155deg, rgba(44, 35, 47, 0.96), rgba(16, 14, 24, 0.98) 68%) !important;
+}
+
+.solutionPage-solutionCard:hover {
+  transform: translateY(-10px) rotateX(2deg) !important;
+  border-color: rgba(140, 236, 255, 0.52) !important;
+  box-shadow:
+    0 28px 0 rgba(4, 7, 16, 0.72),
+    0 52px 120px rgba(0, 0, 0, 0.48),
+    0 0 48px rgba(76, 215, 246, 0.14),
+    inset 0 1px rgba(255, 255, 255, 0.1) !important;
+}
+
+.solutionPage-cardTop > span,
+.solutionPage-stepGrid svg {
+  border-color: rgba(140, 236, 255, 0.34) !important;
+  color: #7ee8ff !important;
+  background: linear-gradient(145deg, rgba(76, 215, 246, 0.18), rgba(124, 58, 237, 0.12)) !important;
+  box-shadow:
+    0 14px 30px rgba(76, 215, 246, 0.13),
+    inset 0 1px rgba(255, 255, 255, 0.16);
+}
+
+.solutionPage-cardTop > b {
+  color: #7ee8ff !important;
+  font-size: 0.78rem !important;
+}
+
+.solutionPage-solutionCard h3,
+.solutionPage-stepGrid h3 {
+  color: #fff7ed !important;
+  font-size: 1.24rem !important;
+  text-shadow: 0 10px 28px rgba(255, 255, 255, 0.08);
+}
+
+.solutionPage-solutionCard strong {
+  color: #a7f3ff !important;
+  font-size: 0.94rem !important;
+}
+
+.solutionPage-bestFor {
+  padding: 16px;
+  border: 1px solid rgba(140, 236, 255, 0.13);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.solutionPage-bestFor small {
+  color: #ffcf9f !important;
+}
+
+.solutionPage-bestFor em {
+  color: #edf7ff !important;
+}
+
+.solutionPage-bestFor svg {
+  color: #56e5ff !important;
+  filter: drop-shadow(0 0 8px rgba(76, 215, 246, 0.42));
+}
+
+.solutionPage-stepGrid article {
+  isolation: isolate;
+  overflow: hidden;
+  border-color: rgba(210, 187, 255, 0.18) !important;
+  background:
+    linear-gradient(145deg, rgba(46, 38, 65, 0.92), rgba(16, 14, 24, 0.98)) !important;
+  box-shadow:
+    0 20px 0 rgba(4, 7, 16, 0.65),
+    0 38px 92px rgba(0, 0, 0, 0.36),
+    inset 0 1px rgba(255, 255, 255, 0.07) !important;
+  transform: translateZ(0);
+}
+
+.solutionPage-stepGrid article:nth-child(2n) {
+  transform: translateY(18px) translateZ(0);
+}
+
+.solutionPage-stepGrid article:hover {
+  transform: translateY(-7px) rotateX(2deg) !important;
+  border-color: rgba(76, 215, 246, 0.42) !important;
+}
+
+.solutionPage-stepGrid article:nth-child(2n):hover {
+  transform: translateY(10px) rotateX(2deg) !important;
+}
+
+.solutionPage-stepGrid article > div span {
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 191, 134, 0.18);
+  border-radius: 999px;
+  color: #ffd2a8 !important;
+  background: rgba(255, 191, 134, 0.06);
+}
+
+.solutionPage-compareTable,
+.solutionPage-platformMatrix {
+  overflow: visible !important;
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border-color: rgba(140, 236, 255, 0.22) !important;
+  background:
+    linear-gradient(145deg, rgba(31, 27, 42, 0.9), rgba(12, 10, 18, 0.98)) !important;
+  box-shadow:
+    0 24px 0 rgba(4, 7, 16, 0.72),
+    0 48px 110px rgba(0, 0, 0, 0.42),
+    inset 0 1px rgba(255, 255, 255, 0.08) !important;
+}
+
+.solutionPage-compareHead,
+.solutionPage-compareRow,
+.solutionPage-platformHead,
+.solutionPage-platformRow {
+  overflow: visible;
+  align-items: stretch;
+  border: 0 !important;
+}
+
+.solutionPage-compareHead span,
+.solutionPage-compareRow strong,
+.solutionPage-compareRow span,
+.solutionPage-platformHead span,
+.solutionPage-platformRow strong,
+.solutionPage-platformRow span {
+  position: relative;
+  border: 1px solid rgba(210, 187, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.solutionPage-compareHead span,
+.solutionPage-platformHead span {
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  color: #f3e8ff !important;
+  background: linear-gradient(145deg, rgba(70, 56, 95, 0.62), rgba(21, 18, 30, 0.86)) !important;
+}
+
+.solutionPage-compareHead span:first-child,
+.solutionPage-compareRow strong,
+.solutionPage-platformHead span:first-child,
+.solutionPage-platformRow strong {
+  border-radius: 16px 0 0 16px;
+}
+
+.solutionPage-compareHead span:last-child,
+.solutionPage-compareRow span:last-child,
+.solutionPage-platformHead span:last-child,
+.solutionPage-platformRow span:last-child {
+  border-radius: 0 16px 16px 0;
+}
+
+.solutionPage-compareRow strong,
+.solutionPage-platformRow strong {
+  color: #ffffff !important;
+  background: linear-gradient(145deg, rgba(44, 37, 61, 0.72), rgba(18, 15, 26, 0.9)) !important;
+}
+
+.solutionPage-compareRow span:nth-child(2),
+.solutionPage-platformRow span:nth-child(n+3) {
+  color: #aebbd0 !important;
+  background: linear-gradient(145deg, rgba(31, 27, 42, 0.54), rgba(17, 15, 24, 0.84)) !important;
+}
+
+.solutionPage-compareHead span:nth-child(3),
+.solutionPage-compareRow span:nth-child(3),
+.solutionPage-platformHead span:nth-child(2),
+.solutionPage-platformRow span:nth-child(2) {
+  z-index: 2;
+  color: #f8feff !important;
+  border-color: rgba(126, 232, 255, 0.5) !important;
+  background:
+    linear-gradient(145deg, rgba(76, 215, 246, 0.24), rgba(124, 58, 237, 0.18)),
+    linear-gradient(145deg, rgba(20, 40, 54, 0.96), rgba(13, 16, 28, 0.98)) !important;
+  box-shadow:
+    0 16px 0 rgba(3, 11, 18, 0.78),
+    0 28px 58px rgba(76, 215, 246, 0.15),
+    inset 0 1px rgba(255, 255, 255, 0.16);
+  transform: translateY(-5px);
+}
+
+.solutionPage-compareHead span:nth-child(3)::after,
+.solutionPage-platformHead span:nth-child(2)::after {
+  content: "BEST CHOICE";
+  position: absolute;
+  top: -14px;
+  right: 16px;
+  padding: 5px 9px;
+  border: 1px solid rgba(255, 191, 134, 0.28);
+  border-radius: 999px;
+  color: #1a1010;
+  background: linear-gradient(90deg, #ffd29e, #7ee8ff);
+  box-shadow: 0 10px 28px rgba(76, 215, 246, 0.16);
+  font-size: 0.58rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+}
+
+.solutionPage-compareRow span:nth-child(3)::after,
+.solutionPage-platformRow span:nth-child(2)::after {
+  content: "";
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  left: 8px;
+  width: 3px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #7ee8ff, #d7c8ff, #ffbf86);
+}
+
+.solutionPage-platformRow span:nth-child(2)::before {
+  content: "HireScore AI advantage";
+  display: block;
+  width: auto;
+  height: auto;
+  margin: 0 0 9px;
+  color: #7ee8ff;
+  background: transparent;
+  font-size: 0.62rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.solutionPage-compareRow span:nth-child(3),
+.solutionPage-platformRow span:nth-child(2) {
+  padding-left: 28px;
+}
+
+.solutionPage-compareRow:hover span:nth-child(3),
+.solutionPage-platformRow:hover span:nth-child(2) {
+  border-color: rgba(255, 191, 134, 0.54) !important;
+  box-shadow:
+    0 18px 0 rgba(3, 11, 18, 0.8),
+    0 34px 72px rgba(76, 215, 246, 0.2),
+    0 0 40px rgba(255, 191, 134, 0.09),
+    inset 0 1px rgba(255, 255, 255, 0.18);
+}
+
+@media (max-width: 1100px) {
+  .solutionPage-stepGrid article:nth-child(2n) {
+    transform: none;
+  }
+
+  .solutionPage-stepGrid article:nth-child(2n):hover {
+    transform: translateY(-7px) rotateX(2deg) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .solutionPage-solutionCard,
+  .solutionPage-stepGrid article {
+    box-shadow:
+      0 14px 0 rgba(4, 7, 16, 0.68),
+      0 28px 72px rgba(0, 0, 0, 0.36),
+      inset 0 1px rgba(255, 255, 255, 0.08) !important;
+  }
+
+  .solutionPage-compareTable,
+  .solutionPage-platformMatrix {
+    padding: 0;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .solutionPage-compareRow,
+  .solutionPage-platformRow {
+    gap: 0;
+  }
+
+  .solutionPage-compareRow strong,
+  .solutionPage-compareRow span,
+  .solutionPage-platformRow strong,
+  .solutionPage-platformRow span {
+    border-radius: 0 !important;
+  }
+
+  .solutionPage-compareRow strong,
+  .solutionPage-platformRow strong {
+    border-radius: 18px 18px 0 0 !important;
+  }
+
+  .solutionPage-compareRow span:nth-child(3),
+  .solutionPage-platformRow span:nth-child(2) {
+    order: 1;
+    border-radius: 0 !important;
+    transform: none;
+  }
+
+  .solutionPage-compareRow span:nth-child(2) {
+    order: 2;
+    border-radius: 0 0 18px 18px !important;
+  }
+
+  .solutionPage-platformRow span:last-child {
+    border-radius: 0 0 18px 18px !important;
+  }
+}
+
+/* Pricing page: clear plan limits, stronger prices, and premium raised cards. */
+.pricingSection {
+  padding-top: 36px;
+}
+
+.pricingGrid {
+  align-items: stretch;
+  gap: 18px;
+  perspective: 1400px;
+}
+
+.pricingCard {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 560px;
+  padding: 28px 24px !important;
+  border-color: rgba(140, 236, 255, 0.17) !important;
+  background:
+    linear-gradient(145deg, rgba(44, 37, 61, 0.88), rgba(14, 13, 22, 0.98) 70%),
+    #100d17 !important;
+  box-shadow:
+    0 20px 0 rgba(4, 7, 16, 0.7),
+    0 42px 92px rgba(0, 0, 0, 0.34),
+    inset 0 1px rgba(255, 255, 255, 0.08) !important;
+  transform: translateZ(0);
+}
+
+.pricingCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 25% 0%, rgba(76, 215, 246, 0.16), transparent 34%),
+    linear-gradient(120deg, rgba(255, 255, 255, 0.1), transparent 28%, transparent 66%, rgba(210, 187, 255, 0.1));
+  opacity: 0.8;
+}
+
+.pricingCard > * {
+  position: relative;
+  z-index: 1;
+}
+
+.pricingCard:hover {
+  transform: translateY(-9px) rotateX(1.5deg) !important;
+  border-color: rgba(126, 232, 255, 0.42) !important;
+  box-shadow:
+    0 24px 0 rgba(4, 7, 16, 0.74),
+    0 54px 120px rgba(0, 0, 0, 0.44),
+    0 0 46px rgba(76, 215, 246, 0.11),
+    inset 0 1px rgba(255, 255, 255, 0.12) !important;
+}
+
+.pricingCard > span {
+  width: fit-content;
+  padding: 7px 11px;
+  border: 1px solid rgba(255, 191, 134, 0.22);
+  border-radius: 999px;
+  color: #ffd2a8 !important;
+  background: rgba(255, 191, 134, 0.07);
+  font-size: 0.72rem !important;
+  letter-spacing: 0.07em;
+}
+
+.pricingCard h2 {
+  margin: 4px 0 0 !important;
+  color: #fff7ed !important;
+  font-size: 1.38rem !important;
+}
+
+.pricingAmount {
+  display: grid;
+  gap: 5px;
+  margin: 10px 0 4px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(210, 187, 255, 0.11);
+}
+
+.pricingAmount strong {
+  color: transparent;
+  background: linear-gradient(90deg, #ffffff 0%, #7ee8ff 48%, #d7c8ff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  font-family: var(--font-display);
+  font-size: 3rem;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.pricingAmount small {
+  color: #b9c7da;
+  font-size: 0.85rem;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.pricingJobLimit {
+  width: fit-content;
+  margin: 0 0 18px;
+  padding: 10px 13px;
+  border: 1px solid rgba(126, 232, 255, 0.22);
+  border-radius: 12px;
+  color: #10131f;
+  background: linear-gradient(90deg, #7ee8ff, #d7c8ff);
+  box-shadow: 0 15px 34px rgba(76, 215, 246, 0.13);
+  font-weight: 950;
+}
+
+.pricingCard p {
+  color: #dce6f6 !important;
+  font-size: 1rem !important;
+  line-height: 1.7 !important;
+}
+
+.pricingCard ul {
+  margin-top: 6px;
+}
+
+.pricingCard li {
+  min-height: 34px;
+  color: #edf7ff !important;
+  font-size: 0.96rem !important;
+}
+
+.pricingCard li svg {
+  color: #7ee8ff;
+  filter: drop-shadow(0 0 8px rgba(76, 215, 246, 0.35));
+  flex: 0 0 auto;
+}
+
+.pricingCard .btn {
+  width: fit-content;
+  min-height: 46px;
+  margin-top: auto;
+  padding-inline: 19px;
+  color: #10131f !important;
+  background: linear-gradient(90deg, #55dff8, #d7c8ff) !important;
+  box-shadow: 0 16px 38px rgba(76, 215, 246, 0.18) !important;
+}
+
+.pricingCard:first-child {
+  border-color: rgba(76, 215, 246, 0.34) !important;
+}
+
+.pricingCard:nth-child(2) {
+  border-color: rgba(210, 187, 255, 0.22) !important;
+}
+
+.pricingCard.isFeatured {
+  border-color: rgba(255, 191, 134, 0.42) !important;
+  background:
+    radial-gradient(circle at 28% 0%, rgba(255, 191, 134, 0.16), transparent 34%),
+    linear-gradient(145deg, rgba(46, 39, 58, 0.96), rgba(14, 13, 22, 0.98) 68%) !important;
+  transform: translateY(-14px) scale(1.015);
+  box-shadow:
+    0 26px 0 rgba(4, 7, 16, 0.72),
+    0 58px 130px rgba(0, 0, 0, 0.45),
+    0 0 58px rgba(255, 191, 134, 0.12),
+    inset 0 1px rgba(255, 255, 255, 0.12) !important;
+}
+
+.pricingCard.isFeatured::after {
+  content: "BEST VALUE";
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 2;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #17121b;
+  background: linear-gradient(90deg, #ffd29e, #7ee8ff);
+  box-shadow: 0 12px 30px rgba(255, 191, 134, 0.18);
+  font-size: 0.58rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+}
+
+.pricingCard:nth-child(4) {
+  border-color: rgba(210, 187, 255, 0.26) !important;
+}
+
+.pricingCard:nth-child(4) .pricingAmount strong {
+  background: linear-gradient(90deg, #ffffff, #ffd29e 45%, #d7c8ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.pricingCard:nth-child(4) .pricingJobLimit {
+  background: linear-gradient(90deg, #ffd29e, #d7c8ff);
+}
+
+@media (max-width: 1120px) {
+  .pricingCard.isFeatured {
+    transform: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .pricingCard {
+    min-height: auto;
+    padding: 24px 20px !important;
+  }
+
+  .pricingAmount strong {
+    font-size: 2.55rem;
+  }
+}

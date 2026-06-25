@@ -635,10 +635,51 @@ const faqs = [
 ]
 
 const pricingPlans = [
-  ['Free Pilot', '7-day free pilot access available for selected early clients.', ['Test with real jobs', 'Resume screening', 'Candidate ranking', 'Pilot support']],
-  ['Starter', 'For small teams starting with AI resume screening.', ['Create jobs', 'Upload resumes', 'AI scoring', 'Public apply pages']],
-  ['Growth', 'For growing teams managing multiple roles and hiring managers.', ['Advanced workflow', 'Communication stages', 'Interview scheduling', 'AI screening tests']],
-  ['Enterprise', 'For teams that need custom rollout and workflow support.', ['Custom onboarding', 'Team governance', 'Priority support', 'Workflow consultation']],
+  {
+    name: 'Free Pilot',
+    badge: 'Available now',
+    price: 'Free',
+    period: '7 days',
+    jobs: '3 active jobs',
+    text: 'Test HireScore AI with real hiring workflows before choosing a paid plan.',
+    items: ['3 active jobs for 7 days', 'Resume screening', 'Candidate ranking', 'Pilot support'],
+    cta: 'Start Free Pilot',
+    href: APP_URL,
+  },
+  {
+    name: 'Starter',
+    badge: 'Monthly plan',
+    price: '₹599',
+    period: 'per month',
+    jobs: '5 active jobs',
+    text: 'For small teams starting with AI resume screening and structured job workflows.',
+    items: ['5 active jobs for 1 month', 'Upload resumes', 'AI scoring', 'Public apply pages'],
+    cta: 'Choose Starter',
+    href: APP_URL,
+  },
+  {
+    name: 'Growth',
+    badge: 'Most popular',
+    price: '₹1599',
+    period: 'per month',
+    jobs: '15 active jobs',
+    text: 'For growing teams managing multiple roles, shortlists, and hiring managers.',
+    items: ['15 active jobs for 1 month', 'Advanced workflow', 'Communication stages', 'Interview scheduling'],
+    cta: 'Choose Growth',
+    href: APP_URL,
+    featured: true,
+  },
+  {
+    name: 'Enterprise',
+    badge: 'Custom plan',
+    price: 'Custom',
+    period: 'talk to an expert',
+    jobs: 'Custom active jobs',
+    text: 'For teams that need custom rollout, workflow consultation, and priority support.',
+    items: ['Custom active job limits', 'Custom onboarding', 'Team governance', 'Priority support'],
+    cta: 'Talk to an expert',
+    href: '/contact',
+  },
 ]
 
 function navigateTo(path) {
@@ -1854,22 +1895,32 @@ function ResourceCard({ item }) {
 function PricingPage() {
   return (
     <>
-      <SEO title="Pricing | HireScore AI" description="Explore HireScore AI pricing blocks for Free Pilot, Starter, Growth, and Enterprise plans with 7-day pilot access for selected early clients." path="/pricing" />
-      <PageHero eyebrow="Pricing" title="Simple pricing for AI-powered hiring teams" intro="7-day free pilot access available for selected early clients. Choose a starting point that fits your hiring workflow." />
-      <section className="section"><div className="container pricingGrid">{pricingPlans.map(([name, text, items]) => <PricingCard key={name} name={name} text={text} items={items} />)}</div></section>
+      <SEO title="Pricing | HireScore AI" description="Explore HireScore AI pricing for Free Pilot, Starter, Growth, and Enterprise plans with active job limits for AI resume screening teams." path="/pricing" />
+      <PageHero eyebrow="Pricing" title="Simple pricing for AI-powered hiring teams" intro="Start with a 7-day free pilot, then choose a monthly plan based on the number of active jobs your hiring team needs." />
+      <section className="section pricingSection"><div className="container pricingGrid">{pricingPlans.map((plan) => <PricingCard key={plan.name} plan={plan} />)}</div></section>
       <CTASection />
     </>
   )
 }
 
-function PricingCard({ name, text, items }) {
+function PricingCard({ plan }) {
+  const cta = plan.href.startsWith('/') ? (
+    <Link className="btn btnPrimary" href={plan.href}>{plan.cta}</Link>
+  ) : (
+    <a className="btn btnPrimary" href={plan.href}>{plan.cta}</a>
+  )
   return (
-    <article className="pricingCard">
-      <span>{name === 'Free Pilot' ? 'Available now' : 'Pilot pricing'}</span>
-      <h2>{name}</h2>
-      <p>{text}</p>
-      <ul>{items.map((item) => <li key={item}><CheckCircle2 size={17} />{item}</li>)}</ul>
-      <a className="btn btnPrimary" href={APP_URL}>Start Free Pilot</a>
+    <article className={`pricingCard ${plan.featured ? 'isFeatured' : ''}`}>
+      <span>{plan.badge}</span>
+      <h2>{plan.name}</h2>
+      <div className="pricingAmount">
+        <strong>{plan.price}</strong>
+        <small>{plan.period}</small>
+      </div>
+      <div className="pricingJobLimit">{plan.jobs}</div>
+      <p>{plan.text}</p>
+      <ul>{plan.items.map((item) => <li key={item}><CheckCircle2 size={17} />{item}</li>)}</ul>
+      {cta}
     </article>
   )
 }
@@ -1900,13 +1951,361 @@ function ContactPage() {
   )
 }
 
+const solutionHeroCards = [
+  ['Recruitment Agencies', BriefcaseBusiness],
+  ['HR Teams', UsersRound],
+  ['Staffing Firms', Building2],
+  ['Startup Hiring', Rocket],
+  ['Bulk Resume Screening', Files],
+]
+
+const solutionPainPoints = [
+  ['Too many resumes', 'Recruiters spend hours reviewing profiles manually, especially for high-volume roles.', Files],
+  ['Inconsistent screening', 'Different recruiters may judge the same resume differently, making shortlisting inconsistent.', SearchCheck],
+  ['Weak shortlist visibility', 'It becomes hard to explain why a candidate was selected, rejected, or moved forward.', BadgeCheck],
+  ['Scattered workflow', 'Resumes, notes, emails, interviews, and candidate status often live across different tools.', Network],
+]
+
+const solutionCards = [
+  {
+    title: 'Recruitment Agencies',
+    subtitle: 'Screen more resumes. Send better shortlists to clients.',
+    text: 'HireScore AI helps agencies manage multiple jobs, upload candidate resumes, rank applicants by JD fit, and share recruiter-ready insights with clients.',
+    bestFor: ['Multiple client roles', 'High-volume resume screening', 'Faster shortlist delivery', 'Recruiter explanation notes'],
+    cta: 'Explore Agency Solution',
+    icon: BriefcaseBusiness,
+  },
+  {
+    title: 'In-House HR Teams',
+    subtitle: 'Bring structure to internal hiring.',
+    text: 'HR teams can create jobs, collect applications, review AI-ranked candidates, and move shortlisted profiles into the interview pipeline.',
+    bestFor: ['Internal hiring teams', 'Department-wise hiring', 'Hiring manager review', 'Interview pipeline tracking'],
+    cta: 'Explore HR Solution',
+    icon: UsersRound,
+  },
+  {
+    title: 'Staffing & Consulting Firms',
+    subtitle: 'Manage candidate pipelines for multiple roles.',
+    text: 'Staffing firms can process resumes faster, identify role-fit candidates, and keep candidate communication organized from screening to interview.',
+    bestFor: ['IT staffing', 'Consulting hiring', 'Bench candidate screening', 'Client-ready candidate lists'],
+    cta: 'Explore Staffing Solution',
+    icon: Building2,
+  },
+  {
+    title: 'Startups & SMBs',
+    subtitle: 'Hire smarter without a large recruitment team.',
+    text: 'Small teams can use AI to screen resumes, compare candidates, and focus only on the most relevant applicants.',
+    bestFor: ['Small hiring teams', 'Founder-led hiring', 'Fast-growing startups', 'Limited HR bandwidth'],
+    cta: 'Explore Startup Solution',
+    icon: Rocket,
+  },
+  {
+    title: 'Bulk Resume Screening',
+    subtitle: 'Upload resumes. Get ranked candidates. Save recruiter time.',
+    text: 'HireScore AI helps teams analyze large resume batches and identify candidates who match the JD requirements.',
+    bestFor: ['Resume database screening', 'Walk-in hiring', 'Job fair data', 'Bulk applications'],
+    cta: 'Explore Bulk Screening',
+    icon: Files,
+  },
+  {
+    title: 'IT & Tech Hiring',
+    subtitle: 'Rank technical candidates by role fit.',
+    text: 'Screen candidates for Data Analyst, Full Stack, Backend, QA, Salesforce, ML, and other technical roles using JD-based matching.',
+    bestFor: ['Tech recruitment', 'Skill-based screening', 'Role similarity matching', 'Candidate skill gap analysis'],
+    cta: 'Explore Tech Hiring',
+    icon: BrainCircuit,
+  },
+]
+
+const solutionSteps = [
+  ['Understand the job', 'HireScore AI reads the job description and identifies important skills, experience, role expectations, and hiring criteria.', PenLine],
+  ['Analyze candidate profiles', 'The platform extracts candidate details like skills, experience, education, projects, companies, and role signals.', FileSearch],
+  ['Rank by job fit', 'Candidates are scored and ranked based on JD relevance, skill match, experience fit, and role similarity.', Trophy],
+  ['Explain every decision', 'Recruiters get matched skills, missing skills, candidate strengths, and review-ready explanation notes.', MessageSquareText],
+]
+
+const comparisonRows = [
+  ['Resume review', 'Manual profile checking', 'AI-assisted resume analysis'],
+  ['Candidate comparison', 'Recruiter judgment only', 'JD-based score and ranking'],
+  ['Shortlisting', 'Time-consuming filtering', 'Faster shortlist with evidence'],
+  ['Client reporting', 'Manual notes', 'Recruiter-ready explanation'],
+  ['Candidate outreach', 'Separate email work', 'Built-in communication workflow'],
+  ['Interview tracking', 'Sheets or manual follow-up', 'Pipeline and interview management'],
+]
+
+const platformComparisonRows = [
+  {
+    label: 'Primary fit',
+    hirescoreAi: 'AI-first resume screening, JD matching, candidate ranking, and explainable shortlist workflows.',
+    hireScore: 'Customizable hiring platform for sourcing, screening, assessments, ranking, and interview scheduling.',
+    greenhouse: 'Structured ATS and hiring platform for scalable recruiting teams and standardized hiring workflows.',
+    workday: 'Enterprise talent acquisition suite connected to broader Workday HCM and workforce data.',
+  },
+  {
+    label: 'Best suited for',
+    hirescoreAi: 'Recruitment agencies, HR teams, startups, staffing firms, and high-volume resume screening.',
+    hireScore: 'Teams that want tailored hiring processes and job-focused recruiting support.',
+    greenhouse: 'Growing companies that need mature ATS process, collaboration, and candidate pipeline management.',
+    workday: 'Large organizations that already run HR, workforce, and talent workflows inside Workday.',
+  },
+  {
+    label: 'Screening approach',
+    hirescoreAi: 'Reads resumes against the JD, ranks candidates, and shows matched skills, gaps, and fit evidence.',
+    hireScore: 'Combines screening, assessments, ranking, and customizable success factors.',
+    greenhouse: 'Supports recruiting workflows with structured hiring and built-in AI recruiting tools.',
+    workday: 'Supports high-volume hiring, candidate surfacing, automation, and enterprise recruiting workflows.',
+  },
+  {
+    label: 'Decision clarity',
+    hirescoreAi: 'Gives recruiter-ready explanations for why candidates move forward or need review.',
+    hireScore: 'Focuses on configurable hiring criteria, process analytics, and tailored candidate evaluation.',
+    greenhouse: 'Helps teams standardize hiring steps, interviews, and decision-making across the ATS.',
+    workday: 'Provides visibility across recruiting and talent acquisition inside an enterprise HR system.',
+  },
+  {
+    label: 'Pilot motion',
+    hirescoreAi: 'Lightweight pilot: create a job, upload resumes, and review ranked candidates.',
+    hireScore: 'More customizable hiring setup depending on hiring process and service needs.',
+    greenhouse: 'ATS implementation and workflow configuration for recruiting operations.',
+    workday: 'Enterprise implementation path for organizations using broader Workday products.',
+  },
+]
+
+const solutionFeatures = [
+  ['AI Resume Screening', 'Parse resumes and identify relevant candidate information quickly.', FileSearch],
+  ['JD Matching', 'Compare every candidate against the role requirements.', Target],
+  ['Candidate Ranking', 'See the strongest candidates at the top with clear scoring.', Trophy],
+  ['Recruiter Explanation', 'Understand why a candidate is a good fit or where they may have gaps.', MessageSquareText],
+  ['Smart Shortlisting', 'Move qualified candidates forward with a cleaner review process.', BadgeCheck],
+  ['Communication Workflow', 'Engage candidates and manage hiring conversations.', Send],
+  ['Interview Pipeline', 'Track candidates from shortlist to interview stage.', CalendarCheck],
+  ['Hiring Analytics', 'Review job-level candidate quality and hiring progress.', PieChart],
+]
+
+const solutionWorkflowCoverage = [
+  ['Job intake', 'Create structured hiring requirements before resume screening starts.', PenLine],
+  ['Bulk resume review', 'Process large resume batches and surface stronger candidate matches faster.', Files],
+  ['JD-fit ranking', 'Rank applicants by role relevance, matched skills, experience, and profile signals.', Target],
+  ['Shortlist evidence', 'Give recruiters clear notes for why candidates should move forward or need review.', BadgeCheck],
+  ['Client-ready summaries', 'Turn screening output into concise hiring manager or client review context.', ClipboardCheck],
+  ['Candidate outreach', 'Keep communication connected to shortlist status and next hiring actions.', Send],
+  ['Interview movement', 'Move qualified candidates from review to interview without losing screening context.', CalendarCheck],
+  ['Hiring visibility', 'Track pipeline quality, screening progress, and role-level hiring activity.', PieChart],
+]
+
 function SolutionsPage() {
   return (
     <>
-      <SEO title="Solutions | HireScore AI for Recruiters, HR Teams and Staffing Agencies" description="HireScore AI solutions for recruiters, HR teams, startups, hiring managers, staffing agencies, and small-to-mid companies." path="/solutions" />
-      <PageHero eyebrow="Solutions" title="AI hiring workflows for every recruiting team" intro="HireScore AI supports recruiters, HR teams, startups, hiring managers, staffing agencies, and small-to-mid companies." />
-      <section className="section"><div className="container threeGrid">{['Recruiters', 'HR teams', 'Startups', 'Hiring managers', 'Staffing agencies', 'SMB companies'].map((name) => <div className="infoCard" key={name}><UsersRound size={24} /><h2>{name}</h2><p>Use AI resume screening, candidate ranking, and workflow automation to hire faster with clearer decisions.</p></div>)}</div></section>
-      <CTASection />
+      <SEO
+        title="AI Hiring Solutions for Recruiters & Staffing Agencies | HireScore AI"
+        description="HireScore AI helps recruitment agencies, HR teams, staffing firms, startups, and high-volume hiring teams screen resumes, rank candidates, shortlist talent, and manage hiring workflows with AI."
+        path="/solutions"
+      />
+      <section className="solutionPage-hero">
+        <div className="container solutionPage-heroGrid">
+          <div className="solutionPage-heroCopy">
+            <span className="solutionPage-eyebrow"><Sparkles size={14} />AI HIRING SOLUTIONS</span>
+            <h1>AI Hiring Solutions for Every Recruiting Team</h1>
+            <p>Whether you manage high-volume resumes, client hiring, internal roles, or startup recruitment, HireScore AI helps you screen candidates faster, rank them by job fit, and move the right talent forward with confidence.</p>
+            <div className="buttonRow solutionPage-actions">
+              <a className="btn btnPrimary btnLarge" href={APP_URL}>Start Free Pilot <ArrowRight size={18} /></a>
+              <Link className="btn btnGhost btnLarge" href="/contact">Book Demo</Link>
+            </div>
+            <div className="solutionPage-supportLine"><CheckCircle2 size={16} />Built for resume screening, JD matching, candidate ranking, shortlisting, outreach, and interview workflow.</div>
+          </div>
+          <div className="solutionPage-visual" aria-label="HireScore AI solution areas">
+            <div className="solutionPage-visualTop"><span><i />LIVE SOLUTION MAP</span><small>5 hiring motions</small></div>
+            <div className="solutionPage-orbit">
+              {solutionHeroCards.map(([label, Icon], index) => (
+                <article key={label} className={`solutionPage-floatingCard card${index + 1}`}>
+                  <Icon size={20} />
+                  <span>{label}</span>
+                </article>
+              ))}
+              <div className="solutionPage-core">
+                <img src="/hirescore-logo-mark.png" alt="" />
+                <strong>HireScore AI</strong>
+                <small>Ranked shortlist engine</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="solutionPage-section solutionPage-painSection">
+        <div className="container">
+          <div className="solutionPage-sectionHeader">
+            <span>HIRING BOTTLENECKS</span>
+            <h2>Hiring teams don't need more resumes. They need the right shortlist.</h2>
+            <p>Manual resume screening slows down hiring, creates inconsistent decisions, and makes it hard to explain why one candidate is better than another. HireScore AI brings structure, speed, and explainability to the hiring process.</p>
+          </div>
+          <div className="solutionPage-painGrid">
+            {solutionPainPoints.map(([title, text, Icon], index) => (
+              <article key={title}>
+                <span>0{index + 1}</span>
+                <Icon size={24} />
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="solutionPage-section solutionPage-solutionCardsSection">
+        <div className="container">
+          <div className="solutionPage-splitHeader">
+            <div>
+              <span>BUYER USE CASES</span>
+              <h2>Solutions built for different hiring needs</h2>
+            </div>
+            <p>Choose the hiring workflow that matches your team, role volume, and recruitment process.</p>
+          </div>
+          <div className="solutionPage-cardGrid">
+            {solutionCards.map(({ title, subtitle, text, bestFor, cta, icon: Icon }, index) => (
+              <article key={title} className="solutionPage-solutionCard">
+                <div className="solutionPage-cardTop">
+                  <span><Icon size={22} /></span>
+                  <b>{String(index + 1).padStart(2, '0')}</b>
+                </div>
+                <h3>{title}</h3>
+                <strong>{subtitle}</strong>
+                <p>{text}</p>
+                <div className="solutionPage-bestFor">
+                  <small>Best for</small>
+                  {bestFor.map((item) => <em key={item}><CheckCircle2 size={13} />{item}</em>)}
+                </div>
+                <Link href="#final-cta" className="solutionPage-cardLink">{cta}<ArrowRight size={15} /></Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="solutionPage-section solutionPage-stepsSection">
+        <div className="container solutionPage-stepsLayout">
+          <div className="solutionPage-stickyCopy">
+            <span>DECISION FLOW</span>
+            <h2>From resumes to confident hiring decisions</h2>
+            <p>HireScore AI keeps every step connected so recruiters can move from job criteria to ranked, explainable shortlists without losing context.</p>
+          </div>
+          <div className="solutionPage-stepGrid">
+            {solutionSteps.map(([title, text, Icon], index) => (
+              <article key={title}>
+                <div><Icon size={22} /><span>Step {index + 1}</span></div>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="solutionPage-section solutionPage-compareSection">
+        <div className="container">
+          <div className="solutionPage-sectionHeader">
+            <span>BEFORE VS AFTER</span>
+            <h2>Replace manual screening with AI-assisted hiring workflow</h2>
+          </div>
+          <div className="solutionPage-compareTable" role="table" aria-label="Manual hiring compared with HireScore AI">
+            <div className="solutionPage-compareHead" role="row">
+              <span role="columnheader">Hiring Task</span>
+              <span role="columnheader">Without HireScore AI</span>
+              <span role="columnheader">With HireScore AI</span>
+            </div>
+            {comparisonRows.map(([task, without, withAi]) => (
+              <div className="solutionPage-compareRow" role="row" key={task}>
+                <strong role="cell">{task}</strong>
+                <span role="cell">{without}</span>
+                <span role="cell">{withAi}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="solutionPage-section solutionPage-platformSection">
+        <div className="container">
+          <div className="solutionPage-splitHeader">
+            <div>
+              <span>PLATFORM COMPARISON</span>
+              <h2>How HireScore AI fits beside common hiring platforms</h2>
+            </div>
+            <p>This is a high-level positioning view based on public product messaging. HireScore AI is independent and is not affiliated with HireScore, Greenhouse, Workday, or HiredScore.</p>
+          </div>
+          <div className="solutionPage-platformMatrix" role="table" aria-label="HireScore AI compared with HireScore, Greenhouse, and Workday">
+            <div className="solutionPage-platformHead" role="row">
+              <span role="columnheader">Comparison point</span>
+              <span role="columnheader">HireScore AI</span>
+              <span role="columnheader">HireScore</span>
+              <span role="columnheader">Greenhouse</span>
+              <span role="columnheader">Workday</span>
+            </div>
+            {platformComparisonRows.map((row) => (
+              <div className="solutionPage-platformRow" role="row" key={row.label}>
+                <strong role="cell">{row.label}</strong>
+                <span role="cell">{row.hirescoreAi}</span>
+                <span role="cell">{row.hireScore}</span>
+                <span role="cell">{row.greenhouse}</span>
+                <span role="cell">{row.workday}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="solutionPage-section solutionPage-featureSection">
+        <div className="container">
+          <div className="solutionPage-splitHeader">
+            <div>
+              <span>PLATFORM MAPPING</span>
+              <h2>One platform. Multiple hiring solutions.</h2>
+            </div>
+            <p>Each solution is powered by connected modules that help recruiters screen, rank, explain, communicate, and schedule from one workspace.</p>
+          </div>
+          <div className="solutionPage-featureGrid">
+            {solutionFeatures.map(([title, text, Icon]) => (
+              <article key={title}>
+                <Icon size={21} />
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="solutionPage-section solutionPage-roleSection">
+        <div className="container solutionPage-roleLayout">
+          <div>
+            <span>SOLUTION COVERAGE</span>
+            <h2>Support the full hiring workflow, not just one role</h2>
+            <p>HireScore AI is built for different recruiting motions, from first job intake to bulk screening, shortlist evidence, candidate outreach, interview movement, and pipeline visibility.</p>
+          </div>
+          <div className="solutionPage-roleGrid">
+            {solutionWorkflowCoverage.map(([title, text, Icon]) => (
+              <article key={title}>
+                <Icon size={17} />
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="solutionPage-section solutionPage-finalCta" id="final-cta">
+        <div className="container solutionPage-finalCtaBox">
+          <span>START THE PILOT</span>
+          <h2>Ready to turn resumes into ranked shortlists?</h2>
+          <p>Start your free pilot and see how HireScore AI can help your team screen candidates, explain hiring decisions, and move faster from application to interview.</p>
+          <div className="buttonRow solutionPage-actions">
+            <a className="btn btnPrimary btnLarge" href={APP_URL}>Start Free Pilot <ArrowRight size={18} /></a>
+            <Link className="btn btnGhost btnLarge" href="/contact">Book Demo</Link>
+          </div>
+          <small>No heavy setup required. Create a job, upload resumes, and review AI-ranked candidates.</small>
+        </div>
+      </section>
     </>
   )
 }
