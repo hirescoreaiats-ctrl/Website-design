@@ -39,10 +39,11 @@ import {
   Zap,
 } from 'lucide-react'
 import './App.css'
-import { BRAND_NAME, buildRouteSchema, getSeoConfig } from './seoConfig.js'
+import { BRAND_NAME, buildRouteSchema, getSeoConfig, solutionSegmentRoutes } from './seoConfig.js'
 
 const APP_URL = 'https://app.hirescoreai.com'
-const CONTACT_EMAIL = 'info@hirescoreai.com'
+const CONTACT_EMAIL = 'Info@hireScoreAi.com'
+const PILOT_MAILTO = `mailto:${CONTACT_EMAIL}?subject=HireScore%20AI%20Free%20Pilot%20Access&body=Hi%20HireScore%20AI%20team%2C%0A%0AI%20want%20free%20pilot%20access%20for%20HireScore%20AI.%0A%0ACompany%3A%0AHiring%20roles%3A%0AExpected%20resume%20volume%3A%0A`
 
 const iconMap = {
   job: BriefcaseBusiness,
@@ -629,7 +630,7 @@ const caseStudies = [
 const faqs = [
   ['What is HireScore AI?', 'HireScore AI is an independent AI-powered recruitment workflow platform that helps recruiters create jobs, generate public apply pages, collect candidate applications, upload resumes, screen resumes with AI, rank candidates, view AI fit explanations, track hiring analytics, manage candidate communication, and schedule interviews from one platform.'],
   ['Is HireScore AI the same as HiredScore or Workday?', 'No. HireScore AI is an independent recruitment workflow platform and is not affiliated with HiredScore, HireScore.com, or Workday.'],
-  ['Where do product CTAs go?', `All product and app CTAs point to ${APP_URL}.`],
+  ['Where do product CTAs go?', `Login CTAs point to ${APP_URL}. Free pilot access is requested by emailing ${CONTACT_EMAIL}.`],
   ['Can recruiters use it for high-volume roles?', 'Yes. HireScore AI is designed to help recruiters screen and rank large candidate pools faster.'],
   ['Does HireScore AI replace recruiters?', 'No. It supports recruiter decisions with structured insights, scores, and explanations. Human review stays important.'],
 ]
@@ -644,7 +645,7 @@ const pricingPlans = [
     text: 'Test HireScore AI with real hiring workflows before choosing a paid plan.',
     items: ['3 active jobs for 7 days', 'Resume screening', 'Candidate ranking', 'Pilot support'],
     cta: 'Start Free Pilot',
-    href: APP_URL,
+    href: PILOT_MAILTO,
   },
   {
     name: 'Starter',
@@ -822,7 +823,7 @@ function Header({ isHome = false }) {
         </nav>
         <div className="navActions">
           <a className="homeLogin" href={APP_URL}>Login</a>
-          <a className="btn btnPrimary" href={APP_URL}>Start Free Pilot</a>
+          <a className="btn btnPrimary" href={PILOT_MAILTO}>Start Free Pilot</a>
         </div>
         <button className="menuButton" type="button" aria-label="Toggle navigation" onClick={() => setOpen(!open)}>
           {open ? <X size={22} /> : <Menu size={22} />}
@@ -833,7 +834,7 @@ function Header({ isHome = false }) {
           {['/', '/product', '/solutions', '/resources', '/pricing', '/contact'].map((path) => (
             <Link key={path} href={path} onClick={() => setOpen(false)}>{labelFor(path)}</Link>
           ))}
-          <a className="btn btnPrimary" href={APP_URL}>Start Free Pilot</a>
+          <a className="btn btnPrimary" href={PILOT_MAILTO}>Start Free Pilot</a>
         </nav>
       )}
     </header>
@@ -885,7 +886,7 @@ function PageHero({ eyebrow, title, titleHighlight, intro, cta = true, className
 function ButtonRow() {
   return (
     <div className="buttonRow">
-      <a className="btn btnPrimary btnLarge" href={APP_URL}>Start Free Pilot <ArrowRight size={18} /></a>
+      <a className="btn btnPrimary btnLarge" href={PILOT_MAILTO}>Start Free Pilot <ArrowRight size={18} /></a>
       <Link className="btn btnGhost btnLarge" href="/contact">Book a Demo</Link>
     </div>
   )
@@ -1114,7 +1115,7 @@ function HomePage() {
             <h1 className="commandReveal commandDelay1"><span className="heroBrand">HireScore AI</span> turns hiring complexity into <span>clear decisions.</span></h1>
             <p className="commandReveal commandDelay2">Screen resumes, understand candidate fit, rank stronger talent, and move every hiring workflow forward from one explainable AI workspace.</p>
             <div className="commandActions commandReveal commandDelay3">
-              <a className="commandButton commandButtonPrimary" href={APP_URL}>Start Free Pilot <ArrowRight size={17} /></a>
+              <a className="commandButton commandButtonPrimary" href={PILOT_MAILTO}>Start Free Pilot <ArrowRight size={17} /></a>
               <Link className="commandButton commandButtonGhost" href="/contact">Book Product Demo</Link>
             </div>
             <div className="heroProof commandReveal commandDelay4"><span><BadgeCheck size={15} /> Explainable AI</span><i /><span><Zap size={15} /> Recruiter controlled</span></div>
@@ -1170,7 +1171,7 @@ function HomePage() {
           <div className="intelligenceGrid commandReveal commandDelay1"><AnalyticsCard /><div className="qualityStack"><MetricCard label="Hire quality index" value="4.9" suffix="/ 5.0" text="Average stakeholder rating for shortlists sourced via HireScore AI Intelligence." /><MetricCard label="Efficiency multiplier" value="72" suffix="%" text="Reduction in manual screening hours per role since HireScore AI deployment." /></div></div>
         </div>
       </section>
-      <section className="commandCta"><div className="commandContainer commandCtaBox commandReveal"><h2>Scale Your Global<br /><span>HireScore AI Talent Engine</span></h2><p>Join hundreds of world-class recruitment teams using the HireScore AI Command Center to build elite organizations.</p><div className="commandActions"><a className="commandButton commandButtonPrimary" href={APP_URL}>Join the HireScore AI Revolution</a><Link className="commandButton commandButtonGhost" href="/contact">Consult With Specialists</Link></div></div></section>
+      <section className="commandCta"><div className="commandContainer commandCtaBox commandReveal"><h2>Scale Your Global<br /><span>HireScore AI Talent Engine</span></h2><p>Join hundreds of world-class recruitment teams using the HireScore AI Command Center to build elite organizations.</p><div className="commandActions"><a className="commandButton commandButtonPrimary" href={PILOT_MAILTO}>Request Free Access</a><Link className="commandButton commandButtonGhost" href="/contact">Consult With Specialists</Link></div></div></section>
     </div>
   )
 }
@@ -1664,19 +1665,91 @@ function titleByPath(path) {
 }
 
 function ResourceHub() {
+  const resourceHubItems = [
+    {
+      href: '/resources/user-guide',
+      title: 'User Guide',
+      text: 'Step-by-step workflows for jobs, apply links, resume uploads, ranking, shortlisting, and interviews.',
+      meta: '8 guides',
+      icon: BookOpen,
+    },
+    {
+      href: '/resources/blogs',
+      title: 'Recruiting Blog',
+      text: 'Practical articles on AI resume screening, JD matching, ranking, shortlisting, and hiring automation.',
+      meta: `${blogPosts.length} articles`,
+      icon: PenLine,
+    },
+    {
+      href: '/resources/case-studies',
+      title: 'Case Studies',
+      text: 'Sample hiring scenarios showing how teams can reduce manual screening and improve shortlist quality.',
+      meta: `${caseStudies.length} studies`,
+      icon: Building2,
+    },
+    {
+      href: '/resources/faqs',
+      title: 'FAQs',
+      text: 'Answers for recruiters, HR teams, staffing agencies, product access, pilots, and workflow questions.',
+      meta: 'Quick answers',
+      icon: HelpCircle,
+    },
+    {
+      href: '/resources/release-notes',
+      title: 'Release Notes',
+      text: 'Product updates for screening, scoring, candidate workflows, and recruiter productivity improvements.',
+      meta: 'Updates',
+      icon: Rocket,
+    },
+  ]
+
   return (
     <>
       <SEO title="Resources | HireScore AI Guides, Blogs, Case Studies and FAQs" description="Explore HireScore AI user guides, recruiting blogs, case studies, FAQs, and release notes for AI-powered hiring teams." path="/resources" />
-      <PageHero eyebrow="Resources" title="Hiring resources for AI-powered recruiters" intro="Read guides, blogs, case studies, FAQs, and release notes for using HireScore AI effectively." />
-      <section className="section">
-        <div className="container resourceGrid">
-          {[
-            ['/resources/user-guide', 'User Guide', BookOpen],
-            ['/resources/blogs', 'Blogs', PenLine],
-            ['/resources/case-studies', 'Case Studies', Building2],
-            ['/resources/faqs', 'FAQs', HelpCircle],
-            ['/resources/release-notes', 'Release Notes', Rocket],
-          ].map(([href, title, Icon]) => <Link href={href} className="resourceCard" key={href}><Icon size={24} /><h2>{title}</h2><p>Open {title.toLowerCase()} resources.</p></Link>)}
+      <section className="resourcesHero">
+        <div className="container resourcesHeroGrid">
+          <div>
+            <span className="eyebrow"><BookOpen size={14} />Resource Center</span>
+            <h1>Hiring resources for AI-powered recruiting teams</h1>
+            <p>Explore practical guides, blogs, case studies, FAQs, and product updates built for recruiters using AI resume screening and candidate ranking.</p>
+            <div className="resourcesHeroActions">
+              <a className="btn btnPrimary btnLarge" href={PILOT_MAILTO}>Request Free Access <ArrowRight size={18} /></a>
+              <Link className="btn btnGhost btnLarge" href="/resources/user-guide">Open User Guide</Link>
+            </div>
+          </div>
+          <div className="resourcesSpotlight" aria-label="Resource highlights">
+            <div><FileSearch size={22} /><strong>Resume screening guides</strong><span>Learn faster shortlist workflows</span></div>
+            <div><ClipboardCheck size={22} /><strong>Recruiter playbooks</strong><span>Use JD fit, scoring, and explanations</span></div>
+            <div><MailCheck size={22} /><strong>Free access</strong><span>Email {CONTACT_EMAIL}</span></div>
+          </div>
+        </div>
+      </section>
+      <section className="section resourcesDirectory">
+        <div className="container">
+          <div className="resourcesSectionHeader">
+            <span>Explore the library</span>
+            <h2>Everything your team needs to evaluate HireScore AI</h2>
+            <p>Choose a path based on whether you are learning the product, researching AI screening, or preparing a pilot.</p>
+          </div>
+          <div className="resourceHubGrid">
+            {resourceHubItems.map(({ href, title, text, meta, icon: Icon }) => (
+              <Link href={href} className="resourceHubCard" key={href}>
+                <div><Icon size={24} /></div>
+                <span>{meta}</span>
+                <h2>{title}</h2>
+                <p>{text}</p>
+                <strong>Explore <ArrowRight size={15} /></strong>
+              </Link>
+            ))}
+          </div>
+          <div className="resourcesAccessPanel">
+            <div>
+              <span>Free pilot access</span>
+              <h2>Want access to HireScore AI?</h2>
+              <p>Email <a href={PILOT_MAILTO}>{CONTACT_EMAIL}</a> with your company name, hiring roles, and expected resume volume. We will help you start the right pilot.</p>
+            </div>
+            <a className="btn btnPrimary btnLarge" href={PILOT_MAILTO}>Email for Free Access <MailCheck size={18} /></a>
+          </div>
         </div>
       </section>
     </>
@@ -1942,8 +2015,8 @@ function ContactPage() {
           </form>
           <aside className="sideCard">
             <h2>Book demo or start pilot</h2>
-            <p>Email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> or start directly from the app CTA.</p>
-            <a className="btn btnPrimary" href={APP_URL}>Start Free Pilot</a>
+            <p>For free access, email <a href={PILOT_MAILTO}>{CONTACT_EMAIL}</a> with your company name and expected resume volume.</p>
+            <a className="btn btnPrimary" href={PILOT_MAILTO}>Request Free Access</a>
           </aside>
         </div>
       </section>
@@ -2093,6 +2166,91 @@ const solutionWorkflowCoverage = [
   ['Hiring visibility', 'Track pipeline quality, screening progress, and role-level hiring activity.', PieChart],
 ]
 
+const solutionSegmentContent = {
+  '/solutions/recruitment-agencies': {
+    cardTitle: 'Recruitment Agencies',
+    eyebrow: 'Agency solution',
+    h1: 'AI recruiting software for recruitment agencies',
+    intro: 'Help agency recruiters screen more resumes, rank candidates by job fit, and send stronger shortlists to clients with recruiter-ready explanations.',
+    primaryNeed: 'Recruitment agencies often manage multiple client roles at once. HireScore AI keeps each job, resume batch, score, shortlist, and explanation connected so recruiters can move faster without losing quality.',
+    outcomes: ['Screen high-volume candidate pools faster', 'Rank applicants against each client job description', 'Prepare shortlist notes clients can review quickly', 'Keep recruiter decisions supported by clear evidence'],
+    workflow: ['Create separate jobs for each client role', 'Upload candidate resumes or collect applications', 'Review AI-ranked candidates with matched skills and gaps', 'Share stronger shortlists with client-ready context'],
+    faqs: [
+      ['Can recruitment agencies use HireScore AI for multiple clients?', 'Yes. Agencies can create separate jobs for different client roles, upload resumes, and review ranked candidates for each hiring requirement.'],
+      ['Does HireScore AI explain why candidates are shortlisted?', 'Yes. Recruiters can review matched skills, gaps, score context, and explanation notes before sharing candidates with clients.'],
+      ['Is this useful for high-volume agency hiring?', 'Yes. HireScore AI is designed to reduce manual resume screening time while keeping recruiters in control of the final shortlist.'],
+    ],
+    relatedLinks: [
+      ['/product/ai-candidate-ranking', 'Candidate ranking'],
+      ['/product/ai-explanation-engine', 'Explanation engine'],
+      ['/resources/user-guide/upload-resumes', 'Upload resumes guide'],
+    ],
+  },
+  '/solutions/staffing-companies': {
+    cardTitle: 'Staffing & Consulting Firms',
+    eyebrow: 'Staffing solution',
+    h1: 'AI resume screening for staffing companies',
+    intro: 'Help staffing and consulting teams process resumes faster, identify role-fit candidates, and keep candidate pipelines organized from screening to interview.',
+    primaryNeed: 'Staffing companies need speed, consistency, and client-ready candidate views across many open roles. HireScore AI helps teams compare resumes against job requirements and keep the next action visible.',
+    outcomes: ['Screen bench and inbound candidates by role fit', 'Build candidate lists for IT staffing and consulting roles', 'Keep shortlist evidence organized for client review', 'Move qualified candidates into communication and interviews'],
+    workflow: ['Set up role-specific hiring criteria', 'Upload candidate profiles for each opportunity', 'Use JD-fit scores to prioritize stronger matches', 'Move qualified candidates through communication and interview stages'],
+    faqs: [
+      ['Can staffing companies screen bench candidates with HireScore AI?', 'Yes. Teams can upload candidate profiles and compare them against active roles to find stronger matches quickly.'],
+      ['Does HireScore AI support client-ready candidate lists?', 'Yes. Recruiters can use scores, matched skills, and explanation notes to prepare cleaner candidate lists for clients.'],
+      ['Can staffing recruiters track communication after screening?', 'Yes. Candidate communication and interview movement can stay connected to the screening workflow.'],
+    ],
+    relatedLinks: [
+      ['/product/hiring-pipeline', 'Hiring pipeline'],
+      ['/product/candidate-communication', 'Candidate communication'],
+      ['/product/interview-scheduling', 'Interview scheduling'],
+    ],
+  },
+  '/solutions/hr-teams': {
+    cardTitle: 'In-House HR Teams',
+    eyebrow: 'HR team solution',
+    h1: 'AI hiring software for in-house HR teams',
+    intro: 'Give HR teams a structured way to create jobs, collect applications, review AI-ranked candidates, and move qualified profiles into interview workflows.',
+    primaryNeed: 'In-house HR teams need consistent screening across departments and clear context for hiring manager review. HireScore AI helps turn incoming applications into ranked, explainable candidate views.',
+    outcomes: ['Structure hiring around each department role', 'Collect applications through public apply pages', 'Review ranked candidates with transparent evidence', 'Move qualified applicants into interview tracking'],
+    workflow: ['Create a structured job with role requirements', 'Share a public apply link or upload resumes', 'Review ranked candidates with matched and missing skills', 'Shortlist candidates for hiring manager and interview review'],
+    faqs: [
+      ['How can HR teams use HireScore AI with hiring managers?', 'HR teams can review ranked candidates and share clearer shortlist context with hiring managers before interviews.'],
+      ['Does HireScore AI help with department-wise hiring?', 'Yes. Each job can be created around a department role so screening stays aligned with the right requirements.'],
+      ['Can HR teams collect applications directly?', 'Yes. HireScore AI supports public apply pages so candidates can submit details and resumes for the right job.'],
+    ],
+    relatedLinks: [
+      ['/product/public-apply-page', 'Public apply pages'],
+      ['/product/ai-shortlisting', 'AI shortlisting'],
+      ['/resources/user-guide/review-ai-ranked-candidates', 'Review ranked candidates guide'],
+    ],
+  },
+  '/solutions/startups': {
+    cardTitle: 'Startups & SMBs',
+    eyebrow: 'Startup solution',
+    h1: 'AI resume screening for startups and SMBs',
+    intro: 'Help small hiring teams screen resumes, compare candidates, and focus limited recruiting time on the applicants most likely to fit the role.',
+    primaryNeed: 'Startups and SMBs often hire without a large recruiting team. HireScore AI helps founders and small HR teams move from resumes to shortlists with less manual review.',
+    outcomes: ['Screen applicants without adding recruiter headcount', 'Compare candidates against the job description', 'See skill matches, gaps, and role-fit evidence', 'Move faster from application review to interviews'],
+    workflow: ['Create a job for the role you need to fill', 'Collect or upload resumes in one place', 'Review AI-ranked candidates and shortlist the strongest profiles', 'Use communication and interview steps to keep hiring moving'],
+    faqs: [
+      ['Is HireScore AI useful for founder-led hiring?', 'Yes. Small teams can use HireScore AI to reduce manual resume review and focus on candidates who best match the role.'],
+      ['Do startups need a large HR team to use HireScore AI?', 'No. The workflow is built so lean teams can create jobs, upload resumes, review rankings, and shortlist candidates quickly.'],
+      ['Can SMBs start with a free pilot?', 'Yes. You can request free pilot access by contacting HireScore AI through the website.'],
+    ],
+    relatedLinks: [
+      ['/pricing', 'Pricing'],
+      ['/product/create-job', 'Create job'],
+      ['/resources/case-studies/startup-reduced-resume-screening-time', 'Startup sample case study'],
+    ],
+  },
+}
+
+const solutionSegmentPages = solutionSegmentRoutes.map((route) => {
+  const content = solutionSegmentContent[route.path]
+  const card = solutionCards.find((item) => item.title === content.cardTitle)
+  return { ...route, ...content, card }
+})
+
 function SolutionsPage() {
   return (
     <>
@@ -2108,7 +2266,7 @@ function SolutionsPage() {
             <h1>AI Hiring Solutions for Every Recruiting Team</h1>
             <p>Whether you manage high-volume resumes, client hiring, internal roles, or startup recruitment, HireScore AI helps you screen candidates faster, rank them by job fit, and move the right talent forward with confidence.</p>
             <div className="buttonRow solutionPage-actions">
-              <a className="btn btnPrimary btnLarge" href={APP_URL}>Start Free Pilot <ArrowRight size={18} /></a>
+              <a className="btn btnPrimary btnLarge" href={PILOT_MAILTO}>Start Free Pilot <ArrowRight size={18} /></a>
               <Link className="btn btnGhost btnLarge" href="/contact">Book Demo</Link>
             </div>
             <div className="solutionPage-supportLine"><CheckCircle2 size={16} />Built for resume screening, JD matching, candidate ranking, shortlisting, outreach, and interview workflow.</div>
@@ -2300,12 +2458,101 @@ function SolutionsPage() {
           <h2>Ready to turn resumes into ranked shortlists?</h2>
           <p>Start your free pilot and see how HireScore AI can help your team screen candidates, explain hiring decisions, and move faster from application to interview.</p>
           <div className="buttonRow solutionPage-actions">
-            <a className="btn btnPrimary btnLarge" href={APP_URL}>Start Free Pilot <ArrowRight size={18} /></a>
+            <a className="btn btnPrimary btnLarge" href={PILOT_MAILTO}>Start Free Pilot <ArrowRight size={18} /></a>
             <Link className="btn btnGhost btnLarge" href="/contact">Book Demo</Link>
           </div>
           <small>No heavy setup required. Create a job, upload resumes, and review AI-ranked candidates.</small>
         </div>
       </section>
+    </>
+  )
+}
+
+function SolutionSegmentPage({ segment }) {
+  const Icon = segment.card?.icon || BriefcaseBusiness
+  return (
+    <>
+      <SEO title={segment.title} description={segment.description} path={segment.path} />
+      <Breadcrumbs items={[['/solutions', 'Solutions'], [segment.path, segment.navLabel]]} />
+      <PageHero eyebrow={segment.eyebrow} title={segment.h1} intro={segment.intro} />
+
+      <section className="section">
+        <div className="container splitGrid">
+          <div className="sectionHeader">
+            <span>Use case</span>
+            <h2>{segment.card.subtitle}</h2>
+            <p>{segment.primaryNeed}</p>
+          </div>
+          <article className="infoCard">
+            <Icon size={26} />
+            <h2>Best fit</h2>
+            <p>{segment.card.text}</p>
+            <ul className="checkList">
+              {segment.card.bestFor.map((item) => <li key={item}><CheckCircle2 size={16} />{item}</li>)}
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <SectionHeader eyebrow="Outcomes" title={`What ${segment.navLabel.toLowerCase()} can improve with HireScore AI`} />
+          <div className="threeGrid">
+            {segment.outcomes.map((item) => (
+              <article className="infoCard" key={item}>
+                <BadgeCheck size={24} />
+                <h2>{item}</h2>
+                <p>Use JD-based screening, candidate ranking, and recruiter-readable evidence to make this workflow clearer and faster.</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <SectionHeader eyebrow="Workflow" title={`How HireScore AI supports ${segment.navLabel.toLowerCase()}`} />
+          <div className="workflowGrid">
+            {segment.workflow.map((step, index) => (
+              <article className="workflowStep" key={step}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <Workflow size={24} />
+                <strong>{step}</strong>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container narrow">
+          <SectionHeader eyebrow="FAQs" title={`${segment.navLabel} FAQs`} />
+          <div className="faqList">
+            {segment.faqs.map(([question, answer]) => (
+              <details key={question}>
+                <summary>{question}</summary>
+                <p>{answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container narrow">
+          <SectionHeader eyebrow="Internal links" title="Explore related HireScore AI workflows" />
+          <div className="inlineLinks">
+            <Link href="/solutions">All solutions</Link>
+            {segment.relatedLinks.map(([href, label]) => <Link href={href} key={href}>{label}</Link>)}
+            <Link href="/contact">Contact sales</Link>
+          </div>
+        </div>
+      </section>
+
+      <CTASection
+        title={`Start a free pilot for ${segment.navLabel.toLowerCase()}`}
+        text="Create a job, upload resumes, review ranked candidates, and see whether HireScore AI fits your hiring workflow."
+      />
     </>
   )
 }
@@ -2336,7 +2583,55 @@ function Breadcrumbs({ items }) {
 }
 
 function Footer() {
-  return <footer className="commandFooter"><div className="commandContainer commandFooterGrid"><div><Link className="homeFullLogo footerLogo" href="/" aria-label="HireScore AI home"><img src="/hirescore-logo-white.png" alt="HireScore AI" /></Link><p>The enterprise-grade HireScore AI operating system built for the next era of human potential.</p><div className="footerDots"><a href="https://www.linkedin.com/company/hire-score-ai" target="_blank" rel="noreferrer" aria-label="HireScore AI on LinkedIn"><Linkedin size={14}/></a><a href="https://www.instagram.com/hirescore_ai/" target="_blank" rel="noreferrer" aria-label="HireScore AI on Instagram"><Instagram size={14}/></a></div></div><div><h3>Company</h3><a href="/#about">About Us</a><Link href="/product">Product</Link><Link href="/solutions">Solutions</Link><Link href="/pricing">Pricing</Link><Link href="/contact">Contact Us</Link></div><div><h3>Resources</h3><Link href="/resources">Resource Hub</Link><Link href="/resources/user-guide">User Guide</Link><Link href="/resources/blogs">Blogs</Link><Link href="/resources/case-studies">Case Studies</Link><Link href="/resources/faqs">FAQs</Link></div></div><div className="commandContainer commandFooterBottom"><span>© 2026 HireScore AI Technologies</span><div><Link href="/privacy">Privacy Policy</Link><Link href="/terms">Legal Intelligence</Link><a href={`mailto:${CONTACT_EMAIL}`}>Security Policy</a></div></div></footer>
+  return (
+    <footer className="commandFooter professionalFooter">
+      <div className="commandContainer professionalFooterTop">
+        <div className="footerBrandBlock">
+          <Link className="homeFullLogo footerLogo" href="/" aria-label="HireScore AI home">
+            <img src="/hirescore-logo-white.png" alt="HireScore AI" />
+          </Link>
+          <p>AI resume screening, JD matching, candidate ranking, and hiring workflow automation for modern recruiting teams.</p>
+          <a className="footerMail" href={PILOT_MAILTO}><MailCheck size={16} />Free access: {CONTACT_EMAIL}</a>
+          <div className="footerDots">
+            <a href="https://www.linkedin.com/company/hire-score-ai" target="_blank" rel="noreferrer" aria-label="HireScore AI on LinkedIn"><Linkedin size={14} /></a>
+            <a href="https://www.instagram.com/hirescore_ai/" target="_blank" rel="noreferrer" aria-label="HireScore AI on Instagram"><Instagram size={14} /></a>
+          </div>
+        </div>
+        <div className="professionalFooterLinks">
+          <div>
+            <h3>Product</h3>
+            <Link href="/product">Platform Overview</Link>
+            <Link href="/product/ai-resume-parsing">AI Resume Screening</Link>
+            <Link href="/product/ai-candidate-ranking">Candidate Ranking</Link>
+            <Link href="/pricing">Pricing</Link>
+          </div>
+          <div>
+            <h3>Solutions</h3>
+            <Link href="/solutions">Recruiting Teams</Link>
+            <a href="/#about">About Us</a>
+            <Link href="/contact">Contact Us</Link>
+            <a href={PILOT_MAILTO}>Request Free Access</a>
+          </div>
+          <div>
+            <h3>Resources</h3>
+            <Link href="/resources">Resource Center</Link>
+            <Link href="/resources/user-guide">User Guide</Link>
+            <Link href="/resources/blogs">Blogs</Link>
+            <Link href="/resources/case-studies">Case Studies</Link>
+            <Link href="/resources/faqs">FAQs</Link>
+          </div>
+        </div>
+      </div>
+      <div className="commandContainer commandFooterBottom">
+        <span>© 2026 HireScore AI Technologies. All rights reserved.</span>
+        <div>
+          <Link href="/privacy">Privacy Policy</Link>
+          <Link href="/terms">Terms</Link>
+          <a href={`mailto:${CONTACT_EMAIL}`}>Security</a>
+        </div>
+      </div>
+    </footer>
+  )
 }
 
 function LegacyFooter({ isHome = false }) {
@@ -2348,7 +2643,7 @@ function LegacyFooter({ isHome = false }) {
           <Logo />
           <p>HireScore AI is an independent AI recruitment workflow platform for recruiters and hiring teams.</p>
           <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
-          <a href={APP_URL}>App login and start pilot</a>
+          <a href={APP_URL}>App login</a>
           <div className="socialLinks" aria-label="Social links">
             <a href="https://www.linkedin.com/company/hire-score-ai" target="_blank" rel="noreferrer" aria-label="HireScore AI on LinkedIn"><Linkedin size={17} />LinkedIn</a>
             <a href="https://www.instagram.com/hirescore_ai/" target="_blank" rel="noreferrer" aria-label="HireScore AI on Instagram"><Instagram size={17} />Instagram</a>
@@ -2395,6 +2690,8 @@ function renderRoute(path) {
   if (path === '/') return <HomePage />
   if (path === '/product') return <ProductOverview />
   if (path === '/solutions') return <SolutionsPage />
+  const solutionSegment = solutionSegmentPages.find((page) => page.path === path)
+  if (solutionSegment) return <SolutionSegmentPage segment={solutionSegment} />
   if (path === '/resources') return <ResourceHub />
   if (path === '/resources/user-guide') return <GuideHub />
   if (path === '/resources/blogs') return <BlogList />
