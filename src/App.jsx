@@ -2046,6 +2046,7 @@ const solutionCards = [
     text: 'HireScore AI helps agencies manage multiple jobs, upload candidate resumes, rank applicants by JD fit, and share recruiter-ready insights with clients.',
     bestFor: ['Multiple client roles', 'High-volume resume screening', 'Faster shortlist delivery', 'Recruiter explanation notes'],
     cta: 'Explore Agency Solution',
+    slug: '/solutions/recruitment-agencies',
     icon: BriefcaseBusiness,
   },
   {
@@ -2054,6 +2055,7 @@ const solutionCards = [
     text: 'HR teams can create jobs, collect applications, review AI-ranked candidates, and move shortlisted profiles into the interview pipeline.',
     bestFor: ['Internal hiring teams', 'Department-wise hiring', 'Hiring manager review', 'Interview pipeline tracking'],
     cta: 'Explore HR Solution',
+    slug: '/solutions/hr-teams',
     icon: UsersRound,
   },
   {
@@ -2062,6 +2064,7 @@ const solutionCards = [
     text: 'Staffing firms can process resumes faster, identify role-fit candidates, and keep candidate communication organized from screening to interview.',
     bestFor: ['IT staffing', 'Consulting hiring', 'Bench candidate screening', 'Client-ready candidate lists'],
     cta: 'Explore Staffing Solution',
+    slug: '/solutions/staffing-companies',
     icon: Building2,
   },
   {
@@ -2070,6 +2073,7 @@ const solutionCards = [
     text: 'Small teams can use AI to screen resumes, compare candidates, and focus only on the most relevant applicants.',
     bestFor: ['Small hiring teams', 'Founder-led hiring', 'Fast-growing startups', 'Limited HR bandwidth'],
     cta: 'Explore Startup Solution',
+    slug: '/solutions/startups',
     icon: Rocket,
   },
   {
@@ -2320,7 +2324,7 @@ function SolutionsPage() {
             <p>Choose the hiring workflow that matches your team, role volume, and recruitment process.</p>
           </div>
           <div className="solutionPage-cardGrid">
-            {solutionCards.map(({ title, subtitle, text, bestFor, cta, icon: Icon }, index) => (
+            {solutionCards.map(({ title, subtitle, text, bestFor, cta, slug, icon: Icon }, index) => (
               <article key={title} className="solutionPage-solutionCard">
                 <div className="solutionPage-cardTop">
                   <span><Icon size={22} /></span>
@@ -2333,7 +2337,7 @@ function SolutionsPage() {
                   <small>Best for</small>
                   {bestFor.map((item) => <em key={item}><CheckCircle2 size={13} />{item}</em>)}
                 </div>
-                <Link href="#final-cta" className="solutionPage-cardLink">{cta}<ArrowRight size={15} /></Link>
+                <Link href={slug || '#final-cta'} className="solutionPage-cardLink">{cta}<ArrowRight size={15} /></Link>
               </article>
             ))}
           </div>
