@@ -2812,46 +2812,46 @@ function ComparisonPage({ page }) {
             <p>{page.tableIntro}</p>
           </div>
           <div className="solutionPage-comparisonCards" aria-label="HireScoreAI comparison pages">
-          {[
-            {
-              name: 'HiredScore',
-              href: '/compare/hirescoreai-vs-hiredscore',
-              text: 'Clarify how HireScoreAI differs from HiredScore and HireScore.com.',
-            },
-            {
-              name: 'Zoho Recruit',
-              href: '/compare/hirescoreai-vs-zoho-recruit',
-              text: 'Compare AI screening, pricing clarity, and hiring workflow fit.',
-            },
-            {
-              name: 'Manatal',
-              href: '/compare/hirescoreai-vs-manatal',
-              text: 'Compare focused JD-based screening with a broader recruiting suite.',
-            },
-            {
-              name: 'Workable',
-              href: '/compare/hirescoreai-vs-workable',
-              text: 'Compare explainable screening with broader ATS and sourcing workflows.',
-            },
-            {
-              name: 'Greenhouse',
-              href: '/compare/hirescoreai-vs-greenhouse',
-              text: 'Compare lighter AI screening workflows with a mature enterprise ATS.',
-            },
-          ].map((comparison) => (
-            <Link
-              key={comparison.href}
-              className="solutionPage-comparisonCard"
-              href={comparison.href}
-            >
-              <span className="solutionPage-comparisonCardKicker">Compare</span>
-              <strong>HireScoreAI vs {comparison.name}</strong>
-              <p>{comparison.text}</p>
-              <span className="solutionPage-comparisonCardLink">
-                View comparison <ArrowRight size={15} />
-              </span>
-            </Link>
-          ))}
+        {[
+          {
+            name: 'HiredScore',
+            href: '/compare/hirescoreai-vs-hiredscore',
+            text: 'Clarify how HireScoreAI differs from HiredScore and HireScore.com.',
+          },
+          {
+            name: 'Zoho Recruit',
+            href: '/compare/hirescoreai-vs-zoho-recruit',
+            text: 'Compare AI screening, pricing clarity, and hiring workflow fit.',
+          },
+          {
+            name: 'Manatal',
+            href: '/compare/hirescoreai-vs-manatal',
+            text: 'Compare focused JD-based screening with a broader recruiting suite.',
+          },
+          {
+            name: 'Workable',
+            href: '/compare/hirescoreai-vs-workable',
+            text: 'Compare explainable screening with broader ATS and sourcing workflows.',
+          },
+          {
+            name: 'Greenhouse',
+            href: '/compare/hirescoreai-vs-greenhouse',
+            text: 'Compare lighter AI screening workflows with a mature enterprise ATS.',
+          },
+        ].map((comparison) => (
+          <Link
+            key={comparison.href}
+            className="solutionPage-comparisonCard"
+            href={comparison.href}
+          >
+            <span className="solutionPage-comparisonCardKicker">Compare</span>
+            <strong>HireScoreAI vs {comparison.name}</strong>
+            <p>{comparison.text}</p>
+            <span className="solutionPage-comparisonCardLink">
+              View comparison <ArrowRight size={15} />
+            </span>
+          </Link>
+        ))}
 </div>
         </div>
       </section>
