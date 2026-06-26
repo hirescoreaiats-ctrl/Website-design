@@ -39,11 +39,20 @@ import {
   Zap,
 } from 'lucide-react'
 import './App.css'
-import { BRAND_NAME, buildRouteSchema, comparisonRoutes, getSeoConfig, solutionSegmentRoutes } from './seoConfig.js'
+import { BRAND_NAME, buildRouteSchema, compareHubRoute, comparisonRoutes, getSeoConfig, solutionSegmentRoutes } from './seoConfig.js'
 
 const APP_URL = 'https://app.hirescoreai.com'
 const CONTACT_EMAIL = 'Info@hireScoreAi.com'
 const PILOT_MAILTO = `mailto:${CONTACT_EMAIL}?subject=HireScore%20AI%20Free%20Pilot%20Access&body=Hi%20HireScore%20AI%20team%2C%0A%0AI%20want%20free%20pilot%20access%20for%20HireScore%20AI.%0A%0ACompany%3A%0AHiring%20roles%3A%0AExpected%20resume%20volume%3A%0A`
+
+const solutionNavItems = [
+  ['/solutions/recruitment-agencies', 'Recruitment Agencies'],
+  ['/solutions/staffing-companies', 'Staffing Companies'],
+  ['/solutions/hr-teams', 'HR Teams'],
+  ['/solutions/startups', 'Startups'],
+  ['/solutions/bulk-resume-screening', 'Bulk Resume Screening'],
+  ['/solutions/tech-hiring', 'IT & Tech Hiring'],
+]
 
 const iconMap = {
   job: BriefcaseBusiness,
@@ -683,6 +692,12 @@ const pricingPlans = [
   },
 ]
 
+const pricingFaqs = [
+  ['Does the free pilot require a credit card?', `No. Free pilot access is requested by emailing ${CONTACT_EMAIL}; the team can confirm access and fit before any paid INR plan starts.`],
+  ['What happens after the 7-day pilot ends?', 'After the 7-day pilot, teams can choose a monthly INR plan based on active job volume or talk to an expert for a custom rollout.'],
+  ['Can I switch plans as my hiring volume changes?', 'Yes. Teams can move to a plan that better matches active job volume as hiring needs change.'],
+]
+
 function navigateTo(path) {
   if (path.startsWith('http') || path.startsWith('mailto:')) {
     window.location.href = path
@@ -816,7 +831,7 @@ function Header({ isHome = false }) {
         <nav className="desktopNav homeNav unifiedNav" aria-label="Primary navigation">
           <a href={isHome ? '#about' : '/#about'}>About Us</a>
           <Link href="/product">Product</Link>
-          <Link href="/solutions">Solutions</Link>
+          <Dropdown label="Solutions" base="/solutions" items={solutionNavItems} />
           <Link href="/resources">Resources</Link>
           <Link href="/pricing">Pricing</Link>
           <Link href="/contact">Contact Us</Link>
@@ -1106,7 +1121,7 @@ function HomePage() {
   return (
     <div className="commandHome">
       <canvas className="commandCosmos" aria-hidden="true" />
-      <SEO title="HireScore AI | AI Recruitment & Resume Screening Software" description="Screen resumes, match candidates to job descriptions, explain fit, rank talent, manage shortlists, communicate, and schedule interviews with HireScore AI." path="/" />
+      <SEO path="/" />
       <section className="commandHero">
         <div className="commandGlow commandGlowOne" />
         <div className="commandContainer commandHeroGrid">
@@ -1452,7 +1467,7 @@ function ProductDashboardPreview() {
 function ProductOverview() {
   return (
     <>
-      <SEO title="HireScore AI Product | AI-Powered ATS for Recruiters" description="Screen resumes, score candidates against job descriptions, rank talent, track assessments, manage interviews, and analyze hiring from one AI-powered ATS." path="/product" />
+      <SEO path="/product" />
       <div className="productPage-root">
         <section className="productPage-hero">
           <div className="container productPage-heroGrid">
@@ -1705,7 +1720,7 @@ function ResourceHub() {
 
   return (
     <>
-      <SEO title="Resources | HireScore AI Guides, Blogs, Case Studies and FAQs" description="Explore HireScore AI user guides, recruiting blogs, case studies, FAQs, and release notes for AI-powered hiring teams." path="/resources" />
+      <SEO path="/resources" />
       <section className="resourcesHero">
         <div className="container resourcesHeroGrid">
           <div>
@@ -1759,7 +1774,7 @@ function ResourceHub() {
 function GuideHub() {
   return (
     <>
-      <SEO title="User Guide | HireScore AI" description="Step-by-step HireScore AI user guides for creating jobs, sharing apply links, uploading resumes, reviewing ranked candidates, shortlisting, communication, interviews, and tests." path="/resources/user-guide" />
+      <SEO path="/resources/user-guide" />
       <PageHero eyebrow="User guide" title="Step-by-step guides for using HireScore AI" intro="Simple instructions for recruiters using HireScore AI from job setup to interview scheduling." />
       <section className="section"><div className="container resourceGrid">{guidePages.map((guide) => <ResourceCard item={guide} key={guide.slug} />)}</div></section>
     </>
@@ -1796,11 +1811,7 @@ function GuidePage({ guide }) {
 function BlogList() {
   return (
     <>
-      <SEO
-        title="AI Recruitment Blogs | HireScore AI"
-        description="Read HireScore AI blogs about AI resume screening, candidate ranking, public apply pages, AI shortlisting, recruitment automation, and hiring workflows."
-        path="/resources/blogs"
-      />
+      <SEO path="/resources/blogs" />
 
       <PageHero
         eyebrow="HireScore AI Blog"
@@ -1925,7 +1936,7 @@ function BlogPost({ post }) {
 function CaseStudyList() {
   return (
     <>
-      <SEO title="Case Studies | HireScore AI" description="Explore generic demo case studies for AI resume screening, candidate shortlisting, and public apply page workflows." path="/resources/case-studies" />
+      <SEO path="/resources/case-studies" />
       <PageHero eyebrow="Case studies" title="Demo case studies for AI-powered hiring workflows" intro="These generic examples show how recruiting teams can use HireScore AI. They are sample scenarios, not named client claims." />
       <section className="section"><div className="container resourceGrid">{caseStudies.map((study) => <ResourceCard item={study} key={study.slug} />)}</div></section>
     </>
@@ -1968,9 +1979,22 @@ function ResourceCard({ item }) {
 function PricingPage() {
   return (
     <>
-      <SEO title="Pricing | HireScore AI" description="Explore HireScore AI pricing for Free Pilot, Starter, Growth, and Enterprise plans with active job limits for AI resume screening teams." path="/pricing" />
+      <SEO path="/pricing" />
       <PageHero eyebrow="Pricing" title="Simple pricing for AI-powered hiring teams" intro="Start with a 7-day free pilot, then choose a monthly plan based on the number of active jobs your hiring team needs." />
       <section className="section pricingSection"><div className="container pricingGrid">{pricingPlans.map((plan) => <PricingCard key={plan.name} plan={plan} />)}</div></section>
+      <section className="section">
+        <div className="container narrow">
+          <SectionHeader eyebrow="Pricing FAQ" title="HireScoreAI vs typical ATS pricing models" />
+          <div className="faqList">
+            {pricingFaqs.map(([question, answer]) => (
+              <details key={question}>
+                <summary>{question}</summary>
+                <p>{answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
       <CTASection />
     </>
   )
@@ -2001,7 +2025,7 @@ function PricingCard({ plan }) {
 function ContactPage() {
   return (
     <>
-      <SEO title="Contact HireScore AI | Book Demo or Request Pilot Access" description="Contact HireScore AI to book a demo, request pilot access, or discuss AI resume screening and hiring workflow automation." path="/contact" />
+      <SEO path="/contact" />
       <PageHero eyebrow="Contact" title="Request a HireScore AI demo or free pilot" intro="Recruiters, HR teams, startups, staffing agencies, and hiring managers can request pilot access or ask questions about the platform." cta={false} />
       <section className="section">
         <div className="container contactGrid">
@@ -2082,6 +2106,7 @@ const solutionCards = [
     text: 'HireScore AI helps teams analyze large resume batches and identify candidates who match the JD requirements.',
     bestFor: ['Resume database screening', 'Walk-in hiring', 'Job fair data', 'Bulk applications'],
     cta: 'Explore Bulk Screening',
+    slug: '/solutions/bulk-resume-screening',
     icon: Files,
   },
   {
@@ -2090,6 +2115,7 @@ const solutionCards = [
     text: 'Screen candidates for Data Analyst, Full Stack, Backend, QA, Salesforce, ML, and other technical roles using JD-based matching.',
     bestFor: ['Tech recruitment', 'Skill-based screening', 'Role similarity matching', 'Candidate skill gap analysis'],
     cta: 'Explore Tech Hiring',
+    slug: '/solutions/tech-hiring',
     icon: BrainCircuit,
   },
 ]
@@ -2247,6 +2273,44 @@ const solutionSegmentContent = {
       ['/resources/case-studies/startup-reduced-resume-screening-time', 'Startup sample case study'],
     ],
   },
+  '/solutions/bulk-resume-screening': {
+    cardTitle: 'Bulk Resume Screening',
+    eyebrow: 'High-volume screening',
+    h1: 'Bulk Resume Screening Software for High-Volume Hiring',
+    intro: 'Screen large resume batches faster with AI candidate ranking and recruiter-ready explanations for high-volume hiring workflows.',
+    primaryNeed: 'Teams that receive large resume batches need a faster way to identify candidates who match the job description. HireScore AI helps recruiters turn bulk applications into ranked, review-ready shortlists.',
+    outcomes: ['Process large resume batches with less manual review', 'Rank candidates by JD relevance and skill match', 'Identify stronger profiles for recruiter review', 'Create clearer shortlist evidence for high-volume roles'],
+    workflow: ['Create a job with role requirements', 'Upload bulk resumes or collect applications', 'Review AI-ranked candidates and fit explanations', 'Shortlist qualified profiles for communication or interviews'],
+    faqs: [
+      ['Can HireScore AI screen bulk resume batches?', 'Yes. HireScore AI helps teams upload and review large resume batches using JD-based ranking and recruiter-readable explanations.'],
+      ['Is bulk screening useful for job fairs or walk-in hiring?', 'Yes. Bulk resume screening can help teams organize larger candidate pools from job fairs, walk-ins, or high-volume application sources.'],
+      ['Does HireScore AI make final hiring decisions?', 'No. HireScore AI supports recruiter review with structured scores and explanations. Human recruiters remain responsible for final decisions.'],
+    ],
+    relatedLinks: [
+      ['/product/resume-upload', 'Bulk resume upload'],
+      ['/product/ai-candidate-ranking', 'Candidate ranking'],
+      ['/product/ai-shortlisting', 'AI shortlisting'],
+    ],
+  },
+  '/solutions/tech-hiring': {
+    cardTitle: 'IT & Tech Hiring',
+    eyebrow: 'Technical hiring',
+    h1: 'AI Candidate Screening for IT & Tech Hiring',
+    intro: 'Help recruiters screen technical resumes faster with AI-powered skill matching, candidate ranking, and explainable shortlist insights.',
+    primaryNeed: 'Tech recruiters need to compare technical skills, role fit, experience, and gaps against each job description. HireScore AI supports technical resume review without claiming to replace recruiter judgment or technical interviews.',
+    outcomes: ['Screen technical resumes by job-specific skills', 'Compare candidates for IT and software roles', 'Surface matched skills and skill gaps for review', 'Build clearer technical shortlists for hiring managers'],
+    workflow: ['Create a technical job with required skills', 'Upload resumes for the role', 'Review matched skills, missing skills, and ranking evidence', 'Shortlist candidates for further technical evaluation'],
+    faqs: [
+      ['Can HireScore AI screen technical resumes?', 'Yes. HireScore AI can help recruiters review technical resumes against role requirements and surface skill matches, gaps, and fit evidence.'],
+      ['Does HireScore AI replace technical interviews?', 'No. HireScore AI supports resume screening and shortlisting. Teams should still use interviews, assignments, or technical review where needed.'],
+      ['Which technical roles can recruiters screen?', 'Recruiters can use HireScore AI for roles such as data analyst, backend, full stack, QA, Salesforce, ML, and other skill-based technical hiring workflows.'],
+    ],
+    relatedLinks: [
+      ['/product/ai-resume-parsing', 'AI resume parsing'],
+      ['/product/ai-candidate-scoring', 'Candidate scoring'],
+      ['/product/ai-screening-test', 'AI screening tests'],
+    ],
+  },
 }
 
 const solutionSegmentPages = solutionSegmentRoutes.map((route) => {
@@ -2300,6 +2364,72 @@ const comparisonPageContent = {
       ['How should teams compare HireScoreAI and Zoho Recruit?', 'Teams should compare current product materials, workflow fit, resume screening needs, candidate ranking expectations, integrations, implementation, and support directly.'],
     ],
   },
+  '/compare/hirescoreai-vs-manatal': {
+    competitorName: 'Manatal',
+    eyebrow: 'Platform comparison',
+    h1: 'HireScoreAI vs Manatal',
+    intro: 'Compare HireScoreAI with Manatal for AI candidate scoring, resume screening focus, setup needs, and recruiting workflow fit.',
+    disclosure: 'Manatal is a broader recruiting suite. HireScoreAI is focused on explainable JD-based resume screening, candidate ranking, and shortlist review. HireScoreAI does not currently claim AI Interviewer parity.',
+    tableTitle: 'How HireScoreAI and Manatal differ',
+    tableIntro: 'This comparison highlights product focus and buyer evaluation points without claiming feature parity or unsupported competitor details.',
+    clarification: 'HireScoreAI and Manatal are separate products. Manatal may suit teams looking for a broader recruiting suite, while HireScoreAI is positioned around explainable screening and ranking workflows.',
+    competitorNotes: {
+      'Primary fit': 'Manatal is positioned as a broader recruiting suite. Buyers should review current Manatal materials for ATS, CRM, sourcing, and automation scope.',
+      'Best suited for': 'Teams evaluating Manatal may be looking for a wider recruiting suite beyond focused resume screening. Fit should be confirmed against their workflow needs.',
+      'Screening approach': 'Manatal may support recruiting automation and candidate management workflows; specific AI screening behavior should be verified from current Manatal product materials.',
+      'Decision clarity': 'Candidate review, scoring, and reporting details should be tested directly during a Manatal evaluation.',
+      'Pilot motion': 'Setup, implementation, commercial terms, and support are separate from HireScoreAI and should be confirmed directly with Manatal.',
+    },
+    faqs: [
+      ['Is HireScoreAI the same as Manatal?', 'No. HireScoreAI and Manatal are separate recruiting platforms with different product focus.'],
+      ['Does HireScoreAI include an AI Interviewer like some broader suites may promote?', 'HireScoreAI does not currently claim AI Interviewer parity. It focuses on JD-based resume screening, candidate ranking, explanations, and connected hiring workflow.'],
+      ['When should teams compare HireScoreAI and Manatal?', 'Teams should compare them when deciding between a focused explainable screening workflow and a broader recruiting suite.'],
+    ],
+  },
+  '/compare/hirescoreai-vs-workable': {
+    competitorName: 'Workable',
+    eyebrow: 'Platform comparison',
+    h1: 'HireScoreAI vs Workable',
+    intro: 'Compare HireScoreAI with Workable for AI screening, candidate evaluation, pricing clarity, and hiring workflow fit for growing teams.',
+    disclosure: 'Workable is commonly evaluated as a broader ATS and sourcing platform. HireScoreAI focuses on explainable applicant screening and ranking. HireScoreAI does not claim a passive candidate sourcing database.',
+    tableTitle: 'How HireScoreAI and Workable differ',
+    tableIntro: 'This comparison keeps the focus on product positioning and evaluation criteria, while avoiding unsupported claims about current Workable features.',
+    clarification: 'HireScoreAI and Workable are separate products. Workable may suit teams looking for a broader ATS or sourcing workflow, while HireScoreAI focuses on screening and shortlist evidence.',
+    competitorNotes: {
+      'Primary fit': 'Workable is generally evaluated as a broader ATS and recruiting platform. Buyers should review current Workable materials for sourcing, ATS, and automation scope.',
+      'Best suited for': 'Teams evaluating Workable may need broader applicant tracking, collaboration, or sourcing workflows. Fit should be confirmed against current requirements.',
+      'Screening approach': 'Candidate evaluation and automation details should be verified directly from current Workable product materials.',
+      'Decision clarity': 'Shortlist evidence, review workflows, and reporting should be assessed directly during a Workable evaluation.',
+      'Pilot motion': 'Pricing, setup, implementation, and support are separate from HireScoreAI and should be confirmed directly with Workable.',
+    },
+    faqs: [
+      ['Is HireScoreAI the same as Workable?', 'No. HireScoreAI and Workable are separate recruiting products with different positioning.'],
+      ['Does HireScoreAI include a passive candidate sourcing database?', 'No. HireScoreAI does not claim a passive candidate sourcing database. It focuses on applicant resume screening, ranking, explanations, and workflow movement.'],
+      ['When should teams compare HireScoreAI and Workable?', 'Teams should compare them when choosing between focused explainable applicant screening and a broader ATS or sourcing platform.'],
+    ],
+  },
+  '/compare/hirescoreai-vs-greenhouse': {
+    competitorName: 'Greenhouse',
+    eyebrow: 'Platform comparison',
+    h1: 'HireScoreAI vs Greenhouse',
+    intro: 'Compare HireScoreAI with Greenhouse on AI screening, setup effort, pricing clarity, and fit for recruitment teams, startups, staffing firms, and HR teams.',
+    disclosure: 'Greenhouse is a mature ATS often evaluated by larger or process-heavy recruiting teams. HireScoreAI is lighter and focused on explainable screening for smaller teams, agencies, and high-volume resume review. HireScoreAI is not positioned as a full enterprise Greenhouse replacement.',
+    tableTitle: 'How HireScoreAI and Greenhouse differ',
+    tableIntro: "This comparison is intentionally high-level and should be validated against current Greenhouse materials and each team's hiring workflow.",
+    clarification: 'HireScoreAI and Greenhouse are separate products. Greenhouse may suit teams needing mature ATS process depth, while HireScoreAI focuses on explainable resume screening and ranking.',
+    competitorNotes: {
+      'Primary fit': 'Greenhouse is a mature ATS and hiring platform. Buyers should review current Greenhouse materials for structured hiring, collaboration, integrations, and reporting scope.',
+      'Best suited for': 'Teams evaluating Greenhouse may need a broader, mature ATS process across departments and hiring stakeholders.',
+      'Screening approach': 'Greenhouse screening and AI capabilities should be verified from current Greenhouse product materials and demos.',
+      'Decision clarity': 'Structured hiring, interview plans, scorecards, and reporting should be assessed directly during a Greenhouse evaluation.',
+      'Pilot motion': 'Implementation, pricing, workflow configuration, and support are separate from HireScoreAI and should be confirmed directly with Greenhouse.',
+    },
+    faqs: [
+      ['Is HireScoreAI a full Greenhouse replacement?', 'No. HireScoreAI should not be positioned as a full enterprise Greenhouse replacement. It focuses on explainable resume screening, candidate ranking, and connected shortlist workflows.'],
+      ['Is Greenhouse better for enterprise ATS needs?', 'Greenhouse is commonly evaluated as a mature ATS. Teams with enterprise ATS needs should compare current Greenhouse capabilities directly against their requirements.'],
+      ['When should teams compare HireScoreAI and Greenhouse?', 'Teams should compare them when deciding between a focused screening and ranking workflow and a broader mature ATS implementation.'],
+    ],
+  },
 }
 
 const comparisonPages = comparisonRoutes.map((route) => {
@@ -2318,11 +2448,7 @@ const comparisonPages = comparisonRoutes.map((route) => {
 function SolutionsPage() {
   return (
     <>
-      <SEO
-        title="AI Hiring Solutions for Recruiters & Staffing Agencies | HireScore AI"
-        description="HireScore AI helps recruitment agencies, HR teams, staffing firms, startups, and high-volume hiring teams screen resumes, rank candidates, shortlist talent, and manage hiring workflows with AI."
-        path="/solutions"
-      />
+      <SEO path="/solutions" />
       <section className="solutionPage-hero">
         <div className="container solutionPage-heroGrid">
           <div className="solutionPage-heroCopy">
@@ -2473,6 +2599,9 @@ function SolutionsPage() {
               </div>
             ))}
           </div>
+          <div className="inlineLinks">
+            <Link href="/compare">View all HireScoreAI comparisons <ArrowRight size={15} /></Link>
+          </div>
         </div>
       </section>
 
@@ -2536,7 +2665,7 @@ function SolutionSegmentPage({ segment }) {
   const Icon = segment.card?.icon || BriefcaseBusiness
   return (
     <>
-      <SEO title={segment.title} description={segment.description} path={segment.path} />
+      <SEO path={segment.path} />
       <Breadcrumbs items={[['/solutions', 'Solutions'], [segment.path, segment.navLabel]]} />
       <PageHero eyebrow={segment.eyebrow} title={segment.h1} intro={segment.intro} />
 
@@ -2621,10 +2750,40 @@ function SolutionSegmentPage({ segment }) {
   )
 }
 
+function CompareHubPage() {
+  return (
+    <>
+      <SEO path={compareHubRoute.path} />
+      <Breadcrumbs items={[[compareHubRoute.path, compareHubRoute.navLabel]]} />
+      <PageHero eyebrow="Comparisons" title="Compare HireScoreAI with Other Recruiting Platforms" intro="Review high-level comparisons for AI resume screening, candidate ranking, pricing clarity, and workflow fit." />
+
+      <section className="section">
+        <div className="container">
+          <SectionHeader eyebrow="Comparison pages" title="Choose a recruiting platform comparison" text="Each comparison is written cautiously and should be validated against the current product materials for that platform." />
+          <div className="threeGrid">
+            {comparisonPages.map((page) => (
+              <Link className="infoCard" href={page.path} key={page.path}>
+                <ShieldCheck size={24} />
+                <h2>{page.navLabel}</h2>
+                <p>{page.description}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <CTASection
+        title="Compare HireScoreAI with your current hiring workflow"
+        text="Start a focused pilot to test JD-based resume screening, candidate ranking, and recruiter-ready explanations."
+      />
+    </>
+  )
+}
+
 function ComparisonPage({ page }) {
   return (
     <>
-      <SEO title={page.title} description={page.description} path={page.path} />
+      <SEO path={page.path} />
       <Breadcrumbs items={[[page.path, page.navLabel]]} />
       <PageHero eyebrow={page.eyebrow} title={page.h1} intro={page.intro} />
 
@@ -2712,7 +2871,7 @@ function SimplePage({ type }) {
   }[type]
   return (
     <>
-      <SEO title={`${config[0]} | HireScore AI`} description={config[2]} path={type} />
+      <SEO path={type} />
       <PageHero eyebrow={config[0]} title={config[1]} intro={config[2]} />
       {type === '/resources/faqs' ? <FAQSection /> : <CTASection />}
     </>
@@ -2838,6 +2997,7 @@ function renderRoute(path) {
   if (path === '/solutions') return <SolutionsPage />
   const solutionSegment = solutionSegmentPages.find((page) => page.path === path)
   if (solutionSegment) return <SolutionSegmentPage segment={solutionSegment} />
+  if (path === '/compare') return <CompareHubPage />
   const comparisonPage = comparisonPages.find((page) => page.path === path)
   if (comparisonPage) return <ComparisonPage page={comparisonPage} />
   if (path === '/resources') return <ResourceHub />

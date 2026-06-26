@@ -25,13 +25,13 @@ const productRoutes = [
   ['/product/create-job', 'AI Job Creation Software for Recruiters | HireScore AI', 'Create structured jobs in HireScore AI so recruiters can collect applications, screen resumes, and manage every hiring stage from one connected workflow.'],
   ['/product/public-apply-page', 'Public Job Apply Pages for Recruiters | HireScore AI', 'Generate shareable public job apply pages to collect candidate details and resumes directly into an organized hiring pipeline.'],
   ['/product/resume-upload', 'Bulk Resume Upload for Hiring Teams | HireScore AI', 'Upload and organize resumes in HireScore AI for AI parsing, JD matching, candidate scoring, ranking, and shortlisting.'],
-  ['/product/ai-resume-parsing', 'AI Resume Screening & Parsing Software | HireScore AI', 'Parse and screen resumes with AI to identify candidate skills, experience, education, and job-fit signals faster.'],
-  ['/product/ai-candidate-scoring', 'JD-Based AI Candidate Scoring Software | HireScore AI', 'Score candidates against job descriptions using skills, experience, semantic match, profile quality, and explainable role-fit evidence.'],
+  ['/product/ai-resume-parsing', 'AI Resume Parser for Recruiters | HireScore AI', 'Use HireScore AI as a resume parser for recruiters to extract candidate skills, experience, education, and job-fit signals for faster screening.'],
+  ['/product/ai-candidate-scoring', 'JD-Based Resume Scoring Software | HireScore AI', 'Score resumes against job descriptions using skills, experience, semantic match, profile quality, and explainable role-fit evidence.'],
   ['/product/ai-candidate-ranking', 'AI Candidate Ranking Software for Recruiters | HireScore AI', 'Rank candidates automatically by job fit, matched skills, missing skills, experience, and explainable AI evidence.'],
-  ['/product/ai-shortlisting', 'AI Candidate Shortlisting Software | HireScore AI', 'Shortlist stronger candidates faster using JD-based scores, ranked profiles, skill evidence, and recruiter-friendly AI explanations.'],
+  ['/product/ai-shortlisting', 'Resume Shortlisting Software | HireScore AI', 'Shortlist stronger candidates faster with resume shortlisting software that uses JD-based scores, ranked profiles, skill evidence, and recruiter-friendly AI explanations.'],
   ['/product/ai-explanation-engine', 'Explainable AI for Recruitment Decisions | HireScore AI', 'Understand candidate scores through matched skills, skill gaps, relevant experience, semantic job fit, and transparent AI explanations.'],
   ['/product/candidate-communication', 'Candidate Communication Workflow Software | HireScore AI', 'Keep candidate outreach and hiring status connected to screening, shortlisting, tests, and interview scheduling.'],
-  ['/product/interview-scheduling', 'Interview Scheduling Software for Hiring Teams | HireScore AI', 'Schedule interviews from a connected hiring pipeline and move qualified candidates smoothly from shortlist to interview.'],
+  ['/product/interview-scheduling', 'AI Interview Scheduling Workflow | HireScore AI', 'Use AI interview scheduling workflow support to move qualified candidates from shortlist to interview while preserving hiring context.'],
   ['/product/ai-screening-test', 'AI Screening Tests for Candidate Validation | HireScore AI', 'Validate shortlisted candidates with role-specific AI screening tests before progressing them to interviews.'],
   ['/product/hiring-pipeline', 'AI Hiring Pipeline & Recruitment Workflow Software | HireScore AI', 'Manage job creation, applications, resume screening, ranking, shortlisting, communication, tests, and interviews in one hiring pipeline.'],
 ]
@@ -61,7 +61,26 @@ export const solutionSegmentRoutes = [
     title: 'AI Resume Screening for Startups & SMBs | HireScore AI',
     description: 'HireScore AI helps startups and SMBs screen resumes, compare candidates, and focus small hiring teams on the most relevant applicants faster.',
   },
+  {
+    path: '/solutions/bulk-resume-screening',
+    navLabel: 'Bulk Resume Screening',
+    title: 'Bulk Resume Screening Software | HireScoreAI',
+    description: 'Screen large resume batches faster with HireScoreAI, using AI candidate ranking and recruiter-ready explanations for high-volume hiring workflows.',
+  },
+  {
+    path: '/solutions/tech-hiring',
+    navLabel: 'IT & Tech Hiring',
+    title: 'AI Technical Candidate Screening Software | HireScoreAI',
+    description: 'Help recruiters screen technical resumes faster with AI-powered skill matching, candidate ranking, and explainable shortlist insights.',
+  },
 ]
+
+export const compareHubRoute = {
+  path: '/compare',
+  navLabel: 'Compare',
+  title: 'HireScoreAI Comparisons | AI Recruiting Software Alternatives',
+  description: 'Compare HireScoreAI with HiredScore, Zoho Recruit, Manatal, Workable, and Greenhouse to understand AI screening, pricing, and workflow fit.',
+}
 
 export const comparisonRoutes = [
   {
@@ -75,6 +94,24 @@ export const comparisonRoutes = [
     navLabel: 'HireScoreAI vs Zoho Recruit',
     title: 'HireScoreAI vs Zoho Recruit | AI Resume Screening Comparison | 2026',
     description: 'Compare HireScoreAI and Zoho Recruit for AI resume screening, candidate ranking, hiring workflows, and recruiter-focused shortlist review.',
+  },
+  {
+    path: '/compare/hirescoreai-vs-manatal',
+    navLabel: 'HireScoreAI vs Manatal',
+    title: 'HireScoreAI vs Manatal: AI Recruiting Software Compared | 2026',
+    description: "See how HireScoreAI's explainable AI candidate scoring compares with Manatal's broader recruiting suite, including screening focus, setup, and hiring workflow fit.",
+  },
+  {
+    path: '/compare/hirescoreai-vs-workable',
+    navLabel: 'HireScoreAI vs Workable',
+    title: 'HireScoreAI vs Workable: AI ATS Comparison | 2026',
+    description: 'Compare HireScoreAI and Workable on AI screening, candidate evaluation, pricing clarity, and hiring workflow fit for growing teams.',
+  },
+  {
+    path: '/compare/hirescoreai-vs-greenhouse',
+    navLabel: 'HireScoreAI vs Greenhouse',
+    title: 'HireScoreAI vs Greenhouse: AI ATS Comparison | 2026',
+    description: 'Compare HireScoreAI and Greenhouse on AI screening, setup effort, pricing clarity, and fit for recruitment teams, startups, and HR teams.',
   },
 ]
 
@@ -114,6 +151,7 @@ export const SEO_ROUTES = [
   ...staticRoutes.map(([path, title, description, pageType, noindex = false]) => ({ path, title, description, pageType: pageType === 'FAQPage' ? 'WebPage' : pageType, schemaKind: pageType === 'FAQPage' ? 'faq' : undefined, noindex })),
   ...productRoutes.map(([path, title, description]) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, title.replace(/ \|.*$/, ''), '/product', 'Product') })),
   ...solutionSegmentRoutes.map(({ path, title, description, navLabel }) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, navLabel, '/solutions', 'Solutions') })),
+  { path: compareHubRoute.path, title: compareHubRoute.title, description: compareHubRoute.description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(compareHubRoute.path, compareHubRoute.navLabel) },
   ...comparisonRoutes.map(({ path, title, description, navLabel }) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, navLabel) })),
   ...guideRoutes.map(([path, title, description, steps]) => ({ path, title: `${title} | HireScore AI Guide`, description, pageType: 'WebPage', schemaKind: 'howto', steps, breadcrumbs: breadcrumbFor(path, title, '/resources/user-guide', 'User Guide') })),
   ...blogRoutes.map(([path, title, description, category, image]) => ({ path, title, description, pageType: 'WebPage', ogType: 'article', schemaKind: 'article', category, image, breadcrumbs: breadcrumbFor(path, title.replace(/ \|.*$/, ''), '/resources/blogs', 'Blog') })),

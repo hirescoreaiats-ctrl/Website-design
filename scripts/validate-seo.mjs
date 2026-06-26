@@ -49,6 +49,8 @@ for (const route of SEO_ROUTES) {
       for (const required of ['Organization', 'WebSite', 'SoftwareApplication']) {
         if (!types.includes(required)) errors.push(`${route.path}: missing ${required} schema`)
       }
+      const software = parsed['@graph'].find((node) => node['@type'] === 'SoftwareApplication')
+      if (software?.offers?.priceCurrency !== 'INR') errors.push(`${route.path}: SoftwareApplication offer currency must be INR`)
       if (route.breadcrumbs && !types.includes('BreadcrumbList')) errors.push(`${route.path}: missing BreadcrumbList schema`)
       if (route.schemaKind === 'article' && !types.includes('Article')) errors.push(`${route.path}: missing Article schema`)
       if (route.schemaKind === 'howto' && !types.includes('HowTo')) errors.push(`${route.path}: missing HowTo schema`)
