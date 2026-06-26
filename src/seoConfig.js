@@ -70,6 +70,12 @@ export const comparisonRoutes = [
     title: 'HireScoreAI vs HiredScore: Is HireScoreAI the Same Platform? | 2026',
     description: 'HireScoreAI is an independent AI recruitment platform and is not affiliated with HiredScore, HireScore.com, or Workday. See how the platforms differ.',
   },
+  {
+    path: '/compare/hirescoreai-vs-zoho-recruit',
+    navLabel: 'HireScoreAI vs Zoho Recruit',
+    title: 'HireScoreAI vs Zoho Recruit | AI Resume Screening Comparison | 2026',
+    description: 'Compare HireScoreAI and Zoho Recruit for AI resume screening, candidate ranking, hiring workflows, and recruiter-focused shortlist review.',
+  },
 ]
 
 const guideRoutes = [

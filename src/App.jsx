@@ -2255,31 +2255,65 @@ const solutionSegmentPages = solutionSegmentRoutes.map((route) => {
   return { ...route, ...content, card }
 })
 
-const hiredScoreComparisonNotes = {
-  'Primary fit': 'HiredScore is a separate platform. Review HiredScore and Workday materials directly for current product scope and positioning.',
-  'Best suited for': 'Teams evaluating HiredScore should confirm fit directly with HiredScore or Workday based on their organization size, workflow, and talent systems.',
-  'Screening approach': 'The screening and talent intelligence approach is different from HireScoreAI and should be assessed from official HiredScore or Workday sources.',
-  'Decision clarity': 'Decision support, explainability, and workflow details should be verified with the HiredScore or Workday product team.',
-  'Pilot motion': 'Commercial setup, implementation, and support are separate from HireScoreAI and should be confirmed directly with HiredScore or Workday.',
+const comparisonPageContent = {
+  '/compare/hirescoreai-vs-hiredscore': {
+    competitorName: 'HiredScore',
+    eyebrow: 'Platform comparison',
+    h1: 'HireScoreAI vs HiredScore: is HireScoreAI the same platform?',
+    intro: 'No. HireScoreAI is an independent AI recruitment platform and is not affiliated with HiredScore, HireScore.com, or Workday.',
+    disclosure: 'This page is a high-level factual clarification for users comparing similarly named platforms. It does not claim affiliation, endorsement, partnership, or feature parity with HiredScore, HireScore.com, or Workday.',
+    tableTitle: 'How HireScoreAI differs from HiredScore',
+    tableIntro: 'This table reuses HireScoreAI positioning from the existing platform comparison content and keeps the HiredScore side factual, cautious, and verification-focused.',
+    clarification: 'HireScoreAI is not HiredScore, is not HireScore.com, and is not a Workday product. Users should evaluate each platform separately based on their own requirements.',
+    competitorNotes: {
+      'Primary fit': 'HiredScore is a separate platform. Review HiredScore and Workday materials directly for current product scope and positioning.',
+      'Best suited for': 'Teams evaluating HiredScore should confirm fit directly with HiredScore or Workday based on their organization size, workflow, and talent systems.',
+      'Screening approach': 'The screening and talent intelligence approach is different from HireScoreAI and should be assessed from official HiredScore or Workday sources.',
+      'Decision clarity': 'Decision support, explainability, and workflow details should be verified with the HiredScore or Workday product team.',
+      'Pilot motion': 'Commercial setup, implementation, and support are separate from HireScoreAI and should be confirmed directly with HiredScore or Workday.',
+    },
+    faqs: [
+      ['Is HireScoreAI the same as HiredScore?', 'No. HireScoreAI is independent and is not affiliated with HiredScore, HireScore.com, or Workday.'],
+      ['Is HireScoreAI affiliated with Workday?', 'No. HireScoreAI is not affiliated with Workday.'],
+      ['Why do HireScoreAI and HiredScore sound similar?', 'The names may sound similar, but they are separate platforms with different positioning and product focus.'],
+    ],
+  },
+  '/compare/hirescoreai-vs-zoho-recruit': {
+    competitorName: 'Zoho Recruit',
+    eyebrow: 'Platform comparison',
+    h1: 'HireScoreAI vs Zoho Recruit',
+    intro: 'Compare HireScoreAI with Zoho Recruit at a high level for resume screening, candidate ranking, shortlist review, and recruiting workflow fit.',
+    disclosure: 'HireScoreAI is an independent AI recruitment platform and is not affiliated with Zoho Recruit or Zoho Corporation. This page is a high-level comparison for evaluation, not an endorsement or partnership claim.',
+    tableTitle: 'How HireScoreAI and Zoho Recruit differ',
+    tableIntro: 'This table uses existing HireScoreAI positioning and keeps Zoho Recruit notes factual, cautious, and focused on what buyers should verify during evaluation.',
+    clarification: 'HireScoreAI and Zoho Recruit are separate products. Teams should review current Zoho Recruit materials directly and compare them with HireScoreAI based on their hiring process.',
+    competitorNotes: {
+      'Primary fit': 'Zoho Recruit is a separate recruiting and applicant tracking product. Review Zoho Recruit materials directly for current product scope and positioning.',
+      'Best suited for': 'Teams evaluating Zoho Recruit should confirm fit based on their ATS needs, hiring workflow, integrations, and existing Zoho ecosystem usage.',
+      'Screening approach': 'Resume screening, candidate matching, and automation details should be verified from current Zoho Recruit product materials.',
+      'Decision clarity': 'Decision support, reporting, and candidate review workflows should be assessed directly during a Zoho Recruit evaluation.',
+      'Pilot motion': 'Commercial setup, implementation, and support are separate from HireScoreAI and should be confirmed directly with Zoho Recruit.',
+    },
+    faqs: [
+      ['Is HireScoreAI the same as Zoho Recruit?', 'No. HireScoreAI and Zoho Recruit are separate recruiting platforms with different positioning and product focus.'],
+      ['Is HireScoreAI affiliated with Zoho Recruit?', 'No. HireScoreAI is not affiliated with Zoho Recruit or Zoho Corporation.'],
+      ['How should teams compare HireScoreAI and Zoho Recruit?', 'Teams should compare current product materials, workflow fit, resume screening needs, candidate ranking expectations, integrations, implementation, and support directly.'],
+    ],
+  },
 }
 
-const comparisonPages = comparisonRoutes.map((route) => ({
-  ...route,
-  eyebrow: 'Platform comparison',
-  h1: 'HireScoreAI vs HiredScore: is HireScoreAI the same platform?',
-  intro: 'No. HireScoreAI is an independent AI recruitment platform and is not affiliated with HiredScore, HireScore.com, or Workday.',
-  disclosure: 'This page is a high-level factual clarification for users comparing similarly named platforms. It does not claim affiliation, endorsement, partnership, or feature parity with HiredScore, HireScore.com, or Workday.',
-  rows: platformComparisonRows.map((row) => ({
-    label: row.label,
-    hirescoreAi: row.hirescoreAi,
-    hiredScore: hiredScoreComparisonNotes[row.label] || row.hireScore,
-  })),
-  faqs: [
-    ['Is HireScoreAI the same as HiredScore?', 'No. HireScoreAI is independent and is not affiliated with HiredScore, HireScore.com, or Workday.'],
-    ['Is HireScoreAI affiliated with Workday?', 'No. HireScoreAI is not affiliated with Workday.'],
-    ['Why do HireScoreAI and HiredScore sound similar?', 'The names may sound similar, but they are separate platforms with different positioning and product focus.'],
-  ],
-}))
+const comparisonPages = comparisonRoutes.map((route) => {
+  const content = comparisonPageContent[route.path]
+  return {
+    ...route,
+    ...content,
+    rows: platformComparisonRows.map((row) => ({
+      label: row.label,
+      hirescoreAi: row.hirescoreAi,
+      competitor: content.competitorNotes[row.label],
+    })),
+  }
+})
 
 function SolutionsPage() {
   return (
@@ -2604,7 +2638,7 @@ function ComparisonPage({ page }) {
           <article className="infoCard">
             <ShieldCheck size={26} />
             <h2>Important clarification</h2>
-            <p>HireScoreAI is not HiredScore, is not HireScore.com, and is not a Workday product. Users should evaluate each platform separately based on their own requirements.</p>
+            <p>{page.clarification}</p>
           </article>
         </div>
       </section>
@@ -2614,21 +2648,21 @@ function ComparisonPage({ page }) {
           <div className="solutionPage-splitHeader">
             <div>
               <span>HIGH-LEVEL COMPARISON</span>
-              <h2>How HireScoreAI differs from HiredScore</h2>
+              <h2>{page.tableTitle}</h2>
             </div>
-            <p>This table reuses HireScoreAI positioning from the existing platform comparison content and keeps the HiredScore side factual, cautious, and verification-focused.</p>
+            <p>{page.tableIntro}</p>
           </div>
-          <div className="solutionPage-platformMatrix" role="table" aria-label="HireScoreAI compared with HiredScore">
+          <div className="solutionPage-platformMatrix" role="table" aria-label={`HireScoreAI compared with ${page.competitorName}`}>
             <div className="solutionPage-platformHead" role="row">
               <span role="columnheader">Comparison point</span>
               <span role="columnheader">HireScoreAI</span>
-              <span role="columnheader">HiredScore</span>
+              <span role="columnheader">{page.competitorName}</span>
             </div>
             {page.rows.map((row) => (
               <div className="solutionPage-platformRow" role="row" key={row.label}>
                 <strong role="cell">{row.label}</strong>
                 <span role="cell">{row.hirescoreAi}</span>
-                <span role="cell">{row.hiredScore}</span>
+                <span role="cell">{row.competitor}</span>
               </div>
             ))}
           </div>
@@ -2637,7 +2671,7 @@ function ComparisonPage({ page }) {
 
       <section className="section">
         <div className="container narrow">
-          <SectionHeader eyebrow="FAQs" title="HireScoreAI and HiredScore FAQs" />
+          <SectionHeader eyebrow="FAQs" title={`HireScoreAI and ${page.competitorName} FAQs`} />
           <div className="faqList">
             {page.faqs.map(([question, answer]) => (
               <details key={question}>
