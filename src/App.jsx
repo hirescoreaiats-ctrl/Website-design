@@ -39,7 +39,7 @@ import {
   Zap,
 } from 'lucide-react'
 import './App.css'
-import { BRAND_NAME, buildRouteSchema, getSeoConfig, solutionSegmentRoutes } from './seoConfig.js'
+import { BRAND_NAME, buildRouteSchema, comparisonRoutes, getSeoConfig, solutionSegmentRoutes } from './seoConfig.js'
 
 const APP_URL = 'https://app.hirescoreai.com'
 const CONTACT_EMAIL = 'Info@hireScoreAi.com'
@@ -2255,6 +2255,32 @@ const solutionSegmentPages = solutionSegmentRoutes.map((route) => {
   return { ...route, ...content, card }
 })
 
+const hiredScoreComparisonNotes = {
+  'Primary fit': 'HiredScore is a separate platform. Review HiredScore and Workday materials directly for current product scope and positioning.',
+  'Best suited for': 'Teams evaluating HiredScore should confirm fit directly with HiredScore or Workday based on their organization size, workflow, and talent systems.',
+  'Screening approach': 'The screening and talent intelligence approach is different from HireScoreAI and should be assessed from official HiredScore or Workday sources.',
+  'Decision clarity': 'Decision support, explainability, and workflow details should be verified with the HiredScore or Workday product team.',
+  'Pilot motion': 'Commercial setup, implementation, and support are separate from HireScoreAI and should be confirmed directly with HiredScore or Workday.',
+}
+
+const comparisonPages = comparisonRoutes.map((route) => ({
+  ...route,
+  eyebrow: 'Platform comparison',
+  h1: 'HireScoreAI vs HiredScore: is HireScoreAI the same platform?',
+  intro: 'No. HireScoreAI is an independent AI recruitment platform and is not affiliated with HiredScore, HireScore.com, or Workday.',
+  disclosure: 'This page is a high-level factual clarification for users comparing similarly named platforms. It does not claim affiliation, endorsement, partnership, or feature parity with HiredScore, HireScore.com, or Workday.',
+  rows: platformComparisonRows.map((row) => ({
+    label: row.label,
+    hirescoreAi: row.hirescoreAi,
+    hiredScore: hiredScoreComparisonNotes[row.label] || row.hireScore,
+  })),
+  faqs: [
+    ['Is HireScoreAI the same as HiredScore?', 'No. HireScoreAI is independent and is not affiliated with HiredScore, HireScore.com, or Workday.'],
+    ['Is HireScoreAI affiliated with Workday?', 'No. HireScoreAI is not affiliated with Workday.'],
+    ['Why do HireScoreAI and HiredScore sound similar?', 'The names may sound similar, but they are separate platforms with different positioning and product focus.'],
+  ],
+}))
+
 function SolutionsPage() {
   return (
     <>
@@ -2561,6 +2587,88 @@ function SolutionSegmentPage({ segment }) {
   )
 }
 
+function ComparisonPage({ page }) {
+  return (
+    <>
+      <SEO title={page.title} description={page.description} path={page.path} />
+      <Breadcrumbs items={[[page.path, page.navLabel]]} />
+      <PageHero eyebrow={page.eyebrow} title={page.h1} intro={page.intro} />
+
+      <section className="section">
+        <div className="container splitGrid">
+          <div className="sectionHeader">
+            <span>Quick answer</span>
+            <h2>HireScoreAI is independent</h2>
+            <p>{page.disclosure}</p>
+          </div>
+          <article className="infoCard">
+            <ShieldCheck size={26} />
+            <h2>Important clarification</h2>
+            <p>HireScoreAI is not HiredScore, is not HireScore.com, and is not a Workday product. Users should evaluate each platform separately based on their own requirements.</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="solutionPage-section solutionPage-platformSection">
+        <div className="container">
+          <div className="solutionPage-splitHeader">
+            <div>
+              <span>HIGH-LEVEL COMPARISON</span>
+              <h2>How HireScoreAI differs from HiredScore</h2>
+            </div>
+            <p>This table reuses HireScoreAI positioning from the existing platform comparison content and keeps the HiredScore side factual, cautious, and verification-focused.</p>
+          </div>
+          <div className="solutionPage-platformMatrix" role="table" aria-label="HireScoreAI compared with HiredScore">
+            <div className="solutionPage-platformHead" role="row">
+              <span role="columnheader">Comparison point</span>
+              <span role="columnheader">HireScoreAI</span>
+              <span role="columnheader">HiredScore</span>
+            </div>
+            {page.rows.map((row) => (
+              <div className="solutionPage-platformRow" role="row" key={row.label}>
+                <strong role="cell">{row.label}</strong>
+                <span role="cell">{row.hirescoreAi}</span>
+                <span role="cell">{row.hiredScore}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container narrow">
+          <SectionHeader eyebrow="FAQs" title="HireScoreAI and HiredScore FAQs" />
+          <div className="faqList">
+            {page.faqs.map(([question, answer]) => (
+              <details key={question}>
+                <summary>{question}</summary>
+                <p>{answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container narrow">
+          <SectionHeader eyebrow="Related pages" title="Explore HireScoreAI workflows" />
+          <div className="inlineLinks">
+            <Link href="/solutions">Solutions</Link>
+            <Link href="/product/ai-resume-parsing">AI resume screening</Link>
+            <Link href="/product/ai-candidate-ranking">Candidate ranking</Link>
+            <Link href="/contact">Contact HireScoreAI</Link>
+          </div>
+        </div>
+      </section>
+
+      <CTASection
+        title="Evaluate HireScoreAI for your hiring workflow"
+        text="Create a job, upload resumes, and review AI-ranked candidates during a focused pilot."
+      />
+    </>
+  )
+}
+
 function SimplePage({ type }) {
   const config = {
     '/resources/faqs': ['FAQs', 'Frequently asked questions about HireScore AI', 'Find answers about AI resume screening, candidate ranking, free pilots, and hiring workflow automation.'],
@@ -2696,6 +2804,8 @@ function renderRoute(path) {
   if (path === '/solutions') return <SolutionsPage />
   const solutionSegment = solutionSegmentPages.find((page) => page.path === path)
   if (solutionSegment) return <SolutionSegmentPage segment={solutionSegment} />
+  const comparisonPage = comparisonPages.find((page) => page.path === path)
+  if (comparisonPage) return <ComparisonPage page={comparisonPage} />
   if (path === '/resources') return <ResourceHub />
   if (path === '/resources/user-guide') return <GuideHub />
   if (path === '/resources/blogs') return <BlogList />

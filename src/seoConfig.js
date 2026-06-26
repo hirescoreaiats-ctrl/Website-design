@@ -63,6 +63,15 @@ export const solutionSegmentRoutes = [
   },
 ]
 
+export const comparisonRoutes = [
+  {
+    path: '/compare/hirescoreai-vs-hiredscore',
+    navLabel: 'HireScoreAI vs HiredScore',
+    title: 'HireScoreAI vs HiredScore: Is HireScoreAI the Same Platform? | 2026',
+    description: 'HireScoreAI is an independent AI recruitment platform and is not affiliated with HiredScore, HireScore.com, or Workday. See how the platforms differ.',
+  },
+]
+
 const guideRoutes = [
   ['/resources/user-guide/create-a-job', 'How to Create a Job in HireScore AI', 'Create a structured job in HireScore AI with role details, skills, hiring criteria, and a connected candidate pipeline.', ['Open the job workspace and choose Create Job.', 'Add the role title, description, skills, and hiring criteria.', 'Save the job and review the pipeline stages.']],
   ['/resources/user-guide/share-public-apply-link', 'How to Share a Public Job Apply Link', 'Generate and share a HireScore AI public apply link so candidates can submit applications and resumes for the correct role.', ['Open the job you want to promote.', 'Generate or copy the public apply page link.', 'Share it on job boards, email, or social channels.']],
@@ -99,6 +108,7 @@ export const SEO_ROUTES = [
   ...staticRoutes.map(([path, title, description, pageType, noindex = false]) => ({ path, title, description, pageType: pageType === 'FAQPage' ? 'WebPage' : pageType, schemaKind: pageType === 'FAQPage' ? 'faq' : undefined, noindex })),
   ...productRoutes.map(([path, title, description]) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, title.replace(/ \|.*$/, ''), '/product', 'Product') })),
   ...solutionSegmentRoutes.map(({ path, title, description, navLabel }) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, navLabel, '/solutions', 'Solutions') })),
+  ...comparisonRoutes.map(({ path, title, description, navLabel }) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, navLabel) })),
   ...guideRoutes.map(([path, title, description, steps]) => ({ path, title: `${title} | HireScore AI Guide`, description, pageType: 'WebPage', schemaKind: 'howto', steps, breadcrumbs: breadcrumbFor(path, title, '/resources/user-guide', 'User Guide') })),
   ...blogRoutes.map(([path, title, description, category, image]) => ({ path, title, description, pageType: 'WebPage', ogType: 'article', schemaKind: 'article', category, image, breadcrumbs: breadcrumbFor(path, title.replace(/ \|.*$/, ''), '/resources/blogs', 'Blog') })),
   ...caseStudyRoutes.map(([path, title, description]) => ({ path, title, description, pageType: 'WebPage', ogType: 'article', schemaKind: 'case-study', breadcrumbs: breadcrumbFor(path, title.replace(/ \|.*$/, ''), '/resources/case-studies', 'Case Studies') })),
