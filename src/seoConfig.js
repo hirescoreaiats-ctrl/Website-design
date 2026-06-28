@@ -46,37 +46,37 @@ export const solutionSegmentRoutes = [
     path: '/solutions/recruitment-agencies',
     navLabel: 'Recruitment Agencies',
     title: 'AI Recruiting Software for Recruitment Agencies | HireScore AI',
-    description: 'HireScore AI helps recruitment agencies screen more resumes, rank candidates by JD fit, create recruiter-ready shortlists, and share explainable insights with clients.',
+    description: 'AI recruiting software for recruitment agencies to screen resume batches, rank candidates by JD fit, and create client-ready shortlists with explainable evidence.',
   },
   {
     path: '/solutions/staffing-companies',
     navLabel: 'Staffing Companies',
     title: 'AI Resume Screening for Staffing Companies | HireScore AI',
-    description: 'HireScore AI helps staffing companies and consulting firms process resumes faster, manage role-fit candidate pipelines, and prepare client-ready shortlists.',
+    description: 'AI resume screening for staffing companies and consulting firms that need faster bench matching, role-fit candidate ranking, and client-ready shortlist evidence.',
   },
   {
     path: '/solutions/hr-teams',
     navLabel: 'HR Teams',
     title: 'AI Hiring Software for HR Teams | HireScore AI',
-    description: 'HireScore AI helps in-house HR teams create jobs, collect applications, rank candidates, shortlist talent, and move qualified profiles into interviews.',
+    description: 'AI hiring software for HR teams to create jobs, collect applications, rank applicants, explain candidate fit, and move qualified profiles into interviews.',
   },
   {
     path: '/solutions/startups',
     navLabel: 'Startups',
     title: 'AI Resume Screening for Startups & SMBs | HireScore AI',
-    description: 'HireScore AI helps startups and SMBs screen resumes, compare candidates, and focus small hiring teams on the most relevant applicants faster.',
+    description: 'AI resume screening for startups and SMBs that need faster applicant review, JD-based candidate ranking, and explainable shortlists without a large HR team.',
   },
   {
     path: '/solutions/bulk-resume-screening',
     navLabel: 'Bulk Resume Screening',
     title: 'Bulk Resume Screening Software | HireScoreAI',
-    description: 'Screen large resume batches faster with HireScoreAI, using AI candidate ranking and recruiter-ready explanations for high-volume hiring workflows.',
+    description: 'Bulk resume screening software for high-volume hiring teams to process large resume batches, rank candidates by JD fit, and review shortlist evidence.',
   },
   {
     path: '/solutions/tech-hiring',
     navLabel: 'IT & Tech Hiring',
     title: 'AI Technical Candidate Screening Software | HireScoreAI',
-    description: 'Help recruiters screen technical resumes faster with AI-powered skill matching, candidate ranking, and explainable shortlist insights.',
+    description: 'AI technical candidate screening software for IT recruiters to match skills, rank technical resumes, review gaps, and prepare stronger shortlists.',
   },
 ]
 

@@ -2252,6 +2252,19 @@ const solutionSegmentContent = {
     h1: 'AI recruiting software for recruitment agencies',
     intro: 'Help agency recruiters screen more resumes, rank candidates by job fit, and send stronger shortlists to clients with recruiter-ready explanations.',
     primaryNeed: 'Recruitment agencies often manage multiple client roles at once. HireScore AI keeps each job, resume batch, score, shortlist, and explanation connected so recruiters can move faster without losing quality.',
+    problemTitle: 'Recruitment agency screening software for high-volume client roles',
+    proofStats: [['Multi-role', 'Client hiring support'], ['JD-fit', 'Candidate ranking'], ['Pilot', 'Fast agency setup']],
+    painPoints: [
+      ['Too many roles at once', 'Agency recruiters need to compare resumes across several client requirements without losing context.'],
+      ['Shortlists need evidence', 'Clients want to know why a candidate is worth reviewing, not just receive another resume list.'],
+      ['Manual screening slows delivery', 'Resume review can consume recruiter hours before qualified profiles reach the client.'],
+    ],
+    capabilities: [
+      ['Client-ready ranking', 'Rank candidates against each job description and prepare a cleaner shortlist for client review.'],
+      ['Explainable candidate fit', 'Show matched skills, missing skills, and role-fit evidence before sending profiles forward.'],
+      ['Separate job workspaces', 'Keep every client role, resume batch, shortlist, and candidate status organized.'],
+      ['Faster agency pilot', 'Start with one client job, upload resumes, and review ranked candidates without a heavy rollout.'],
+    ],
     outcomes: ['Screen high-volume candidate pools faster', 'Rank applicants against each client job description', 'Prepare shortlist notes clients can review quickly', 'Keep recruiter decisions supported by clear evidence'],
     workflow: ['Create separate jobs for each client role', 'Upload candidate resumes or collect applications', 'Review AI-ranked candidates with matched skills and gaps', 'Share stronger shortlists with client-ready context'],
     faqs: [
@@ -2271,6 +2284,19 @@ const solutionSegmentContent = {
     h1: 'AI resume screening for staffing companies',
     intro: 'Help staffing and consulting teams process resumes faster, identify role-fit candidates, and keep candidate pipelines organized from screening to interview.',
     primaryNeed: 'Staffing companies need speed, consistency, and client-ready candidate views across many open roles. HireScore AI helps teams compare resumes against job requirements and keep the next action visible.',
+    problemTitle: 'AI resume screening for staffing companies and consulting firms',
+    proofStats: [['Bench', 'Candidate screening'], ['Role-fit', 'JD matching'], ['Client', 'Shortlist evidence']],
+    painPoints: [
+      ['Bench profiles are hard to match', 'Staffing teams need to quickly map available candidates to active client requirements.'],
+      ['Client submissions need clarity', 'Recruiters need concise evidence before moving profiles into client review.'],
+      ['High-volume resumes create noise', 'Large candidate pools make it harder to find the strongest role-fit profiles quickly.'],
+    ],
+    capabilities: [
+      ['Bench candidate matching', 'Compare candidate profiles against active roles to surface stronger matches faster.'],
+      ['Staffing shortlist workflow', 'Use scores and explanations to build client-ready lists with less manual review.'],
+      ['Role-specific candidate ranking', 'Prioritize profiles by JD relevance, skill match, experience, and profile quality.'],
+      ['Connected next steps', 'Move candidates from screening into communication and interview follow-up without losing context.'],
+    ],
     outcomes: ['Screen bench and inbound candidates by role fit', 'Build candidate lists for IT staffing and consulting roles', 'Keep shortlist evidence organized for client review', 'Move qualified candidates into communication and interviews'],
     workflow: ['Set up role-specific hiring criteria', 'Upload candidate profiles for each opportunity', 'Use JD-fit scores to prioritize stronger matches', 'Move qualified candidates through communication and interview stages'],
     faqs: [
@@ -2290,6 +2316,19 @@ const solutionSegmentContent = {
     h1: 'AI hiring software for in-house HR teams',
     intro: 'Give HR teams a structured way to create jobs, collect applications, review AI-ranked candidates, and move qualified profiles into interview workflows.',
     primaryNeed: 'In-house HR teams need consistent screening across departments and clear context for hiring manager review. HireScore AI helps turn incoming applications into ranked, explainable candidate views.',
+    problemTitle: 'AI hiring software for HR teams managing department-wise roles',
+    proofStats: [['HR', 'Hiring manager ready'], ['Apply', 'Candidate intake'], ['Ranked', 'Applicant review']],
+    painPoints: [
+      ['Hiring managers need context', 'HR teams need to explain why candidates are worth reviewing before interviews begin.'],
+      ['Screening differs by department', 'Different roles need consistent JD-based evaluation rather than manual resume guessing.'],
+      ['Applications pile up quickly', 'Inbound resumes can slow HR teams when every profile needs manual review.'],
+    ],
+    capabilities: [
+      ['Department-wise job setup', 'Create structured roles with requirements that keep screening aligned to each team.'],
+      ['Public apply page intake', 'Collect applications and resumes directly into the right hiring workflow.'],
+      ['Hiring manager evidence', 'Share matched skills, gaps, and fit explanations before interview review.'],
+      ['Shortlist to interview movement', 'Move qualified candidates into communication and interviews with screening context intact.'],
+    ],
     outcomes: ['Structure hiring around each department role', 'Collect applications through public apply pages', 'Review ranked candidates with transparent evidence', 'Move qualified applicants into interview tracking'],
     workflow: ['Create a structured job with role requirements', 'Share a public apply link or upload resumes', 'Review ranked candidates with matched and missing skills', 'Shortlist candidates for hiring manager and interview review'],
     faqs: [
@@ -2309,6 +2348,19 @@ const solutionSegmentContent = {
     h1: 'AI resume screening for startups and SMBs',
     intro: 'Help small hiring teams screen resumes, compare candidates, and focus limited recruiting time on the applicants most likely to fit the role.',
     primaryNeed: 'Startups and SMBs often hire without a large recruiting team. HireScore AI helps founders and small HR teams move from resumes to shortlists with less manual review.',
+    problemTitle: 'AI resume screening for startups and SMB hiring teams',
+    proofStats: [['Lean', 'Hiring team fit'], ['7-day', 'Free pilot'], ['Fast', 'Resume review']],
+    painPoints: [
+      ['Small teams have limited time', 'Founders and lean HR teams cannot spend hours manually comparing every applicant.'],
+      ['Early hires need careful review', 'Startups need stronger shortlists without skipping recruiter or founder judgment.'],
+      ['No heavy ATS rollout', 'Growing teams need a practical hiring workflow before they commit to complex systems.'],
+    ],
+    capabilities: [
+      ['Founder-friendly shortlist view', 'See ranked candidates with evidence that helps small teams decide who to review first.'],
+      ['Simple job setup', 'Create the role, upload resumes, and start screening without a long implementation cycle.'],
+      ['Skill match and gaps', 'Understand how applicants align with the job description before interviews.'],
+      ['Pilot before scaling', 'Test HireScore AI on real hiring volume before expanding the workflow.'],
+    ],
     outcomes: ['Screen applicants without adding recruiter headcount', 'Compare candidates against the job description', 'See skill matches, gaps, and role-fit evidence', 'Move faster from application review to interviews'],
     workflow: ['Create a job for the role you need to fill', 'Collect or upload resumes in one place', 'Review AI-ranked candidates and shortlist the strongest profiles', 'Use communication and interview steps to keep hiring moving'],
     faqs: [
@@ -2328,6 +2380,19 @@ const solutionSegmentContent = {
     h1: 'Bulk Resume Screening Software for High-Volume Hiring',
     intro: 'Screen large resume batches faster with AI candidate ranking and recruiter-ready explanations for high-volume hiring workflows.',
     primaryNeed: 'Teams that receive large resume batches need a faster way to identify candidates who match the job description. HireScore AI helps recruiters turn bulk applications into ranked, review-ready shortlists.',
+    problemTitle: 'Bulk resume screening software for high-volume hiring workflows',
+    proofStats: [['Bulk', 'Resume batches'], ['Ranked', 'Candidate lists'], ['Evidence', 'Shortlist notes']],
+    painPoints: [
+      ['Resume volume overwhelms recruiters', 'Large batches from job boards, walk-ins, or databases make manual review slow and inconsistent.'],
+      ['Keyword filters miss context', 'Recruiters need JD-fit evidence, not just exact keyword matches.'],
+      ['Shortlists need to be defendable', 'High-volume hiring still needs clear reasons for why candidates move forward.'],
+    ],
+    capabilities: [
+      ['Batch resume review', 'Upload large resume sets and prioritize profiles by job-fit relevance.'],
+      ['JD-based candidate scoring', 'Use role requirements, skills, experience, and profile signals to rank applicants.'],
+      ['Explainable shortlist evidence', 'Review matched skills, missing skills, and reasons before contacting candidates.'],
+      ['High-volume hiring flow', 'Move from bulk upload to ranked shortlist without spreadsheet-heavy manual review.'],
+    ],
     outcomes: ['Process large resume batches with less manual review', 'Rank candidates by JD relevance and skill match', 'Identify stronger profiles for recruiter review', 'Create clearer shortlist evidence for high-volume roles'],
     workflow: ['Create a job with role requirements', 'Upload bulk resumes or collect applications', 'Review AI-ranked candidates and fit explanations', 'Shortlist qualified profiles for communication or interviews'],
     faqs: [
@@ -2347,6 +2412,19 @@ const solutionSegmentContent = {
     h1: 'AI Candidate Screening for IT & Tech Hiring',
     intro: 'Help recruiters screen technical resumes faster with AI-powered skill matching, candidate ranking, and explainable shortlist insights.',
     primaryNeed: 'Tech recruiters need to compare technical skills, role fit, experience, and gaps against each job description. HireScore AI supports technical resume review without claiming to replace recruiter judgment or technical interviews.',
+    problemTitle: 'AI technical candidate screening for IT and software roles',
+    proofStats: [['Skills', 'Tech resume matching'], ['Gaps', 'Candidate evidence'], ['Review', 'Recruiter controlled']],
+    painPoints: [
+      ['Technical resumes are dense', 'Recruiters need to understand skills, tools, projects, and role relevance quickly.'],
+      ['Skill gaps matter', 'A candidate may match core skills while still missing important requirements for the role.'],
+      ['Screening is not the interview', 'Teams need resume intelligence before technical interviews, not a replacement for technical evaluation.'],
+    ],
+    capabilities: [
+      ['Skill-based resume screening', 'Compare technical resumes against required skills, experience, and role expectations.'],
+      ['Matched and missing skills', 'Surface skill evidence and gaps so recruiters know what to validate next.'],
+      ['Role-fit candidate ranking', 'Prioritize candidates for software, data, QA, Salesforce, ML, and other technical roles.'],
+      ['Interview-ready context', 'Send stronger profiles forward with clear screening notes for hiring managers.'],
+    ],
     outcomes: ['Screen technical resumes by job-specific skills', 'Compare candidates for IT and software roles', 'Surface matched skills and skill gaps for review', 'Build clearer technical shortlists for hiring managers'],
     workflow: ['Create a technical job with required skills', 'Upload resumes for the role', 'Review matched skills, missing skills, and ranking evidence', 'Shortlist candidates for further technical evaluation'],
     faqs: [
@@ -2732,63 +2810,129 @@ function SolutionsPage() {
 
 function SolutionSegmentPage({ segment }) {
   const Icon = segment.card?.icon || BriefcaseBusiness
+  const proofStats = segment.proofStats || [
+    ['1', 'Connected hiring workspace'],
+    ['JD', 'Role-fit screening logic'],
+    ['AI', 'Explainable shortlist support'],
+  ]
+  const painPoints = segment.painPoints || segment.outcomes.map((item) => [item, 'Turn this hiring bottleneck into a clearer, faster review step with JD-based scoring and recruiter-readable evidence.'])
+  const capabilities = segment.capabilities || segment.card.bestFor.map((item) => [item, 'Use HireScore AI to keep this workflow organized, explainable, and easier for recruiters to act on.'])
   return (
     <>
       <SEO path={segment.path} />
       <Breadcrumbs items={[['/solutions', 'Solutions'], [segment.path, segment.navLabel]]} />
-      <PageHero eyebrow={segment.eyebrow} title={segment.h1} intro={segment.intro} />
 
-      <section className="section">
-        <div className="container splitGrid">
-          <div className="sectionHeader">
-            <span>Use case</span>
-            <h2>{segment.card.subtitle}</h2>
-            <p>{segment.primaryNeed}</p>
+      <section className="solutionDetailHero">
+        <div className="container solutionDetailHeroGrid">
+          <div className="solutionDetailHeroCopy">
+            <span className="solutionDetailEyebrow"><Icon size={15} />{segment.eyebrow}</span>
+            <h1>{segment.h1}</h1>
+            <p>{segment.intro}</p>
+            <div className="buttonRow solutionDetailActions">
+              <a className="btn btnPrimary btnLarge" href={PILOT_MAILTO}>Start Free Pilot <ArrowRight size={18} /></a>
+              <Link className="btn btnGhost btnLarge" href="/contact">Book a Demo</Link>
+            </div>
           </div>
-          <article className="infoCard">
-            <Icon size={26} />
-            <h2>Best fit</h2>
-            <p>{segment.card.text}</p>
-            <ul className="checkList">
-              {segment.card.bestFor.map((item) => <li key={item}><CheckCircle2 size={16} />{item}</li>)}
-            </ul>
-          </article>
+
+          <aside className="solutionDetailPanel" aria-label={`${segment.navLabel} solution snapshot`}>
+            <div className="solutionDetailPanelTop">
+              <span><Icon size={24} /></span>
+              <div>
+                <small>Best for</small>
+                <strong>{segment.card.subtitle}</strong>
+              </div>
+            </div>
+            <p>{segment.primaryNeed}</p>
+            <div className="solutionDetailTags">
+              {segment.card.bestFor.map((item) => <span key={item}>{item}</span>)}
+            </div>
+            <div className="solutionDetailStats">
+              {proofStats.map(([value, label]) => (
+                <div key={label}>
+                  <strong>{value}</strong>
+                  <small>{label}</small>
+                </div>
+              ))}
+            </div>
+          </aside>
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
-          <SectionHeader eyebrow="Outcomes" title={`What ${segment.navLabel.toLowerCase()} can improve with HireScore AI`} />
-          <div className="threeGrid">
-            {segment.outcomes.map((item) => (
-              <article className="infoCard" key={item}>
-                <BadgeCheck size={24} />
-                <h2>{item}</h2>
-                <p>Use JD-based screening, candidate ranking, and recruiter-readable evidence to make this workflow clearer and faster.</p>
+      <section className="solutionDetailSection">
+        <div className="container solutionDetailIntroGrid">
+          <div>
+            <span className="solutionDetailLabel">Buyer problem</span>
+            <h2>{segment.problemTitle || `Built for ${segment.navLabel.toLowerCase()} that need faster shortlist decisions`}</h2>
+            <p>{segment.card.text}</p>
+          </div>
+          <div className="solutionDetailPainGrid">
+            {painPoints.slice(0, 3).map(([title, text], index) => (
+              <article key={title}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section">
+      <section className="solutionDetailSection solutionDetailCapabilitiesSection">
         <div className="container">
-          <SectionHeader eyebrow="Workflow" title={`How HireScore AI supports ${segment.navLabel.toLowerCase()}`} />
-          <div className="workflowGrid">
+          <div className="solutionDetailSectionHeader">
+            <span>Platform fit</span>
+            <h2>What HireScore AI gives {segment.navLabel.toLowerCase()}</h2>
+            <p>Focused AI screening modules that help recruiting teams move from resume volume to review-ready decisions.</p>
+          </div>
+          <div className="solutionDetailCapabilityGrid">
+            {capabilities.slice(0, 4).map(([title, text], index) => (
+              <article key={title}>
+                <div><BadgeCheck size={20} /><span>{String(index + 1).padStart(2, '0')}</span></div>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="solutionDetailSection">
+        <div className="container">
+          <div className="solutionDetailSectionHeader">
+            <span>Workflow</span>
+            <h2>How the hiring workflow runs</h2>
+            <p>Keep the process simple: define the role, bring resumes in, review ranked profiles, and move qualified candidates forward.</p>
+          </div>
+          <div className="solutionDetailWorkflow">
             {segment.workflow.map((step, index) => (
-              <article className="workflowStep" key={step}>
+              <article key={step}>
                 <span>{String(index + 1).padStart(2, '0')}</span>
                 <Workflow size={24} />
-                <strong>{step}</strong>
+                <h3>{step}</h3>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section">
+      <section className="solutionDetailSection solutionDetailOutcomesSection">
+        <div className="container solutionDetailOutcomeGrid">
+          <div>
+            <span className="solutionDetailLabel">Business outcomes</span>
+            <h2>Cleaner screening, stronger shortlists, and less manual review</h2>
+            <p>HireScore AI is designed to support recruiter decisions, not replace them. Teams keep control while AI handles structure, ranking, and explanation.</p>
+          </div>
+          <div className="solutionDetailOutcomeList">
+            {segment.outcomes.map((item) => (
+              <div key={item}><CheckCircle2 size={18} />{item}</div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="solutionDetailSection">
         <div className="container narrow">
-          <SectionHeader eyebrow="FAQs" title={`${segment.navLabel} FAQs`} />
+          <SectionHeader eyebrow="FAQs" title={`${segment.navLabel} FAQs`} text="Clear answers for teams evaluating HireScore AI for this hiring motion." />
           <div className="faqList">
             {segment.faqs.map(([question, answer]) => (
               <details key={question}>
@@ -2800,9 +2944,9 @@ function SolutionSegmentPage({ segment }) {
         </div>
       </section>
 
-      <section className="section">
+      <section className="solutionDetailSection compact">
         <div className="container narrow">
-          <SectionHeader eyebrow="Internal links" title="Explore related HireScore AI workflows" />
+          <SectionHeader eyebrow="Related workflows" title="Explore connected HireScore AI modules" />
           <div className="inlineLinks">
             <Link href="/solutions">All solutions</Link>
             {segment.relatedLinks.map(([href, label]) => <Link href={href} key={href}>{label}</Link>)}
@@ -2812,7 +2956,7 @@ function SolutionSegmentPage({ segment }) {
       </section>
 
       <CTASection
-        title={`Start a free pilot for ${segment.navLabel.toLowerCase()}`}
+        title={`Start a free pilot for ${segment.navLabel}`}
         text="Create a job, upload resumes, review ranked candidates, and see whether HireScore AI fits your hiring workflow."
       />
     </>

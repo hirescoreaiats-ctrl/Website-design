@@ -2560,6 +2560,431 @@ h3 {
   }
 }
 
+/* Solution detail pages: cleaner SaaS-style pages for each buyer/use case. */
+.solutionDetailHero {
+  position: relative;
+  overflow: hidden;
+  padding: 72px 0 82px;
+  border-bottom: 1px solid rgba(210, 187, 255, 0.07);
+  background:
+    radial-gradient(circle at 14% 16%, rgba(124, 58, 237, 0.16), transparent 32rem),
+    radial-gradient(circle at 86% 20%, rgba(76, 215, 246, 0.1), transparent 28rem),
+    linear-gradient(180deg, rgba(19, 16, 27, 0.96), rgba(10, 8, 14, 0.98));
+}
+
+.solutionDetailHero::before,
+.solutionDetailSection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.14;
+  background-image: radial-gradient(circle, rgba(210, 187, 255, 0.7) 1px, transparent 1.3px);
+  background-size: 92px 92px;
+}
+
+.solutionDetailHeroGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.52fr);
+  gap: 58px;
+  align-items: center;
+}
+
+.solutionDetailEyebrow,
+.solutionDetailLabel,
+.solutionDetailSectionHeader > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  padding: 8px 13px;
+  border: 1px solid rgba(126, 232, 255, 0.2);
+  border-radius: 999px;
+  color: #7ee8ff;
+  background: rgba(76, 215, 246, 0.06);
+  font-size: 0.62rem;
+  font-weight: 950;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.solutionDetailHeroCopy h1 {
+  max-width: 780px;
+  margin: 24px 0 20px;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+}
+
+.solutionDetailHeroCopy p {
+  max-width: 720px;
+  margin: 0;
+  color: #dce6f6;
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+.solutionDetailActions {
+  justify-content: flex-start;
+  margin-top: 32px;
+}
+
+.solutionDetailPanel {
+  position: relative;
+  overflow: hidden;
+  padding: 26px;
+  border: 1px solid rgba(210, 187, 255, 0.14);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 86% 0, rgba(76, 215, 246, 0.1), transparent 36%),
+    linear-gradient(145deg, rgba(32, 27, 43, 0.92), rgba(15, 13, 22, 0.98));
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.32), inset 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.solutionDetailPanelTop {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.solutionDetailPanelTop > span {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(126, 232, 255, 0.2);
+  border-radius: 16px;
+  color: #7ee8ff;
+  background: rgba(76, 215, 246, 0.06);
+}
+
+.solutionDetailPanelTop small {
+  display: block;
+  margin-bottom: 6px;
+  color: #8d8495;
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.solutionDetailPanelTop strong {
+  display: block;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.solutionDetailPanel > p {
+  margin: 22px 0 0;
+  color: #d1ddec;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.solutionDetailTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.solutionDetailTags span {
+  padding: 8px 10px;
+  border: 1px solid rgba(210, 187, 255, 0.11);
+  border-radius: 999px;
+  color: #c9f6ff;
+  background: rgba(255, 255, 255, 0.035);
+  font-size: 0.68rem;
+  font-weight: 750;
+}
+
+.solutionDetailStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.solutionDetailStats div {
+  min-height: 92px;
+  padding: 14px;
+  border: 1px solid rgba(210, 187, 255, 0.1);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.solutionDetailStats strong {
+  display: block;
+  color: #fff;
+  font-size: 1.08rem;
+}
+
+.solutionDetailStats small {
+  display: block;
+  margin-top: 7px;
+  color: #b5c3d8;
+  font-size: 0.64rem;
+  line-height: 1.45;
+}
+
+.solutionDetailSection {
+  position: relative;
+  overflow: hidden;
+  padding: 82px 0;
+  background: #120f19;
+}
+
+.solutionDetailSection.compact {
+  padding-top: 48px;
+}
+
+.solutionDetailSection > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.solutionDetailIntroGrid,
+.solutionDetailOutcomeGrid {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.28fr);
+  gap: 58px;
+  align-items: start;
+}
+
+.solutionDetailIntroGrid h2,
+.solutionDetailOutcomeGrid h2,
+.solutionDetailSectionHeader h2 {
+  max-width: 720px;
+  margin: 18px 0 0;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: clamp(2.15rem, 3.4vw, 3.5rem);
+  line-height: 1.06;
+  letter-spacing: -0.045em;
+}
+
+.solutionDetailIntroGrid > div:first-child p,
+.solutionDetailOutcomeGrid > div:first-child p,
+.solutionDetailSectionHeader p {
+  max-width: 660px;
+  margin: 18px 0 0;
+  color: #dce6f6;
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.solutionDetailPainGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.solutionDetailPainGrid article,
+.solutionDetailCapabilityGrid article,
+.solutionDetailWorkflow article {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(210, 187, 255, 0.11);
+  background: linear-gradient(145deg, rgba(31, 27, 42, 0.82), rgba(17, 15, 24, 0.94));
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2), inset 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.solutionDetailPainGrid article {
+  min-height: 236px;
+  padding: 24px;
+  border-radius: 20px;
+}
+
+.solutionDetailPainGrid article::before,
+.solutionDetailCapabilityGrid article::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 24px;
+  width: 66px;
+  height: 2px;
+  background: linear-gradient(90deg, #7ee8ff, transparent);
+}
+
+.solutionDetailPainGrid article:nth-child(2n)::before,
+.solutionDetailCapabilityGrid article:nth-child(2n)::before {
+  background: linear-gradient(90deg, #ffbf86, transparent);
+}
+
+.solutionDetailPainGrid article > span {
+  color: #7ee8ff;
+  font-family: monospace;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.solutionDetailPainGrid h3,
+.solutionDetailCapabilityGrid h3,
+.solutionDetailWorkflow h3 {
+  margin: 25px 0 0;
+  color: #fff;
+  font-size: 1.08rem;
+  line-height: 1.35;
+}
+
+.solutionDetailPainGrid p,
+.solutionDetailCapabilityGrid p {
+  margin: 12px 0 0;
+  color: #d1ddec;
+  font-size: 0.94rem;
+  line-height: 1.68;
+}
+
+.solutionDetailCapabilitiesSection,
+.solutionDetailOutcomesSection {
+  background: linear-gradient(180deg, #100d16, #120f19);
+}
+
+.solutionDetailSectionHeader {
+  max-width: 790px;
+  margin: 0 auto 42px;
+  text-align: center;
+}
+
+.solutionDetailSectionHeader > span {
+  margin: 0 auto;
+}
+
+.solutionDetailSectionHeader h2,
+.solutionDetailSectionHeader p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.solutionDetailCapabilityGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.solutionDetailCapabilityGrid article {
+  min-height: 270px;
+  padding: 24px;
+  border-radius: 21px;
+}
+
+.solutionDetailCapabilityGrid article > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.solutionDetailCapabilityGrid svg {
+  width: 42px;
+  height: 42px;
+  padding: 10px;
+  border: 1px solid rgba(126, 232, 255, 0.2);
+  border-radius: 13px;
+  color: #7ee8ff;
+  background: rgba(76, 215, 246, 0.06);
+}
+
+.solutionDetailCapabilityGrid article > div span {
+  color: #645c69;
+  font-family: monospace;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.solutionDetailWorkflow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.solutionDetailWorkflow article {
+  min-height: 190px;
+  padding: 23px;
+  border-radius: 20px;
+}
+
+.solutionDetailWorkflow article > span {
+  color: #ffbf86;
+  font-family: monospace;
+  font-weight: 900;
+}
+
+.solutionDetailWorkflow svg {
+  display: block;
+  margin-top: 32px;
+  color: #7ee8ff;
+}
+
+.solutionDetailOutcomeList {
+  display: grid;
+  gap: 12px;
+}
+
+.solutionDetailOutcomeList div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  padding: 17px 19px;
+  border: 1px solid rgba(210, 187, 255, 0.11);
+  border-radius: 16px;
+  color: #eef7ff;
+  background: linear-gradient(145deg, rgba(31, 27, 42, 0.82), rgba(18, 16, 25, 0.94));
+  font-size: 0.96rem;
+  font-weight: 780;
+}
+
+.solutionDetailOutcomeList svg {
+  flex: 0 0 auto;
+  color: #7ee8ff;
+}
+
+@media (max-width: 1100px) {
+  .solutionDetailHeroGrid,
+  .solutionDetailIntroGrid,
+  .solutionDetailOutcomeGrid {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .solutionDetailCapabilityGrid,
+  .solutionDetailWorkflow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .solutionDetailHero,
+  .solutionDetailSection {
+    padding: 58px 0;
+  }
+
+  .solutionDetailHeroCopy h1 {
+    font-size: 2.55rem;
+  }
+
+  .solutionDetailActions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .solutionDetailActions .btn {
+    width: 100%;
+  }
+
+  .solutionDetailStats,
+  .solutionDetailPainGrid,
+  .solutionDetailCapabilityGrid,
+  .solutionDetailWorkflow {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Pricing page: clear plan limits, stronger prices, and premium raised cards. */
 .pricingSection {
   padding-top: 36px;
@@ -3182,4 +3607,3 @@ h3 {
     padding: 24px;
   }
 }
-
