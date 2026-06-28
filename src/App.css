@@ -2362,6 +2362,128 @@ h3 {
     inset 0 1px rgba(255, 255, 255, 0.18);
 }
 
+.solutionPage-comparisonLoop {
+  display: flex;
+  gap: 18px;
+  overflow: hidden;
+  padding: 12px 0 28px;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.solutionPage-comparisonLoop .solutionPage-comparisonCard {
+  flex: 0 0 min(420px, 82vw);
+  animation: comparisonLoop 28s linear infinite;
+}
+
+.solutionPage-comparisonLoop:hover .solutionPage-comparisonCard {
+  animation-play-state: paused;
+}
+
+.solutionPage-comparisonCards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.solutionPage-comparisonCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 310px;
+  padding: 26px;
+  overflow: hidden;
+  border: 1px solid rgba(210, 187, 255, 0.14);
+  border-radius: 22px;
+  color: inherit;
+  text-decoration: none;
+  background:
+    radial-gradient(circle at 90% 0, rgba(76, 215, 246, 0.1), transparent 34%),
+    linear-gradient(145deg, rgba(33, 28, 44, 0.92), rgba(17, 15, 24, 0.98));
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28), inset 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.solutionPage-comparisonCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 26px;
+  width: 74px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #7ee8ff, #d2bbff, transparent);
+}
+
+.solutionPage-comparisonCard:nth-child(2n)::before {
+  background: linear-gradient(90deg, #ffbf86, #d2bbff, transparent);
+}
+
+.solutionPage-comparisonCardKicker {
+  width: fit-content;
+  padding: 7px 10px;
+  border: 1px solid rgba(126, 232, 255, 0.2);
+  border-radius: 999px;
+  color: #7ee8ff;
+  background: rgba(76, 215, 246, 0.06);
+  font-size: 0.58rem;
+  font-weight: 950;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.solutionPage-comparisonCard strong {
+  margin-top: 22px;
+  color: #fff;
+  font-size: 1.25rem;
+  line-height: 1.28;
+}
+
+.solutionPage-comparisonCard p {
+  margin: 14px 0 0;
+  color: #d1ddec !important;
+  font-size: 0.95rem !important;
+  line-height: 1.66 !important;
+}
+
+.solutionPage-comparisonCard ul {
+  display: grid;
+  gap: 9px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.solutionPage-comparisonCard li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #c9f6ff;
+  font-size: 0.78rem;
+  font-weight: 760;
+}
+
+.solutionPage-comparisonCard li svg {
+  flex: 0 0 auto;
+  color: #7ee8ff;
+}
+
+.solutionPage-comparisonCardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: auto;
+  padding-top: 22px;
+  color: #7ee8ff;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@keyframes comparisonLoop {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-100% - 18px)); }
+}
+
 @media (max-width: 1100px) {
   .solutionPage-stepGrid article:nth-child(2n) {
     transform: none;
@@ -2420,6 +2542,21 @@ h3 {
 
   .solutionPage-platformRow span:last-child {
     border-radius: 0 0 18px 18px !important;
+  }
+
+  .solutionPage-comparisonCards {
+    grid-template-columns: 1fr;
+  }
+
+  .solutionPage-comparisonCard {
+    min-height: auto;
+    padding: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solutionPage-comparisonLoop .solutionPage-comparisonCard {
+    animation: none;
   }
 }
 
@@ -3045,5 +3182,4 @@ h3 {
     padding: 24px;
   }
 }
-
 

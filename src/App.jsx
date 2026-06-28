@@ -39,7 +39,7 @@ import {
   Zap,
 } from 'lucide-react'
 import './App.css'
-import { BRAND_NAME, buildRouteSchema, compareHubRoute, comparisonRoutes, getSeoConfig, solutionSegmentRoutes } from './seoConfig.js'
+import { BRAND_NAME, buildRouteSchema, comparisonRoutes, getSeoConfig, solutionSegmentRoutes } from './seoConfig.js'
 
 const APP_URL = 'https://app.hirescoreai.com'
 const CONTACT_EMAIL = 'Info@hireScoreAi.com'
@@ -2190,6 +2190,39 @@ const platformComparisonRows = [
   },
 ]
 
+const featuredComparisonCards = [
+  {
+    title: 'HireScore AI vs HiredScore',
+    href: '/compare/hirescoreai-vs-hiredscore',
+    text: 'Clarify similarly named products and see why HireScore AI is positioned for focused, explainable resume screening.',
+    points: ['Independent platform', 'JD-based ranking', 'Shortlist explanations'],
+  },
+  {
+    title: 'HireScore AI vs Zoho Recruit',
+    href: '/compare/hirescoreai-vs-zoho-recruit',
+    text: 'Compare focused AI screening and candidate ranking with a broader recruiting and applicant tracking workflow.',
+    points: ['Screening focus', 'Recruiter control', 'Workflow fit'],
+  },
+  {
+    title: 'HireScore AI vs Manatal',
+    href: '/compare/hirescoreai-vs-manatal',
+    text: 'Compare explainable JD-based resume scoring with a broader recruiting suite evaluation.',
+    points: ['Resume scoring', 'Setup clarity', 'No AI interviewer claim'],
+  },
+  {
+    title: 'HireScore AI vs Workable',
+    href: '/compare/hirescoreai-vs-workable',
+    text: 'Compare HireScore AI screening with broader ATS and sourcing platform considerations.',
+    points: ['Applicant screening', 'Pricing clarity', 'No sourcing database claim'],
+  },
+  {
+    title: 'HireScore AI vs Greenhouse',
+    href: '/compare/hirescoreai-vs-greenhouse',
+    text: 'Compare lighter explainable screening workflows with a mature ATS evaluation path.',
+    points: ['Lean workflow', 'Screening speed', 'Not enterprise ATS replacement'],
+  },
+]
+
 const solutionFeatures = [
   ['AI Resume Screening', 'Parse resumes and identify relevant candidate information quickly.', FileSearch],
   ['JD Matching', 'Compare every candidate against the role requirements.', Target],
@@ -2461,6 +2494,29 @@ const comparisonPages = comparisonRoutes.map((route) => {
   }
 })
 
+function comparisonDetailCards(page) {
+  return [
+    {
+      kicker: 'HireScore AI advantage',
+      title: 'Focused AI screening without heavy ATS complexity',
+      text: 'HireScore AI is built around JD-based resume scoring, candidate ranking, and recruiter-friendly explanations, so teams can move from resume batches to stronger shortlists faster.',
+      points: ['Explainable scores', 'Skill match and gap context', 'Shortlist-ready review notes'],
+    },
+    {
+      kicker: `${page.competitorName} fit`,
+      title: `Where ${page.competitorName} may make sense`,
+      text: page.rows.find((row) => row.label === 'Primary fit')?.competitor || page.clarification,
+      points: ['Verify current product scope', 'Check implementation needs', 'Confirm pricing and support directly'],
+    },
+    {
+      kicker: 'Decision guide',
+      title: 'Best fit for lean recruiting teams',
+      text: `Choose HireScore AI when your priority is faster, explainable resume screening. Compare ${page.competitorName} directly if you need a broader suite or enterprise workflow depth.`,
+      points: ['Recruiter-controlled AI', 'Pilot-friendly setup', 'Focused screening workflow'],
+    },
+  ]
+}
+
 function SolutionsPage() {
   return (
     <>
@@ -2597,26 +2653,23 @@ function SolutionsPage() {
             </div>
             <p>This is a high-level positioning view based on public product messaging. HireScore AI is independent and is not affiliated with HireScore, Greenhouse, Workday, or HiredScore.</p>
           </div>
-          <div className="solutionPage-platformMatrix" role="table" aria-label="HireScore AI compared with HireScore, Greenhouse, and Workday">
-            <div className="solutionPage-platformHead" role="row">
-              <span role="columnheader">Comparison point</span>
-              <span role="columnheader">HireScore AI</span>
-              <span role="columnheader">HireScore</span>
-              <span role="columnheader">Greenhouse</span>
-              <span role="columnheader">Workday</span>
-            </div>
-            {platformComparisonRows.map((row) => (
-              <div className="solutionPage-platformRow" role="row" key={row.label}>
-                <strong role="cell">{row.label}</strong>
-                <span role="cell">{row.hirescoreAi}</span>
-                <span role="cell">{row.hireScore}</span>
-                <span role="cell">{row.greenhouse}</span>
-                <span role="cell">{row.workday}</span>
-              </div>
+          <div className="solutionPage-comparisonLoop" aria-label="Featured HireScore AI comparisons">
+            {[...featuredComparisonCards, ...featuredComparisonCards].map((comparison, index) => (
+              <Link href={comparison.href} className="solutionPage-comparisonCard" key={`${comparison.title}-${index}`}>
+                <span className="solutionPage-comparisonCardKicker">Compare</span>
+                <strong>{comparison.title}</strong>
+                <p>{comparison.text}</p>
+                <ul>
+                  {comparison.points.map((point) => <li key={point}><CheckCircle2 size={14} />{point}</li>)}
+                </ul>
+                <span className="solutionPage-comparisonCardLink">Open detailed comparison <ArrowRight size={15} /></span>
+              </Link>
             ))}
           </div>
           <div className="inlineLinks">
-            <Link href="/compare">View all HireScoreAI comparisons <ArrowRight size={15} /></Link>
+            {featuredComparisonCards.map((comparison) => (
+              <Link href={comparison.href} key={comparison.href}>{comparison.title} <ArrowRight size={15} /></Link>
+            ))}
           </div>
         </div>
       </section>
@@ -2767,33 +2820,11 @@ function SolutionSegmentPage({ segment }) {
 }
 
 function CompareHubPage() {
-  return (
-    <>
-      <SEO path={compareHubRoute.path} />
-      <Breadcrumbs items={[[compareHubRoute.path, compareHubRoute.navLabel]]} />
-      <PageHero eyebrow="Comparisons" title="Compare HireScoreAI with Other Recruiting Platforms" intro="Review high-level comparisons for AI resume screening, candidate ranking, pricing clarity, and workflow fit." />
+  useEffect(() => {
+    navigateTo('/compare/hirescoreai-vs-hiredscore/')
+  }, [])
 
-      <section className="section">
-        <div className="container">
-          <SectionHeader eyebrow="Comparison pages" title="Choose a recruiting platform comparison" text="Each comparison is written cautiously and should be validated against the current product materials for that platform." />
-          <div className="threeGrid">
-            {comparisonPages.map((page) => (
-              <Link className="infoCard" href={page.path} key={page.path}>
-                <ShieldCheck size={24} />
-                <h2>{page.navLabel}</h2>
-                <p>{page.description}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <CTASection
-        title="Compare HireScoreAI with your current hiring workflow"
-        text="Start a focused pilot to test JD-based resume screening, candidate ranking, and recruiter-ready explanations."
-      />
-    </>
-  )
+  return null
 }
 
 function ComparisonPage({ page }) {
@@ -2822,53 +2853,23 @@ function ComparisonPage({ page }) {
         <div className="container">
           <div className="solutionPage-splitHeader">
             <div>
-              <span>HIGH-LEVEL COMPARISON</span>
+              <span>DETAILED COMPARISON</span>
               <h2>{page.tableTitle}</h2>
             </div>
             <p>{page.tableIntro}</p>
           </div>
-          <div className="solutionPage-comparisonCards" aria-label="HireScoreAI comparison pages">
-        {[
-          {
-            name: 'HiredScore',
-            href: '/compare/hirescoreai-vs-hiredscore',
-            text: 'Clarify how HireScoreAI differs from HiredScore and HireScore.com.',
-          },
-          {
-            name: 'Zoho Recruit',
-            href: '/compare/hirescoreai-vs-zoho-recruit',
-            text: 'Compare AI screening, pricing clarity, and hiring workflow fit.',
-          },
-          {
-            name: 'Manatal',
-            href: '/compare/hirescoreai-vs-manatal',
-            text: 'Compare focused JD-based screening with a broader recruiting suite.',
-          },
-          {
-            name: 'Workable',
-            href: '/compare/hirescoreai-vs-workable',
-            text: 'Compare explainable screening with broader ATS and sourcing workflows.',
-          },
-          {
-            name: 'Greenhouse',
-            href: '/compare/hirescoreai-vs-greenhouse',
-            text: 'Compare lighter AI screening workflows with a mature enterprise ATS.',
-          },
-        ].map((comparison) => (
-          <Link
-            key={comparison.href}
-            className="solutionPage-comparisonCard"
-            href={comparison.href}
-          >
-            <span className="solutionPage-comparisonCardKicker">Compare</span>
-            <strong>HireScoreAI vs {comparison.name}</strong>
-            <p>{comparison.text}</p>
-            <span className="solutionPage-comparisonCardLink">
-              View comparison <ArrowRight size={15} />
-            </span>
-          </Link>
-        ))}
-</div>
+          <div className="solutionPage-comparisonCards" aria-label={`HireScoreAI compared with ${page.competitorName}`}>
+            {comparisonDetailCards(page).map((card) => (
+              <article className="solutionPage-comparisonCard" key={card.title}>
+                <span className="solutionPage-comparisonCardKicker">{card.kicker}</span>
+                <strong>{card.title}</strong>
+                <p>{card.text}</p>
+                <ul>
+                  {card.points.map((point) => <li key={point}><CheckCircle2 size={14} />{point}</li>)}
+                </ul>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

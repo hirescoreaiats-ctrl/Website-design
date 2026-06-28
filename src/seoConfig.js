@@ -80,13 +80,6 @@ export const solutionSegmentRoutes = [
   },
 ]
 
-export const compareHubRoute = {
-  path: '/compare',
-  navLabel: 'Compare',
-  title: 'HireScoreAI Comparisons | AI Recruiting Software Alternatives',
-  description: 'Compare HireScoreAI with HiredScore, Zoho Recruit, Manatal, Workable, and Greenhouse to understand AI screening, pricing, and workflow fit.',
-}
-
 export const comparisonRoutes = [
   {
     path: '/compare/hirescoreai-vs-hiredscore',
@@ -156,7 +149,6 @@ export const SEO_ROUTES = [
   ...staticRoutes.map(([path, title, description, pageType, noindex = false]) => ({ path, title, description, pageType: pageType === 'FAQPage' ? 'WebPage' : pageType, schemaKind: pageType === 'FAQPage' ? 'faq' : undefined, noindex })),
   ...productRoutes.map(([path, title, description]) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, title.replace(/ \|.*$/, ''), '/product', 'Product') })),
   ...solutionSegmentRoutes.map(({ path, title, description, navLabel }) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, navLabel, '/solutions', 'Solutions') })),
-  { path: compareHubRoute.path, title: compareHubRoute.title, description: compareHubRoute.description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(compareHubRoute.path, compareHubRoute.navLabel) },
   ...comparisonRoutes.map(({ path, title, description, navLabel }) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, navLabel) })),
   ...guideRoutes.map(([path, title, description, steps]) => ({ path, title: `${title} | HireScore AI Guide`, description, pageType: 'WebPage', schemaKind: 'howto', steps, breadcrumbs: breadcrumbFor(path, title, '/resources/user-guide', 'User Guide') })),
   ...blogRoutes.map(([path, title, description, category, image]) => ({ path, title, description, pageType: 'WebPage', ogType: 'article', schemaKind: 'article', category, image, breadcrumbs: breadcrumbFor(path, title.replace(/ \|.*$/, ''), '/resources/blogs', 'Blog') })),
