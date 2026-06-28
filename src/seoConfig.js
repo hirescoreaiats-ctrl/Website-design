@@ -5,6 +5,11 @@ export const DEFAULT_DESCRIPTION = 'HireScore AI is an AI recruitment workflow p
 
 const baseKeywords = ['HireScore AI', 'AI recruitment software', 'AI resume screening', 'candidate ranking software', 'recruitment workflow automation']
 
+export function canonicalUrlForPath(path = '/') {
+  const normalized = normalizePath(path)
+  return `${SITE_URL}${normalized === '/' ? '/' : `${normalized}/`}`
+}
+
 const staticRoutes = [
   ['/', 'HireScore AI | AI Recruitment & Resume Screening Software', 'Screen resumes, match candidates to job descriptions, explain fit, rank talent, manage shortlists, communicate, and schedule interviews with HireScore AI.', 'WebPage'],
   ['/product', 'AI Recruitment Software Features | HireScore AI', 'Explore HireScore AI features for job creation, public apply pages, resume parsing, JD matching, candidate ranking, explainable shortlisting, communication, and interviews.', 'CollectionPage'],
@@ -158,7 +163,7 @@ export const SEO_ROUTES = [
   ...caseStudyRoutes.map(([path, title, description]) => ({ path, title, description, pageType: 'WebPage', ogType: 'article', schemaKind: 'case-study', breadcrumbs: breadcrumbFor(path, title.replace(/ \|.*$/, ''), '/resources/case-studies', 'Case Studies') })),
 ].map((route) => ({
   ...route,
-  canonical: `${SITE_URL}${route.path === '/' ? '/' : route.path}`,
+  canonical: canonicalUrlForPath(route.path),
   image: route.image || DEFAULT_OG_IMAGE,
   keywords: [...new Set([...baseKeywords, route.title.replace(/ \|.*$/, '')])].join(', '),
 }))
@@ -180,7 +185,7 @@ export function getSeoConfig(path, fallback = {}) {
     description: fallback.description || DEFAULT_DESCRIPTION,
     pageType: 'WebPage',
     ogType: fallback.type || 'website',
-    canonical: `${SITE_URL}${normalized}`,
+    canonical: canonicalUrlForPath(normalized),
     image: DEFAULT_OG_IMAGE,
     keywords: baseKeywords.join(', '),
     noindex: true,
@@ -245,7 +250,7 @@ const software = {
     priceCurrency: 'INR',
     category: 'Free pilot',
     description: 'Seven-day free pilot access is available for selected early clients.',
-    url: `${SITE_URL}/pricing`,
+    url: canonicalUrlForPath('/pricing'),
   },
 }
 
@@ -280,7 +285,7 @@ export function buildRouteSchema(config) {
         '@type': 'ListItem',
         position: index + 1,
         name: item.name,
-        item: `${SITE_URL}${item.path === '/' ? '/' : item.path}`,
+        item: canonicalUrlForPath(item.path),
       })),
     })
   }

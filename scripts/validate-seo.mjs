@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
-import { SEO_ROUTES } from '../src/seoConfig.js'
+import { SEO_ROUTES, SITE_URL } from '../src/seoConfig.js'
 
 const dist = path.join(process.cwd(), 'dist')
 const errors = []
@@ -36,6 +36,8 @@ for (const route of SEO_ROUTES) {
   if (title !== route.title) errors.push(`${route.path}: title mismatch`)
   if (description !== route.description) errors.push(`${route.path}: description mismatch`)
   if (canonical !== route.canonical) errors.push(`${route.path}: canonical mismatch`)
+  if (!route.canonical.startsWith(`${SITE_URL}/`)) errors.push(`${route.path}: canonical must use HTTPS non-www domain`)
+  if (!route.canonical.endsWith('/')) errors.push(`${route.path}: canonical must use trailing slash`)
   if (route.noindex ? !robots.includes('noindex') : !robots.includes('index')) errors.push(`${route.path}: robots directive mismatch`)
   if (titles.has(title)) errors.push(`${route.path}: duplicate title with ${titles.get(title)}`)
   if (descriptions.has(description)) errors.push(`${route.path}: duplicate description with ${descriptions.get(description)}`)
@@ -51,6 +53,7 @@ for (const route of SEO_ROUTES) {
       }
       const software = parsed['@graph'].find((node) => node['@type'] === 'SoftwareApplication')
       if (software?.offers?.priceCurrency !== 'INR') errors.push(`${route.path}: SoftwareApplication offer currency must be INR`)
+      if (software?.offers?.url !== `${SITE_URL}/pricing/`) errors.push(`${route.path}: SoftwareApplication offer URL must use trailing slash pricing URL`)
       if (route.breadcrumbs && !types.includes('BreadcrumbList')) errors.push(`${route.path}: missing BreadcrumbList schema`)
       if (route.schemaKind === 'article' && !types.includes('Article')) errors.push(`${route.path}: missing Article schema`)
       if (route.schemaKind === 'howto' && !types.includes('HowTo')) errors.push(`${route.path}: missing HowTo schema`)
@@ -65,7 +68,12 @@ const sitemapFiles = ['page-sitemap.xml', 'blog-sitemap.xml']
 const sitemapUrls = new Set()
 for (const filename of sitemapFiles) {
   const xml = await readFile(path.join(dist, filename), 'utf8')
-  for (const match of xml.matchAll(/<loc>(.*?)<\/loc>/g)) sitemapUrls.add(match[1])
+  for (const match of xml.matchAll(/<loc>(.*?)<\/loc>/g)) {
+    const url = match[1]
+    sitemapUrls.add(url)
+    if (!url.startsWith(`${SITE_URL}/`)) errors.push(`${filename}: sitemap URL must use HTTPS non-www domain: ${url}`)
+    if (!url.endsWith('/')) errors.push(`${filename}: sitemap URL must use trailing slash: ${url}`)
+  }
 }
 const indexableUrls = new Set(SEO_ROUTES.filter((route) => !route.noindex).map((route) => route.canonical))
 for (const url of indexableUrls) if (!sitemapUrls.has(url)) errors.push(`Sitemap missing ${url}`)

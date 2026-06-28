@@ -708,15 +708,31 @@ function navigateTo(path) {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
+function finalInternalHref(href = '') {
+  if (
+    !href ||
+    href.startsWith('http') ||
+    href.startsWith('mailto:') ||
+    href.startsWith('#')
+  ) return href
+
+  const [beforeHash, hash = ''] = href.split('#')
+  const [pathname, query = ''] = beforeHash.split('?')
+  if (!pathname.startsWith('/') || pathname.includes('.')) return href
+  const normalized = pathname === '/' ? '/' : `${pathname.replace(/\/+$/, '')}/`
+  return `${normalized}${query ? `?${query}` : ''}${hash ? `#${hash}` : ''}`
+}
+
 function Link({ href, children, className, onClick, ...props }) {
+  const finalHref = finalInternalHref(href)
   return (
     <a
-      href={href}
+      href={finalHref}
       className={className}
       onClick={(event) => {
         if (!href.startsWith('http') && !href.startsWith('mailto:')) {
           event.preventDefault()
-          navigateTo(href)
+          navigateTo(finalHref)
         }
         if (onClick) onClick()
       }}
