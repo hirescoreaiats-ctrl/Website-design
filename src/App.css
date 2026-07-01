@@ -3506,6 +3506,80 @@ h3 {
   padding-top: 36px;
 }
 
+.pricingSeoSection {
+  padding-bottom: 20px;
+}
+
+.pricingSeoSummary {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.75fr) minmax(0, 1.25fr);
+  gap: 28px;
+  align-items: center;
+  padding: 24px;
+  border: 1px solid rgba(210, 187, 255, 0.12);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(76, 215, 246, 0.09), transparent 30rem),
+    linear-gradient(145deg, rgba(31, 27, 42, 0.78), rgba(23, 20, 31, 0.86));
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
+}
+
+.pricingSeoSummary .eyebrow {
+  margin-bottom: 14px;
+}
+
+.pricingSeoSummary h2 {
+  margin: 0;
+  color: #fff7ed;
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 2.7vw, 2.45rem);
+  line-height: 1.08;
+}
+
+.pricingSeoSummary p {
+  margin: 14px 0 0;
+  color: #dce6f6;
+  line-height: 1.72;
+}
+
+.pricingSeoGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.pricingSeoGrid article {
+  min-height: 142px;
+  padding: 16px;
+  border: 1px solid rgba(126, 232, 255, 0.13);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.pricingSeoGrid span,
+.pricingSeoGrid small {
+  display: block;
+  color: #aebbd0;
+  font-size: 0.7rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.pricingSeoGrid strong {
+  display: block;
+  margin-top: 12px;
+  color: #7ee8ff;
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
+.pricingSeoGrid p {
+  margin-top: 12px;
+  color: #eef7ff;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
 .pricingGrid {
   align-items: stretch;
   gap: 18px;
@@ -3699,6 +3773,14 @@ h3 {
   .pricingCard.isFeatured {
     transform: none;
   }
+
+  .pricingSeoSummary {
+    grid-template-columns: 1fr;
+  }
+
+  .pricingSeoGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 700px) {
@@ -3709,6 +3791,14 @@ h3 {
 
   .pricingAmount strong {
     font-size: 2.55rem;
+  }
+
+  .pricingSeoSummary {
+    padding: 18px;
+  }
+
+  .pricingSeoGrid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -4121,5 +4211,311 @@ h3 {
 
   .resourcesAccessPanel {
     padding: 24px;
+  }
+}
+
+/* JD Manager page: separate product page styles scoped away from /product. */
+.jdManagerView .productPage-productDirectory {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.jdManagerView .productPage-productDirectory article,
+.jdManagerView .productPage-selectedProduct,
+.jdManagerView .productPage-twoProductGrid article,
+.jdManagerView .productPage-stepGrid article,
+.jdManagerView .productPage-problemPanel,
+.jdManagerView .productPage-jdPreview,
+.jdManagerView .productPage-useCasePromise {
+  border: 1px solid rgba(210, 187, 255, 0.12);
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(31, 27, 42, 0.88), rgba(17, 16, 24, 0.96));
+  box-shadow: 0 22px 62px rgba(0, 0, 0, 0.18);
+}
+
+.jdManagerView .productPage-productDirectory article {
+  min-height: 218px;
+  padding: 22px;
+}
+
+.jdManagerView .productPage-productDirectory article > span,
+.jdManagerView .productPage-productDirectory a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.jdManagerView .productPage-productDirectory article > span,
+.jdManagerView .productPage-selectedCopy > span,
+.jdManagerView .productPage-problemPanel > span {
+  color: #4cd7f6;
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.jdManagerView .productPage-productDirectory h3,
+.jdManagerView .productPage-selectedCopy h2,
+.jdManagerView .productPage-twoProductGrid h3,
+.jdManagerView .productPage-stepGrid h3,
+.jdManagerView .productPage-useCasePromise strong {
+  color: #fff;
+}
+
+.jdManagerView .productPage-productDirectory p,
+.jdManagerView .productPage-selectedCopy p,
+.jdManagerView .productPage-twoProductGrid p,
+.jdManagerView .productPage-stepGrid p,
+.jdManagerView .productPage-problemPanel p,
+.jdManagerView .productPage-useCaseGrid p {
+  color: #d1ddec;
+  line-height: 1.68;
+}
+
+.jdManagerView .productPage-productDirectory a {
+  margin-top: 18px;
+  color: #9de9ff;
+  font-weight: 900;
+}
+
+.jdManagerView .productPage-selectedProduct {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(420px, 1.14fr);
+  gap: 34px;
+  align-items: center;
+  padding: 26px;
+}
+
+.jdManagerView .productPage-selectedCopy h2 {
+  margin: 16px 0 14px;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.6vw, 3.45rem);
+  line-height: 1.07;
+}
+
+.jdManagerView .productPage-selectedActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.jdManagerView .productPage-selectedProof.productPage-proof {
+  display: flex !important;
+  margin-top: 20px;
+}
+
+.jdManagerView .productPage-twoProductGrid,
+.jdManagerView .productPage-stepGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.jdManagerView .productPage-twoProductGrid article,
+.jdManagerView .productPage-stepGrid article {
+  position: relative;
+  min-height: 250px;
+  padding: 24px;
+}
+
+.jdManagerView .productPage-twoProductGrid article > span,
+.jdManagerView .productPage-stepGrid article > span {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  color: #6f6775;
+  font-weight: 900;
+}
+
+.jdManagerView .productPage-cardIcon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(76, 215, 246, 0.2);
+  border-radius: 13px;
+  color: #4cd7f6;
+  background: rgba(76, 215, 246, 0.06);
+}
+
+.jdManagerView .productPage-workflowLayout {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
+  gap: 56px;
+  align-items: start;
+}
+
+.jdManagerView .productPage-problemPanel {
+  margin-top: 26px;
+  padding: 24px;
+  border-color: rgba(76, 215, 246, 0.16);
+  background: linear-gradient(145deg, rgba(76, 215, 246, 0.06), rgba(124, 58, 237, 0.08));
+}
+
+.jdManagerView .productPage-problemPanel strong {
+  display: block;
+  margin: 14px 0 10px;
+  color: #fff;
+  line-height: 1.5;
+}
+
+.jdManagerView .productPage-jdPreview {
+  overflow: hidden;
+  padding: 18px;
+}
+
+.jdManagerView .productPage-jdTopbar,
+.jdManagerView .productPage-jdCandidate,
+.jdManagerView .productPage-jdStats {
+  display: flex;
+  align-items: center;
+}
+
+.jdManagerView .productPage-jdTopbar {
+  justify-content: space-between;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(210, 187, 255, 0.1);
+}
+
+.jdManagerView .productPage-jdTopbar > div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #fff;
+  font-weight: 900;
+}
+
+.jdManagerView .productPage-jdGrid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.15fr 1fr;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.jdManagerView .productPage-jdGrid aside,
+.jdManagerView .productPage-jdGrid section {
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid rgba(210, 187, 255, 0.09);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.jdManagerView .productPage-jdGrid button,
+.jdManagerView .productPage-jdCandidate,
+.jdManagerView .productPage-jdRequirement,
+.jdManagerView .productPage-jdStats span {
+  border: 1px solid rgba(210, 187, 255, 0.09);
+  border-radius: 12px;
+  background: rgba(8, 10, 17, 0.42);
+}
+
+.jdManagerView .productPage-jdGrid button {
+  width: 100%;
+  display: grid;
+  gap: 4px;
+  margin-top: 9px;
+  padding: 11px;
+  color: #fff;
+  text-align: left;
+  cursor: default;
+}
+
+.jdManagerView .productPage-jdGrid button.isActive {
+  border-color: rgba(76, 215, 246, 0.24);
+  background: rgba(76, 215, 246, 0.08);
+}
+
+.jdManagerView .productPage-jdRequirement {
+  margin-top: 12px;
+  padding: 16px;
+}
+
+.jdManagerView .productPage-jdRequirement span {
+  color: #ffb784;
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.jdManagerView .productPage-jdRequirement strong {
+  display: block;
+  margin-top: 8px;
+  color: #fff;
+}
+
+.jdManagerView .productPage-jdStats {
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.jdManagerView .productPage-jdStats span {
+  flex: 1;
+  padding: 10px;
+}
+
+.jdManagerView .productPage-jdStats strong,
+.jdManagerView .productPage-jdStats small,
+.jdManagerView .productPage-jdCandidate strong,
+.jdManagerView .productPage-jdCandidate small {
+  display: block;
+}
+
+.jdManagerView .productPage-jdStats strong {
+  color: #fff;
+}
+
+.jdManagerView .productPage-jdStats small,
+.jdManagerView .productPage-jdCandidate small,
+.jdManagerView .productPage-jdTopbar small {
+  color: #a59cab;
+}
+
+.jdManagerView .productPage-jdCandidate {
+  justify-content: space-between;
+  gap: 9px;
+  margin-top: 9px;
+  padding: 10px;
+}
+
+.jdManagerView .productPage-jdCandidate b {
+  color: #4cd7f6;
+}
+
+.jdManagerView .productPage-jdCandidate em {
+  padding: 5px 7px;
+  border-radius: 999px;
+  color: #15121e;
+  background: #d2bbff;
+  font-size: 0.62rem;
+  font-style: normal;
+  font-weight: 900;
+}
+
+@media (max-width: 1050px) {
+  .jdManagerView .productPage-selectedProduct,
+  .jdManagerView .productPage-workflowLayout,
+  .jdManagerView .productPage-jdGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .jdManagerView .productPage-twoProductGrid,
+  .jdManagerView .productPage-stepGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .jdManagerView .productPage-productDirectory,
+  .jdManagerView .productPage-twoProductGrid,
+  .jdManagerView .productPage-stepGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .jdManagerView .productPage-selectedProduct {
+    padding: 18px;
   }
 }

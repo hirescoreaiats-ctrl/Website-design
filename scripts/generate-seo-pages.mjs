@@ -6,6 +6,7 @@ const root = process.cwd()
 const dist = path.join(root, 'dist')
 const templatePath = path.join(dist, 'index.html')
 const template = await readFile(templatePath, 'utf8')
+const lastmod = new Date().toISOString().slice(0, 10)
 
 const escapeHtml = (value) => String(value)
   .replaceAll('&', '&amp;')
@@ -50,6 +51,17 @@ function renderSeo(config) {
     <!-- route-seo:end -->`
 }
 
+function renderUrlset(routes) {
+  const urls = routes
+    .map((route) => `  <url><loc>${escapeHtml(route.canonical)}</loc><lastmod>${lastmod}</lastmod></url>`)
+    .join('\n')
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`
+}
+
+function renderSitemapIndex() {
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <sitemap><loc>https://hirescoreai.com/page-sitemap.xml</loc><lastmod>${lastmod}</lastmod></sitemap>\n  <sitemap><loc>https://hirescoreai.com/blog-sitemap.xml</loc><lastmod>${lastmod}</lastmod></sitemap>\n</sitemapindex>\n`
+}
+
 for (const config of SEO_ROUTES) {
   const html = template.replace(
     /<!-- route-seo:start -->[\s\S]*?<!-- route-seo:end -->/,
@@ -62,4 +74,12 @@ for (const config of SEO_ROUTES) {
   await writeFile(outputPath, html)
 }
 
-console.log(`Generated route-specific SEO HTML for ${SEO_ROUTES.length} routes.`)
+const indexableRoutes = SEO_ROUTES.filter((route) => !route.noindex)
+const blogRoutes = indexableRoutes.filter((route) => route.path.startsWith('/resources/blogs/'))
+const pageRoutes = indexableRoutes.filter((route) => !route.path.startsWith('/resources/blogs/'))
+
+await writeFile(path.join(dist, 'sitemap.xml'), renderSitemapIndex())
+await writeFile(path.join(dist, 'page-sitemap.xml'), renderUrlset(pageRoutes))
+await writeFile(path.join(dist, 'blog-sitemap.xml'), renderUrlset(blogRoutes))
+
+console.log(`Generated route-specific SEO HTML and sitemaps for ${SEO_ROUTES.length} routes.`)

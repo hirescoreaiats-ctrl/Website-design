@@ -54,6 +54,11 @@ const solutionNavItems = [
   ['/solutions/tech-hiring', 'IT & Tech Hiring'],
 ]
 
+const productNavItems = [
+  ['/product', 'HireScore AI'],
+  ['/product/jd-manager', 'JD Manager'],
+]
+
 const iconMap = {
   job: BriefcaseBusiness,
   apply: Globe2,
@@ -846,7 +851,7 @@ function Header({ isHome = false }) {
         <Link className="homeFullLogo" href="/" aria-label="HireScore AI home"><img src="/hirescore-logo-white.png" alt="HireScore AI" /></Link>
         <nav className="desktopNav homeNav unifiedNav" aria-label="Primary navigation">
           <a href={isHome ? '#about' : '/#about'}>About Us</a>
-          <Link href="/product">Product</Link>
+          <Dropdown label="Product" base="/product" items={productNavItems} />
           <Dropdown label="Solutions" base="/solutions" items={solutionNavItems} />
           <Link href="/resources">Resources</Link>
           <Link href="/pricing">Pricing</Link>
@@ -862,7 +867,7 @@ function Header({ isHome = false }) {
       </div>
       {open && (
         <nav className="mobileNav" aria-label="Mobile navigation">
-          {['/', '/product', '/solutions', '/resources', '/pricing', '/contact'].map((path) => (
+          {['/', '/product', '/product/jd-manager', '/solutions', '/resources', '/pricing', '/contact'].map((path) => (
             <Link key={path} href={path} onClick={() => setOpen(false)}>{labelFor(path)}</Link>
           ))}
           <a className="btn btnPrimary" href={PILOT_MAILTO}>Start Free Pilot</a>
@@ -886,7 +891,8 @@ function Dropdown({ label, base, items }) {
 function labelFor(path) {
   const labels = {
     '/': 'Home',
-    '/product': 'Product',
+    '/product': 'HireScore AI',
+    '/product/jd-manager': 'JD Manager',
     '/solutions': 'Solutions',
     '/resources': 'Resources',
     '/resources/user-guide': 'User Guide',
@@ -1391,6 +1397,95 @@ const productFaqs = [
   ['Is there a free pilot?', 'Yes. Hiring teams can request a free 7-day pilot and test HireScore AI with a real job and real resumes.'],
 ]
 
+const productCatalog = {
+  hirescore: {
+    id: 'hirescore',
+    label: 'HireScore AI',
+    eyebrow: 'AI recruitment platform',
+    headline: 'HireScore AI for resume screening and candidate fit decisions',
+    intro: 'Screen resumes faster, match candidates against job descriptions, generate shortlist scores, rank applicants, and give recruiters clear AI-backed explanations before they move candidates forward.',
+    ctas: [
+      ['Request a Demo', '/contact'],
+      ['Start Free Pilot', PILOT_MAILTO],
+      ['Explore Features', '#product-capabilities'],
+    ],
+    proof: ['JD-based scoring', 'Recruiter-ready explanations', 'AI screening test support'],
+    capabilities: [
+      [SearchCheck, 'AI Resume Screening', 'Parse resumes into structured candidate details so recruiters can review skills, experience, education, and role-fit signals faster.'],
+      [Target, 'JD-Based Candidate Scoring', 'Compare every profile against the job description and produce shortlist scores grounded in candidate evidence.'],
+      [Trophy, 'Candidate Ranking', 'Rank candidates by fit so recruiters can focus first on the strongest matches for each open role.'],
+      [BrainCircuit, 'Recruiter-Ready Explanations', 'Show why a candidate scored well or poorly using matched skills, missing skills, relevant experience, and fit notes.'],
+      [BadgeCheck, 'Smart Shortlisting', 'Turn screened profiles into clearer shortlist decisions while keeping recruiter review in control.'],
+      [Workflow, 'Workflow Clarity', 'Keep jobs, resumes, scores, rankings, communication, screening tests, and interview movement connected.'],
+    ],
+    workflow: [
+      [BriefcaseBusiness, 'Create job', 'Set the role, required skills, must-have criteria, and hiring context.'],
+      [Files, 'Upload or receive resumes', 'Collect applications from apply pages or upload resumes in bulk.'],
+      [Bot, 'AI parses resumes', 'Extract candidate details and normalize resume content for consistent review.'],
+      [Target, 'Score candidate fit', 'Compare every resume against the JD and calculate a clear shortlist score.'],
+      [Trophy, 'Rank and shortlist', 'Prioritize candidates and move the strongest profiles into shortlist review.'],
+      [Send, 'Recruiter action', 'Review explanations, coordinate outreach, run screening tests, and progress candidates.'],
+    ],
+    benefits: [
+      'Save recruiter time on first-pass resume review',
+      'Shortlist faster without losing decision context',
+      'Improve consistency across recruiters and roles',
+      'Reduce repetitive manual workload',
+      'Make candidate fit easier to explain to hiring managers',
+      'Keep high-volume applicant review more visible and organized',
+    ],
+    audiences: [
+      [Building2, 'Recruitment agencies', 'Review client roles faster and send better-supported shortlists.'],
+      [Network, 'Staffing companies', 'Handle high-volume profiles with clearer fit ranking by requirement.'],
+      [UsersRound, 'HR teams', 'Give internal recruiters a consistent screening and decision workflow.'],
+      [BriefcaseBusiness, 'Hiring managers', 'Review candidate recommendations with clear evidence instead of raw resume lists.'],
+    ],
+  },
+  jdManager: {
+    id: 'jdManager',
+    label: 'JD Manager',
+    eyebrow: 'Free open-source JD workspace',
+    headline: 'JD Manager for Recruitment Agencies',
+    intro: 'A free, open-source JD management workspace that helps agencies organize multiple client requirements, track candidate flow per JD, and maintain clearer shortlisting visibility.',
+    ctas: [
+      ['Explore JD Manager', '#product-capabilities'],
+      ['Use Free Tool', '/contact'],
+      ['View Workflow', '#product-workflow'],
+    ],
+    proof: ['Open source', 'Free to use', 'Built for agency operations'],
+    capabilities: [
+      [Building2, 'Multi-Client JD Management', 'Organize client accounts and keep each client requirement in a clean, searchable workspace.'],
+      [Files, 'Multiple JDs per Client', 'Track several open roles under the right client without losing ownership or status context.'],
+      [GitBranch, 'Candidate-to-JD Tracking', 'See which candidates were sourced, reviewed, submitted, or rejected for each specific JD.'],
+      [BarChart3, 'Shortlisting Score Visibility', 'Keep shortlist scores visible at the JD level so recruiters can compare decisions later.'],
+      [ClipboardCheck, 'Submission & Status Tracking', 'Follow candidate movement from sourced to shortlisted, submitted, interviewed, selected, or closed.'],
+      [UsersRound, 'Better Recruiter Coordination', 'Help teams understand which recruiter worked on each JD and what action is needed next.'],
+    ],
+    workflow: [
+      [Building2, 'Add client', 'Create the client workspace and centralize all active requirements.'],
+      [BriefcaseBusiness, 'Add multiple JDs', 'Create role records under the right client with ownership and active status.'],
+      [UsersRound, 'Track incoming candidates', 'Attach candidates to the correct JD and maintain source and recruiter visibility.'],
+      [BarChart3, 'See shortlist scores', 'Review candidate scores and shortlist decisions per JD.'],
+      [ClipboardCheck, 'Review submissions', 'Track submitted candidates, pipeline stage, and historical decisions.'],
+      [Workflow, 'Coordinate actions', 'Keep recruiters aligned on next steps across clients, JDs, and candidates.'],
+    ],
+    benefits: [
+      'Cleaner recruitment agency operations',
+      'Better JD tracking across multiple clients',
+      'Less confusion about which candidate belongs to which role',
+      'Clearer candidate history and shortlist visibility',
+      'Easier review of submissions and pipeline status',
+      'More organized recruiter coordination',
+    ],
+    audiences: [
+      [Building2, 'Recruitment agencies', 'Manage many client requirements without spreadsheet sprawl.'],
+      [Network, 'Staffing teams', 'Keep client JDs, submissions, scores, and candidate status aligned.'],
+      [UsersRound, 'Recruiter teams', 'Coordinate who worked on each JD and what needs follow-up.'],
+      [ClipboardCheck, 'Delivery managers', 'Review active JDs, candidate pipeline, and shortlist quality in one place.'],
+    ],
+  },
+}
+
 function ProductCandidateRow({ rank, name, score, status }) {
   return (
     <div className="productPage-candidateRow">
@@ -1475,6 +1570,90 @@ function ProductDashboardPreview() {
       <div className="productPage-appBottom">
         <div className="productPage-pipeline"><span>Pipeline</span>{[['Applied','129'],['Screened','82'],['Shortlisted','14'],['Assessment','8'],['Interview','5']].map(([label,value]) => <div key={label}><strong>{value}</strong><small>{label}</small></div>)}</div>
         <div className="productPage-analytics"><span>Job health</span><div><i style={{ width: '78%' }} /><small>78% pipeline quality</small></div><strong>12 days<small> average time to shortlist</small></strong></div>
+      </div>
+    </div>
+  )
+}
+
+function ProductSuitePreview() {
+  return (
+    <div className="productPage-suitePreview" aria-label="HireScore AI product suite preview">
+      <div className="productPage-suiteTop">
+        <img src="/hirescore-logo-mark.png" alt="" />
+        <div><strong>HireScore AI Suite</strong><small>Independent recruiting software platform</small></div>
+      </div>
+      <div className="productPage-suiteCards">
+        <article>
+          <span><SearchCheck size={20} /></span>
+          <h2>HireScore AI</h2>
+          <p>AI resume screening, JD-based scoring, ranked shortlists, and candidate-fit explanations.</p>
+          <div><b>92%</b><small>top fit score</small></div>
+        </article>
+        <article>
+          <span><BriefcaseBusiness size={20} /></span>
+          <h2>JD Manager</h2>
+          <p>Free open-source workspace for clients, JDs, candidate tracking, scores, and submissions.</p>
+          <div><b>18</b><small>active JDs</small></div>
+        </article>
+      </div>
+      <div className="productPage-suiteFlow">
+        {['Client', 'JD', 'Candidates', 'Score', 'Shortlist'].map((item) => <span key={item}>{item}</span>)}
+      </div>
+    </div>
+  )
+}
+
+function JDManagerPreview() {
+  const clients = [
+    ['Acme Staffing', '6 active JDs'],
+    ['Northstar Tech', '4 active JDs'],
+    ['Vertex Consulting', '8 active JDs'],
+  ]
+  const candidates = [
+    ['Aarav S.', 'Backend Engineer', '84', 'Submitted'],
+    ['Meera P.', 'Data Analyst', '91', 'Shortlisted'],
+    ['Karan V.', 'QA Lead', '76', 'Review'],
+  ]
+
+  return (
+    <div className="productPage-jdPreview" aria-label="JD Manager workspace preview">
+      <div className="productPage-jdTopbar">
+        <div><BriefcaseBusiness size={17} /><span>JD Manager</span></div>
+        <small>Open source & free</small>
+      </div>
+      <div className="productPage-jdGrid">
+        <aside>
+          <div className="productPage-panelTitle"><span>Clients</span><small>18 active JDs</small></div>
+          {clients.map(([name, detail], index) => (
+            <button type="button" className={index === 0 ? 'isActive' : ''} key={name}>
+              <strong>{name}</strong>
+              <small>{detail}</small>
+            </button>
+          ))}
+        </aside>
+        <section>
+          <div className="productPage-panelTitle"><span>JDs under Acme Staffing</span><small>Recruiter: Team A</small></div>
+          <div className="productPage-jdRequirement">
+            <span>JD-1042</span>
+            <strong>Senior Data Analyst</strong>
+            <p>Track candidates, shortlist scores, submissions, status, and recruiter ownership for this client requirement.</p>
+          </div>
+          <div className="productPage-jdStats">
+            <span><strong>42</strong><small>Candidates</small></span>
+            <span><strong>11</strong><small>Shortlisted</small></span>
+            <span><strong>6</strong><small>Submitted</small></span>
+          </div>
+        </section>
+        <aside>
+          <div className="productPage-panelTitle"><span>Candidate flow</span><small>Per JD</small></div>
+          {candidates.map(([name, role, score, status]) => (
+            <div className="productPage-jdCandidate" key={name}>
+              <div><strong>{name}</strong><small>{role}</small></div>
+              <b>{score}</b>
+              <em>{status}</em>
+            </div>
+          ))}
+        </aside>
       </div>
     </div>
   )
@@ -1636,6 +1815,204 @@ function ProductOverview() {
           <div className="container productPage-faqLayout">
             <div className="productPage-heading productPage-headingLeft"><span>Product FAQs</span><h2 id="product-faq-title">Questions Before You Start</h2><p>Clear answers about the HireScore AI product workflow.</p></div>
             <div className="productPage-faqList">{productFaqs.map(([question, answer]) => <details key={question}><summary>{question}<ChevronDown size={18} /></summary><p>{answer}</p></details>)}</div>
+          </div>
+        </section>
+      </div>
+    </>
+  )
+}
+
+function JDManagerPage() {
+  return <ProductLandingPage productId="jdManager" path="/product/jd-manager" />
+}
+
+function ProductLandingPage({ productId, path }) {
+  const product = productCatalog[productId]
+  const isHireScoreProduct = productId === 'hirescore'
+  const otherProduct = productCatalog[isHireScoreProduct ? 'jdManager' : 'hirescore']
+  const otherPath = isHireScoreProduct ? '/product/jd-manager' : '/product'
+
+  return (
+    <>
+      <SEO path={path} />
+      <div className="productPage-root">
+        <section className="productPage-hero">
+          <div className="container productPage-heroGrid">
+            <div className="productPage-heroCopy">
+              <span className="productPage-eyebrow"><Sparkles size={14} />{product.eyebrow}</span>
+              <h1>{product.headline}</h1>
+              <p>{product.intro}</p>
+              <div className="productPage-actions">
+                {product.ctas.slice(0, 3).map(([label, href], index) => (
+                  href.startsWith('mailto:')
+                    ? <a className={`btn ${index === 0 ? 'btnPrimary' : 'btnGhost'} btnLarge`} href={href} key={label}>{label}{index === 0 && <ArrowRight size={17} />}</a>
+                    : href.startsWith('#')
+                      ? <a className={`btn ${index === 0 ? 'btnPrimary' : 'btnGhost'} btnLarge`} href={href} key={label}>{label}{index === 0 && <ArrowRight size={17} />}</a>
+                      : <Link className={`btn ${index === 0 ? 'btnPrimary' : 'btnGhost'} btnLarge`} href={href} key={label}>{label}{index === 0 && <ArrowRight size={17} />}</Link>
+                ))}
+              </div>
+              <div className="productPage-proof">{product.proof.map((item) => <span key={item}><CheckCircle2 size={15} />{item}</span>)}</div>
+            </div>
+            <div className="productPage-heroVisual">
+              <div className="productPage-heroVisualTop"><span><i /> {product.label}</span><small>{isHireScoreProduct ? 'AI screening workspace' : 'JD operations workspace'}</small></div>
+              {isHireScoreProduct ? <ProductHeroDashboard /> : <JDManagerPreview />}
+              <div className="productPage-heroVisualFoot">
+                {product.proof.map((item) => <span key={item}>{item}</span>)}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="productPage-section productPage-switchSection" aria-labelledby="product-overview-title">
+          <div className="container">
+            <div className="productPage-productDirectory" aria-label="HireScore AI product offerings">
+              <article>
+                <span>{isHireScoreProduct ? <SearchCheck size={20} /> : <BriefcaseBusiness size={20} />}{product.label}</span>
+                <h3>{isHireScoreProduct ? 'AI recruitment and resume screening platform' : 'Free open-source JD workspace'}</h3>
+                <p>{isHireScoreProduct ? 'This page focuses only on HireScore AI: resume screening, JD-based scoring, ranking, explanations, and shortlist workflows.' : 'This page focuses only on JD Manager: multi-client JD tracking, candidate-to-JD visibility, shortlist scores, submissions, and status history.'}</p>
+                <a href="#product-capabilities">Explore this product <ArrowRight size={15} /></a>
+              </article>
+              <article>
+                <span>{isHireScoreProduct ? <BriefcaseBusiness size={20} /> : <SearchCheck size={20} />}{otherProduct.label}</span>
+                <h3>{isHireScoreProduct ? 'Need JD Manager instead?' : 'Need HireScore AI instead?'}</h3>
+                <p>{isHireScoreProduct ? 'JD Manager has its own separate page for recruitment agencies and staffing teams that need client, JD, and candidate tracking.' : 'HireScore AI has its own separate page for AI resume screening, candidate scoring, ranking, and recruiter-ready explanations.'}</p>
+                <Link href={otherPath}>Open {otherProduct.label} page <ArrowRight size={15} /></Link>
+              </article>
+            </div>
+
+            <article className="productPage-selectedProduct" id={isHireScoreProduct ? 'hirescore-ai' : 'jd-manager'}>
+              <div className="productPage-selectedCopy">
+                <span>{product.eyebrow}</span>
+                <h2 id="product-overview-title">{product.headline}</h2>
+                <p>{product.intro}</p>
+                <div className="productPage-selectedActions">
+                  {product.ctas.map(([label, href], index) => (
+                    href.startsWith('mailto:')
+                      ? <a className={`btn ${index === 0 ? 'btnPrimary' : 'btnGhost'}`} href={href} key={label}>{label}{index === 0 && <ArrowRight size={16} />}</a>
+                      : href.startsWith('#')
+                        ? <a className={`btn ${index === 0 ? 'btnPrimary' : 'btnGhost'}`} href={href} key={label}>{label}{index === 0 && <ArrowRight size={16} />}</a>
+                      : <Link className={`btn ${index === 0 ? 'btnPrimary' : 'btnGhost'}`} href={href} key={label}>{label}{index === 0 && <ArrowRight size={16} />}</Link>
+                  ))}
+                </div>
+                <div className="productPage-proof productPage-selectedProof">
+                  {product.proof.map((item) => <span key={item}><CheckCircle2 size={15} />{item}</span>)}
+                </div>
+              </div>
+              {isHireScoreProduct ? <ProductHeroDashboard /> : <JDManagerPreview />}
+            </article>
+          </div>
+        </section>
+
+        <section className="productPage-section" id="product-capabilities" aria-labelledby="product-capabilities-title">
+          <div className="container">
+            <div className="productPage-heading">
+              <span>Key capabilities</span>
+              <h2 id="product-capabilities-title">{product.label} capabilities recruiters can use every day</h2>
+              <p>{isHireScoreProduct ? 'AI screening, scoring, ranking, and explanation tools for faster shortlist decisions.' : 'Operational tools for managing clients, JDs, candidate movement, scores, and recruiter coordination.'}</p>
+            </div>
+            <div className="productPage-twoProductGrid">
+              {product.capabilities.map(([Icon, title, text], index) => (
+                <article key={title}>
+                  <div className="productPage-cardIcon"><Icon size={22} /></div>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="productPage-section productPage-workflowSection" id="product-workflow" aria-labelledby="product-workflow-title">
+          <div className="container">
+            <div className="productPage-workflowLayout">
+              <aside className="productPage-workflowIntro">
+                <div className="productPage-heading productPage-headingLeft">
+                  <span>How it works</span>
+                  <h2 id="product-workflow-title">{isHireScoreProduct ? 'From job requirement to ranked shortlist' : 'From client requirement to tracked JD pipeline'}</h2>
+                  <p>{isHireScoreProduct ? 'A practical screening flow that keeps recruiters in control of review, evidence, and next action.' : 'A clear operating flow for agencies managing many clients, roles, candidates, and submission decisions.'}</p>
+                </div>
+                <div className="productPage-problemPanel">
+                  <span>{isHireScoreProduct ? 'Screening problem' : 'Agency operations problem'}</span>
+                  <strong>{isHireScoreProduct ? 'Manual resume review slows down shortlist decisions and makes candidate fit hard to explain.' : 'Recruitment agencies often manage several clients at once, and each client can have many active JDs with candidates, scores, statuses, and recruiter actions spread across tools.'}</strong>
+                  <p>{isHireScoreProduct ? 'HireScore AI structures the review so candidate scoring, ranking, and explanations stay connected to the JD.' : 'JD Manager acts as the operational control layer for tracking active JDs, candidate history, shortlist scores, submissions, and stage movement.'}</p>
+                </div>
+              </aside>
+              <div className="productPage-stepGrid">
+                {product.workflow.map(([Icon, title, text], index) => (
+                  <article key={title}>
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    <Icon size={24} />
+                    <h3>{title}</h3>
+                    <p>{text}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="productPage-section productPage-benefitsSection" aria-labelledby="product-benefits-title">
+          <div className="container">
+            <div className="productPage-benefitsHeader">
+              <div className="productPage-heading productPage-headingLeft"><span>Business benefits</span><h2 id="product-benefits-title">{isHireScoreProduct ? 'Built to help recruiters move faster with clearer evidence' : 'Built to make agency JD operations easier to control'}</h2></div>
+              <div className="productPage-benefitsIntro"><Sparkles size={17} /><p>{isHireScoreProduct ? 'Spend less time sorting profiles and more time reviewing the candidates most likely to fit the role.' : 'Reduce the daily confusion that comes from tracking many clients, many JDs, and many candidate submissions at once.'}</p><span><i />Practical workflow gains</span></div>
+            </div>
+            <div className="productPage-benefitGrid">
+              {product.benefits.map((benefit, index) => (
+                <article key={benefit}><span>{String(index + 1).padStart(2, '0')}</span><CheckCircle2 size={19} /><h3>{benefit}</h3></article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="productPage-section productPage-useCaseSection" aria-labelledby="product-use-cases-title">
+          <div className="container productPage-useCaseLayout">
+            <div className="productPage-useCaseIntro">
+              <div className="productPage-heading productPage-headingLeft">
+                <span>Who it is for</span>
+                <h2 id="product-use-cases-title">{isHireScoreProduct ? 'For teams handling resume volume and shortlist decisions' : 'For agencies managing clients, roles, submissions, and recruiter action'}</h2>
+                <p>{isHireScoreProduct ? 'HireScore AI fits recruiting teams that need faster screening, clearer scoring, and more consistent candidate review.' : 'JD Manager fits teams that need practical visibility across clients, active JDs, candidates, scores, submissions, and status history.'}</p>
+              </div>
+              <div className="productPage-useCasePromise">
+                <div><Sparkles size={16} /><span>Built for real hiring operations</span></div>
+                <strong>{isHireScoreProduct ? 'Flexible enough for every hiring team. Consistent enough for every screening decision.' : 'Simple enough to adopt quickly. Structured enough to reduce JD and candidate tracking confusion.'}</strong>
+                <div className="productPage-useCaseTags">{product.proof.map((item) => <span key={item}>{item}</span>)}</div>
+              </div>
+            </div>
+            <div className="productPage-useCaseGrid">
+              {product.audiences.map(([Icon, title, text], index) => (
+                <article key={title}>
+                  <div className="productPage-useCaseCardTop"><span><Icon size={21} /></span><b>{String(index + 1).padStart(2, '0')}</b></div>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="productPage-section productPage-ctaSection">
+          <div className="container productPage-cta">
+            <div><span>Next step</span><h2>{isHireScoreProduct ? 'Try HireScore AI with your real hiring workflow' : 'Explore JD Manager for practical agency operations'}</h2><p>{isHireScoreProduct ? 'Start with one job, upload real resumes, and see how AI screening, ranking, explanation, screening test support, and shortlist review can speed up your process.' : 'Use JD Manager to organize clients, JDs, candidates, shortlist scores, submissions, and recruiter actions in a free open-source workflow.'}</p></div>
+            <Link className="btn btnPrimary btnLarge" href={isHireScoreProduct ? '/contact' : '/resources/user-guide'}>{isHireScoreProduct ? 'Book Free Pilot Access' : 'View Workflow Guide'} <ArrowRight size={18} /></Link>
+          </div>
+        </section>
+
+        <section className="productPage-section productPage-faqSection" aria-labelledby="product-faq-title">
+          <div className="container productPage-faqLayout">
+            <div className="productPage-heading productPage-headingLeft"><span>Product links</span><h2 id="product-faq-title">Explore connected HireScore AI pages</h2><p>Follow the important product, pricing, solution, and feature paths from one place.</p></div>
+            <div className="productPage-faqList">{productFaqs.map(([question, answer]) => <details key={question}><summary>{question}<ChevronDown size={18} /></summary><p>{answer}</p></details>)}</div>
+            <div className="inlineLinks productPage-internalLinks">
+              <Link href="/pricing">Pricing</Link>
+              <Link href="/solutions">Solutions</Link>
+              <Link href="/solutions/recruitment-agencies">Recruitment Agencies</Link>
+              <Link href="/solutions/staffing-companies">Staffing Companies</Link>
+              <Link href="/solutions/hr-teams">HR Teams</Link>
+              <Link href="/product/ai-resume-parsing">AI Resume Screening</Link>
+              <Link href="/product/ai-candidate-scoring">Candidate Scoring</Link>
+              <Link href="/product/ai-screening-test">AI Screening Test</Link>
+            </div>
           </div>
         </section>
       </div>
@@ -1993,10 +2370,36 @@ function ResourceCard({ item }) {
 }
 
 function PricingPage() {
+  const pricingSummary = [
+    ['Free Pilot', 'INR 0', '7 days', '3 active jobs'],
+    ['Starter', 'INR 599', 'per month', '5 active jobs'],
+    ['Growth', 'INR 1,599', 'per month', '15 active jobs'],
+    ['Enterprise', 'Custom', 'talk to an expert', 'Custom active jobs'],
+  ]
+
   return (
     <>
       <SEO path="/pricing" />
       <PageHero eyebrow="Pricing" title="Simple pricing for AI-powered hiring teams" intro="Start with a 7-day free pilot, then choose a monthly plan based on the number of active jobs your hiring team needs." />
+      <section className="section compact pricingSeoSection" aria-labelledby="pricing-summary-title">
+        <div className="container pricingSeoSummary">
+          <div>
+            <span className="eyebrow"><CheckCircle2 size={14} />INR pricing</span>
+            <h2 id="pricing-summary-title">HireScore AI pricing starts with a free pilot, then monthly INR plans</h2>
+            <p>Choose the plan by active job volume: Free Pilot for 7 days, Starter at INR 599 per month, Growth at INR 1,599 per month, or Enterprise custom pricing for larger hiring workflows.</p>
+          </div>
+          <div className="pricingSeoGrid" aria-label="HireScore AI pricing summary">
+            {pricingSummary.map(([name, price, period, jobs]) => (
+              <article key={name}>
+                <span>{name}</span>
+                <strong>{price}</strong>
+                <small>{period}</small>
+                <p>{jobs}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
       <section className="section pricingSection"><div className="container pricingGrid">{pricingPlans.map((plan) => <PricingCard key={plan.name} plan={plan} />)}</div></section>
       <section className="section">
         <div className="container narrow">
@@ -3116,7 +3519,8 @@ function Footer() {
         <div className="professionalFooterLinks">
           <div>
             <h3>Product</h3>
-            <Link href="/product">Platform Overview</Link>
+            <Link href="/product">HireScore AI</Link>
+            <Link href="/product/jd-manager">JD Manager</Link>
             <Link href="/product/ai-resume-parsing">AI Resume Screening</Link>
             <Link href="/product/ai-candidate-ranking">Candidate Ranking</Link>
             <Link href="/pricing">Pricing</Link>
@@ -3205,6 +3609,7 @@ function usePath() {
 function renderRoute(path) {
   if (path === '/') return <HomePage />
   if (path === '/product') return <ProductOverview />
+  if (path === '/product/jd-manager') return <JDManagerPage />
   if (path === '/solutions') return <SolutionsPage />
   const solutionSegment = solutionSegmentPages.find((page) => page.path === path)
   if (solutionSegment) return <SolutionSegmentPage segment={solutionSegment} />
@@ -3232,9 +3637,10 @@ function renderRoute(path) {
 export default function App() {
   const path = usePath()
   const isHome = path === '/'
-  const isProductOverview = path === '/product'
+  const isProductOverview = path === '/product' || path === '/product/jd-manager'
+  const isJdManager = path === '/product/jd-manager'
   return (
-    <div className={`app ${isHome ? 'stitchHome' : 'commandInner'} ${isProductOverview ? 'productView' : ''}`}>
+    <div className={`app ${isHome ? 'stitchHome' : 'commandInner'} ${isProductOverview ? 'productView' : ''} ${isJdManager ? 'jdManagerView' : ''}`}>
       <Header isHome={isHome} />
       <main>{renderRoute(path)}</main>
       <Footer />

@@ -12,7 +12,7 @@ export function canonicalUrlForPath(path = '/') {
 
 const staticRoutes = [
   ['/', 'HireScore AI | AI Recruitment & Resume Screening Software', 'Screen resumes, match candidates to job descriptions, explain fit, rank talent, manage shortlists, communicate, and schedule interviews with HireScore AI.', 'WebPage'],
-  ['/product', 'AI Recruitment Software Features | HireScore AI', 'Explore HireScore AI features for job creation, public apply pages, resume parsing, JD matching, candidate ranking, explainable shortlisting, communication, and interviews.', 'CollectionPage'],
+  ['/product', 'HireScore AI Product | AI Resume Screening Software', 'Explore HireScore AI for AI resume screening, JD-based candidate scoring, candidate ranking, smart shortlisting, and recruiter-ready explanations.', 'CollectionPage'],
   ['/solutions', 'AI Hiring Solutions for Recruiters & Staffing Agencies | HireScore AI', 'HireScore AI helps recruitment agencies, HR teams, staffing firms, startups, and high-volume hiring teams screen resumes, rank candidates, shortlist talent, and manage hiring workflows with AI.', 'CollectionPage'],
   ['/resources', 'AI Recruitment Resources, Guides & Case Studies | HireScore AI', 'Explore practical AI recruitment guides, articles, sample case studies, FAQs, and product updates from HireScore AI.', 'CollectionPage'],
   ['/resources/user-guide', 'HireScore AI User Guide | Recruiter Workflow Tutorials', 'Follow step-by-step HireScore AI guides for jobs, apply links, resume uploads, ranked candidates, shortlisting, communication, screening tests, and interviews.', 'CollectionPage'],
@@ -20,13 +20,14 @@ const staticRoutes = [
   ['/resources/case-studies', 'AI Recruitment Workflow Case Studies | HireScore AI', 'Explore sample HireScore AI case studies covering resume screening, candidate shortlisting, and public application workflows.', 'CollectionPage'],
   ['/resources/faqs', 'HireScore AI FAQs | AI Resume Screening & Recruitment', 'Find answers about HireScore AI, AI resume screening, candidate ranking, free pilot access, recruiter control, and hiring workflow automation.', 'FAQPage'],
   ['/resources/release-notes', 'HireScore AI Release Notes | Product Updates', 'Follow HireScore AI product updates for resume screening, candidate ranking, public apply pages, communication, and interview workflows.', 'CollectionPage'],
-  ['/pricing', 'HireScore AI Pricing | Start a Free Recruitment Software Pilot', 'Explore HireScore AI Free Pilot, Starter, Growth, and Enterprise options for AI resume screening and connected hiring workflows.', 'WebPage'],
+  ['/pricing', 'HireScore AI Pricing | INR Plans from 599 per Month', 'Compare HireScore AI pricing: Free Pilot for 7 days, Starter at INR 599/month, Growth at INR 1,599/month, and Enterprise custom pricing.', 'WebPage'],
   ['/contact', 'Contact HireScore AI | Book a Demo or Request a Pilot', 'Contact HireScore AI to book a demo, request pilot access, or discuss AI resume screening, candidate ranking, and recruitment automation.', 'ContactPage'],
   ['/privacy', 'Privacy Policy | HireScore AI', 'Read the HireScore AI privacy policy for information about website and recruitment platform data practices.', 'WebPage', true],
   ['/terms', 'Terms of Use | HireScore AI', 'Read the terms that apply to the HireScore AI website and recruitment workflow platform.', 'WebPage', true],
 ]
 
 const productRoutes = [
+  ['/product/jd-manager', 'JD Manager for Recruitment Agencies | HireScore AI', 'Use JD Manager, a free open-source JD workspace for recruitment agencies and staffing teams to manage clients, JDs, candidates, shortlist scores, submissions, and pipeline status.'],
   ['/product/create-job', 'AI Job Creation Software for Recruiters | HireScore AI', 'Create structured jobs in HireScore AI so recruiters can collect applications, screen resumes, and manage every hiring stage from one connected workflow.'],
   ['/product/public-apply-page', 'Public Job Apply Pages for Recruiters | HireScore AI', 'Generate shareable public job apply pages to collect candidate details and resumes directly into an organized hiring pipeline.'],
   ['/product/resume-upload', 'Bulk Resume Upload for Hiring Teams | HireScore AI', 'Upload and organize resumes in HireScore AI for AI parsing, JD matching, candidate scoring, ranking, and shortlisting.'],
@@ -69,13 +70,13 @@ export const solutionSegmentRoutes = [
   {
     path: '/solutions/bulk-resume-screening',
     navLabel: 'Bulk Resume Screening',
-    title: 'Bulk Resume Screening Software | HireScoreAI',
+    title: 'Bulk Resume Screening Software | HireScore AI',
     description: 'Bulk resume screening software for high-volume hiring teams to process large resume batches, rank candidates by JD fit, and review shortlist evidence.',
   },
   {
     path: '/solutions/tech-hiring',
     navLabel: 'IT & Tech Hiring',
-    title: 'AI Technical Candidate Screening Software | HireScoreAI',
+    title: 'AI Technical Candidate Screening Software | HireScore AI',
     description: 'AI technical candidate screening software for IT recruiters to match skills, rank technical resumes, review gaps, and prepare stronger shortlists.',
   },
 ]
@@ -84,32 +85,32 @@ export const comparisonRoutes = [
   {
     path: '/compare/hirescoreai-vs-hiredscore',
     navLabel: 'HireScoreAI vs HiredScore',
-    title: 'HireScoreAI vs HiredScore: Is HireScoreAI the Same Platform? | 2026',
-    description: 'HireScoreAI is an independent AI recruitment platform and is not affiliated with HiredScore, HireScore.com, or Workday. See how the platforms differ.',
+    title: 'HireScore AI vs HiredScore: Is HireScore AI the Same Platform? | 2026',
+    description: 'HireScore AI is an independent AI recruitment platform and is not affiliated with HiredScore, HireScore.com, or Workday. See how the platforms differ.',
   },
   {
     path: '/compare/hirescoreai-vs-zoho-recruit',
     navLabel: 'HireScoreAI vs Zoho Recruit',
-    title: 'HireScoreAI vs Zoho Recruit | AI Resume Screening Comparison | 2026',
-    description: 'Compare HireScoreAI and Zoho Recruit for AI resume screening, candidate ranking, hiring workflows, and recruiter-focused shortlist review.',
+    title: 'HireScore AI vs Zoho Recruit | AI Resume Screening Comparison | 2026',
+    description: 'Compare HireScore AI and Zoho Recruit for AI resume screening, candidate ranking, hiring workflows, and recruiter-focused shortlist review.',
   },
   {
     path: '/compare/hirescoreai-vs-manatal',
     navLabel: 'HireScoreAI vs Manatal',
-    title: 'HireScoreAI vs Manatal: AI Recruiting Software Compared | 2026',
-    description: "See how HireScoreAI's explainable AI candidate scoring compares with Manatal's broader recruiting suite, including screening focus, setup, and hiring workflow fit.",
+    title: 'HireScore AI vs Manatal: AI Recruiting Software Compared | 2026',
+    description: "See how HireScore AI's explainable AI candidate scoring compares with Manatal's broader recruiting suite, including screening focus, setup, and hiring workflow fit.",
   },
   {
     path: '/compare/hirescoreai-vs-workable',
     navLabel: 'HireScoreAI vs Workable',
-    title: 'HireScoreAI vs Workable: AI ATS Comparison | 2026',
-    description: 'Compare HireScoreAI and Workable on AI screening, candidate evaluation, pricing clarity, and hiring workflow fit for growing teams.',
+    title: 'HireScore AI vs Workable: AI ATS Comparison | 2026',
+    description: 'Compare HireScore AI and Workable on AI screening, candidate evaluation, pricing clarity, and hiring workflow fit for growing teams.',
   },
   {
     path: '/compare/hirescoreai-vs-greenhouse',
     navLabel: 'HireScoreAI vs Greenhouse',
-    title: 'HireScoreAI vs Greenhouse: AI ATS Comparison | 2026',
-    description: 'Compare HireScoreAI and Greenhouse on AI screening, setup effort, pricing clarity, and fit for recruitment teams, startups, and HR teams.',
+    title: 'HireScore AI vs Greenhouse: AI ATS Comparison | 2026',
+    description: 'Compare HireScore AI and Greenhouse on AI screening, setup effort, pricing clarity, and fit for recruitment teams, startups, and HR teams.',
   },
 ]
 
@@ -227,7 +228,7 @@ const software = {
   '@type': 'SoftwareApplication',
   '@id': `${SITE_URL}/#software`,
   name: BRAND_NAME,
-  alternateName: 'HireScoreAI',
+  alternateName: ['HireScoreAI', 'HireScore AI recruitment platform'],
   applicationCategory: 'BusinessApplication',
   applicationSubCategory: 'AI recruitment software',
   operatingSystem: 'Web',
@@ -235,7 +236,7 @@ const software = {
   description: DEFAULT_DESCRIPTION,
   publisher: { '@id': `${SITE_URL}/#organization` },
   brand: { '@id': `${SITE_URL}/#organization` },
-  featureList: ['Job creation', 'Public job apply pages', 'Bulk resume upload', 'AI resume parsing', 'JD-based candidate matching', 'AI candidate scoring and ranking', 'Explainable candidate fit', 'Shortlisting', 'Candidate communication', 'Screening tests', 'Interview scheduling', 'Hiring pipeline analytics'],
+  featureList: ['Job creation', 'Public job apply pages', 'Bulk resume upload', 'AI resume parsing', 'JD-based candidate matching', 'AI candidate scoring and ranking', 'Explainable candidate fit', 'Shortlisting', 'Candidate communication', 'Screening tests', 'Interview scheduling', 'Hiring pipeline analytics', 'JD Manager for client and job description tracking'],
   offers: {
     '@type': 'Offer',
     price: '0',
@@ -245,6 +246,131 @@ const software = {
     url: canonicalUrlForPath('/pricing'),
   },
 }
+
+const productSuite = [
+  {
+    '@type': 'SoftwareApplication',
+    '@id': `${SITE_URL}/product/#hirescore-ai`,
+    name: 'HireScore AI',
+    applicationCategory: 'BusinessApplication',
+    applicationSubCategory: 'AI recruitment and resume screening software',
+    operatingSystem: 'Web',
+    url: canonicalUrlForPath('/product'),
+    description: 'AI recruitment and resume screening platform for JD-based candidate scoring, ranking, smart shortlisting, and recruiter-ready explanations.',
+    publisher: { '@id': `${SITE_URL}/#organization` },
+    brand: { '@id': `${SITE_URL}/#organization` },
+    featureList: ['AI resume screening', 'JD-based candidate scoring', 'Candidate ranking', 'Recruiter-ready explanations', 'Smart shortlisting', 'Workflow clarity', 'AI screening test support'],
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'INR',
+      category: 'Free pilot',
+      url: canonicalUrlForPath('/pricing'),
+    },
+  },
+  {
+    '@type': 'SoftwareApplication',
+    '@id': `${SITE_URL}/product/jd-manager/#software`,
+    name: 'JD Manager',
+    applicationCategory: 'BusinessApplication',
+    applicationSubCategory: 'Open-source job description management tool',
+    operatingSystem: 'Web',
+    url: canonicalUrlForPath('/product/jd-manager'),
+    description: 'Free open-source JD management workspace for recruitment agencies and staffing teams that manage multiple clients, multiple JDs, candidate tracking, shortlist scores, submissions, and pipeline status.',
+    publisher: { '@id': `${SITE_URL}/#organization` },
+    brand: { '@id': `${SITE_URL}/#organization` },
+    isAccessibleForFree: true,
+    featureList: ['Multi-client JD management', 'Multiple JDs per client', 'Candidate-to-JD tracking', 'Shortlisting score visibility', 'Submission and status tracking', 'Recruiter coordination'],
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'INR',
+      category: 'Free open-source tool',
+      url: canonicalUrlForPath('/product/jd-manager'),
+    },
+  },
+]
+
+const pricingOffers = [
+  {
+    '@type': 'Offer',
+    name: 'HireScore AI Free Pilot',
+    description: 'Seven-day HireScore AI pilot with 3 active jobs for testing real hiring workflows.',
+    price: '0',
+    priceCurrency: 'INR',
+    availability: 'https://schema.org/InStock',
+    url: canonicalUrlForPath('/pricing'),
+    eligibleDuration: {
+      '@type': 'QuantitativeValue',
+      value: 7,
+      unitText: 'day',
+    },
+    itemOffered: {
+      '@type': 'SoftwareApplication',
+      name: 'HireScore AI Free Pilot',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+    },
+  },
+  {
+    '@type': 'Offer',
+    name: 'HireScore AI Starter',
+    description: 'Monthly HireScore AI Starter plan for 5 active jobs.',
+    price: '599',
+    priceCurrency: 'INR',
+    availability: 'https://schema.org/InStock',
+    url: canonicalUrlForPath('/pricing'),
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: '599',
+      priceCurrency: 'INR',
+      billingDuration: 1,
+      unitText: 'month',
+    },
+    itemOffered: {
+      '@type': 'SoftwareApplication',
+      name: 'HireScore AI Starter',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+    },
+  },
+  {
+    '@type': 'Offer',
+    name: 'HireScore AI Growth',
+    description: 'Monthly HireScore AI Growth plan for 15 active jobs.',
+    price: '1599',
+    priceCurrency: 'INR',
+    availability: 'https://schema.org/InStock',
+    url: canonicalUrlForPath('/pricing'),
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: '1599',
+      priceCurrency: 'INR',
+      billingDuration: 1,
+      unitText: 'month',
+    },
+    itemOffered: {
+      '@type': 'SoftwareApplication',
+      name: 'HireScore AI Growth',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+    },
+  },
+  {
+    '@type': 'Offer',
+    name: 'HireScore AI Enterprise',
+    description: 'Custom HireScore AI pricing for teams that need custom active job limits, onboarding, governance, and priority support.',
+    priceCurrency: 'INR',
+    availability: 'https://schema.org/InStock',
+    url: canonicalUrlForPath('/contact'),
+    itemOffered: {
+      '@type': 'SoftwareApplication',
+      name: 'HireScore AI Enterprise',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+    },
+  },
+]
 
 const faqEntities = [
   ['What is HireScore AI?', 'HireScore AI is an independent AI recruitment workflow platform for job creation, public apply pages, resume screening, candidate ranking, explainable shortlisting, communication, tests, and interview scheduling.'],
@@ -268,6 +394,28 @@ export function buildRouteSchema(config) {
     primaryImageOfPage: { '@type': 'ImageObject', url: config.image },
     breadcrumb: config.breadcrumbs ? { '@id': `${config.canonical}#breadcrumb` } : undefined,
   }]
+
+  if (config.path === '/product') {
+    graph.push(productSuite[0])
+  }
+
+  if (config.path === '/product/jd-manager') {
+    graph.push(productSuite[1])
+  }
+
+  if (config.path === '/pricing') {
+    graph.push({
+      '@type': 'OfferCatalog',
+      '@id': `${config.canonical}#pricing-offers`,
+      name: 'HireScore AI pricing plans',
+      url: config.canonical,
+      itemListElement: pricingOffers.map((offer, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: offer,
+      })),
+    })
+  }
 
   if (config.breadcrumbs) {
     graph.push({
