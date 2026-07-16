@@ -4215,6 +4215,10 @@ h3 {
 }
 
 /* JD Manager page: separate product page styles scoped away from /product. */
+.productView .dropTrigger[href="/product/hirescore-ai"] {
+  color: #4cd7f6;
+}
+
 .jdManagerView .productPage-productDirectory {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -4517,5 +4521,137 @@ h3 {
 
   .jdManagerView .productPage-selectedProduct {
     padding: 18px;
+  }
+}
+
+/* Cleaner JD Manager hero mockup. */
+.jdManagerView .productPage-heroVisual {
+  align-self: start;
+}
+
+.jdManagerView .productPage-jdPreview {
+  max-width: 620px;
+  margin-inline: auto;
+  padding: 20px;
+}
+
+.jdManagerView .productPage-jdMetricRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.jdManagerView .productPage-jdMetricRow span {
+  min-height: 86px;
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  padding: 14px;
+  border: 1px solid rgba(210, 187, 255, 0.09);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.jdManagerView .productPage-jdMetricRow strong {
+  color: #fff;
+  font-size: 1.55rem;
+}
+
+.jdManagerView .productPage-jdMetricRow small {
+  color: #a59cab;
+  font-size: 0.75rem;
+  font-weight: 850;
+}
+
+.jdManagerView .productPage-jdSimplePanel {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.jdManagerView .productPage-jdSimplePanel .productPage-jdRequirement {
+  margin: 0;
+  padding: 18px;
+}
+
+.jdManagerView .productPage-jdSimplePanel .productPage-jdRequirement p {
+  margin: 8px 0 0;
+  color: #a59cab;
+}
+
+.jdManagerView .productPage-jdTimeline {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.jdManagerView .productPage-jdTimeline span {
+  min-height: 62px;
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  padding: 10px;
+  border: 1px solid rgba(76, 215, 246, 0.11);
+  border-radius: 12px;
+  color: #dce6f6;
+  background: rgba(76, 215, 246, 0.045);
+  font-size: 0.75rem;
+  font-weight: 850;
+}
+
+.jdManagerView .productPage-jdTimeline b {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #15121e;
+  background: #4cd7f6;
+  font-size: 0.68rem;
+}
+
+.jdManagerView .productPage-jdCandidateList {
+  padding: 14px;
+  border: 1px solid rgba(210, 187, 255, 0.09);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.jdManagerView .productPage-jdCandidate {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  min-height: 64px;
+  margin-top: 9px;
+}
+
+.jdManagerView .productPage-jdCandidate strong {
+  font-size: 0.92rem;
+}
+
+.jdManagerView .productPage-jdCandidate b {
+  min-width: 34px;
+  text-align: right;
+}
+
+.jdManagerView .productPage-jdCandidate em {
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .jdManagerView .productPage-jdMetricRow,
+  .jdManagerView .productPage-jdTimeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .jdManagerView .productPage-jdCandidate {
+    grid-template-columns: 1fr auto;
+  }
+
+  .jdManagerView .productPage-jdCandidate em {
+    grid-column: 1 / -1;
+    width: fit-content;
+    margin-top: 8px;
   }
 }

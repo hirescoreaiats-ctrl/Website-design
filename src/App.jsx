@@ -55,7 +55,7 @@ const solutionNavItems = [
 ]
 
 const productNavItems = [
-  ['/product', 'HireScore AI'],
+  ['/product/hirescore-ai', 'HireScore AI'],
   ['/product/jd-manager', 'JD Manager'],
 ]
 
@@ -851,7 +851,7 @@ function Header({ isHome = false }) {
         <Link className="homeFullLogo" href="/" aria-label="HireScore AI home"><img src="/hirescore-logo-white.png" alt="HireScore AI" /></Link>
         <nav className="desktopNav homeNav unifiedNav" aria-label="Primary navigation">
           <a href={isHome ? '#about' : '/#about'}>About Us</a>
-          <Dropdown label="Product" base="/product" items={productNavItems} />
+          <Dropdown label="Product" base="/product/hirescore-ai" items={productNavItems} />
           <Dropdown label="Solutions" base="/solutions" items={solutionNavItems} />
           <Link href="/resources">Resources</Link>
           <Link href="/pricing">Pricing</Link>
@@ -867,7 +867,7 @@ function Header({ isHome = false }) {
       </div>
       {open && (
         <nav className="mobileNav" aria-label="Mobile navigation">
-          {['/', '/product', '/product/jd-manager', '/solutions', '/resources', '/pricing', '/contact'].map((path) => (
+          {['/', '/product/hirescore-ai', '/product/jd-manager', '/solutions', '/resources', '/pricing', '/contact'].map((path) => (
             <Link key={path} href={path} onClick={() => setOpen(false)}>{labelFor(path)}</Link>
           ))}
           <a className="btn btnPrimary" href={PILOT_MAILTO}>Start Free Pilot</a>
@@ -891,7 +891,8 @@ function Dropdown({ label, base, items }) {
 function labelFor(path) {
   const labels = {
     '/': 'Home',
-    '/product': 'HireScore AI',
+    '/product': 'Product',
+    '/product/hirescore-ai': 'HireScore AI',
     '/product/jd-manager': 'JD Manager',
     '/solutions': 'Solutions',
     '/resources': 'Resources',
@@ -1604,14 +1605,9 @@ function ProductSuitePreview() {
 }
 
 function JDManagerPreview() {
-  const clients = [
-    ['Acme Staffing', '6 active JDs'],
-    ['Northstar Tech', '4 active JDs'],
-    ['Vertex Consulting', '8 active JDs'],
-  ]
   const candidates = [
-    ['Aarav S.', 'Backend Engineer', '84', 'Submitted'],
     ['Meera P.', 'Data Analyst', '91', 'Shortlisted'],
+    ['Aarav S.', 'Backend Engineer', '84', 'Submitted'],
     ['Karan V.', 'QA Lead', '76', 'Review'],
   ]
 
@@ -1621,31 +1617,28 @@ function JDManagerPreview() {
         <div><BriefcaseBusiness size={17} /><span>JD Manager</span></div>
         <small>Open source & free</small>
       </div>
-      <div className="productPage-jdGrid">
-        <aside>
-          <div className="productPage-panelTitle"><span>Clients</span><small>18 active JDs</small></div>
-          {clients.map(([name, detail], index) => (
-            <button type="button" className={index === 0 ? 'isActive' : ''} key={name}>
-              <strong>{name}</strong>
-              <small>{detail}</small>
-            </button>
+
+      <div className="productPage-jdMetricRow">
+        <span><strong>18</strong><small>Active JDs</small></span>
+        <span><strong>42</strong><small>Candidates</small></span>
+        <span><strong>11</strong><small>Shortlisted</small></span>
+      </div>
+
+      <div className="productPage-jdSimplePanel">
+        <div className="productPage-jdRequirement">
+          <span>Client workspace</span>
+          <strong>Acme Staffing</strong>
+          <p>Senior Data Analyst · JD-1042</p>
+        </div>
+
+        <div className="productPage-jdTimeline" aria-label="JD Manager workflow">
+          {['Client', 'JD', 'Candidates', 'Shortlist'].map((item, index) => (
+            <span key={item}><b>{index + 1}</b>{item}</span>
           ))}
-        </aside>
-        <section>
-          <div className="productPage-panelTitle"><span>JDs under Acme Staffing</span><small>Recruiter: Team A</small></div>
-          <div className="productPage-jdRequirement">
-            <span>JD-1042</span>
-            <strong>Senior Data Analyst</strong>
-            <p>Track candidates, shortlist scores, submissions, status, and recruiter ownership for this client requirement.</p>
-          </div>
-          <div className="productPage-jdStats">
-            <span><strong>42</strong><small>Candidates</small></span>
-            <span><strong>11</strong><small>Shortlisted</small></span>
-            <span><strong>6</strong><small>Submitted</small></span>
-          </div>
-        </section>
-        <aside>
-          <div className="productPage-panelTitle"><span>Candidate flow</span><small>Per JD</small></div>
+        </div>
+
+        <div className="productPage-jdCandidateList">
+          <div className="productPage-panelTitle"><span>Candidate shortlist</span><small>Per JD</small></div>
           {candidates.map(([name, role, score, status]) => (
             <div className="productPage-jdCandidate" key={name}>
               <div><strong>{name}</strong><small>{role}</small></div>
@@ -1653,7 +1646,7 @@ function JDManagerPreview() {
               <em>{status}</em>
             </div>
           ))}
-        </aside>
+        </div>
       </div>
     </div>
   )
@@ -1662,7 +1655,7 @@ function JDManagerPreview() {
 function ProductOverview() {
   return (
     <>
-      <SEO path="/product" />
+      <SEO path="/product/hirescore-ai" />
       <div className="productPage-root">
         <section className="productPage-hero">
           <div className="container productPage-heroGrid">
@@ -1826,11 +1819,19 @@ function JDManagerPage() {
   return <ProductLandingPage productId="jdManager" path="/product/jd-manager" />
 }
 
+function RedirectPage({ to }) {
+  useEffect(() => {
+    navigateTo(to)
+  }, [to])
+
+  return null
+}
+
 function ProductLandingPage({ productId, path }) {
   const product = productCatalog[productId]
   const isHireScoreProduct = productId === 'hirescore'
   const otherProduct = productCatalog[isHireScoreProduct ? 'jdManager' : 'hirescore']
-  const otherPath = isHireScoreProduct ? '/product/jd-manager' : '/product'
+  const otherPath = isHireScoreProduct ? '/product/jd-manager' : '/product/hirescore-ai'
 
   return (
     <>
@@ -2025,7 +2026,7 @@ function ProductDetail({ page }) {
     <>
       <SEO title={`${page.title} | HireScore AI`} description={page.meta} path={page.slug} />
       <PageHero eyebrow="Product feature" title={page.title} intro={page.intro} />
-      <Breadcrumbs items={[['/product', 'Product'], [page.slug, page.navLabel]]} />
+      <Breadcrumbs items={[['/product/hirescore-ai', 'HireScore AI'], [page.slug, page.navLabel]]} />
       <section className="section">
         <div className="container detailGrid">
           <InfoBlock title="What this feature does" text={page.does} />
@@ -3519,7 +3520,7 @@ function Footer() {
         <div className="professionalFooterLinks">
           <div>
             <h3>Product</h3>
-            <Link href="/product">HireScore AI</Link>
+            <Link href="/product/hirescore-ai">HireScore AI</Link>
             <Link href="/product/jd-manager">JD Manager</Link>
             <Link href="/product/ai-resume-parsing">AI Resume Screening</Link>
             <Link href="/product/ai-candidate-ranking">Candidate Ranking</Link>
@@ -3608,7 +3609,8 @@ function usePath() {
 
 function renderRoute(path) {
   if (path === '/') return <HomePage />
-  if (path === '/product') return <ProductOverview />
+  if (path === '/product') return <RedirectPage to="/product/hirescore-ai" />
+  if (path === '/product/hirescore-ai') return <ProductOverview />
   if (path === '/product/jd-manager') return <JDManagerPage />
   if (path === '/solutions') return <SolutionsPage />
   const solutionSegment = solutionSegmentPages.find((page) => page.path === path)
@@ -3637,7 +3639,7 @@ function renderRoute(path) {
 export default function App() {
   const path = usePath()
   const isHome = path === '/'
-  const isProductOverview = path === '/product' || path === '/product/jd-manager'
+  const isProductOverview = path === '/product' || path === '/product/hirescore-ai' || path === '/product/jd-manager'
   const isJdManager = path === '/product/jd-manager'
   return (
     <div className={`app ${isHome ? 'stitchHome' : 'commandInner'} ${isProductOverview ? 'productView' : ''} ${isJdManager ? 'jdManagerView' : ''}`}>

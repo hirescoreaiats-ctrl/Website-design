@@ -12,7 +12,7 @@ export function canonicalUrlForPath(path = '/') {
 
 const staticRoutes = [
   ['/', 'HireScore AI | AI Recruitment & Resume Screening Software', 'Screen resumes, match candidates to job descriptions, explain fit, rank talent, manage shortlists, communicate, and schedule interviews with HireScore AI.', 'WebPage'],
-  ['/product', 'HireScore AI Product | AI Resume Screening Software', 'Explore HireScore AI for AI resume screening, JD-based candidate scoring, candidate ranking, smart shortlisting, and recruiter-ready explanations.', 'CollectionPage'],
+  ['/product/hirescore-ai', 'HireScore AI Product | AI Resume Screening Software', 'Explore HireScore AI for AI resume screening, JD-based candidate scoring, candidate ranking, smart shortlisting, and recruiter-ready explanations.', 'CollectionPage'],
   ['/solutions', 'AI Hiring Solutions for Recruiters & Staffing Agencies | HireScore AI', 'HireScore AI helps recruitment agencies, HR teams, staffing firms, startups, and high-volume hiring teams screen resumes, rank candidates, shortlist talent, and manage hiring workflows with AI.', 'CollectionPage'],
   ['/resources', 'AI Recruitment Resources, Guides & Case Studies | HireScore AI', 'Explore practical AI recruitment guides, articles, sample case studies, FAQs, and product updates from HireScore AI.', 'CollectionPage'],
   ['/resources/user-guide', 'HireScore AI User Guide | Recruiter Workflow Tutorials', 'Follow step-by-step HireScore AI guides for jobs, apply links, resume uploads, ranked candidates, shortlisting, communication, screening tests, and interviews.', 'CollectionPage'],
@@ -148,7 +148,7 @@ const breadcrumbFor = (path, label, parentPath, parentLabel) => [
 
 export const SEO_ROUTES = [
   ...staticRoutes.map(([path, title, description, pageType, noindex = false]) => ({ path, title, description, pageType: pageType === 'FAQPage' ? 'WebPage' : pageType, schemaKind: pageType === 'FAQPage' ? 'faq' : undefined, noindex })),
-  ...productRoutes.map(([path, title, description]) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, title.replace(/ \|.*$/, ''), '/product', 'Product') })),
+  ...productRoutes.map(([path, title, description]) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, title.replace(/ \|.*$/, ''), '/product/hirescore-ai', 'HireScore AI') })),
   ...solutionSegmentRoutes.map(({ path, title, description, navLabel }) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, navLabel, '/solutions', 'Solutions') })),
   ...comparisonRoutes.map(({ path, title, description, navLabel }) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, navLabel) })),
   ...guideRoutes.map(([path, title, description, steps]) => ({ path, title: `${title} | HireScore AI Guide`, description, pageType: 'WebPage', schemaKind: 'howto', steps, breadcrumbs: breadcrumbFor(path, title, '/resources/user-guide', 'User Guide') })),
@@ -250,12 +250,12 @@ const software = {
 const productSuite = [
   {
     '@type': 'SoftwareApplication',
-    '@id': `${SITE_URL}/product/#hirescore-ai`,
+    '@id': `${SITE_URL}/product/hirescore-ai/#software`,
     name: 'HireScore AI',
     applicationCategory: 'BusinessApplication',
     applicationSubCategory: 'AI recruitment and resume screening software',
     operatingSystem: 'Web',
-    url: canonicalUrlForPath('/product'),
+    url: canonicalUrlForPath('/product/hirescore-ai'),
     description: 'AI recruitment and resume screening platform for JD-based candidate scoring, ranking, smart shortlisting, and recruiter-ready explanations.',
     publisher: { '@id': `${SITE_URL}/#organization` },
     brand: { '@id': `${SITE_URL}/#organization` },
@@ -395,7 +395,7 @@ export function buildRouteSchema(config) {
     breadcrumb: config.breadcrumbs ? { '@id': `${config.canonical}#breadcrumb` } : undefined,
   }]
 
-  if (config.path === '/product') {
+  if (config.path === '/product/hirescore-ai') {
     graph.push(productSuite[0])
   }
 
