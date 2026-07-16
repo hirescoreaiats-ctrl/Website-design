@@ -4219,6 +4219,112 @@ h3 {
   color: #4cd7f6;
 }
 
+/* Product navigation: restrained SaaS header treatment. */
+.productView .siteHeader {
+  height: 68px;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  background: rgba(13, 12, 18, 0.96);
+  box-shadow: none;
+  backdrop-filter: blur(16px);
+}
+
+.productView .navShell {
+  width: min(1200px, calc(100% - 40px));
+  height: 68px;
+  min-height: 68px;
+}
+
+.productView .homeFullLogo {
+  width: 132px;
+}
+
+.productView .desktopNav {
+  gap: 8px;
+}
+
+.productView .desktopNav > a,
+.productView .dropTrigger {
+  min-height: 38px;
+  padding: 0 10px;
+  border-radius: 6px;
+  color: #c8c5ce;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.productView .desktopNav > a:hover,
+.productView .dropTrigger:hover,
+.productView .dropdown:focus-within .dropTrigger {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.productView .dropTrigger[href="/product/hirescore-ai"] {
+  color: #ffffff;
+}
+
+.productView .dropTrigger svg {
+  width: 14px;
+  height: 14px;
+  color: #898590;
+}
+
+.productView .dropMenu {
+  top: calc(100% + 6px);
+  width: 220px;
+  padding: 6px;
+  border-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: #15131b;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32);
+}
+
+.productView .dropdown::after {
+  height: 10px;
+}
+
+.productView .dropMenu a {
+  min-height: 40px;
+  padding: 0 11px;
+  border-radius: 5px;
+  color: #c8c5ce;
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
+.productView .dropMenu a:hover,
+.productView .dropMenu a:focus-visible {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.productView .navActions .btnPrimary {
+  min-height: 38px;
+  padding-inline: 17px;
+  border: 1px solid #b9a3ff;
+  border-radius: 7px;
+  color: #17131d;
+  background: #bda8ff;
+  box-shadow: none;
+}
+
+.productView .navActions .btnPrimary:hover {
+  transform: none;
+  background: #c8b7ff;
+}
+
+@media (max-width: 700px) {
+  .productView .siteHeader,
+  .productView .navShell {
+    height: 62px;
+    min-height: 62px;
+  }
+
+  .productView .navShell {
+    width: calc(100% - 28px);
+  }
+}
+
 .jdManagerView .productPage-productDirectory {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
