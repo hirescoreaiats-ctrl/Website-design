@@ -1167,6 +1167,7 @@ function HomePage() {
       </section>
       <AboutCommandSection />
       <CompleteHiringWorkflowSection />
+      <ActionAiAgentSection surface="home" />
       <JDMatchIntelligence />
       <section className="commandSection advantageSection" id="advantage">
         <div className="commandContainer">
@@ -1267,6 +1268,72 @@ function CompleteHiringWorkflowSection() {
           <div className="workflowRail">
             {hiringWorkflow.map(([Icon,title,text],index)=><div className="workflowNode" key={title} style={{'--workflow-index':index}}><div className="workflowNodeIcon"><Icon size={19}/><span>{index+1}</span></div><strong>{title}</strong><small>{text}</small>{index < hiringWorkflow.length-1 && <ArrowRight className="workflowArrow" size={14}/>}</div>)}
           </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function ActionAiAgentSection({ surface = 'product' }) {
+  const capabilities = [
+    [BriefcaseBusiness, 'Create jobs', 'Describe the role in plain English and the agent prepares the job with structured requirements.'],
+    [Globe2, 'Launch apply pages', 'Ask for a public apply page and the agent generates a shareable candidate application flow.'],
+    [SearchCheck, 'Understand applicants', 'Ask how many people applied, which skills they have, and who best matches the job.'],
+    [BadgeCheck, 'Move candidates forward', 'Tell the agent to shortlist candidates above your chosen score, send email, and schedule interviews.'],
+  ]
+  const wrapperClass = surface === 'home'
+    ? 'commandSection actionAgentSection actionAgentHome'
+    : surface === 'solutions'
+      ? 'solutionPage-section actionAgentSection actionAgentSolutions'
+      : 'productPage-section actionAgentSection actionAgentProduct'
+  const containerClass = surface === 'home' ? 'commandContainer' : 'container'
+
+  return (
+    <section id="action-ai-agent" className={wrapperClass} aria-labelledby={`action-agent-title-${surface}`}>
+      <div className={`${containerClass} actionAgentLayout`}>
+        <div className="actionAgentCopy">
+          <span className="actionAgentEyebrow"><Bot size={15} /> HireScore AI Action Agent</span>
+          <h2 id={`action-agent-title-${surface}`}>Run your hiring workflow in <em>plain English.</em></h2>
+          <p>Ask the HireScore AI Action Agent to work across your connected hiring tools. It can create jobs, generate public apply pages, answer questions about applicants, identify skills, prepare shortlists, send candidate emails, and coordinate interviews from one conversation.</p>
+          <div className="actionAgentCapabilities">
+            {capabilities.map(([Icon, title, text]) => (
+              <article key={title}>
+                <Icon size={18} />
+                <div><h3>{title}</h3><p>{text}</p></div>
+              </article>
+            ))}
+          </div>
+          <div className="actionAgentControl"><ShieldCheck size={17} /><span><strong>You stay in control.</strong> Review important actions and keep the final hiring decision with your team.</span></div>
+        </div>
+
+        <div className="actionAgentConsole" aria-label="HireScore AI Action Agent workflow example">
+          <header>
+            <span><Bot size={18} /></span>
+            <div><strong>HireScore AI Agent</strong><small><i /> Ready to help</small></div>
+            <em>Action mode</em>
+          </header>
+          <div className="actionAgentConversation">
+            <div className="actionAgentMessage isUser">
+              <small>You</small>
+              <p>Create a Senior React Developer job in Bengaluru and make a public apply page.</p>
+            </div>
+            <div className="actionAgentMessage isAgent">
+              <small>AI Agent</small>
+              <p>Job and public apply page prepared. I used your role requirements and added the required React, TypeScript, and API skills.</p>
+              <div className="actionAgentResult"><CheckCircle2 size={15} /><span><strong>Senior React Developer</strong><small>Job active · Apply page ready</small></span></div>
+            </div>
+            <div className="actionAgentMessage isUser">
+              <small>You</small>
+              <p>How many candidates applied? Shortlist everyone scoring above 70, email them, and schedule interviews.</p>
+            </div>
+            <div className="actionAgentPlan">
+              <div><UsersRound size={16} /><span><strong>48 applicants reviewed</strong><small>Skills and JD-fit checked</small></span><CheckCircle2 size={15} /></div>
+              <div><BadgeCheck size={16} /><span><strong>12 candidates shortlisted</strong><small>Score threshold: above 70</small></span><CheckCircle2 size={15} /></div>
+              <div><MailCheck size={16} /><span><strong>Candidate email prepared</strong><small>Ready for recruiter approval</small></span><CheckCircle2 size={15} /></div>
+              <div><CalendarCheck size={16} /><span><strong>Interview slots coordinated</strong><small>Availability matched</small></span><CheckCircle2 size={15} /></div>
+            </div>
+          </div>
+          <footer><MessageSquareText size={16} /><span>Ask HireScore AI to take the next hiring action...</span><button type="button" aria-label="Send example command"><ArrowRight size={16} /></button></footer>
         </div>
       </div>
     </section>
@@ -1713,6 +1780,8 @@ function ProductOverview() {
             </div>
           </div>
         </section>
+
+        <ActionAiAgentSection surface="product" />
 
         <section className="productPage-section" aria-labelledby="product-capabilities-title">
           <div className="container">
@@ -3053,6 +3122,8 @@ function SolutionsPage() {
           </div>
         </div>
       </section>
+
+      <ActionAiAgentSection surface="solutions" />
 
       <section className="solutionPage-section solutionPage-solutionCardsSection">
         <div className="container">

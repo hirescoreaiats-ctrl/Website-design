@@ -4761,3 +4761,401 @@ h3 {
     margin-top: 8px;
   }
 }
+
+/* Shared Action AI Agent section for home, product, and solutions pages. */
+.actionAgentSection {
+  position: relative;
+  overflow: hidden;
+  padding: 92px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background-color: #111019 !important;
+  background-image: none !important;
+}
+
+.actionAgentSection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent 0 68%, rgba(76, 215, 246, 0.035) 68% 100%),
+    radial-gradient(circle at 12% 22%, rgba(124, 58, 237, 0.12), transparent 28rem);
+}
+
+.actionAgentLayout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(340px, 0.88fr) minmax(480px, 1.12fr);
+  gap: 64px;
+  align-items: center;
+}
+
+.actionAgentCopy {
+  min-width: 0;
+}
+
+.actionAgentEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #70e3f5;
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.actionAgentCopy h2 {
+  max-width: 650px;
+  margin: 18px 0;
+  color: #f4eff7;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4.3vw, 4.25rem);
+  line-height: 1.04;
+  letter-spacing: 0;
+}
+
+.actionAgentCopy h2 em {
+  color: #c9b4ff;
+  font-style: normal;
+}
+
+.actionAgentCopy > p {
+  max-width: 650px;
+  margin: 0;
+  color: #aaa3b1;
+  font-size: 0.92rem;
+  line-height: 1.75;
+}
+
+.actionAgentCapabilities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 22px;
+  margin-top: 32px;
+}
+
+.actionAgentCapabilities article {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 11px;
+  align-items: start;
+}
+
+.actionAgentCapabilities article > svg {
+  width: 34px;
+  height: 34px;
+  padding: 8px;
+  border: 1px solid rgba(112, 227, 245, 0.18);
+  border-radius: 7px;
+  color: #70e3f5;
+  background: rgba(76, 215, 246, 0.05);
+}
+
+.actionAgentCapabilities h3 {
+  margin: 1px 0 5px;
+  color: #ede8f0;
+  font-size: 0.8rem;
+  letter-spacing: 0;
+}
+
+.actionAgentCapabilities p {
+  margin: 0;
+  color: #8f8896;
+  font-size: 0.68rem;
+  line-height: 1.55;
+}
+
+.actionAgentControl {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  color: #9d96a4;
+  font-size: 0.72rem;
+  line-height: 1.55;
+}
+
+.actionAgentControl svg {
+  flex: 0 0 auto;
+  color: #62dba5;
+}
+
+.actionAgentControl strong {
+  color: #dce8e2;
+}
+
+.actionAgentConsole {
+  overflow: hidden;
+  border: 1px solid rgba(210, 187, 255, 0.14);
+  border-radius: 8px;
+  background: #17151e;
+  box-shadow: 0 30px 75px rgba(0, 0, 0, 0.3);
+}
+
+.actionAgentConsole > header {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  gap: 11px;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: #1b1822;
+}
+
+.actionAgentConsole > header > span {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  color: #17131d;
+  background: #c9b4ff;
+}
+
+.actionAgentConsole > header strong,
+.actionAgentConsole > header small {
+  display: block;
+}
+
+.actionAgentConsole > header strong {
+  color: #f1ebf4;
+  font-size: 0.82rem;
+}
+
+.actionAgentConsole > header small {
+  margin-top: 3px;
+  color: #8f8796;
+  font-size: 0.62rem;
+}
+
+.actionAgentConsole > header small i {
+  width: 6px;
+  height: 6px;
+  display: inline-block;
+  margin-right: 5px;
+  border-radius: 50%;
+  background: #62dba5;
+}
+
+.actionAgentConsole > header em {
+  padding: 6px 8px;
+  border: 1px solid rgba(98, 219, 165, 0.17);
+  border-radius: 5px;
+  color: #79e4b7;
+  background: rgba(98, 219, 165, 0.05);
+  font-size: 0.58rem;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.actionAgentConversation {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+}
+
+.actionAgentMessage {
+  max-width: 88%;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 7px;
+}
+
+.actionAgentMessage small {
+  display: block;
+  margin-bottom: 5px;
+  color: #817987;
+  font-size: 0.57rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.actionAgentMessage p {
+  margin: 0;
+  color: #c9c2cd;
+  font-size: 0.72rem;
+  line-height: 1.55;
+}
+
+.actionAgentMessage.isUser {
+  justify-self: end;
+  border-color: rgba(201, 180, 255, 0.17);
+  background: #252032;
+}
+
+.actionAgentMessage.isAgent {
+  background: #1d1a24;
+}
+
+.actionAgentResult {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  margin-top: 11px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.actionAgentResult svg {
+  color: #62dba5;
+}
+
+.actionAgentResult strong,
+.actionAgentResult small {
+  display: block;
+}
+
+.actionAgentResult strong {
+  color: #e8e2ec;
+  font-size: 0.68rem;
+}
+
+.actionAgentResult small {
+  margin: 2px 0 0;
+  color: #8e8794;
+  font-size: 0.59rem;
+  text-transform: none;
+}
+
+.actionAgentPlan {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.actionAgentPlan > div {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) 15px;
+  gap: 8px;
+  align-items: center;
+  min-height: 62px;
+  padding: 9px;
+  border: 1px solid rgba(112, 227, 245, 0.1);
+  border-radius: 6px;
+  background: rgba(76, 215, 246, 0.025);
+}
+
+.actionAgentPlan > div > svg:first-child {
+  color: #70e3f5;
+}
+
+.actionAgentPlan > div > svg:last-child {
+  color: #62dba5;
+}
+
+.actionAgentPlan strong,
+.actionAgentPlan small {
+  display: block;
+}
+
+.actionAgentPlan strong {
+  overflow-wrap: anywhere;
+  color: #dfd9e3;
+  font-size: 0.63rem;
+}
+
+.actionAgentPlan small {
+  margin-top: 3px;
+  color: #817a87;
+  font-size: 0.55rem;
+  line-height: 1.35;
+}
+
+.actionAgentConsole > footer {
+  min-height: 52px;
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) 30px;
+  gap: 9px;
+  align-items: center;
+  padding: 9px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  color: #77717d;
+  background: #131119;
+  font-size: 0.65rem;
+}
+
+.actionAgentConsole > footer > svg {
+  color: #9f8fca;
+}
+
+.actionAgentConsole > footer button {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 6px;
+  color: #17131d;
+  background: #c9b4ff;
+}
+
+.actionAgentProduct {
+  background-color: #100d17 !important;
+}
+
+.actionAgentSolutions {
+  background-color: #120f19 !important;
+}
+
+@media (max-width: 1050px) {
+  .actionAgentLayout {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .actionAgentCopy,
+  .actionAgentCopy h2,
+  .actionAgentCopy > p {
+    max-width: 760px;
+  }
+
+  .actionAgentConsole {
+    max-width: 760px;
+  }
+}
+
+@media (max-width: 700px) {
+  .actionAgentSection {
+    padding: 66px 0;
+  }
+
+  .actionAgentCopy h2 {
+    font-size: 2.45rem;
+  }
+
+  .actionAgentCopy > p {
+    font-size: 0.82rem;
+  }
+
+  .actionAgentCapabilities,
+  .actionAgentPlan {
+    grid-template-columns: 1fr;
+  }
+
+  .actionAgentCapabilities {
+    gap: 18px;
+  }
+
+  .actionAgentConsole > header {
+    grid-template-columns: 36px minmax(0, 1fr);
+  }
+
+  .actionAgentConsole > header em {
+    grid-column: 1 / -1;
+    width: fit-content;
+  }
+
+  .actionAgentConversation {
+    padding: 12px;
+  }
+
+  .actionAgentMessage {
+    max-width: 94%;
+  }
+}
