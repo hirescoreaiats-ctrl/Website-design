@@ -1276,10 +1276,10 @@ function CompleteHiringWorkflowSection() {
 
 function ActionAiAgentSection({ surface = 'product' }) {
   const capabilities = [
-    [BriefcaseBusiness, 'Create jobs', 'Describe the role in plain English and the agent prepares the job with structured requirements.'],
-    [Globe2, 'Launch apply pages', 'Ask for a public apply page and the agent generates a shareable candidate application flow.'],
-    [SearchCheck, 'Understand applicants', 'Ask how many people applied, which skills they have, and who best matches the job.'],
-    [BadgeCheck, 'Move candidates forward', 'Tell the agent to shortlist candidates above your chosen score, send email, and schedule interviews.'],
+    [Workflow, 'Work across HireScore AI', 'Use plain English to operate any connected HireScore AI feature available in your workspace.'],
+    [BriefcaseBusiness, 'Create and manage hiring work', 'Create jobs, launch apply pages, review pipelines, or ask the agent to update the next step.'],
+    [SearchCheck, 'Ask questions about your data', 'Get answers about jobs, applicants, skills, scores, rankings, shortlists, and hiring activity.'],
+    [Zap, 'Take connected actions', 'Turn your request into action across screening, communication, interview, and workflow tools.'],
   ]
   const wrapperClass = surface === 'home'
     ? 'commandSection actionAgentSection actionAgentHome'
@@ -1293,8 +1293,8 @@ function ActionAiAgentSection({ surface = 'product' }) {
       <div className={`${containerClass} actionAgentLayout`}>
         <div className="actionAgentCopy">
           <span className="actionAgentEyebrow"><Bot size={15} /> HireScore AI Action Agent</span>
-          <h2 id={`action-agent-title-${surface}`}>Run your hiring workflow in <em>plain English.</em></h2>
-          <p>Ask the HireScore AI Action Agent to work across your connected hiring tools. It can create jobs, generate public apply pages, answer questions about applicants, identify skills, prepare shortlists, send candidate emails, and coordinate interviews from one conversation.</p>
+          <h2 id={`action-agent-title-${surface}`}>Ask for anything across HireScore AI in <em>plain English.</em></h2>
+          <p>The HireScore AI Action Agent is not limited to a fixed list of commands. Tell it what you want to accomplish and it can work across every connected HireScore AI feature available in your workspace. Creating jobs, generating apply pages, analyzing applicants, shortlisting, emailing, and scheduling interviews are just a few examples.</p>
           <div className="actionAgentCapabilities">
             {capabilities.map(([Icon, title, text]) => (
               <article key={title}>
@@ -1303,14 +1303,14 @@ function ActionAiAgentSection({ surface = 'product' }) {
               </article>
             ))}
           </div>
-          <div className="actionAgentControl"><ShieldCheck size={17} /><span><strong>You stay in control.</strong> Review important actions and keep the final hiring decision with your team.</span></div>
+          <div className="actionAgentControl"><ShieldCheck size={17} /><span><strong>Workspace-wide assistance, with you in control.</strong> The agent can help across HireScore AI while important actions remain reviewable and final hiring decisions stay with your team.</span></div>
         </div>
 
         <div className="actionAgentConsole" aria-label="HireScore AI Action Agent workflow example">
           <header>
             <span><Bot size={18} /></span>
             <div><strong>HireScore AI Agent</strong><small><i /> Ready to help</small></div>
-            <em>Action mode</em>
+            <em>Workspace action mode</em>
           </header>
           <div className="actionAgentConversation">
             <div className="actionAgentMessage isUser">
@@ -1333,7 +1333,7 @@ function ActionAiAgentSection({ surface = 'product' }) {
               <div><CalendarCheck size={16} /><span><strong>Interview slots coordinated</strong><small>Availability matched</small></span><CheckCircle2 size={15} /></div>
             </div>
           </div>
-          <footer><MessageSquareText size={16} /><span>Ask HireScore AI to take the next hiring action...</span><button type="button" aria-label="Send example command"><ArrowRight size={16} /></button></footer>
+          <footer><MessageSquareText size={16} /><span>Ask anything about your HireScore AI workspace...</span><button type="button" aria-label="Send example command"><ArrowRight size={16} /></button></footer>
         </div>
       </div>
     </section>
