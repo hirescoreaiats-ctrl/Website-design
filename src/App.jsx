@@ -1340,6 +1340,28 @@ function ActionAiAgentSection({ surface = 'product' }) {
   )
 }
 
+function AgentDetailBand({ title, text, prompts = [], note = 'Available actions depend on the connected HireScore AI features and recruiter permissions in your workspace.' }) {
+  return (
+    <section className="section agentDetailBand" aria-label="HireScore AI Action Agent">
+      <div className="container agentDetailBandLayout">
+        <div className="agentDetailBandCopy">
+          <span><Bot size={15} /> HireScore AI Action Agent</span>
+          <h2>{title}</h2>
+          <p>{text}</p>
+          <div className="agentDetailBandNote"><ShieldCheck size={16} /><small>{note}</small></div>
+        </div>
+        <div className="agentDetailPromptList" aria-label="Example plain English commands">
+          <header><MessageSquareText size={16} /><strong>Try asking in plain English</strong><em>Examples</em></header>
+          {prompts.map((prompt, index) => (
+            <div key={prompt}><span>{String(index + 1).padStart(2, '0')}</span><p>{prompt}</p><ArrowRight size={15} /></div>
+          ))}
+          <Link href="/product/hirescore-ai">Explore the Action AI Agent <ArrowRight size={15} /></Link>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function JDMatchIntelligence() {
   const presentSkills = [['React / Next.js',96],['Node.js / APIs',92],['TypeScript',88],['PostgreSQL',84]]
   const skillGaps = [['Kubernetes',42],['Terraform',28],['GraphQL federation',18]]
@@ -2115,6 +2137,15 @@ function ProductDetail({ page }) {
           </div>
         </div>
       </section>
+      <AgentDetailBand
+        title={`Use ${page.navLabel} through the Action AI Agent`}
+        text={`Instead of moving through every screen manually, ask the agent to use connected ${page.navLabel.toLowerCase()} capabilities as part of a wider HireScore AI workflow. It can answer questions, prepare the next action, and continue into other available modules from the same conversation.`}
+        prompts={[
+          `Use ${page.navLabel.toLowerCase()} for this job and show me the result.`,
+          'Explain what changed and which candidates need my review.',
+          'Take the next available HireScore AI action for the selected candidates.',
+        ]}
+      />
       <RelatedLinks links={page.related} />
       <CTASection />
     </>
@@ -2471,6 +2502,16 @@ function PricingPage() {
         </div>
       </section>
       <section className="section pricingSection"><div className="container pricingGrid">{pricingPlans.map((plan) => <PricingCard key={plan.name} plan={plan} />)}</div></section>
+      <AgentDetailBand
+        title="Evaluate the Action AI Agent during your HireScore AI pilot"
+        text="Use the pilot to test how plain-English requests can work across your connected HireScore AI workflow. Ask the agent questions about jobs and candidates, then review how it prepares or completes available recruiting actions."
+        prompts={[
+          'Create a job from this role description and prepare its public apply page.',
+          'Show me the strongest applicants and explain their relevant skills.',
+          'Prepare the next shortlist, communication, and interview actions for review.',
+        ]}
+        note="Confirm Action Agent access and available workspace actions with the HireScore AI team for your selected plan."
+      />
       <section className="section">
         <div className="container narrow">
           <SectionHeader eyebrow="Pricing FAQ" title="HireScoreAI vs typical ATS pricing models" />
@@ -2533,6 +2574,16 @@ function ContactPage() {
           </aside>
         </div>
       </section>
+      <AgentDetailBand
+        title="Tell us what you want the Action AI Agent to handle"
+        text="When requesting a demo or pilot, describe the hiring work you want to complete in plain English. We can show how the agent uses the relevant connected HireScore AI features for that workflow."
+        prompts={[
+          'I want the agent to create jobs and public apply pages.',
+          'I want to ask questions about candidate skills, scores, and rankings.',
+          'I want recruiter-reviewed shortlist, email, and interview actions.',
+        ]}
+        note="Your demo can focus on the HireScore AI features and approval controls that matter to your team."
+      />
     </>
   )
 }
@@ -3411,6 +3462,16 @@ function SolutionSegmentPage({ segment }) {
           </div>
         </div>
       </section>
+
+      <AgentDetailBand
+        title={`Use the Action AI Agent for ${segment.navLabel}`}
+        text={`Describe the outcome you need and let the agent work across the connected HireScore AI features relevant to ${segment.navLabel.toLowerCase()}. These are example requests, not a fixed command list.`}
+        prompts={[
+          'Set up the next job and prepare its public apply workflow.',
+          'Show which applicants best match the role and explain their strongest skills.',
+          'Prepare the qualified shortlist and next candidate actions for my review.',
+        ]}
+      />
 
       <section className="solutionDetailSection solutionDetailOutcomesSection">
         <div className="container solutionDetailOutcomeGrid">

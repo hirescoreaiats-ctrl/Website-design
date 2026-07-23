@@ -5159,3 +5159,176 @@ h3 {
     max-width: 94%;
   }
 }
+
+/* Compact Action Agent context used on feature, solution, pricing, and contact pages. */
+.agentDetailBand {
+  position: relative;
+  overflow: hidden;
+  border-block: 1px solid rgba(210, 187, 255, 0.08);
+  background:
+    linear-gradient(90deg, rgba(124, 58, 237, 0.055), transparent 42%),
+    #111019;
+}
+
+.agentDetailBandLayout {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.88fr) minmax(460px, 1.12fr);
+  gap: 58px;
+  align-items: center;
+}
+
+.agentDetailBandCopy > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #70e3f5;
+  font-size: 0.68rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.agentDetailBandCopy h2 {
+  max-width: 650px;
+  margin: 16px 0 14px;
+  color: #f1ebf4;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.3vw, 3.25rem);
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.agentDetailBandCopy > p {
+  max-width: 680px;
+  margin: 0;
+  color: #aaa3b1;
+  font-size: 0.84rem;
+  line-height: 1.72;
+}
+
+.agentDetailBandNote {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  margin-top: 22px;
+  color: #918a98;
+}
+
+.agentDetailBandNote svg {
+  flex: 0 0 auto;
+  color: #62dba5;
+}
+
+.agentDetailBandNote small {
+  max-width: 620px;
+  font-size: 0.65rem;
+  line-height: 1.55;
+}
+
+.agentDetailPromptList {
+  overflow: hidden;
+  border: 1px solid rgba(210, 187, 255, 0.13);
+  border-radius: 8px;
+  background: #18151f;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+}
+
+.agentDetailPromptList header {
+  min-height: 52px;
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) auto;
+  gap: 9px;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  color: #dcd5e1;
+}
+
+.agentDetailPromptList header svg {
+  color: #c9b4ff;
+}
+
+.agentDetailPromptList header strong {
+  font-size: 0.72rem;
+}
+
+.agentDetailPromptList header em {
+  color: #817a87;
+  font-size: 0.56rem;
+  font-style: normal;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.agentDetailPromptList > div {
+  min-height: 56px;
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) 18px;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.agentDetailPromptList > div > span {
+  color: #70e3f5;
+  font-size: 0.58rem;
+  font-weight: 850;
+}
+
+.agentDetailPromptList > div p {
+  margin: 0;
+  color: #c2bbc7;
+  font-size: 0.7rem;
+  line-height: 1.48;
+}
+
+.agentDetailPromptList > div > svg {
+  color: #68616e;
+}
+
+.agentDetailPromptList > a {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  color: #d4c2ff;
+  background: rgba(124, 58, 237, 0.055);
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.agentDetailPromptList > a:hover {
+  color: #ffffff;
+  background: rgba(124, 58, 237, 0.1);
+}
+
+@media (max-width: 980px) {
+  .agentDetailBandLayout {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .agentDetailPromptList {
+    max-width: 760px;
+  }
+}
+
+@media (max-width: 700px) {
+  .agentDetailBandCopy h2 {
+    font-size: 2.25rem;
+  }
+
+  .agentDetailBandCopy > p {
+    font-size: 0.8rem;
+  }
+
+  .agentDetailPromptList header {
+    grid-template-columns: 20px minmax(0, 1fr);
+  }
+
+  .agentDetailPromptList header em {
+    grid-column: 1 / -1;
+  }
+}
