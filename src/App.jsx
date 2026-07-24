@@ -39,7 +39,7 @@ import {
   Zap,
 } from 'lucide-react'
 import './App.css'
-import { BRAND_NAME, buildRouteSchema, comparisonRoutes, getSeoConfig, solutionSegmentRoutes } from './seoConfig.js'
+import { BRAND_NAME, HOME_FAQS, HOME_H1, buildRouteSchema, comparisonRoutes, getSeoConfig, solutionSegmentRoutes } from './seoConfig.js'
 
 const APP_URL = 'https://app.hirescoreai.com'
 const CONTACT_EMAIL = 'Info@hireScoreAi.com'
@@ -757,7 +757,6 @@ function SEO({ title, description, path = '/', type = 'website' }) {
     document.title = config.title
     document.documentElement.lang = 'en'
     setMeta('description', config.description)
-    setMeta('keywords', config.keywords)
     setMeta('robots', robots)
     setMeta('googlebot', robots)
     setMeta('author', BRAND_NAME)
@@ -1149,16 +1148,16 @@ function HomePage() {
         <div className="commandGlow commandGlowOne" />
         <div className="commandContainer commandHeroGrid">
           <div className="commandHeroCopy">
-            <span className="commandPill commandReveal"><Rocket size={12} /> The recruitment command center</span>
-            <h1 className="commandReveal commandDelay1"><span className="heroBrand">HireScore AI</span> turns hiring complexity into <span>clear decisions.</span></h1>
-            <p className="commandReveal commandDelay2">Screen resumes, understand candidate fit, rank stronger talent, and move every hiring workflow forward from one explainable AI workspace.</p>
-            <div className="commandActions commandReveal commandDelay3">
+            <span className="commandPill"><Rocket size={12} /> The recruitment command center</span>
+            <h1>{HOME_H1}</h1>
+            <p>Use AI recruitment software to screen resumes, apply JD-based candidate scoring, rank stronger applicants, and move hiring forward from one explainable, recruiter-controlled workspace.</p>
+            <div className="commandActions">
               <a className="commandButton commandButtonPrimary" href={PILOT_MAILTO}>Start Free Pilot <ArrowRight size={17} /></a>
               <Link className="commandButton commandButtonGhost" href="/contact">Book Product Demo</Link>
             </div>
-            <div className="heroProof commandReveal commandDelay4"><span><BadgeCheck size={15} /> Explainable AI</span><i /><span><Zap size={15} /> Recruiter controlled</span></div>
+            <div className="heroProof"><span><BadgeCheck size={15} /> Explainable AI</span><i /><span><Zap size={15} /> Recruiter controlled</span></div>
           </div>
-          <div className="commandHeroVisual commandReveal commandDelay3">
+          <div className="commandHeroVisual">
             <div className="commandHeroVisualTop"><span><i /> Live candidate intelligence</span><small>One connected workspace</small></div>
             <ProductHeroDashboard />
             <div className="commandHeroVisualFoot"><span>Resume intelligence</span><span>Explainable ranking</span><span>Pipeline visibility</span></div>
@@ -1171,7 +1170,7 @@ function HomePage() {
       <JDMatchIntelligence />
       <section className="commandSection advantageSection" id="advantage">
         <div className="commandContainer">
-          <CommandHeading title={<>The <span>HireScore AI Advantage</span></>} text="A One-Stop Recruitment OS that unifies every aspect of your talent acquisition engine." />
+          <CommandHeading title={<>AI recruitment software built for <span>practical hiring work</span></>} text="Use one connected platform for resume intelligence, evidence-led ranking, recruiter review, communication, and interviews." />
           <div className="advantageGrid commandReveal commandDelay1">
             {advantageCards.map(([Icon, title, text, label], index) => (
               <article className="advantageCard" key={title} style={{ '--card-delay': `${index * 90}ms` }}>
@@ -1198,7 +1197,7 @@ function HomePage() {
       </section>
       <section className="commandSection shortlistSection">
         <div className="commandContainer">
-          <CommandHeading title={<>HireScore AI Neural <span>Shortlisting</span></>} text="How our explainable intelligence transforms thousands of applicants into your elite top 1%." />
+          <CommandHeading title={<>Candidate ranking software for <span>explainable shortlisting</span></>} text="Turn large applicant pools into prioritized candidates using role-fit evidence, matched skills, and recruiter-controlled decisions." />
           <div className="shortlistGrid commandReveal commandDelay1">
             {shortlistSteps.map(([Icon,title,text], index) => <article className="shortlistCard" key={title}><b className="stepNumber">{index+1}</b><div className="commandIcon"><Icon size={20} /></div><h3>{title}</h3><p>{text}</p></article>)}
           </div>
@@ -1210,12 +1209,44 @@ function HomePage() {
           <div className="intelligenceGrid commandReveal commandDelay1"><AnalyticsCard /><div className="qualityStack"><MetricCard label="Hire quality index" value="4.9" suffix="/ 5.0" text="Average stakeholder rating for shortlists sourced via HireScore AI Intelligence." /><MetricCard label="Efficiency multiplier" value="72" suffix="%" text="Reduction in manual screening hours per role since HireScore AI deployment." /></div></div>
         </div>
       </section>
+      <HomepageFaqSection />
       <section className="commandCta"><div className="commandContainer commandCtaBox commandReveal"><h2>Scale Your Global<br /><span>HireScore AI Talent Engine</span></h2><p>Join hundreds of world-class recruitment teams using the HireScore AI Command Center to build elite organizations.</p><div className="commandActions"><a className="commandButton commandButtonPrimary" href={PILOT_MAILTO}>Request Free Access</a><Link className="commandButton commandButtonGhost" href="/contact">Consult With Specialists</Link></div></div></section>
     </div>
   )
 }
 
 function CommandHeading({ title, text }) { return <div className="commandHeading commandReveal"><h2>{title}</h2><p>{text}</p></div> }
+
+function HomepageFaqSection() {
+  return (
+    <section className="commandSection homeFaqSection" id="home-faq" aria-labelledby="home-faq-title">
+      <div className="commandContainer">
+        <div className="commandHeading commandReveal">
+          <h2 id="home-faq-title">AI resume screening software FAQs</h2>
+          <p>Clear answers about candidate scoring, AI ATS workflows, recruitment automation, and recruiter control.</p>
+        </div>
+        <div className="homeFaqLayout commandReveal commandDelay1">
+          <div className="homeFaqList">
+            {HOME_FAQS.map(([question, answer]) => (
+              <details key={question}>
+                <summary>{question}<ChevronDown size={18} /></summary>
+                <p>{answer}</p>
+              </details>
+            ))}
+          </div>
+          <aside className="homeSeoLinks">
+            <span>Explore connected workflows</span>
+            <Link href="/product/ai-resume-parsing">AI resume screening <ArrowRight size={15} /></Link>
+            <Link href="/product/ai-candidate-scoring">JD-based candidate scoring <ArrowRight size={15} /></Link>
+            <Link href="/solutions/bulk-resume-screening">Bulk resume screening <ArrowRight size={15} /></Link>
+            <Link href="/resources/user-guide/review-ai-ranked-candidates">Candidate ranking guide <ArrowRight size={15} /></Link>
+            <Link href="/pricing">HireScore AI pricing <ArrowRight size={15} /></Link>
+          </aside>
+        </div>
+      </div>
+    </section>
+  )
+}
 
 function AboutCommandSection() {
   const capabilities = [
@@ -1228,8 +1259,12 @@ function AboutCommandSection() {
       <div className="commandContainer aboutCommandGrid">
         <div className="aboutCommandCopy commandReveal">
           <span className="sectionKicker"><Sparkles size={13} /> About HireScore AI</span>
-          <h2>Recruitment intelligence built for <span>clarity, speed, and better decisions.</span></h2>
+          <h2>AI recruitment software built for <span>clarity, speed, and better decisions.</span></h2>
           <p>HireScore AI is an independent AI recruitment workflow platform that turns disconnected hiring activity into one explainable command center—from job creation and resume screening to candidate ranking and interview coordination.</p>
+          <div className="aboutFounderIdentity" id="sachin-yadav">
+            <span><UsersRound size={18} /></span>
+            <div><small>Founder</small><strong>Sachin Yadav</strong><p>Founder of HireScore AI, focused on building a clearer, connected, and recruiter-controlled AI hiring workflow.</p></div>
+          </div>
           <div className="aboutStats">
             <div><strong><span className="counterAnimate" data-target="12">0</span><em>+</em></strong><small>Connected workflow modules</small></div>
             <div><strong><span className="counterAnimate" data-target="1">0</span></strong><small>Unified hiring workspace</small></div>
@@ -1260,7 +1295,7 @@ function CompleteHiringWorkflowSection() {
       <div className="commandContainer">
         <div className="workflowSectionIntro commandReveal">
           <span className="sectionKicker"><Workflow size={13}/> How HireScore AI works</span>
-          <h2>One platform. <span>Every hiring step connected.</span></h2>
+          <h2>AI ATS software that keeps <span>every hiring step connected.</span></h2>
           <p>Follow the complete hiring journey from creating a job to scheduling an interview. As the live signal moves, the active stage lights up to show exactly what HireScore AI is doing.</p>
         </div>
         <div className="aboutWorkflowPanel commandReveal commandDelay1">
@@ -1287,13 +1322,16 @@ function ActionAiAgentSection({ surface = 'product' }) {
       ? 'solutionPage-section actionAgentSection actionAgentSolutions'
       : 'productPage-section actionAgentSection actionAgentProduct'
   const containerClass = surface === 'home' ? 'commandContainer' : 'container'
+  const heading = surface === 'home'
+    ? <>Recruitment automation software you can operate in <em>plain English.</em></>
+    : <>Ask for anything across HireScore AI in <em>plain English.</em></>
 
   return (
     <section id="action-ai-agent" className={wrapperClass} aria-labelledby={`action-agent-title-${surface}`}>
       <div className={`${containerClass} actionAgentLayout`}>
         <div className="actionAgentCopy">
           <span className="actionAgentEyebrow"><Bot size={15} /> HireScore AI Action Agent</span>
-          <h2 id={`action-agent-title-${surface}`}>Ask for anything across HireScore AI in <em>plain English.</em></h2>
+          <h2 id={`action-agent-title-${surface}`}>{heading}</h2>
           <p>The HireScore AI Action Agent is not limited to a fixed list of commands. Tell it what you want to accomplish and it can work across every connected HireScore AI feature available in your workspace. Creating jobs, generating apply pages, analyzing applicants, shortlisting, emailing, and scheduling interviews are just a few examples.</p>
           <div className="actionAgentCapabilities">
             {capabilities.map(([Icon, title, text]) => (
@@ -1369,7 +1407,7 @@ function JDMatchIntelligence() {
     <section className="commandSection jdIntelligenceSection" id="jd-match">
       <div className="commandContainer">
         <CommandHeading
-          title={<>JD Match <span>Intelligence</span></>}
+          title={<>JD-based candidate scoring and <span>match intelligence</span></>}
           text="See how a candidate matches the job description, which required skills are already present, where gaps remain, and why the profile deserves recruiter attention."
         />
         <div className="jdIntelligenceShell commandReveal commandDelay1">
@@ -3361,7 +3399,7 @@ function SolutionSegmentPage({ segment }) {
             <span className="solutionDetailEyebrow"><Icon size={15} />{segment.eyebrow}</span>
             <h1>
               {segment.h1}
-              <span>{segment.card.subtitle}</span>
+              {' '}<span>{segment.card.subtitle}</span>
             </h1>
             <p>{segment.intro}</p>
             <div className="solutionDetailTrustRow" aria-label={`${segment.navLabel} key use cases`}>

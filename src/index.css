@@ -60,3 +60,107 @@ img,
 svg {
   display: block;
 }
+
+.staticRouteShell {
+  min-height: 100vh;
+  background: #100d17;
+  color: #eee7f2;
+}
+
+.staticRouteShell > header,
+.staticRouteShell > main,
+.staticRouteShell > footer {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.staticRouteShell > header {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-weight: 800;
+}
+
+.staticRouteShell > header nav,
+.staticRouteLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.staticRouteShell > main {
+  padding: 72px 0;
+}
+
+.staticRouteShell main > nav {
+  margin-bottom: 26px;
+  color: #a99db3;
+  font-size: 0.78rem;
+}
+
+.staticRouteShell article {
+  max-width: 860px;
+}
+
+.staticRouteShell h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  line-height: 1.04;
+  letter-spacing: 0;
+}
+
+.staticRouteShell h2 {
+  margin: 42px 0 12px;
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 3vw, 2.5rem);
+  letter-spacing: 0;
+}
+
+.staticRouteShell p,
+.staticRouteShell li {
+  color: #aaa1b4;
+}
+
+.staticRouteShell details {
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.staticRouteShell summary {
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.staticRouteLinks {
+  margin-top: 42px;
+}
+
+.staticRouteLinks a {
+  color: #70e3f5;
+  font-weight: 750;
+}
+
+.staticRouteShell > footer {
+  padding: 28px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 720px) {
+  .staticRouteShell > header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 18px 0;
+  }
+
+  .staticRouteShell > header nav {
+    gap: 12px 18px;
+  }
+
+  .staticRouteShell > main {
+    padding: 52px 0;
+  }
+}

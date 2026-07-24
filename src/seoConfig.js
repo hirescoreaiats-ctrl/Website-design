@@ -1,9 +1,57 @@
 export const SITE_URL = 'https://hirescoreai.com'
 export const BRAND_NAME = 'HireScore AI'
+export const ORGANIZATION_ID = `${SITE_URL}/#organization`
+export const FOUNDER_ID = `${SITE_URL}/#sachin-yadav`
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/hirescore-logo-full.png`
 export const DEFAULT_DESCRIPTION = 'HireScore AI is an AI recruitment workflow platform for resume screening, JD matching, candidate ranking, explainable shortlisting, communication, and interview scheduling.'
+export const HOME_H1 = 'AI Resume Screening and Candidate Ranking Software for Recruiters'
 
-const baseKeywords = ['HireScore AI', 'AI recruitment software', 'AI resume screening', 'candidate ranking software', 'recruitment workflow automation']
+export const STATIC_ROUTE_H1S = {
+  '/': HOME_H1,
+  '/product/hirescore-ai': 'One AI hiring workspace for faster, clearer decisions.',
+  '/pricing': 'Simple pricing for AI-powered hiring teams',
+  '/solutions/recruitment-agencies': 'AI recruiting software for recruitment agencies Screen more resumes. Send better shortlists to clients.',
+  '/solutions/staffing-companies': 'AI resume screening for staffing companies Manage candidate pipelines for multiple roles.',
+  '/solutions/bulk-resume-screening': 'Bulk resume screening software for high-volume hiring Upload resumes. Get ranked candidates. Save recruiter time.',
+  '/product/ai-candidate-scoring': 'JD-Based AI Candidate Scoring for Recruiters',
+  '/product/ai-candidate-ranking': 'AI Candidate Ranking Tool for Faster Shortlists',
+  '/resources/blogs': 'AI recruitment insights for faster, smarter hiring',
+  '/resources/blogs/how-ai-resume-screening-helps-recruiters-save-time': 'How AI Resume Screening Helps Recruiters Save Time and Improve Shortlist Quality',
+}
+
+export const STATIC_ROUTE_FAQS = {
+  '/product/hirescore-ai': [
+    ['Is HireScore AI only a resume parser?', 'No. Resume parsing is one part of HireScore AI. The platform also supports JD-based scoring, candidate ranking, explanations, shortlisting, communication, assessments, interview pipelines, and job analytics.'],
+    ['How does JD-based scoring work?', 'HireScore AI compares candidate skills, experience, education, seniority, and profile evidence with the requirements in the job description to produce a clear fit score.'],
+    ['Can recruiters see why a candidate is recommended?', 'Yes. Each recommendation includes recruiter-ready evidence such as matched skills, missing skills, relevant experience, seniority fit, and potential hiring risks.'],
+    ['Can I upload multiple resumes?', 'Yes. Recruiters can add multiple resumes to a job and review the resulting candidate profiles, fit scores, and rankings in one place.'],
+    ['Does HireScore AI support communication workflow?', 'Yes. Teams can organize candidate outreach, follow-ups, interview updates, and hiring communication within the workflow.'],
+    ['Can I track assessments?', 'Yes. HireScore AI can track assessment status, test results, scores, and candidate readiness before interview stages.'],
+    ['Does it support interview pipeline management?', 'Yes. Candidates can move through shortlist, communication, assessment, interview, and offer stages from one dashboard.'],
+    ['Does it provide job analytics?', 'Yes. Job analytics surface candidate quality, source insights, pipeline progress, and hiring bottlenecks for each role.'],
+    ['Is there a free pilot?', 'Yes. Hiring teams can request a free 7-day pilot and test HireScore AI with a real job and real resumes.'],
+  ],
+  '/pricing': [
+    ['Does the free pilot require a credit card?', 'No. Free pilot access is requested by emailing Info@hireScoreAi.com; the team can confirm access and fit before any paid INR plan starts.'],
+    ['What happens after the 7-day pilot ends?', 'After the 7-day pilot, teams can choose a monthly INR plan based on active job volume or talk to an expert for a custom rollout.'],
+    ['Can I switch plans as my hiring volume changes?', 'Yes. Teams can move to a plan that better matches active job volume as hiring needs change.'],
+  ],
+  '/solutions/recruitment-agencies': [
+    ['Can recruitment agencies use HireScore AI for multiple clients?', 'Yes. Agencies can create separate jobs for different client roles, upload resumes, and review ranked candidates for each hiring requirement.'],
+    ['Does HireScore AI explain why candidates are shortlisted?', 'Yes. Recruiters can review matched skills, gaps, score context, and explanation notes before sharing candidates with clients.'],
+    ['Is this useful for high-volume agency hiring?', 'Yes. HireScore AI is designed to reduce manual resume screening time while keeping recruiters in control of the final shortlist.'],
+  ],
+  '/solutions/staffing-companies': [
+    ['Can staffing companies screen bench candidates with HireScore AI?', 'Yes. Teams can upload candidate profiles and compare them against active roles to find stronger matches quickly.'],
+    ['Does HireScore AI support client-ready candidate lists?', 'Yes. Recruiters can use scores, matched skills, and explanation notes to prepare cleaner candidate lists for clients.'],
+    ['Can staffing recruiters track communication after screening?', 'Yes. Candidate communication and interview movement can stay connected to the screening workflow.'],
+  ],
+  '/solutions/bulk-resume-screening': [
+    ['Can HireScore AI screen bulk resume batches?', 'Yes. HireScore AI helps teams upload and review large resume batches using JD-based ranking and recruiter-readable explanations.'],
+    ['Is bulk screening useful for job fairs or walk-in hiring?', 'Yes. Bulk resume screening can help teams organize larger candidate pools from job fairs, walk-ins, or high-volume application sources.'],
+    ['Does HireScore AI make final hiring decisions?', 'No. HireScore AI supports recruiter review with structured scores and explanations. Human recruiters remain responsible for final decisions.'],
+  ],
+}
 
 export function canonicalUrlForPath(path = '/') {
   const normalized = normalizePath(path)
@@ -11,7 +59,7 @@ export function canonicalUrlForPath(path = '/') {
 }
 
 const staticRoutes = [
-  ['/', 'HireScore AI | AI Recruitment & Resume Screening Software', 'Screen resumes, match candidates to job descriptions, explain fit, rank talent, manage shortlists, communicate, and schedule interviews with HireScore AI.', 'WebPage'],
+  ['/', 'AI Resume Screening Software for Recruiters | HireScore AI', 'HireScore AI is AI resume screening software for JD-based candidate scoring, explainable ranking, shortlisting, and connected recruitment automation.', 'WebPage'],
   ['/product/hirescore-ai', 'HireScore AI Product | AI Resume Screening Software', 'Explore HireScore AI for AI resume screening, JD-based candidate scoring, candidate ranking, smart shortlisting, and recruiter-ready explanations.', 'CollectionPage'],
   ['/solutions', 'AI Hiring Solutions for Recruiters & Staffing Agencies | HireScore AI', 'HireScore AI helps recruitment agencies, HR teams, staffing firms, startups, and high-volume hiring teams screen resumes, rank candidates, shortlist talent, and manage hiring workflows with AI.', 'CollectionPage'],
   ['/resources', 'AI Recruitment Resources, Guides & Case Studies | HireScore AI', 'Explore practical AI recruitment guides, articles, sample case studies, FAQs, and product updates from HireScore AI.', 'CollectionPage'],
@@ -158,7 +206,6 @@ export const SEO_ROUTES = [
   ...route,
   canonical: canonicalUrlForPath(route.path),
   image: route.image || DEFAULT_OG_IMAGE,
-  keywords: [...new Set([...baseKeywords, route.title.replace(/ \|.*$/, '')])].join(', '),
 }))
 
 const routeMap = new Map(SEO_ROUTES.map((route) => [route.path, route]))
@@ -180,14 +227,13 @@ export function getSeoConfig(path, fallback = {}) {
     ogType: fallback.type || 'website',
     canonical: canonicalUrlForPath(normalized),
     image: DEFAULT_OG_IMAGE,
-    keywords: baseKeywords.join(', '),
     noindex: true,
   }
 }
 
 const organization = {
   '@type': 'Organization',
-  '@id': `${SITE_URL}/#organization`,
+  '@id': ORGANIZATION_ID,
   name: BRAND_NAME,
   alternateName: ['HireScoreAI', 'HireScore AI ATS'],
   url: `${SITE_URL}/`,
@@ -204,6 +250,7 @@ const organization = {
   email: 'info@hirescoreai.com',
   description: 'HireScore AI is an independent AI recruitment workflow platform for recruiters, HR teams, staffing agencies, and growing companies.',
   disambiguatingDescription: 'HireScore AI is independent and is not affiliated with HiredScore, HireScore.com, Workday, or similarly named products.',
+  founder: { '@id': FOUNDER_ID },
   sameAs: ['https://www.linkedin.com/company/hire-score-ai', 'https://www.instagram.com/hirescore_ai/'],
   contactPoint: {
     '@type': 'ContactPoint',
@@ -211,6 +258,15 @@ const organization = {
     email: 'info@hirescoreai.com',
     availableLanguage: ['English', 'Hindi'],
   },
+}
+
+const founder = {
+  '@type': 'Person',
+  '@id': FOUNDER_ID,
+  name: 'Sachin Yadav',
+  jobTitle: 'Founder',
+  url: FOUNDER_ID,
+  worksFor: { '@id': ORGANIZATION_ID },
 }
 
 const website = {
@@ -221,7 +277,7 @@ const website = {
   alternateName: 'HireScoreAI',
   description: DEFAULT_DESCRIPTION,
   inLanguage: 'en',
-  publisher: { '@id': `${SITE_URL}/#organization` },
+  publisher: { '@id': ORGANIZATION_ID },
 }
 
 const software = {
@@ -234,8 +290,8 @@ const software = {
   operatingSystem: 'Web',
   url: `${SITE_URL}/`,
   description: DEFAULT_DESCRIPTION,
-  publisher: { '@id': `${SITE_URL}/#organization` },
-  brand: { '@id': `${SITE_URL}/#organization` },
+  publisher: { '@id': ORGANIZATION_ID },
+  brand: { '@id': ORGANIZATION_ID },
   featureList: ['Job creation', 'Public job apply pages', 'Bulk resume upload', 'AI resume parsing', 'JD-based candidate matching', 'AI candidate scoring and ranking', 'Explainable candidate fit', 'Shortlisting', 'Candidate communication', 'Screening tests', 'Interview scheduling', 'Hiring pipeline analytics', 'JD Manager for client and job description tracking'],
   offers: {
     '@type': 'Offer',
@@ -257,8 +313,8 @@ const productSuite = [
     operatingSystem: 'Web',
     url: canonicalUrlForPath('/product/hirescore-ai'),
     description: 'AI recruitment and resume screening platform for JD-based candidate scoring, ranking, smart shortlisting, and recruiter-ready explanations.',
-    publisher: { '@id': `${SITE_URL}/#organization` },
-    brand: { '@id': `${SITE_URL}/#organization` },
+    publisher: { '@id': ORGANIZATION_ID },
+    brand: { '@id': ORGANIZATION_ID },
     featureList: ['AI resume screening', 'JD-based candidate scoring', 'Candidate ranking', 'Recruiter-ready explanations', 'Smart shortlisting', 'Workflow clarity', 'AI screening test support'],
     offers: {
       '@type': 'Offer',
@@ -277,8 +333,8 @@ const productSuite = [
     operatingSystem: 'Web',
     url: canonicalUrlForPath('/product/jd-manager'),
     description: 'Free open-source JD management workspace for recruitment agencies and staffing teams that manage multiple clients, multiple JDs, candidate tracking, shortlist scores, submissions, and pipeline status.',
-    publisher: { '@id': `${SITE_URL}/#organization` },
-    brand: { '@id': `${SITE_URL}/#organization` },
+    publisher: { '@id': ORGANIZATION_ID },
+    brand: { '@id': ORGANIZATION_ID },
     isAccessibleForFree: true,
     featureList: ['Multi-client JD management', 'Multiple JDs per client', 'Candidate-to-JD tracking', 'Shortlisting score visibility', 'Submission and status tracking', 'Recruiter coordination'],
     offers: {
@@ -372,11 +428,12 @@ const pricingOffers = [
   },
 ]
 
-const faqEntities = [
+export const HOME_FAQS = [
   ['What is HireScore AI?', 'HireScore AI is an independent AI recruitment workflow platform for job creation, public apply pages, resume screening, candidate ranking, explainable shortlisting, communication, tests, and interview scheduling.'],
-  ['Is HireScore AI the same as HiredScore or Workday?', 'No. HireScore AI is independent and is not affiliated with HiredScore, HireScore.com, or Workday.'],
-  ['Can recruiters use HireScore AI for high-volume roles?', 'Yes. HireScore AI helps recruiters organize, screen, and rank larger candidate pools while keeping final decisions under human control.'],
-  ['Does HireScore AI replace recruiters?', 'No. HireScore AI supports recruiter decisions with structured insights, scores, and explanations. Recruiters remain responsible for hiring decisions.'],
+  ['How does AI resume screening software help recruiters?', 'AI resume screening software structures resume data, compares candidates with job requirements, and helps recruiters prioritize profiles for human review.'],
+  ['How does HireScore AI perform JD-based candidate scoring?', 'HireScore AI evaluates job requirements, matched skills, relevant experience, and skill gaps to produce a role-specific score with recruiter-readable evidence.'],
+  ['Is HireScore AI an AI ATS software platform?', 'HireScore AI connects job creation, applications, resume screening, candidate ranking, shortlisting, communication, tests, and interview workflows in one AI-assisted hiring workspace.'],
+  ['Can HireScore AI automate recruitment tasks?', 'Yes. Connected recruitment automation can prepare or complete available workflow actions while recruiters review important actions and retain final hiring control.'],
 ]
 
 export function buildRouteSchema(config) {
@@ -394,6 +451,15 @@ export function buildRouteSchema(config) {
     primaryImageOfPage: { '@type': 'ImageObject', url: config.image },
     breadcrumb: config.breadcrumbs ? { '@id': `${config.canonical}#breadcrumb` } : undefined,
   }]
+
+  if (config.path === '/') {
+    graph.splice(1, 0, founder)
+    graph.push({
+      '@type': 'FAQPage',
+      '@id': `${config.canonical}#faq`,
+      mainEntity: HOME_FAQS.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } })),
+    })
+  }
 
   if (config.path === '/product/hirescore-ai') {
     graph.push(productSuite[0])
@@ -440,8 +506,8 @@ export function buildRouteSchema(config) {
       articleSection: config.category || 'Sample case study',
       inLanguage: 'en',
       mainEntityOfPage: { '@id': pageId },
-      author: { '@id': `${SITE_URL}/#organization` },
-      publisher: { '@id': `${SITE_URL}/#organization` },
+      author: { '@id': ORGANIZATION_ID },
+      publisher: { '@id': ORGANIZATION_ID },
       isAccessibleForFree: true,
     })
   }
@@ -461,7 +527,7 @@ export function buildRouteSchema(config) {
     graph.push({
       '@type': 'FAQPage',
       '@id': `${config.canonical}#faq`,
-      mainEntity: faqEntities.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } })),
+      mainEntity: HOME_FAQS.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } })),
     })
   }
 
