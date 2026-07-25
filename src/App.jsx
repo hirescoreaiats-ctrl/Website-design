@@ -265,6 +265,27 @@ const guidePages = [
 
 const blogPosts = [
   {
+    slug: '/resources/blogs/hire-through-conversation-action-ai-agent',
+    title: 'Hire Through Conversation: How HireScoreAI’s Action AI Agent Runs Your Entire Hiring Workflow',
+    meta: 'See how HireScoreAI’s Action AI Agent helps recruiters manage job creation, resume screening, candidate ranking, communication and interviews through chat.',
+    image: '/action-ai-agent-conversation.webp',
+    category: 'AI Recruitment Automation',
+    readTime: '11 min read',
+    published: 'July 26, 2026',
+    isActionAgentArticle: true,
+    links: [
+      '/product/hirescore-ai',
+      '/solutions',
+      '/product/create-job',
+      '/product/public-apply-page',
+      '/product/resume-upload',
+      '/product/ai-candidate-ranking',
+      '/product/candidate-communication',
+      '/product/interview-scheduling',
+      '/product/ai-screening-test',
+    ],
+  },
+  {
     slug: '/resources/blogs/how-ai-resume-screening-helps-recruiters-save-time',
     title: 'How AI Resume Screening Helps Recruiters Save Time and Improve Shortlist Quality',
     meta: 'Learn how AI resume screening helps recruiters reduce manual resume review, parse candidate profiles, match resumes with job descriptions, and shortlist better candidates faster.',
@@ -2433,6 +2454,7 @@ function BlogList() {
                 <div className="blogMetaRow">
                   <span className="blogCategory">{post.category}</span>
                   <span className="blogReadTime">{post.readTime}</span>
+                  {post.published && <time dateTime="2026-07-26">{post.published}</time>}
                 </div>
 
                 <h2>
@@ -2456,6 +2478,7 @@ function BlogList() {
 }
 
 function BlogPost({ post }) {
+  if (post.isActionAgentArticle) return <ActionAgentBlogPost post={post} />
   const contextualLinks = blogContextLinks(post)
   return (
     <>
@@ -2690,6 +2713,345 @@ function ContactPage() {
         ]}
         note="Your demo can focus on the HireScoreAI features and approval controls that matter to your team."
       />
+    </>
+  )
+}
+
+const actionAgentToc = [
+  ['problem', 'The Problem with Complex ATS Dashboards'],
+  ['solution', 'The Solution: An ATS You Can Talk To'],
+  ['how-it-works', 'How the HireScoreAI Action AI Agent Works'],
+  ['create-jobs', 'Create Jobs Through Conversation'],
+  ['application-pages', 'Generate and Share Public Application Pages'],
+  ['process-resumes', 'Upload and Process Candidate Resumes'],
+  ['best-candidates', 'Find and Understand the Best Candidates'],
+  ['shortlist', 'Shortlist Candidates and Move Them Forward'],
+  ['communication', 'Manage Candidate Communication'],
+  ['interviews', 'Schedule Interviews Through Chat'],
+  ['screening-tests', 'Run Screening Tests and Continue the Workflow'],
+  ['guide-vs-action', 'Guide Agent vs Action Agent'],
+  ['control', 'Recruiters Stay in Control'],
+  ['benefits', 'Benefits of Hiring Through Conversation'],
+  ['future', 'The Future of Recruitment Software Is Conversational'],
+  ['start', 'Start Hiring Through Conversation'],
+]
+
+function ChatCommand({ children }) {
+  return <blockquote className="actionChatCommand"><MessageSquareText size={18} aria-hidden="true" /><span>{children}</span></blockquote>
+}
+
+function ActionAgentBlogPost({ post }) {
+  const [activeSection, setActiveSection] = useState(actionAgentToc[0][0])
+
+  useEffect(() => {
+    const sections = actionAgentToc.map(([id]) => document.getElementById(id)).filter(Boolean)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+        if (visible[0]) setActiveSection(visible[0].target.id)
+      },
+      { rootMargin: '-18% 0px -68% 0px', threshold: [0, 0.2, 0.6] },
+    )
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
+  }, [])
+
+  const contextualLinks = blogContextLinks(post)
+  const workflowCommands = [
+    ['Create this job', 'Job creation'],
+    ['Process these resumes', 'Resume processing'],
+    ['Show me the strongest candidates', 'Candidate ranking'],
+    ['Move them to communication', 'Stage update'],
+    ['Schedule interviews', 'Interview plan'],
+  ]
+  const dashboardSteps = ['Job creation', 'Resume upload', 'Candidate review', 'Shortlisting', 'Communication', 'Interview scheduling']
+  const actionSteps = [
+    ['01', 'Understand recruiter intent', 'Identify the requested outcome, job, candidates and available context.'],
+    ['02', 'Prepare an action plan', 'Structure the supported action and surface any missing information.'],
+    ['03', 'Request confirmation', 'Show the affected job, candidates, message or schedule for recruiter review.'],
+    ['04', 'Execute the approved action', 'Continue only after the recruiter confirms the prepared action.'],
+  ]
+  const benefits = [
+    ['Less dashboard navigation', 'Spend less time moving repeatedly through menus, forms and filters.', Route],
+    ['Faster recruiter onboarding', 'Help new users begin supported workflows without learning every screen first.', Rocket],
+    ['Reduced repetitive work', 'Make common job, stage and communication tasks easier to prepare.', Zap],
+    ['Better feature adoption', 'Reach useful capabilities through natural-language instructions.', Sparkles],
+    ['Connected hiring workflows', 'Keep screening, ranking, communication and interviews in one process.', Workflow],
+    ['More time for human judgement', 'Preserve recruiter attention for candidates and hiring-manager conversations.', UsersRound],
+  ]
+
+  return (
+    <>
+      <SEO path={post.slug} schemaHeadline={post.title} />
+      <nav className="breadcrumbs container" aria-label="Breadcrumb">
+        <Link href="/">Home</Link>
+        <span>/<Link href="/resources">Resources</Link></span>
+        <span>/<Link href="/resources/blogs">Blogs</Link></span>
+        <span aria-current="page">/ Hire Through Conversation</span>
+      </nav>
+
+      <article className="actionArticle">
+        <header className="actionArticleHero">
+          <div className="actionArticleShell actionArticleHeroGrid">
+            <div className="actionArticleHeroCopy">
+              <div className="blogMetaRow">
+                <span className="blogCategory">{post.category}</span>
+                <span className="blogReadTime">{post.readTime}</span>
+                <time dateTime="2026-07-26">{post.published}</time>
+              </div>
+              <h1>{post.title}</h1>
+              <p>Manage jobs, candidates, communication and interviews through natural-language chat—while recruiter review and confirmation remain central to consequential actions.</p>
+              <div className="actionArticleByline"><span className="actionArticleAuthor">H</span><span><strong>By HireScoreAI</strong><small>AI recruitment workflow insights</small></span></div>
+              <a className="btn btnPrimary btnLarge" href={PILOT_MAILTO}>Book Your Free 7-Day Pilot <ArrowRight size={18} /></a>
+            </div>
+            <div className="actionHeroVisual">
+              <img
+                src={post.image}
+                alt="HireScoreAI Action AI Agent conversation connecting recruiter commands to prepared ATS actions and recruiter confirmation"
+                width="1200"
+                height="630"
+                fetchpriority="high"
+              />
+            </div>
+          </div>
+        </header>
+
+        <div className="actionArticleShell actionArticleLayout">
+          <aside className="actionArticleToc" aria-label="Article contents">
+            <strong>In this article</strong>
+            <nav>
+              {actionAgentToc.map(([id, label]) => (
+                <a className={activeSection === id ? 'isActive' : ''} href={`#${id}`} key={id}>{label}</a>
+              ))}
+            </nav>
+          </aside>
+
+          <div className="actionArticleBody">
+            <details className="actionMobileToc">
+              <summary>Article contents <ChevronDown size={18} /></summary>
+              <nav>{actionAgentToc.map(([id, label]) => <a href={`#${id}`} key={id}>{label}</a>)}</nav>
+            </details>
+
+            <section className="actionArticleIntro" aria-label="Introduction">
+              <p>Recruitment technology has become more powerful, but using it has not always become easier.</p>
+              <p>Many applicant tracking systems require recruiters to move between dashboards, forms, filters and candidate profiles. Creating a job happens on one screen, resume processing on another, shortlisting somewhere else, and interview scheduling in a separate workflow.</p>
+              <p>Even modern AI recruiting platforms can add isolated AI features without removing the operational complexity recruiters face every day. Recruiters may gain smarter screening and automation while still manually controlling every step.</p>
+              <p><Link href="/">HireScoreAI</Link> takes a different approach. Its Action AI Agent lets recruiters manage a connected hiring workflow through conversation. Instead of searching menus or memorising every feature location, recruiters can state what they want to accomplish and review the prepared action.</p>
+            </section>
+
+            <section className="actionWorkflowVisual" aria-labelledby="conversation-workflow-title">
+              <div className="actionSectionLabel">Conversation workflow</div>
+              <h2 id="conversation-workflow-title">One conversation, connected ATS actions</h2>
+              <div className="actionWorkflowSequence">
+                {workflowCommands.map(([command, action], index) => (
+                  <div className="actionWorkflowRow" style={{ '--sequence': index }} key={command}>
+                    <span className="actionWorkflowNumber">{index + 1}</span>
+                    <blockquote>{command}</blockquote>
+                    <span className="actionWorkflowConnector"><ArrowRight size={17} /></span>
+                    <div><CheckCircle2 size={17} /><span>{action}</span><small>Prepared for review</small></div>
+                  </div>
+                ))}
+              </div>
+              <div className="actionConfirmation"><ShieldCheck size={21} /><span><strong>Confirmation first</strong> Consequential actions continue only after recruiter review and approval.</span></div>
+            </section>
+
+            <section className="actionArticleSection" id="problem">
+              <span className="actionSectionLabel">The operational problem</span>
+              <h2>The Problem with Complex ATS Dashboards</h2>
+              <p>Traditional ATS platforms were mainly designed to store candidate records and manage hiring stages. As more features were added, dashboards became more powerful—but also more complicated.</p>
+              <p>To complete one hiring requirement, a recruiter may need to move through every part of this workflow:</p>
+              <div className="actionDashboardFlow">
+                {dashboardSteps.map((step, index) => <div key={step}><span>{String(index + 1).padStart(2, '0')}</span><strong>{step}</strong></div>)}
+              </div>
+              <p>Each action may require a separate page, form or configuration. This creates friction for recruitment agencies, staffing companies and internal HR teams. Recruiters spend time operating software when they should be evaluating candidates and speaking with hiring managers.</p>
+              <p>Agentic recruitment systems can interpret natural language and combine it with defined workflow automation, while keeping hiring teams responsible for decisions. That direction is particularly relevant across <Link href="/solutions">AI hiring solutions for recruitment agencies, staffing companies and HR teams</Link>.</p>
+            </section>
+
+            <section className="actionArticleSection" id="solution">
+              <span className="actionSectionLabel">A conversational workspace</span>
+              <h2>The Solution: An ATS You Can Talk To</h2>
+              <p>HireScoreAI’s Action AI Agent converts recruiter instructions into structured hiring actions. A recruiter can begin with:</p>
+              <ChatCommand>Create a Data Analyst job using this job description.</ChatCommand>
+              <p>The agent can understand the request, extract relevant job details and prepare the job for review. The recruiter can then continue:</p>
+              <div className="actionCommandGrid">
+                <ChatCommand>Create a public application page for this job.</ChatCommand>
+                <ChatCommand>Upload these resumes and process them.</ChatCommand>
+                <ChatCommand>Show me the top 10 candidates.</ChatCommand>
+                <ChatCommand>Move qualified candidates to communication.</ChatCommand>
+                <ChatCommand>Schedule interviews for next Tuesday.</ChatCommand>
+              </div>
+              <p>Rather than navigating each dashboard area manually, the recruiter manages the workflow through a continuous conversation inside <Link href="/product/hirescore-ai">HireScoreAI’s connected AI recruitment platform</Link>.</p>
+            </section>
+
+            <section className="actionArticleSection" id="how-it-works">
+              <span className="actionSectionLabel">Intent to approved action</span>
+              <h2>How the HireScoreAI Action AI Agent Works</h2>
+              <p>The Action AI Agent starts by understanding the recruiter’s intent: the requested action, the relevant job or candidates, the available information, missing details and whether confirmation is required.</p>
+              <ChatCommand>Move the top 10 Data Analyst candidates to communication.</ChatCommand>
+              <p>For this request, the agent can resolve the job, identify the highest-ranked candidates and prepare the proposed movement. Before completing an important action, it shows what will happen and asks for approval.</p>
+              <div className="actionSteps">
+                {actionSteps.map(([number, title, text]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{text}</p></article>)}
+              </div>
+              <p>This provides the convenience of AI hiring workflow automation without removing human control.</p>
+            </section>
+
+            <section className="actionArticleSection" id="create-jobs">
+              <h2>Create Jobs Through Conversation</h2>
+              <p>Creating a job usually involves entering a title, required skills, experience level, location, employment type, responsibilities and candidate requirements.</p>
+              <p>With the Action AI Agent, a recruiter can provide a job description or explain the requirement conversationally:</p>
+              <ChatCommand>Create a Senior Backend Developer role requiring Python, FastAPI, PostgreSQL, AWS and five years of experience.</ChatCommand>
+              <p>The agent can structure the requirement, prepare the job details and ask the recruiter to review them before creation. This reduces repetitive form filling and supports a quicker start to the <Link href="/product/create-job">structured job-creation workflow</Link>.</p>
+            </section>
+
+            <section className="actionArticleSection" id="application-pages">
+              <h2>Generate and Share Public Application Pages</h2>
+              <p>Once a job is created, the recruiter can ask the agent to generate a public application page.</p>
+              <ChatCommand>Create an application link for this job.</ChatCommand>
+              <p>The resulting <Link href="/product/public-apply-page">public job application page</Link> can be shared through LinkedIn, job boards, email campaigns or direct outreach. Candidates can submit applications and resumes directly into the appropriate workflow.</p>
+            </section>
+
+            <section className="actionArticleSection" id="process-resumes">
+              <h2>Upload and Process Candidate Resumes</h2>
+              <p>Recruiters often receive resumes through email, job portals, referrals and shared folders. Instead of manually assigning every file, they can ask:</p>
+              <ChatCommand>Upload these resumes to the Backend Developer job.</ChatCommand>
+              <p>The Action AI Agent can help associate the resumes with the correct requirement and initiate candidate processing. HireScoreAI can then extract skills, work experience, education, projects, role history and contact details.</p>
+              <p><Link href="/product/resume-upload">Connected resume upload and processing</Link> reduces repetitive organisation work and prepares candidate information for more structured evaluation.</p>
+            </section>
+
+            <section className="actionArticleSection" id="best-candidates">
+              <h2>Find and Understand the Best Candidates</h2>
+              <p>A recruiter should not have to open every profile simply to identify the strongest applicants.</p>
+              <ChatCommand>Show me the top 10 candidates for this role.</ChatCommand>
+              <p>HireScoreAI can surface AI-ranked candidates based on alignment with the job requirements. Recruiters can review matching skills, relevant experience, project evidence, missing requirements, potential risks and areas that need interview verification.</p>
+              <ChatCommand>Why did this candidate receive a score of 82?</ChatCommand>
+              <p>The agent can help surface the evidence behind the score, making <Link href="/product/ai-candidate-ranking">AI candidate ranking</Link> easier to understand. The score supports review; it does not make the final hiring decision.</p>
+            </section>
+
+            <section className="actionArticleSection" id="shortlist">
+              <h2>Shortlist Candidates and Move Them Forward</h2>
+              <p>Once the recruiter has reviewed the ranking, the workflow can continue through chat.</p>
+              <div className="actionCommandGrid">
+                <ChatCommand>Shortlist candidates scoring above 75.</ChatCommand>
+                <ChatCommand>Move the top five candidates to communication.</ChatCommand>
+              </div>
+              <p>The Action AI Agent prepares the selected candidate list and asks for confirmation before changing a hiring stage. This can reduce repetitive stage updates when recruiters are managing large candidate volumes.</p>
+            </section>
+
+            <section className="actionArticleSection" id="communication">
+              <h2>Manage Candidate Communication</h2>
+              <p>Recruiters can also use the agent to prepare candidate communication.</p>
+              <div className="actionCommandGrid">
+                <ChatCommand>Draft an interview invitation for the shortlisted candidates.</ChatCommand>
+                <ChatCommand>Prepare a follow-up message for candidates who have not responded.</ChatCommand>
+                <ChatCommand>Send the selected candidates the next-step instructions.</ChatCommand>
+              </div>
+              <p>The recruiter can review the message and recipient list before anything is sent. This supports a faster <Link href="/product/candidate-communication">candidate communication workflow</Link> while leaving tone, content and final approval with the recruiter.</p>
+            </section>
+
+            <section className="actionArticleSection" id="interviews">
+              <h2>Schedule Interviews Through Chat</h2>
+              <p>Interview scheduling normally involves selecting candidates, entering dates, coordinating interviewers and preparing meeting details.</p>
+              <ChatCommand>Schedule interviews with the shortlisted candidates next Tuesday afternoon.</ChatCommand>
+              <p>The agent can gather missing information, prepare the interview plan and request confirmation before finalising it. This reduces the number of screens involved and helps avoid mistakes concerning the wrong candidate, job or stage.</p>
+            </section>
+
+            <section className="actionArticleSection" id="screening-tests">
+              <h2>Run Screening Tests and Continue the Workflow</h2>
+              <p>Recruiters may also ask the agent to initiate a screening test for selected candidates.</p>
+              <ChatCommand>Send a technical screening test to the shortlisted backend candidates.</ChatCommand>
+              <p>After the recruiter confirms the action, selected candidates can move into the appropriate assessment workflow. Job creation, screening, shortlisting, communication, testing and interview scheduling remain connected inside one conversation.</p>
+            </section>
+
+            <section className="actionArticleSection" id="guide-vs-action">
+              <span className="actionSectionLabel">Two assistance modes</span>
+              <h2>Guide Agent vs Action Agent</h2>
+              <p>HireScoreAI supports two assistance modes for different recruiter needs.</p>
+              <div className="agentComparison">
+                <article>
+                  <div className="agentComparisonIcon"><BookOpen size={22} /></div>
+                  <span>Learn and navigate</span>
+                  <h3>Guide Agent</h3>
+                  <ul>
+                    <li><CheckCircle2 size={17} />Explains workflows</li>
+                    <li><CheckCircle2 size={17} />Shows the next steps</li>
+                    <li><CheckCircle2 size={17} />Makes no changes</li>
+                    <li><CheckCircle2 size={17} />Useful for onboarding</li>
+                  </ul>
+                </article>
+                <article className="isAction">
+                  <div className="agentComparisonIcon"><Bot size={22} /></div>
+                  <span>Prepare and complete</span>
+                  <h3>Action Agent</h3>
+                  <ul>
+                    <li><CheckCircle2 size={17} />Prepares supported actions</li>
+                    <li><CheckCircle2 size={17} />Executes after confirmation</li>
+                    <li><CheckCircle2 size={17} />Helps complete repetitive workflows</li>
+                    <li><CheckCircle2 size={17} />Keeps recruiters in control</li>
+                  </ul>
+                </article>
+              </div>
+              <p>The Guide Agent helps recruiters understand the product without changing anything. The Action Agent prepares supported tasks and continues only with the required approval. Together, they make the ATS more approachable for new and experienced recruiters.</p>
+            </section>
+
+            <section className="actionArticleSection" id="control">
+              <span className="actionSectionLabel">Responsible automation</span>
+              <h2>Recruiters Stay in Control</h2>
+              <p>An AI recruitment agent should not make important hiring decisions without oversight. HireScoreAI follows a confirmation-first approach for sensitive or consequential actions.</p>
+              <div className="actionApprovalPanel">
+                <div><ShieldCheck size={27} /><span><small>Action status</small><strong>Ready for recruiter review</strong></span></div>
+                <ul>
+                  <li>The job being affected</li>
+                  <li>The candidates selected</li>
+                  <li>The proposed stage change</li>
+                  <li>The message that will be sent</li>
+                  <li>The interview details</li>
+                  <li>The action requiring approval</li>
+                </ul>
+                <button type="button" disabled aria-label="Example confirmed action button">Confirm approved action</button>
+              </div>
+              <p>Responsible recruitment automation should handle repetitive workflow preparation while keeping hiring teams accountable for final decisions. The agent supports recruiter decisions—it does not replace recruiters.</p>
+            </section>
+
+            <section className="actionArticleSection" id="benefits">
+              <span className="actionSectionLabel">Practical advantages</span>
+              <h2>Benefits of Hiring Through Conversation</h2>
+              <div className="actionBenefitGrid">
+                {benefits.map(([title, text, Icon]) => <article key={title}><Icon size={21} /><h3>{title}</h3><p>{text}</p></article>)}
+              </div>
+            </section>
+
+            <section className="actionArticleSection" id="future">
+              <h2>The Future of Recruitment Software Is Conversational</h2>
+              <p>The future of recruitment software is not simply another dashboard filled with more buttons. It is an intelligent hiring system that understands what recruiters are trying to achieve and helps them complete supported work.</p>
+              <div className="actionFutureFlow">
+                {['Create this job', 'Process these resumes', 'Show me the strongest candidates', 'Move them to communication and schedule interviews'].map((command, index) => <div key={command}><span>{index + 1}</span><p>{command}</p></div>)}
+              </div>
+              <p>HireScoreAI turns complex hiring workflows into simpler conversations while keeping recruiters in control of every important action.</p>
+            </section>
+
+            <section className="actionArticleSection actionArticleConclusion" id="start">
+              <h2>Start Hiring Through Conversation</h2>
+              <p>HireScoreAI combines job creation, public application pages, resume processing, AI candidate scoring, explainable ranking, shortlisting, candidate communication, screening tests and interview scheduling in one connected platform.</p>
+              <p>The Action AI Agent makes the workflow easier to manage through simple chat-based instructions. Recruiters can reduce dashboard navigation without giving up review, accountability or final decision-making.</p>
+              <p>Ready to stop navigating complex ATS dashboards and start hiring through conversation?</p>
+            </section>
+
+            <section className="actionArticleCta" aria-label="Start Hiring Through Conversation">
+              <span className="actionSectionLabel">HireScoreAI Action AI Agent</span>
+              <h2>Start Hiring Through Conversation</h2>
+              <p>Manage jobs, resumes, candidate ranking, communication and interviews through simple chat-based instructions.</p>
+              <a href={PILOT_MAILTO} className="btn btnPrimary btnLarge">Book Your Free 7-Day Pilot <ArrowRight size={18} /></a>
+            </section>
+
+            <div className="blogRelatedBox">
+              <h2>Continue exploring HireScoreAI</h2>
+              <div className="blogRelatedLinks">
+                {contextualLinks.map((href) => <Link href={href} key={href}>{titleByPath(href)}</Link>)}
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
     </>
   )
 }

@@ -145,6 +145,7 @@ const guideRoutes = [
 ]
 
 const blogRoutes = [
+  ['/resources/blogs/hire-through-conversation-action-ai-agent', 'Hire Through Conversation with an AI ATS Action Agent | HireScoreAI', 'See how HireScoreAI’s Action AI Agent helps recruiters manage job creation, resume screening, candidate ranking, communication and interviews through chat.', 'AI Recruitment Automation', `${SITE_URL}/action-ai-agent-conversation.webp`, '2026-07-26', '2026-07-26', 'BlogPosting'],
   ['/resources/blogs/how-ai-resume-screening-helps-recruiters-save-time', 'How AI Resume Screening Saves Recruiters Time | HireScoreAI', 'Learn how AI resume screening reduces manual resume review, structures candidate profiles, improves JD matching, and helps recruiters build stronger shortlists faster.', 'AI Resume Screening', 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80'],
   ['/resources/blogs/what-is-candidate-ranking-and-why-it-matters', 'What Is Candidate Ranking in Recruitment? | HireScoreAI', 'Understand candidate ranking and how JD-based AI scoring, skill matching, gap analysis, and explainable evidence help recruiters prioritize applicants.', 'Candidate Ranking', 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=80'],
   ['/resources/blogs/how-to-create-a-public-job-apply-page-for-faster-hiring', 'How to Create a Public Job Apply Page | HireScoreAI', 'Learn how public job apply pages simplify candidate intake, organize resume collection, and connect applications with AI resume screening.', 'Public Apply Page', 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80'],
@@ -171,7 +172,27 @@ export const SEO_ROUTES = [
   ...solutionSegmentRoutes.map(({ path, title, description, navLabel }) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, navLabel, '/solutions', 'Solutions') })),
   ...comparisonRoutes.map(({ path, title, description, navLabel }) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, navLabel) })),
   ...guideRoutes.map(([path, title, description, steps]) => ({ path, title: `${title} | HireScoreAI Guide`, description, pageType: 'WebPage', schemaKind: 'howto', steps, breadcrumbs: breadcrumbFor(path, title, '/resources/user-guide', 'User Guide') })),
-  ...blogRoutes.map(([path, title, description, category, image]) => ({ path, title, description, pageType: 'WebPage', ogType: 'article', schemaKind: 'article', category, image, datePublished: '2026-06-28', dateModified: '2026-07-25', breadcrumbs: breadcrumbFor(path, title.replace(/ \|.*$/, ''), '/resources/blogs', 'Blog') })),
+  ...blogRoutes.map(([path, title, description, category, image, datePublished = '2026-06-28', dateModified = '2026-07-25', articleType = 'Article']) => ({
+    path,
+    title,
+    description,
+    pageType: 'WebPage',
+    ogType: 'article',
+    schemaKind: 'article',
+    articleType,
+    category,
+    image,
+    datePublished,
+    dateModified,
+    breadcrumbs: path === '/resources/blogs/hire-through-conversation-action-ai-agent'
+      ? [
+          { name: 'Home', path: '/' },
+          { name: 'Resources', path: '/resources' },
+          { name: 'Blogs', path: '/resources/blogs' },
+          { name: 'Hire Through Conversation', path },
+        ]
+      : breadcrumbFor(path, title.replace(/ \|.*$/, ''), '/resources/blogs', 'Blog'),
+  })),
   ...caseStudyRoutes.map(([path, title, description]) => ({ path, title, description, pageType: 'WebPage', ogType: 'article', schemaKind: 'case-study', datePublished: '2026-06-28', dateModified: '2026-07-25', breadcrumbs: breadcrumbFor(path, title.replace(/ \|.*$/, ''), '/resources/case-studies', 'Case Studies') })),
 ].map((route) => ({
   ...route,
@@ -324,7 +345,7 @@ export function buildRouteSchema(config) {
   if (config.schemaKind === 'article' || config.schemaKind === 'case-study') {
     graph.unshift(organization)
     graph.push({
-      '@type': 'Article',
+      '@type': config.articleType || 'Article',
       '@id': `${config.canonical}#article`,
       headline: config.renderedH1 || config.title.replace(/ \|.*$/, ''),
       description: config.description,
@@ -332,6 +353,7 @@ export function buildRouteSchema(config) {
       articleSection: config.category || 'Sample case study',
       inLanguage: 'en',
       mainEntityOfPage: { '@id': pageId },
+      url: config.canonical,
       author: { '@id': ORGANIZATION_ID },
       publisher: { '@id': ORGANIZATION_ID },
       isAccessibleForFree: true,

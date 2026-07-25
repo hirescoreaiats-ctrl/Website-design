@@ -14,6 +14,25 @@ const inboundLinks = new Map(SEO_ROUTES.map((route) => [route.path, new Set()]))
 const linkRecords = []
 const blogBodies = []
 const routeMetrics = []
+const actionAgentArticlePath = '/resources/blogs/hire-through-conversation-action-ai-agent'
+const actionAgentArticleH2s = [
+  'The Problem with Complex ATS Dashboards',
+  'The Solution: An ATS You Can Talk To',
+  'How the HireScoreAI Action AI Agent Works',
+  'Create Jobs Through Conversation',
+  'Generate and Share Public Application Pages',
+  'Upload and Process Candidate Resumes',
+  'Find and Understand the Best Candidates',
+  'Shortlist Candidates and Move Them Forward',
+  'Manage Candidate Communication',
+  'Schedule Interviews Through Chat',
+  'Run Screening Tests and Continue the Workflow',
+  'Guide Agent vs Action Agent',
+  'Recruiters Stay in Control',
+  'Benefits of Hiring Through Conversation',
+  'The Future of Recruitment Software Is Conversational',
+  'Start Hiring Through Conversation',
+]
 
 const decodeHtml = (value = '') => value
   .replaceAll('&amp;', '&')
@@ -49,6 +68,7 @@ const requiredRepresentativePaths = new Set([
   '/resources/blogs/how-ai-resume-screening-helps-recruiters-save-time',
   '/resources/blogs/what-is-candidate-ranking-and-why-it-matters',
   '/resources/blogs/complete-guide-to-ai-powered-hiring-automation',
+  '/resources/blogs/hire-through-conversation-action-ai-agent',
   '/resources/user-guide/upload-resumes',
   '/compare/hirescoreai-vs-hiredscore',
 ])
@@ -110,6 +130,22 @@ for (const route of SEO_ROUTES) {
     if (mainHeadings.length < 4) errors.push(`${route.path}: complete blog article is missing its expected section hierarchy`)
     if (meaningfulText.includes('Practical guidance for recruiting teams')) errors.push(`${route.path}: generic blog fallback is still present`)
     blogBodies.push({ path: route.path, text: meaningfulText.toLowerCase() })
+  }
+  if (route.path === actionAgentArticlePath) {
+    if (h1Text !== 'Hire Through Conversation: How HireScoreAI’s Action AI Agent Runs Your Entire Hiring Workflow') errors.push(`${route.path}: article H1 mismatch`)
+    if (meaningfulWords < 1600) errors.push(`${route.path}: complete supplied article is missing from prerendered HTML (${meaningfulWords} words)`)
+    for (const heading of actionAgentArticleH2s) {
+      if (!mainHeadings.includes(heading)) errors.push(`${route.path}: missing required H2 "${heading}"`)
+    }
+    for (const href of ['/', '/product/hirescore-ai/', '/solutions/']) {
+      if (!new RegExp(`<a\\b[^>]*href=["']${href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}["']`, 'i').test(mainHtml)) errors.push(`${route.path}: missing required crawlable internal link ${href}`)
+    }
+    for (const command of ['Create this job', 'Process these resumes', 'Show me the strongest candidates', 'Move them to communication', 'Schedule interviews']) {
+      if (!visibleText.includes(command)) errors.push(`${route.path}: missing visible chat command "${command}"`)
+    }
+    if (!visibleText.includes('Book Your Free 7-Day Pilot')) errors.push(`${route.path}: missing final pilot CTA`)
+    if (!/<time\b[^>]*datetime=["']2026-07-26["']/i.test(mainHtml)) errors.push(`${route.path}: missing visible publish date`)
+    if (!/<img\b[^>]*src=["']\/action-ai-agent-conversation\.webp["'][^>]*width=["']1200["'][^>]*height=["']630["']/i.test(mainHtml)) errors.push(`${route.path}: hero image must include explicit dimensions`)
   }
   for (const paragraph of paragraphTexts.filter((text) => text.length >= 80)) {
     const routes = staticParagraphs.get(paragraph) || []
@@ -296,13 +332,15 @@ for (const route of SEO_ROUTES) {
       }
       if (route.breadcrumbs && !types.includes('BreadcrumbList')) errors.push(`${route.path}: missing BreadcrumbList schema`)
       if (route.schemaKind === 'article') {
-        const article = graph.find((node) => node['@type'] === 'Article')
-        if (!article) errors.push(`${route.path}: missing Article schema`)
+        const article = graph.find((node) => ['Article', 'BlogPosting'].includes(node['@type']))
+        if (!article) errors.push(`${route.path}: missing Article or BlogPosting schema`)
         if (article?.headline !== h1Text) errors.push(`${route.path}: Article headline must match the visible H1`)
         if (article?.author?.['@id'] !== ORGANIZATION_ID || !visibleText.includes('By HireScoreAI')) errors.push(`${route.path}: article authorship is not consistent between schema and visible content`)
-        for (const field of ['headline', 'description', 'image', 'author', 'publisher', 'datePublished', 'dateModified', 'mainEntityOfPage']) {
+        for (const field of ['headline', 'description', 'image', 'author', 'publisher', 'datePublished', 'dateModified', 'mainEntityOfPage', 'url', 'inLanguage']) {
           if (!article?.[field]) errors.push(`${route.path}: Article missing ${field}`)
         }
+        if (route.articleType && article?.['@type'] !== route.articleType) errors.push(`${route.path}: expected ${route.articleType} schema`)
+        if (route.path === actionAgentArticlePath && types.includes('SoftwareApplication')) errors.push(`${route.path}: SoftwareApplication must not appear on the blog route`)
       }
       if (route.schemaKind === 'case-study' && !types.includes('Article')) errors.push(`${route.path}: case study missing Article schema`)
       if (route.schemaKind === 'howto' && !types.includes('HowTo')) errors.push(`${route.path}: missing HowTo schema`)
