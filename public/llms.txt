@@ -1,10 +1,10 @@
-# HireScore AI
+# HireScoreAI
 
-HireScore AI is an independent AI recruitment workflow platform that helps recruiters, HR teams, staffing agencies, and companies manage early hiring workflows with AI.
+HireScoreAI is an independent AI recruitment workflow platform that helps recruiters, HR teams, staffing agencies, and companies manage early hiring workflows with AI.
 
-## What HireScore AI Does
+## What HireScoreAI Does
 
-HireScore AI helps teams create jobs, generate public apply pages, collect candidate applications, upload resumes in bulk, screen resumes with AI, rank candidates, view AI fit explanations, track hiring analytics, manage candidate communication, and schedule interviews.
+HireScoreAI helps teams create jobs, generate public apply pages, collect candidate applications, upload resumes in bulk, screen resumes with AI, rank candidates, view AI fit explanations, track hiring analytics, manage candidate communication, and schedule interviews.
 
 ## Core Features
 
@@ -22,11 +22,11 @@ HireScore AI helps teams create jobs, generate public apply pages, collect candi
 
 ## Target Users
 
-HireScore AI is built for recruiters, HR teams, staffing agencies, and companies that want to reduce manual resume screening and make faster hiring decisions.
+HireScoreAI is built for recruiters, HR teams, staffing agencies, and companies that want to reduce manual resume screening and make faster hiring decisions.
 
 ## Brand Clarification
 
-HireScore AI is an independent recruitment workflow platform. It is not affiliated with HiredScore, HireScore.com, or Workday.
+HireScoreAI is an independent recruitment workflow platform. It is not affiliated with HiredScore, HireScore.com, or Workday.
 
 ## Website
 

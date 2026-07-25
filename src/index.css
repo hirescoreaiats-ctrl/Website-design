@@ -67,6 +67,11 @@ svg {
   color: #eee7f2;
 }
 
+[data-static-route-content] .commandReveal {
+  opacity: 1;
+  transform: none;
+}
+
 .staticRouteShell > header,
 .staticRouteShell > main,
 .staticRouteShell > footer {

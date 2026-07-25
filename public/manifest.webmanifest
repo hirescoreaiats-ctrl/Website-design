@@ -1,6 +1,6 @@
 {
-  "name": "HireScore AI",
-  "short_name": "HireScore AI",
+  "name": "HireScoreAI",
+  "short_name": "HireScoreAI",
   "description": "Independent AI recruitment workflow platform for AI resume screening, candidate ranking, AI fit explanations, hiring analytics, communication, and interview scheduling.",
   "start_url": "/",
   "display": "standalone",

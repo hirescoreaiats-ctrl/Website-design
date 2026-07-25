@@ -1,6 +1,6 @@
-import { readFile } from 'node:fs/promises'
+import { readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { FOUNDER_ID, HOME_FAQS, HOME_H1, ORGANIZATION_ID, SEO_ROUTES, SITE_URL, STATIC_ROUTE_FAQS, STATIC_ROUTE_H1S } from '../src/seoConfig.js'
+import { FOUNDER_ID, HOME_FAQS, HOME_H1, OFFICIAL_SOCIAL_LINKS, ORGANIZATION_ID, SEO_ROUTES, SITE_URL, STATIC_ROUTE_H1S } from '../src/seoConfig.js'
 
 const dist = path.join(process.cwd(), 'dist')
 const errors = []
@@ -9,6 +9,11 @@ const descriptions = new Map()
 const canonicals = new Map()
 const staticParagraphs = new Map()
 const intentionalNoindexRoutes = new Set(['/privacy', '/terms'])
+const routePaths = new Set(SEO_ROUTES.map((route) => route.path))
+const inboundLinks = new Map(SEO_ROUTES.map((route) => [route.path, new Set()]))
+const linkRecords = []
+const blogBodies = []
+const routeMetrics = []
 
 const decodeHtml = (value = '') => value
   .replaceAll('&amp;', '&')
@@ -17,6 +22,36 @@ const decodeHtml = (value = '') => value
   .replaceAll('&gt;', '>')
 
 const capture = (html, pattern) => decodeHtml(html.match(pattern)?.[1] || '')
+const stripHtml = (html = '') => decodeHtml(html
+  .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+  .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+  .replace(/<svg[\s\S]*?<\/svg>/gi, ' ')
+  .replace(/<canvas[\s\S]*?<\/canvas>/gi, ' ')
+  .replace(/<nav[\s\S]*?<\/nav>/gi, ' ')
+  .replace(/<section[^>]*\bctaSection\b[^>]*>[\s\S]*?<\/section>/gi, ' ')
+  .replace(/<[^>]+>/g, ' ')
+  .replace(/\s+/g, ' ')
+  .trim())
+const wordCount = (text = '') => text.match(/\b[\p{L}\p{N}][\p{L}\p{N}'’-]*\b/gu)?.length || 0
+const normalizeRoutePath = (value = '/') => {
+  const clean = value.split('?')[0].split('#')[0].replace(/\/+$/, '')
+  return clean || '/'
+}
+const attribute = (attrs, name) => decodeHtml(attrs.match(new RegExp(`\\b${name}=(?:"([^"]*)"|'([^']*)')`, 'i'))?.slice(1).find((value) => value !== undefined) || '')
+const requiredRepresentativePaths = new Set([
+  '/',
+  '/product/hirescore-ai',
+  '/pricing',
+  '/solutions/recruitment-agencies',
+  '/product/ai-candidate-scoring',
+  '/resources',
+  '/resources/blogs',
+  '/resources/blogs/how-ai-resume-screening-helps-recruiters-save-time',
+  '/resources/blogs/what-is-candidate-ranking-and-why-it-matters',
+  '/resources/blogs/complete-guide-to-ai-powered-hiring-automation',
+  '/resources/user-guide/upload-resumes',
+  '/compare/hirescoreai-vs-hiredscore',
+])
 
 for (const route of SEO_ROUTES) {
   const outputPath = route.path === '/'
@@ -36,18 +71,17 @@ for (const route of SEO_ROUTES) {
   const robots = capture(html, /<meta name="robots" content="([^"]*)"/i)
   const jsonLd = html.match(/<script id="route-schema" type="application\/ld\+json">([\s\S]*?)<\/script>/i)?.[1]
   const body = capture(html, /<body[^>]*>([\s\S]*?)<\/body>/i)
-  const rootContent = capture(body, /<div id="root">([\s\S]*?)<\/div>\s*$/i)
+  const mainHtml = body.match(/<main(?:\s[^>]*)?>([\s\S]*?)<\/main>/i)?.[1] || ''
   const h1Matches = body.match(/<h1(?:\s[^>]*)?>[\s\S]*?<\/h1>/gi) || []
   const h1Text = h1Matches[0]?.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim() || ''
-  const paragraphTexts = [...body.matchAll(/<p(?:\s[^>]*)?>([\s\S]*?)<\/p>/gi)]
+  const paragraphTexts = [...mainHtml.matchAll(/<p(?:\s[^>]*)?>([\s\S]*?)<\/p>/gi)]
     .map((match) => decodeHtml(match[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()))
     .filter(Boolean)
-  const visibleText = body
-    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
+  const visibleText = stripHtml(body)
+  const meaningfulText = stripHtml(mainHtml)
+  const meaningfulWords = wordCount(meaningfulText)
+  const mainHeadings = [...mainHtml.matchAll(/<h([23])(?:\s[^>]*)?>([\s\S]*?)<\/h\1>/gi)].map((match) => stripHtml(match[2]))
+  routeMetrics.push({ path: route.path, words: meaningfulWords, h1: h1Text, headings: mainHeadings })
 
   if (title !== route.title) errors.push(`${route.path}: title mismatch`)
   if (description !== route.description) errors.push(`${route.path}: description mismatch`)
@@ -62,14 +96,18 @@ for (const route of SEO_ROUTES) {
   if (/<meta[^>]+name=["']keywords["']/i.test(html)) errors.push(`${route.path}: meta keywords tag must not be present`)
   if (/<noscript[\s>]/i.test(html)) errors.push(`${route.path}: SEO noscript content must not be present`)
   if (!body.includes('data-static-route-content')) errors.push(`${route.path}: missing meaningful static route content`)
-  if (!rootContent || visibleText.length < 180) errors.push(`${route.path}: initial HTML body content is too thin`)
+  if (!mainHtml || meaningfulWords < 50) errors.push(`${route.path}: initial main content is blank or extremely thin (${meaningfulWords} words)`)
   if (h1Matches.length !== 1) errors.push(`${route.path}: initial HTML must contain exactly one H1`)
   if (STATIC_ROUTE_H1S[route.path] && h1Text !== STATIC_ROUTE_H1S[route.path]) errors.push(`${route.path}: static H1 conflicts with the interactive React H1`)
   if (route.path === '/' && h1Text !== HOME_H1) errors.push('/: approved homepage H1 mismatch')
-  if (!visibleText.includes(route.description)) errors.push(`${route.path}: static body must contain its route-specific primary description`)
   if (route.path !== '/' && visibleText.includes(HOME_H1)) errors.push(`${route.path}: unrelated route contains the homepage H1`)
-  for (const [question, answer] of STATIC_ROUTE_FAQS[route.path] || []) {
-    if (!visibleText.includes(question) || !visibleText.includes(answer)) errors.push(`${route.path}: static FAQ content conflicts with the interactive page`)
+  if (route.path === '/' && meaningfulWords < 600) errors.push(`/: homepage needs at least 600 meaningful main-content words; found ${meaningfulWords}`)
+  if (requiredRepresentativePaths.has(route.path) && (!h1Text || !mainHeadings.length || meaningfulWords < 100)) errors.push(`${route.path}: representative parity route is missing its H1, section headings, or core content`)
+  if (route.schemaKind === 'article') {
+    if (meaningfulWords < 800) errors.push(`${route.path}: complete blog article requires at least 800 meaningful words; found ${meaningfulWords}`)
+    if (mainHeadings.length < 4) errors.push(`${route.path}: complete blog article is missing its expected section hierarchy`)
+    if (meaningfulText.includes('Practical guidance for recruiting teams')) errors.push(`${route.path}: generic blog fallback is still present`)
+    blogBodies.push({ path: route.path, text: meaningfulText.toLowerCase() })
   }
   for (const paragraph of paragraphTexts.filter((text) => text.length >= 80)) {
     const routes = staticParagraphs.get(paragraph) || []
@@ -80,6 +118,97 @@ for (const route of SEO_ROUTES) {
   titles.set(title, route.path)
   descriptions.set(description, route.path)
   canonicals.set(canonical, route.path)
+
+  for (const match of body.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)) {
+    const attrs = match[1]
+    const href = attribute(attrs, 'href')
+    const anchorText = stripHtml(match[2]) || attribute(attrs, 'aria-label')
+    const inMain = mainHtml.includes(match[0])
+    const target = attribute(attrs, 'target')
+    const rel = attribute(attrs, 'rel')
+    const ariaLabel = attribute(attrs, 'aria-label')
+    let kind = 'external'
+    let destinationStatus = 'external-not-fetched'
+    let canonicalDestination = ''
+    let broken = false
+    let redirectDetected = false
+
+    if (!href || href === '#' || /^javascript:/i.test(href)) {
+      broken = true
+      destinationStatus = 'invalid'
+      errors.push(`${route.path}: empty, placeholder, or JavaScript href`)
+    } else if (href.startsWith('#')) {
+      kind = 'internal'
+      const id = href.slice(1)
+      destinationStatus = new RegExp(`\\bid=["']${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}["']`, 'i').test(body) ? 'ok' : 'missing-fragment'
+      broken = destinationStatus !== 'ok'
+      canonicalDestination = `${route.canonical}${href}`
+      if (broken) errors.push(`${route.path}: missing fragment destination ${href}`)
+    } else if (href.startsWith('/') || href.startsWith(SITE_URL)) {
+      kind = 'internal'
+      let localHref = href.startsWith(SITE_URL) ? href.slice(SITE_URL.length) || '/' : href
+      if (localHref.startsWith('//') || /\/{2,}/.test(localHref.split('?')[0].replace(/^\/\//, '/'))) {
+        broken = true
+        errors.push(`${route.path}: malformed internal href ${href}`)
+      }
+      const destinationPath = normalizeRoutePath(localHref)
+      canonicalDestination = `${SITE_URL}${destinationPath === '/' ? '/' : `${destinationPath}/`}`
+      if (!routePaths.has(destinationPath)) {
+        broken = true
+        destinationStatus = 'missing-route'
+        errors.push(`${route.path}: internal link points to unknown generated route ${href}`)
+      } else {
+        destinationStatus = 'ok'
+        inboundLinks.get(destinationPath).add(route.path)
+      }
+      const pathPart = localHref.split('?')[0].split('#')[0]
+      if (pathPart !== '/' && !pathPart.endsWith('/')) {
+        redirectDetected = true
+        errors.push(`${route.path}: internal href must use the canonical trailing slash ${href}`)
+      }
+      if (/^https?:\/\/www\.hirescoreai\.com/i.test(href)) errors.push(`${route.path}: internal link uses www host ${href}`)
+    } else if (/^https?:/i.test(href)) {
+      if (target === '_blank' && (!rel.includes('noopener') || !rel.includes('noreferrer'))) {
+        broken = true
+        errors.push(`${route.path}: target="_blank" external link is missing noopener noreferrer: ${href}`)
+      }
+    } else if (!href.startsWith('mailto:')) {
+      broken = true
+      destinationStatus = 'malformed'
+      errors.push(`${route.path}: malformed href ${href}`)
+    }
+
+    const approvedSocial = Object.entries(OFFICIAL_SOCIAL_LINKS).find(([, url]) => href === url)
+    if (/youtube\.com|linkedin\.com|instagram\.com/i.test(href)) {
+      if (!approvedSocial) {
+        broken = true
+        errors.push(`${route.path}: unapproved social URL ${href}`)
+      } else {
+        const [network] = approvedSocial
+        const expectedLabel = {
+          youtube: 'HireScoreAI on YouTube',
+          linkedin: 'HireScoreAI on LinkedIn',
+          instagram: 'HireScoreAI on Instagram',
+        }[network]
+        if (target !== '_blank' || !rel.includes('noopener') || !rel.includes('noreferrer') || ariaLabel !== expectedLabel) {
+          broken = true
+          errors.push(`${route.path}: ${network} social link attributes are incomplete`)
+        }
+      }
+    }
+
+    linkRecords.push({
+      sourceRoute: route.path,
+      anchorText,
+      destination: href,
+      kind,
+      destinationStatus,
+      canonicalDestination,
+      redirectDetected,
+      broken,
+      inMain,
+    })
+  }
 
   if (!route.noindex) {
     try {
@@ -93,7 +222,7 @@ for (const route of SEO_ROUTES) {
         if (!types.includes(required)) errors.push(`${route.path}: missing ${required} schema`)
       }
       const organizations = graph.filter((node) => node['@type'] === 'Organization')
-      if (organizations.length !== 1 || organizations[0]?.['@id'] !== ORGANIZATION_ID) errors.push(`${route.path}: must contain one stable HireScore AI Organization entity`)
+      if (organizations.length !== 1 || organizations[0]?.['@id'] !== ORGANIZATION_ID) errors.push(`${route.path}: must contain one stable HireScoreAI Organization entity`)
       if (organizations[0]?.founder?.['@id'] !== FOUNDER_ID) errors.push(`${route.path}: Organization founder must reference the stable founder @id`)
 
       const website = graph.find((node) => node['@id'] === `${SITE_URL}/#website`)
@@ -119,7 +248,12 @@ for (const route of SEO_ROUTES) {
         errors.push(`${route.path}: founder Person entity must only appear on the visible About page`)
       }
       if (route.breadcrumbs && !types.includes('BreadcrumbList')) errors.push(`${route.path}: missing BreadcrumbList schema`)
-      if (route.schemaKind === 'article' && !types.includes('Article')) errors.push(`${route.path}: missing Article schema`)
+      if (route.schemaKind === 'article') {
+        const article = graph.find((node) => node['@type'] === 'Article')
+        if (!article) errors.push(`${route.path}: missing Article schema`)
+        if (article?.headline !== h1Text) errors.push(`${route.path}: Article headline must match the visible H1`)
+        if (article?.author?.['@id'] !== ORGANIZATION_ID || !visibleText.includes('By HireScoreAI')) errors.push(`${route.path}: article authorship is not consistent between schema and visible content`)
+      }
       if (route.schemaKind === 'howto' && !types.includes('HowTo')) errors.push(`${route.path}: missing HowTo schema`)
       if (route.schemaKind === 'faq' && !types.includes('FAQPage')) errors.push(`${route.path}: missing FAQPage schema`)
     } catch {
@@ -130,6 +264,16 @@ for (const route of SEO_ROUTES) {
 
 for (const [paragraph, routes] of staticParagraphs) {
   if (routes.length === SEO_ROUTES.length) errors.push(`Generic paragraph duplicated across every route: ${paragraph.slice(0, 80)}`)
+}
+
+for (let index = 0; index < blogBodies.length; index += 1) {
+  for (let other = index + 1; other < blogBodies.length; other += 1) {
+    const left = new Set(blogBodies[index].text.split(/\s+/).filter((word) => word.length > 4))
+    const right = new Set(blogBodies[other].text.split(/\s+/).filter((word) => word.length > 4))
+    const overlap = [...left].filter((word) => right.has(word)).length
+    const similarity = overlap / Math.max(1, Math.min(left.size, right.size))
+    if (similarity > 0.9) errors.push(`${blogBodies[index].path} and ${blogBodies[other].path}: blog main content is substantially duplicated`)
+  }
 }
 
 const sitemapFiles = ['page-sitemap.xml', 'blog-sitemap.xml']
@@ -146,6 +290,81 @@ for (const filename of sitemapFiles) {
 const indexableUrls = new Set(SEO_ROUTES.filter((route) => !route.noindex).map((route) => route.canonical))
 for (const url of indexableUrls) if (!sitemapUrls.has(url)) errors.push(`Sitemap missing ${url}`)
 for (const url of sitemapUrls) if (!indexableUrls.has(url)) errors.push(`Sitemap contains non-indexable or unknown URL ${url}`)
+
+const destinationsFor = (source) => linkRecords
+  .filter((link) => link.sourceRoute === source && link.kind === 'internal' && link.inMain && !link.broken)
+  .map((link) => normalizeRoutePath(link.destination.startsWith(SITE_URL) ? link.destination.slice(SITE_URL.length) : link.destination))
+const requireLinkGroup = (source, label, predicate, minimum = 1) => {
+  const matches = destinationsFor(source).filter(predicate)
+  if (new Set(matches).size < minimum) errors.push(`${source}: missing ${label} internal links (expected ${minimum})`)
+}
+
+const homepageRequired = [
+  '/product/hirescore-ai',
+  '/pricing',
+  '/contact',
+  '/resources',
+  '/resources/blogs',
+  ...SEO_ROUTES.filter((route) => route.path.startsWith('/solutions/')).map((route) => route.path),
+]
+for (const destination of homepageRequired) {
+  if (!destinationsFor('/').includes(destination)) errors.push(`/: missing required contextual link to ${destination}`)
+}
+
+for (const route of SEO_ROUTES.filter((item) => item.path.startsWith('/product/') && !['/product/hirescore-ai', '/product/jd-manager'].includes(item.path))) {
+  requireLinkGroup(route.path, 'product overview', (destination) => destination === '/product/hirescore-ai')
+  requireLinkGroup(route.path, 'related product', (destination) => destination.startsWith('/product/') && destination !== route.path && destination !== '/product/hirescore-ai', 2)
+  requireLinkGroup(route.path, 'relevant solution', (destination) => destination.startsWith('/solutions/'))
+  requireLinkGroup(route.path, 'resource or guide', (destination) => destination.startsWith('/resources/'))
+  requireLinkGroup(route.path, 'pricing or contact', (destination) => ['/pricing', '/contact'].includes(destination))
+}
+
+for (const route of SEO_ROUTES.filter((item) => item.path.startsWith('/solutions/'))) {
+  requireLinkGroup(route.path, 'solutions overview', (destination) => destination === '/solutions')
+  requireLinkGroup(route.path, 'relevant product', (destination) => destination.startsWith('/product/'), 2)
+  requireLinkGroup(route.path, 'resource or guide', (destination) => destination.startsWith('/resources/'))
+  requireLinkGroup(route.path, 'pricing or contact', (destination) => ['/pricing', '/contact'].includes(destination))
+}
+
+const articleRoutes = SEO_ROUTES.filter((route) => route.schemaKind === 'article')
+for (const route of articleRoutes) {
+  requireLinkGroup(route.path, 'relevant product', (destination) => destination.startsWith('/product/'), 2)
+  requireLinkGroup(route.path, 'relevant solution', (destination) => destination.startsWith('/solutions/'))
+  requireLinkGroup(route.path, 'guide or FAQ', (destination) => destination.startsWith('/resources/user-guide/') || destination === '/resources/faqs')
+  requireLinkGroup(route.path, 'related article', (destination) => destination.startsWith('/resources/blogs/') && destination !== route.path, 2)
+  requireLinkGroup(route.path, 'blog hub', (destination) => destination === '/resources/blogs')
+  requireLinkGroup(route.path, 'pricing or contact', (destination) => ['/pricing', '/contact'].includes(destination))
+}
+
+for (const article of articleRoutes) {
+  const hubLinks = linkRecords.filter((link) => link.sourceRoute === '/resources/blogs' && normalizeRoutePath(link.destination) === article.path)
+  if (hubLinks.length < 3) errors.push(`/resources/blogs: blog card for ${article.path} must link its image, title, and CTA`)
+}
+
+const orphanRoutes = SEO_ROUTES
+  .filter((route) => !route.noindex && route.path !== '/' && inboundLinks.get(route.path).size === 0)
+  .map((route) => route.path)
+for (const orphan of orphanRoutes) errors.push(`${orphan}: indexable route has no internal inbound links`)
+
+const inboundCounts = Object.fromEntries([...inboundLinks].map(([route, sources]) => [route, sources.size]))
+for (const record of linkRecords) {
+  if (record.kind === 'internal') record.inboundLinkCount = inboundCounts[normalizeRoutePath(record.destination)] || 0
+}
+await writeFile(path.join(dist, 'internal-link-report.json'), `${JSON.stringify({
+  generatedAt: new Date().toISOString(),
+  totals: {
+    hyperlinks: linkRecords.length,
+    internal: linkRecords.filter((link) => link.kind === 'internal').length,
+    external: linkRecords.filter((link) => link.kind === 'external').length,
+    broken: linkRecords.filter((link) => link.broken).length,
+    redirects: linkRecords.filter((link) => link.redirectDetected).length,
+  },
+  orphanRoutes,
+  lowInboundRoutes: Object.entries(inboundCounts).filter(([, count]) => count < 3),
+  inboundCounts,
+  routeMetrics,
+  links: linkRecords,
+}, null, 2)}\n`)
 
 if (errors.length) {
   console.error(`SEO validation failed with ${errors.length} issue(s):`)
