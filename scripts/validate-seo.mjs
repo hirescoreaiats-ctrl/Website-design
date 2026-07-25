@@ -69,7 +69,8 @@ for (const route of SEO_ROUTES) {
   const description = capture(html, /<meta name="description" content="([^"]*)"/i)
   const canonical = capture(html, /<link rel="canonical" href="([^"]*)"/i)
   const robots = capture(html, /<meta name="robots" content="([^"]*)"/i)
-  const jsonLd = html.match(/<script id="route-schema" type="application\/ld\+json">([\s\S]*?)<\/script>/i)?.[1]
+  const jsonLdBlocks = [...html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)]
+  const jsonLd = jsonLdBlocks[0]?.[1]
   const body = capture(html, /<body[^>]*>([\s\S]*?)<\/body>/i)
   const mainHtml = body.match(/<main(?:\s[^>]*)?>([\s\S]*?)<\/main>/i)?.[1] || ''
   const h1Matches = body.match(/<h1(?:\s[^>]*)?>[\s\S]*?<\/h1>/gi) || []
@@ -96,6 +97,7 @@ for (const route of SEO_ROUTES) {
   if (/<meta[^>]+name=["']keywords["']/i.test(html)) errors.push(`${route.path}: meta keywords tag must not be present`)
   if (/<noscript[\s>]/i.test(html)) errors.push(`${route.path}: SEO noscript content must not be present`)
   if (!body.includes('data-static-route-content')) errors.push(`${route.path}: missing meaningful static route content`)
+  if (!route.noindex && jsonLdBlocks.length !== 1) errors.push(`${route.path}: expected exactly one JSON-LD block, found ${jsonLdBlocks.length}`)
   if (!mainHtml || meaningfulWords < 50) errors.push(`${route.path}: initial main content is blank or extremely thin (${meaningfulWords} words)`)
   if (h1Matches.length !== 1) errors.push(`${route.path}: initial HTML must contain exactly one H1`)
   if (STATIC_ROUTE_H1S[route.path] && h1Text !== STATIC_ROUTE_H1S[route.path]) errors.push(`${route.path}: static H1 conflicts with the interactive React H1`)
@@ -214,23 +216,68 @@ for (const route of SEO_ROUTES) {
     try {
       const parsed = JSON.parse(jsonLd)
       const graph = parsed['@graph']
+      if (!Array.isArray(graph)) throw new Error('JSON-LD @graph must be an array')
       const types = graph.flatMap((node) => Array.isArray(node['@type']) ? node['@type'] : [node['@type']])
-      const entityIds = graph.map((node) => node['@id']).filter(Boolean)
+      const structuredEntities = []
+      const collectEntities = (value) => {
+        if (!value || typeof value !== 'object') return
+        if (value['@type']) structuredEntities.push(value)
+        for (const child of Object.values(value)) collectEntities(child)
+      }
+      collectEntities(graph)
+      const entityIds = structuredEntities.map((node) => node['@id']).filter(Boolean)
       const duplicateIds = entityIds.filter((id, index) => entityIds.indexOf(id) !== index)
       if (duplicateIds.length) errors.push(`${route.path}: duplicate JSON-LD @id values: ${[...new Set(duplicateIds)].join(', ')}`)
-      for (const required of ['Organization', 'WebSite', 'SoftwareApplication']) {
-        if (!types.includes(required)) errors.push(`${route.path}: missing ${required} schema`)
-      }
-      const organizations = graph.filter((node) => node['@type'] === 'Organization')
-      if (organizations.length !== 1 || organizations[0]?.['@id'] !== ORGANIZATION_ID) errors.push(`${route.path}: must contain one stable HireScoreAI Organization entity`)
-      if (organizations[0]?.founder?.['@id'] !== FOUNDER_ID) errors.push(`${route.path}: Organization founder must reference the stable founder @id`)
+      const entityKeys = structuredEntities
+        .map((node) => `${node['@type']}|${node['@id'] || node.url || node.name || ''}`)
+        .filter((key) => !key.endsWith('|'))
+      const duplicateEntityKeys = entityKeys.filter((key, index) => entityKeys.indexOf(key) !== index)
+      if (duplicateEntityKeys.length) errors.push(`${route.path}: duplicate schema entities: ${[...new Set(duplicateEntityKeys)].join(', ')}`)
+      if (!types.includes(route.pageType || 'WebPage')) errors.push(`${route.path}: missing route WebPage schema`)
 
-      const website = graph.find((node) => node['@id'] === `${SITE_URL}/#website`)
-      if (website?.publisher?.['@id'] !== ORGANIZATION_ID) errors.push(`${route.path}: WebSite publisher must reference the stable Organization @id`)
-      const software = graph.find((node) => node['@id'] === `${SITE_URL}/#software`)
-      if (software?.publisher?.['@id'] !== ORGANIZATION_ID || software?.brand?.['@id'] !== ORGANIZATION_ID) errors.push(`${route.path}: SoftwareApplication must reference the stable Organization @id`)
-      if (software?.offers?.priceCurrency !== 'INR') errors.push(`${route.path}: SoftwareApplication offer currency must be INR`)
-      if (software?.offers?.url !== `${SITE_URL}/pricing/`) errors.push(`${route.path}: SoftwareApplication offer URL must use trailing slash pricing URL`)
+      const walk = (value, location = '$') => {
+        if (value === '' || value === null || value === undefined || (Array.isArray(value) && value.length === 0)) {
+          errors.push(`${route.path}: empty structured-data value at ${location}`)
+          return
+        }
+        if (!value || typeof value !== 'object') return
+        for (const [key, child] of Object.entries(value)) {
+          if (key === 'brand') errors.push(`${route.path}: unsupported SoftwareApplication brand property at ${location}`)
+          walk(child, `${location}.${key}`)
+        }
+      }
+      walk(parsed)
+
+      const softwareEntities = structuredEntities.filter((node) => node['@type'] === 'SoftwareApplication')
+      if (route.path === '/product/hirescore-ai') {
+        if (softwareEntities.length !== 1) errors.push(`${route.path}: primary product route must contain exactly one SoftwareApplication`)
+        const software = softwareEntities[0]
+        const supportedSoftwareProperties = new Set(['@type', '@id', 'name', 'description', 'applicationCategory', 'operatingSystem', 'url', 'publisher', 'offers'])
+        for (const property of Object.keys(software || {})) {
+          if (!supportedSoftwareProperties.has(property)) errors.push(`${route.path}: unsupported SoftwareApplication property ${property}`)
+        }
+        for (const required of ['name', 'description', 'applicationCategory', 'operatingSystem', 'url', 'offers']) {
+          if (!software?.[required]) errors.push(`${route.path}: SoftwareApplication missing ${required}`)
+        }
+        if (software?.publisher?.['@id'] !== ORGANIZATION_ID) errors.push(`${route.path}: SoftwareApplication publisher must reference the stable Organization @id`)
+        if (software?.offers?.priceCurrency !== 'INR' || software?.offers?.url !== `${SITE_URL}/pricing/`) errors.push(`${route.path}: SoftwareApplication offer is incomplete`)
+        if ('aggregateRating' in (software || {}) || 'review' in (software || {})) errors.push(`${route.path}: rating or review data must not be emitted without public evidence`)
+      } else if (softwareEntities.length) {
+        errors.push(`${route.path}: SoftwareApplication is only allowed on /product/hirescore-ai`)
+      }
+
+      const organizations = graph.filter((node) => node['@type'] === 'Organization')
+      const requiresOrganization = route.path === '/' || route.path === '/product/hirescore-ai' || ['article', 'case-study'].includes(route.schemaKind)
+      if (requiresOrganization && (organizations.length !== 1 || organizations[0]?.['@id'] !== ORGANIZATION_ID)) errors.push(`${route.path}: must contain one stable HireScoreAI Organization entity`)
+
+      if (route.path === '/') {
+        if (!types.includes('WebSite')) errors.push('/: homepage missing WebSite schema')
+        if (types.includes('SoftwareApplication')) errors.push('/: homepage must not claim SoftwareApplication without review evidence')
+        const website = graph.find((node) => node['@id'] === `${SITE_URL}/#website`)
+        if (website?.publisher?.['@id'] !== ORGANIZATION_ID) errors.push('/: WebSite publisher must reference the stable Organization @id')
+      } else if (types.includes('WebSite')) {
+        errors.push(`${route.path}: WebSite must only be emitted on the homepage`)
+      }
 
       const founderEntities = graph.filter((node) => node['@type'] === 'Person' && node.name === 'Sachin Yadav')
       if (route.path === '/') {
@@ -253,7 +300,11 @@ for (const route of SEO_ROUTES) {
         if (!article) errors.push(`${route.path}: missing Article schema`)
         if (article?.headline !== h1Text) errors.push(`${route.path}: Article headline must match the visible H1`)
         if (article?.author?.['@id'] !== ORGANIZATION_ID || !visibleText.includes('By HireScoreAI')) errors.push(`${route.path}: article authorship is not consistent between schema and visible content`)
+        for (const field of ['headline', 'description', 'image', 'author', 'publisher', 'datePublished', 'dateModified', 'mainEntityOfPage']) {
+          if (!article?.[field]) errors.push(`${route.path}: Article missing ${field}`)
+        }
       }
+      if (route.schemaKind === 'case-study' && !types.includes('Article')) errors.push(`${route.path}: case study missing Article schema`)
       if (route.schemaKind === 'howto' && !types.includes('HowTo')) errors.push(`${route.path}: missing HowTo schema`)
       if (route.schemaKind === 'faq' && !types.includes('FAQPage')) errors.push(`${route.path}: missing FAQPage schema`)
     } catch {

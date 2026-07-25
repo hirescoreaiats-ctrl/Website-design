@@ -31,7 +31,7 @@ export function canonicalUrlForPath(path = '/') {
 
 const staticRoutes = [
   ['/', 'AI Resume Screening Software for Recruiters | HireScoreAI', 'HireScoreAI is AI resume screening software for JD-based candidate scoring, explainable ranking, shortlisting, and connected recruitment automation.', 'WebPage'],
-  ['/product/hirescore-ai', 'HireScoreAI Product | AI Resume Screening Software', 'Explore HireScoreAI for AI resume screening, JD-based candidate scoring, candidate ranking, smart shortlisting, and recruiter-ready explanations.', 'CollectionPage'],
+  ['/product/hirescore-ai', 'HireScoreAI Product | AI Resume Screening Software', 'Explore HireScoreAI for AI resume screening, JD-based candidate scoring, candidate ranking, smart shortlisting, and recruiter-ready explanations.', 'WebPage'],
   ['/solutions', 'AI Hiring Solutions for Recruiters & Staffing Agencies | HireScoreAI', 'HireScoreAI helps recruitment agencies, HR teams, staffing firms, startups, and high-volume hiring teams screen resumes, rank candidates, shortlist talent, and manage hiring workflows with AI.', 'CollectionPage'],
   ['/resources', 'AI Recruitment Resources, Guides & Case Studies | HireScoreAI', 'Explore practical AI recruitment guides, articles, sample case studies, FAQs, and product updates from HireScoreAI.', 'CollectionPage'],
   ['/resources/user-guide', 'HireScoreAI User Guide | Recruiter Workflow Tutorials', 'Follow step-by-step HireScoreAI guides for jobs, apply links, resume uploads, ranked candidates, shortlisting, communication, screening tests, and interviews.', 'CollectionPage'],
@@ -171,8 +171,8 @@ export const SEO_ROUTES = [
   ...solutionSegmentRoutes.map(({ path, title, description, navLabel }) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, navLabel, '/solutions', 'Solutions') })),
   ...comparisonRoutes.map(({ path, title, description, navLabel }) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, navLabel) })),
   ...guideRoutes.map(([path, title, description, steps]) => ({ path, title: `${title} | HireScoreAI Guide`, description, pageType: 'WebPage', schemaKind: 'howto', steps, breadcrumbs: breadcrumbFor(path, title, '/resources/user-guide', 'User Guide') })),
-  ...blogRoutes.map(([path, title, description, category, image]) => ({ path, title, description, pageType: 'WebPage', ogType: 'article', schemaKind: 'article', category, image, breadcrumbs: breadcrumbFor(path, title.replace(/ \|.*$/, ''), '/resources/blogs', 'Blog') })),
-  ...caseStudyRoutes.map(([path, title, description]) => ({ path, title, description, pageType: 'WebPage', ogType: 'article', schemaKind: 'case-study', breadcrumbs: breadcrumbFor(path, title.replace(/ \|.*$/, ''), '/resources/case-studies', 'Case Studies') })),
+  ...blogRoutes.map(([path, title, description, category, image]) => ({ path, title, description, pageType: 'WebPage', ogType: 'article', schemaKind: 'article', category, image, datePublished: '2026-06-28', dateModified: '2026-07-25', breadcrumbs: breadcrumbFor(path, title.replace(/ \|.*$/, ''), '/resources/blogs', 'Blog') })),
+  ...caseStudyRoutes.map(([path, title, description]) => ({ path, title, description, pageType: 'WebPage', ogType: 'article', schemaKind: 'case-study', datePublished: '2026-06-28', dateModified: '2026-07-25', breadcrumbs: breadcrumbFor(path, title.replace(/ \|.*$/, ''), '/resources/case-studies', 'Case Studies') })),
 ].map((route) => ({
   ...route,
   canonical: canonicalUrlForPath(route.path),
@@ -251,153 +251,23 @@ const website = {
   publisher: { '@id': ORGANIZATION_ID },
 }
 
-const software = {
+const primarySoftware = {
   '@type': 'SoftwareApplication',
-  '@id': `${SITE_URL}/#software`,
+  '@id': `${SITE_URL}/product/hirescore-ai/#software`,
   name: BRAND_NAME,
-  alternateName: ['HireScoreAI', 'HireScoreAI recruitment platform'],
+  description: 'AI recruitment and resume screening platform for JD-based candidate scoring, ranking, smart shortlisting, and recruiter-ready explanations.',
   applicationCategory: 'BusinessApplication',
-  applicationSubCategory: 'AI recruitment software',
   operatingSystem: 'Web',
-  url: `${SITE_URL}/`,
-  description: DEFAULT_DESCRIPTION,
+  url: canonicalUrlForPath('/product/hirescore-ai'),
   publisher: { '@id': ORGANIZATION_ID },
-  brand: { '@id': ORGANIZATION_ID },
-  featureList: ['Job creation', 'Public job apply pages', 'Bulk resume upload', 'AI resume parsing', 'JD-based candidate matching', 'AI candidate scoring and ranking', 'Explainable candidate fit', 'Shortlisting', 'Candidate communication', 'Screening tests', 'Interview scheduling', 'Hiring pipeline analytics', 'JD Manager for client and job description tracking'],
   offers: {
     '@type': 'Offer',
     price: '0',
     priceCurrency: 'INR',
-    category: 'Free pilot',
     description: 'Seven-day free pilot access is available for selected early clients.',
     url: canonicalUrlForPath('/pricing'),
   },
 }
-
-const productSuite = [
-  {
-    '@type': 'SoftwareApplication',
-    '@id': `${SITE_URL}/product/hirescore-ai/#software`,
-    name: 'HireScoreAI',
-    applicationCategory: 'BusinessApplication',
-    applicationSubCategory: 'AI recruitment and resume screening software',
-    operatingSystem: 'Web',
-    url: canonicalUrlForPath('/product/hirescore-ai'),
-    description: 'AI recruitment and resume screening platform for JD-based candidate scoring, ranking, smart shortlisting, and recruiter-ready explanations.',
-    publisher: { '@id': ORGANIZATION_ID },
-    brand: { '@id': ORGANIZATION_ID },
-    featureList: ['AI resume screening', 'JD-based candidate scoring', 'Candidate ranking', 'Recruiter-ready explanations', 'Smart shortlisting', 'Workflow clarity', 'AI screening test support'],
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'INR',
-      category: 'Free pilot',
-      url: canonicalUrlForPath('/pricing'),
-    },
-  },
-  {
-    '@type': 'SoftwareApplication',
-    '@id': `${SITE_URL}/product/jd-manager/#software`,
-    name: 'JD Manager',
-    applicationCategory: 'BusinessApplication',
-    applicationSubCategory: 'Open-source job description management tool',
-    operatingSystem: 'Web',
-    url: canonicalUrlForPath('/product/jd-manager'),
-    description: 'Free open-source JD management workspace for recruitment agencies and staffing teams that manage multiple clients, multiple JDs, candidate tracking, shortlist scores, submissions, and pipeline status.',
-    publisher: { '@id': ORGANIZATION_ID },
-    brand: { '@id': ORGANIZATION_ID },
-    isAccessibleForFree: true,
-    featureList: ['Multi-client JD management', 'Multiple JDs per client', 'Candidate-to-JD tracking', 'Shortlisting score visibility', 'Submission and status tracking', 'Recruiter coordination'],
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'INR',
-      category: 'Free open-source tool',
-      url: canonicalUrlForPath('/product/jd-manager'),
-    },
-  },
-]
-
-const pricingOffers = [
-  {
-    '@type': 'Offer',
-    name: 'HireScoreAI Free Pilot',
-    description: 'Seven-day HireScoreAI pilot with 3 active jobs for testing real hiring workflows.',
-    price: '0',
-    priceCurrency: 'INR',
-    availability: 'https://schema.org/InStock',
-    url: canonicalUrlForPath('/pricing'),
-    eligibleDuration: {
-      '@type': 'QuantitativeValue',
-      value: 7,
-      unitText: 'day',
-    },
-    itemOffered: {
-      '@type': 'SoftwareApplication',
-      name: 'HireScoreAI Free Pilot',
-      applicationCategory: 'BusinessApplication',
-      operatingSystem: 'Web',
-    },
-  },
-  {
-    '@type': 'Offer',
-    name: 'HireScoreAI Starter',
-    description: 'Monthly HireScoreAI Starter plan for 5 active jobs.',
-    price: '599',
-    priceCurrency: 'INR',
-    availability: 'https://schema.org/InStock',
-    url: canonicalUrlForPath('/pricing'),
-    priceSpecification: {
-      '@type': 'UnitPriceSpecification',
-      price: '599',
-      priceCurrency: 'INR',
-      billingDuration: 1,
-      unitText: 'month',
-    },
-    itemOffered: {
-      '@type': 'SoftwareApplication',
-      name: 'HireScoreAI Starter',
-      applicationCategory: 'BusinessApplication',
-      operatingSystem: 'Web',
-    },
-  },
-  {
-    '@type': 'Offer',
-    name: 'HireScoreAI Growth',
-    description: 'Monthly HireScoreAI Growth plan for 15 active jobs.',
-    price: '1599',
-    priceCurrency: 'INR',
-    availability: 'https://schema.org/InStock',
-    url: canonicalUrlForPath('/pricing'),
-    priceSpecification: {
-      '@type': 'UnitPriceSpecification',
-      price: '1599',
-      priceCurrency: 'INR',
-      billingDuration: 1,
-      unitText: 'month',
-    },
-    itemOffered: {
-      '@type': 'SoftwareApplication',
-      name: 'HireScoreAI Growth',
-      applicationCategory: 'BusinessApplication',
-      operatingSystem: 'Web',
-    },
-  },
-  {
-    '@type': 'Offer',
-    name: 'HireScoreAI Enterprise',
-    description: 'Custom HireScoreAI pricing for teams that need custom active job limits, onboarding, governance, and priority support.',
-    priceCurrency: 'INR',
-    availability: 'https://schema.org/InStock',
-    url: canonicalUrlForPath('/contact'),
-    itemOffered: {
-      '@type': 'SoftwareApplication',
-      name: 'HireScoreAI Enterprise',
-      applicationCategory: 'BusinessApplication',
-      operatingSystem: 'Web',
-    },
-  },
-]
 
 export const HOME_FAQS = [
   ['What is HireScoreAI?', 'HireScoreAI is an independent AI recruitment workflow platform for job creation, public apply pages, resume screening, candidate ranking, explainable shortlisting, communication, tests, and interview scheduling.'],
@@ -410,7 +280,7 @@ export const HOME_FAQS = [
 export function buildRouteSchema(config) {
   if (!config || config.noindex) return null
   const pageId = `${config.canonical}#webpage`
-  const graph = [organization, website, software, {
+  const page = {
     '@type': config.pageType || 'WebPage',
     '@id': pageId,
     url: config.canonical,
@@ -418,13 +288,13 @@ export function buildRouteSchema(config) {
     description: config.description,
     inLanguage: 'en',
     isPartOf: { '@id': `${SITE_URL}/#website` },
-    about: { '@id': `${SITE_URL}/#software` },
     primaryImageOfPage: { '@type': 'ImageObject', url: config.image },
     breadcrumb: config.breadcrumbs ? { '@id': `${config.canonical}#breadcrumb` } : undefined,
-  }]
+  }
+  const graph = [page]
 
   if (config.path === '/') {
-    graph.splice(1, 0, founder)
+    graph.unshift(organization, founder, website)
     graph.push({
       '@type': 'FAQPage',
       '@id': `${config.canonical}#faq`,
@@ -433,25 +303,9 @@ export function buildRouteSchema(config) {
   }
 
   if (config.path === '/product/hirescore-ai') {
-    graph.push(productSuite[0])
-  }
-
-  if (config.path === '/product/jd-manager') {
-    graph.push(productSuite[1])
-  }
-
-  if (config.path === '/pricing') {
-    graph.push({
-      '@type': 'OfferCatalog',
-      '@id': `${config.canonical}#pricing-offers`,
-      name: 'HireScoreAI pricing plans',
-      url: config.canonical,
-      itemListElement: pricingOffers.map((offer, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        item: offer,
-      })),
-    })
+    page.about = { '@id': primarySoftware['@id'] }
+    graph.unshift(organization)
+    graph.push(primarySoftware)
   }
 
   if (config.breadcrumbs) {
@@ -468,6 +322,7 @@ export function buildRouteSchema(config) {
   }
 
   if (config.schemaKind === 'article' || config.schemaKind === 'case-study') {
+    graph.unshift(organization)
     graph.push({
       '@type': 'Article',
       '@id': `${config.canonical}#article`,
@@ -480,6 +335,8 @@ export function buildRouteSchema(config) {
       author: { '@id': ORGANIZATION_ID },
       publisher: { '@id': ORGANIZATION_ID },
       isAccessibleForFree: true,
+      datePublished: config.datePublished,
+      dateModified: config.dateModified,
     })
   }
 

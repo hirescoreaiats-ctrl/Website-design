@@ -819,7 +819,9 @@ function setAlternate(lang, href) {
 }
 
 function setJsonLd(id, payload) {
-  let tag = document.getElementById(id)
+  const matchingTags = [...document.querySelectorAll(`script#${id}[type="application/ld+json"]`)]
+  let tag = matchingTags.shift()
+  matchingTags.forEach((duplicate) => duplicate.remove())
   if (!payload) {
     if (tag) tag.remove()
     return
