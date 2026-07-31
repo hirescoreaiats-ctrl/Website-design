@@ -1289,7 +1289,7 @@ h3 {
   --action-soft: #211c2b;
   --action-line: rgba(210, 187, 255, 0.14);
   --action-text: #f1eaf7;
-  --action-muted: #aaa1b4;
+  --action-muted: #c5bdcb;
   --action-violet: #bca6ff;
   --action-cyan: #4cd7f6;
   --action-orange: #ff9d52;
@@ -1302,20 +1302,20 @@ h3 {
 }
 
 .actionArticleShell {
-  width: min(1180px, calc(100% - 40px));
+  width: min(1320px, calc(100% - 48px));
   margin-inline: auto;
 }
 
 .actionArticleHero {
   position: relative;
-  padding: 76px 0 88px;
+  padding: 42px 0 52px;
   border-bottom: 1px solid var(--action-line);
 }
 
 .actionArticleHeroGrid {
   display: grid;
-  grid-template-columns: minmax(0, 0.88fr) minmax(440px, 1.12fr);
-  gap: 54px;
+  grid-template-columns: minmax(0, 0.86fr) minmax(580px, 1.34fr);
+  gap: 34px;
   align-items: center;
 }
 
@@ -1326,8 +1326,8 @@ h3 {
 .actionArticleHeroCopy h1 {
   max-width: 760px;
   margin: 0 0 24px;
-  font-size: clamp(2.7rem, 4.2vw, 4.15rem);
-  line-height: 1;
+  font-size: clamp(2.65rem, 3.75vw, 4.05rem);
+  line-height: 1.04;
   letter-spacing: -0.065em;
 }
 
@@ -1335,8 +1335,8 @@ h3 {
   max-width: 720px;
   margin: 0 0 24px;
   color: var(--action-muted);
-  font-size: 1.13rem;
-  line-height: 1.75;
+  font-size: 1.2rem;
+  line-height: 1.68;
 }
 
 .actionArticleHero .blogMetaRow {
@@ -1402,27 +1402,23 @@ h3 {
 
 .actionArticleLayout {
   display: grid;
-  grid-template-columns: 230px minmax(0, 790px);
-  gap: 64px;
+  grid-template-columns: 270px minmax(0, 860px);
+  gap: 50px;
   justify-content: center;
   padding-block: 64px 100px;
 }
 
 .actionArticleToc {
-  position: sticky;
-  top: 96px;
+  position: static;
   align-self: start;
-  max-height: calc(100vh - 122px);
-  overflow-y: auto;
-  padding: 20px 14px 20px 0;
-  scrollbar-width: thin;
+  padding: 8px 14px 20px 0;
 }
 
 .actionArticleToc > strong {
   display: block;
   margin-bottom: 14px;
   color: var(--action-text);
-  font-size: 0.84rem;
+  font-size: 0.96rem;
   text-transform: uppercase;
   letter-spacing: 0.11em;
 }
@@ -1436,10 +1432,10 @@ h3 {
 .actionArticleToc a {
   position: relative;
   display: block;
-  padding: 7px 0 7px 16px;
-  color: #827a8a;
-  font-size: 0.79rem;
-  line-height: 1.35;
+  padding: 8px 0 8px 17px;
+  color: #b8afc0;
+  font-size: 0.94rem;
+  line-height: 1.42;
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -1478,8 +1474,8 @@ h3 {
 
 .actionArticleIntro p:first-child {
   color: var(--action-text);
-  font-size: 1.42rem;
-  line-height: 1.6;
+  font-size: 1.52rem;
+  line-height: 1.55;
 }
 
 .actionArticleIntro p,
@@ -1487,8 +1483,8 @@ h3 {
 .actionArticleConclusion > p {
   margin: 0 0 22px;
   color: var(--action-muted);
-  font-size: 1.06rem;
-  line-height: 1.88;
+  font-size: 1.18rem;
+  line-height: 1.82;
 }
 
 .actionArticleBody p a {
