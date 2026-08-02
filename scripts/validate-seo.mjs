@@ -145,7 +145,7 @@ for (const route of SEO_ROUTES) {
     }
     if (!visibleText.includes('Book Your Free 7-Day Pilot')) errors.push(`${route.path}: missing final pilot CTA`)
     if (!/<time\b[^>]*datetime=["']2026-07-26["']/i.test(mainHtml)) errors.push(`${route.path}: missing visible publish date`)
-    if (!/<img\b[^>]*src=["']\/action-ai-agent-conversation\.webp["'][^>]*width=["']1200["'][^>]*height=["']630["']/i.test(mainHtml)) errors.push(`${route.path}: hero image must include explicit dimensions`)
+    if (!/<img\b[^>]*src=["']\/conversational-ai-recruitment-hero\.png["'][^>]*width=["']1672["'][^>]*height=["']941["']/i.test(mainHtml)) errors.push(`${route.path}: hero image must include explicit dimensions`)
   }
   for (const paragraph of paragraphTexts.filter((text) => text.length >= 80)) {
     const routes = staticParagraphs.get(paragraph) || []

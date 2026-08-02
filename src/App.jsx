@@ -268,7 +268,7 @@ const blogPosts = [
     slug: '/resources/blogs/hire-through-conversation-action-ai-agent',
     title: 'Conversational AI ATS: HireScoreAI Action Agent',
     meta: 'See how HireScoreAI’s AI ATS Action Agent helps recruiters manage job creation, resume screening, candidate ranking, communication and interviews through conversational AI.',
-    image: '/action-ai-agent-conversation.webp',
+    image: '/conversational-ai-recruitment-hero.png',
     category: 'AI Recruitment Automation',
     readTime: '11 min read',
     published: 'July 26, 2026',
@@ -2806,9 +2806,9 @@ function ActionAgentBlogPost({ post }) {
             <div className="actionHeroVisual">
               <img
                 src={post.image}
-                alt="HireScoreAI Action AI Agent conversation connecting recruiter commands to prepared ATS actions and recruiter confirmation"
-                width="1200"
-                height="630"
+                alt="Conversational AI recruitment workflow connecting a recruiter with job creation, resume review, candidate shortlisting, communication and interview scheduling"
+                width="1672"
+                height="941"
                 fetchpriority="high"
               />
             </div>
