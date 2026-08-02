@@ -1405,10 +1405,17 @@ h3 {
 .actionHeroVisual {
   position: relative;
   width: 100%;
-  padding: 9px;
+  display: grid;
+  min-height: 540px;
+  place-items: center;
+  padding: 34px 9px;
   border: 1px solid rgba(188, 166, 255, 0.2);
   border-radius: 28px;
-  background: rgba(255, 255, 255, 0.025);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 52% 48%, rgba(101, 59, 245, 0.18), transparent 47%),
+    radial-gradient(circle at 82% 20%, rgba(76, 215, 246, 0.08), transparent 31%),
+    rgba(255, 255, 255, 0.025);
   box-shadow: 0 34px 100px rgba(0, 0, 0, 0.38), 0 0 60px rgba(76, 215, 246, 0.05);
   animation: actionHeroVisualEnter 0.8s 0.1s cubic-bezier(.2,.75,.25,1) both;
 }
@@ -1416,8 +1423,9 @@ h3 {
 .actionHeroVisual img {
   display: block;
   width: 100%;
-  height: clamp(480px, 34vw, 590px);
-  object-fit: fill;
+  height: auto;
+  aspect-ratio: 1200 / 630;
+  object-fit: contain;
   border-radius: 21px;
 }
 
@@ -1432,7 +1440,7 @@ h3 {
 
 .actionArticleToc {
   position: sticky;
-  top: 106px;
+  top: 24px;
   align-self: start;
   display: block;
   padding: 22px 20px;
@@ -2032,6 +2040,11 @@ h3 {
     height: auto;
     aspect-ratio: 1200 / 630;
     object-fit: cover;
+  }
+
+  .actionHeroVisual {
+    min-height: auto;
+    padding: 9px;
   }
 
   .actionArticleLayout {
