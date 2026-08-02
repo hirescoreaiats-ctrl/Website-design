@@ -132,7 +132,7 @@ for (const route of SEO_ROUTES) {
     blogBodies.push({ path: route.path, text: meaningfulText.toLowerCase() })
   }
   if (route.path === actionAgentArticlePath) {
-    if (h1Text !== 'Hire Through Conversation: How HireScoreAI’s Action AI Agent Runs Your Entire Hiring Workflow') errors.push(`${route.path}: article H1 mismatch`)
+    if (h1Text !== 'Conversational AI ATS: HireScoreAI Action Agent') errors.push(`${route.path}: article H1 mismatch`)
     if (meaningfulWords < 1600) errors.push(`${route.path}: complete supplied article is missing from prerendered HTML (${meaningfulWords} words)`)
     for (const heading of actionAgentArticleH2s) {
       if (!mainHeadings.includes(heading)) errors.push(`${route.path}: missing required H2 "${heading}"`)

@@ -266,8 +266,8 @@ const guidePages = [
 const blogPosts = [
   {
     slug: '/resources/blogs/hire-through-conversation-action-ai-agent',
-    title: 'Hire Through Conversation: How HireScoreAI’s Action AI Agent Runs Your Entire Hiring Workflow',
-    meta: 'See how HireScoreAI’s Action AI Agent helps recruiters manage job creation, resume screening, candidate ranking, communication and interviews through chat.',
+    title: 'Conversational AI ATS: HireScoreAI Action Agent',
+    meta: 'See how HireScoreAI’s AI ATS Action Agent helps recruiters manage job creation, resume screening, candidate ranking, communication and interviews through conversational AI.',
     image: '/action-ai-agent-conversation.webp',
     category: 'AI Recruitment Automation',
     readTime: '11 min read',

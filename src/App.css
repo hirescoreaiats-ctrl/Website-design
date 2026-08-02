@@ -1308,26 +1308,27 @@ h3 {
 
 .actionArticleHero {
   position: relative;
-  padding: 48px 0 66px;
+  padding: 42px 0 52px;
   border-bottom: 1px solid var(--action-line);
 }
 
 .actionArticleHeroGrid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 42px;
+  grid-template-columns: minmax(0, 0.94fr) minmax(600px, 1.26fr);
+  gap: 44px;
+  align-items: center;
 }
 
 .actionArticleHeroCopy {
-  max-width: 1080px;
+  max-width: 680px;
   animation: actionHeroEnter 0.7s cubic-bezier(.2,.75,.25,1) both;
 }
 
 .actionArticleHeroCopy h1 {
-  max-width: 1080px;
+  max-width: 680px;
   margin: 0 0 20px;
-  font-size: clamp(2.8rem, 4.2vw, 4.8rem);
-  line-height: 1.06;
+  font-size: clamp(2.55rem, 3.2vw, 3.65rem);
+  line-height: 1.08;
   letter-spacing: -0.058em;
   text-wrap: balance;
 }
