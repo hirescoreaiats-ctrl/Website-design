@@ -1422,20 +1422,14 @@ h3 {
 
 .actionArticleLayout {
   display: grid;
-  grid-template-columns: 290px minmax(0, 830px);
-  gap: 64px;
+  grid-template-columns: minmax(0, 960px);
+  gap: 0;
   justify-content: center;
   padding-block: 64px 100px;
 }
 
 .actionArticleToc {
-  position: sticky;
-  top: 106px;
-  align-self: start;
-  padding: 20px 18px;
-  border: 1px solid var(--action-line);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.025);
+  display: none;
 }
 
 .actionArticleToc > strong {
@@ -1485,7 +1479,34 @@ h3 {
 }
 
 .actionMobileToc {
-  display: none;
+  display: block;
+  margin: 0 0 42px;
+  padding: 16px 20px;
+  border: 1px solid var(--action-line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.actionMobileToc summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 34px;
+  color: var(--action-text);
+  font-size: 1rem;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.actionMobileToc nav {
+  display: grid;
+  gap: 8px;
+  padding: 15px 0 5px;
+}
+
+.actionMobileToc a {
+  color: var(--action-muted);
+  line-height: 1.45;
 }
 
 .actionArticleBody {
@@ -2008,39 +2029,6 @@ h3 {
     max-width: 850px;
   }
 
-  .actionArticleToc {
-    display: none;
-  }
-
-  .actionMobileToc {
-    display: block;
-    margin-bottom: 38px;
-    padding: 15px 18px;
-    border: 1px solid var(--action-line);
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.025);
-  }
-
-  .actionMobileToc summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 34px;
-    color: var(--action-text);
-    font-weight: 850;
-    cursor: pointer;
-  }
-
-  .actionMobileToc nav {
-    display: grid;
-    gap: 8px;
-    padding: 15px 0 5px;
-  }
-
-  .actionMobileToc a {
-    color: var(--action-muted);
-    line-height: 1.4;
-  }
 }
 
 @media (max-width: 720px) {
