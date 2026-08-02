@@ -1430,20 +1430,21 @@ h3 {
 }
 
 .actionArticleLayout {
-  display: grid;
   width: min(1480px, calc(100% - 64px));
-  grid-template-columns: 350px minmax(0, 880px);
-  gap: 72px;
-  align-items: start;
-  justify-content: center;
+  margin-inline: auto;
   padding-block: 64px 100px;
 }
 
+.actionArticleLayout::after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
 .actionArticleToc {
-  position: static;
-  /* Continue the left-hand TOC panel alongside the full article so its short
-     link list never leaves an empty column while the reader keeps scrolling. */
-  align-self: stretch;
+  float: left;
+  width: 350px;
+  margin: 0 72px 36px 0;
   display: block;
   min-height: 0;
   padding: 22px 20px;
@@ -2078,7 +2079,6 @@ h3 {
   }
 
   .actionArticleLayout {
-    grid-template-columns: 1fr;
     width: min(100% - 48px, 850px);
     height: auto;
     max-width: 850px;
@@ -2086,6 +2086,9 @@ h3 {
   }
 
   .actionArticleToc {
+    float: none;
+    width: auto;
+    margin: 0;
     display: none;
   }
 
