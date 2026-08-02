@@ -1432,22 +1432,28 @@ h3 {
 .actionArticleLayout {
   display: grid;
   width: min(1480px, calc(100% - 64px));
+  height: calc(100vh - 32px);
+  box-sizing: border-box;
   grid-template-columns: 350px minmax(0, 880px);
   gap: 72px;
+  align-items: stretch;
   justify-content: center;
-  padding-block: 64px 100px;
+  padding-block: 24px;
 }
 
 .actionArticleToc {
-  position: sticky;
-  top: 24px;
-  align-self: start;
+  position: relative;
+  top: auto;
+  align-self: stretch;
   display: block;
-  min-height: calc(100vh - 48px);
+  min-height: 0;
   padding: 22px 20px;
   border: 1px solid var(--action-line);
   border-radius: 18px;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-color: rgba(188, 166, 255, 0.5) transparent;
+  scrollbar-width: thin;
   background:
     radial-gradient(circle at 18% 88%, rgba(124, 58, 237, 0.2), transparent 30%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012));
@@ -1461,6 +1467,16 @@ h3 {
   font-size: 0.86rem;
   text-transform: uppercase;
   letter-spacing: 0.11em;
+}
+
+.actionArticleToc::-webkit-scrollbar {
+  width: 8px;
+}
+
+.actionArticleToc::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: linear-gradient(var(--action-violet), var(--action-cyan)) padding-box;
 }
 
 .actionArticleToc nav {
@@ -1528,6 +1544,28 @@ h3 {
 
 .actionArticleBody {
   min-width: 0;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  padding-right: 18px;
+  scrollbar-color: rgba(188, 166, 255, 0.65) rgba(255, 255, 255, 0.05);
+  scrollbar-width: thin;
+}
+
+.actionArticleBody::-webkit-scrollbar {
+  width: 10px;
+}
+
+.actionArticleBody::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.actionArticleBody::-webkit-scrollbar-thumb {
+  border: 2px solid var(--action-bg);
+  border-radius: 999px;
+  background: linear-gradient(var(--action-violet), var(--action-cyan));
 }
 
 .actionArticleIntro {
@@ -2055,11 +2093,19 @@ h3 {
   .actionArticleLayout {
     grid-template-columns: 1fr;
     width: min(100% - 48px, 850px);
+    height: auto;
     max-width: 850px;
+    padding-block: 64px 100px;
   }
 
   .actionArticleToc {
     display: none;
+  }
+
+  .actionArticleBody {
+    height: auto;
+    overflow: visible;
+    padding-right: 0;
   }
 
   .actionMobileToc {
