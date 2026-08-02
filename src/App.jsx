@@ -2800,7 +2800,12 @@ function ActionAgentBlogPost({ post }) {
                 <time dateTime="2026-07-26">{post.published}</time>
               </div>
               <h1>{post.title}</h1>
-              <p>Manage jobs, candidates, communication and interviews through natural-language chat—while recruiter review and confirmation remain central to consequential actions.</p>
+              <p>HireScoreAI’s AI ATS Action Agent turns recruitment operations into a conversational hiring workflow: create jobs, review candidates, coordinate communication and schedule interviews through chat—while recruiter approval stays central to consequential actions.</p>
+              <ul className="actionHeroHighlights" aria-label="Article highlights">
+                <li>Conversational AI ATS</li>
+                <li>Connected hiring workflow</li>
+                <li>Recruiter-approved actions</li>
+              </ul>
               <div className="actionArticleByline"><span className="actionArticleAuthor">H</span><span><strong>By HireScoreAI</strong><small>AI recruitment workflow insights</small></span></div>
               <a className="btn btnPrimary btnLarge" href={PILOT_MAILTO}>Book Your Free 7-Day Pilot <ArrowRight size={18} /></a>
             </div>
@@ -2836,7 +2841,7 @@ function ActionAgentBlogPost({ post }) {
               <p>Recruitment technology has become more powerful, but using it has not always become easier.</p>
               <p>Many applicant tracking systems require recruiters to move between dashboards, forms, filters and candidate profiles. Creating a job happens on one screen, resume processing on another, shortlisting somewhere else, and interview scheduling in a separate workflow.</p>
               <p>Even modern AI recruiting platforms can add isolated AI features without removing the operational complexity recruiters face every day. Recruiters may gain smarter screening and automation while still manually controlling every step.</p>
-              <p><Link href="/">HireScoreAI</Link> takes a different approach. Its Action AI Agent lets recruiters manage a connected hiring workflow through conversation. Instead of searching menus or memorising every feature location, recruiters can state what they want to accomplish and review the prepared action.</p>
+              <p><Link href="/">HireScoreAI</Link> takes a different approach. Its AI ATS Action Agent lets recruiters manage a connected hiring workflow through conversation. Instead of searching menus or memorising every feature location, recruiters can state what they want to accomplish, review the prepared action and retain final control.</p>
             </section>
 
             <section className="actionWorkflowVisual" aria-labelledby="conversation-workflow-title">

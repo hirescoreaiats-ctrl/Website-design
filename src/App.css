@@ -1308,14 +1308,14 @@ h3 {
 
 .actionArticleHero {
   position: relative;
-  padding: 42px 0 52px;
+  padding: 38px 0 44px;
   border-bottom: 1px solid var(--action-line);
 }
 
 .actionArticleHeroGrid {
   display: grid;
-  grid-template-columns: minmax(0, 0.86fr) minmax(580px, 1.34fr);
-  gap: 34px;
+  grid-template-columns: minmax(540px, 1.05fr) minmax(600px, 1.15fr);
+  gap: 44px;
   align-items: center;
 }
 
@@ -1325,18 +1325,38 @@ h3 {
 
 .actionArticleHeroCopy h1 {
   max-width: 760px;
-  margin: 0 0 24px;
-  font-size: clamp(2.65rem, 3.75vw, 4.05rem);
-  line-height: 1.04;
-  letter-spacing: -0.065em;
+  margin: 0 0 20px;
+  font-size: clamp(2.55rem, 3.45vw, 3.85rem);
+  line-height: 1.06;
+  letter-spacing: -0.058em;
+  text-wrap: balance;
 }
 
 .actionArticleHeroCopy > p {
   max-width: 720px;
+  margin: 0 0 19px;
+  color: #d5cedc;
+  font-size: 1.17rem;
+  line-height: 1.7;
+}
+
+.actionHeroHighlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   margin: 0 0 24px;
-  color: var(--action-muted);
-  font-size: 1.2rem;
-  line-height: 1.68;
+  padding: 0;
+  list-style: none;
+}
+
+.actionHeroHighlights li {
+  padding: 7px 10px;
+  border: 1px solid rgba(188, 166, 255, 0.22);
+  border-radius: 999px;
+  color: #e7e0ec;
+  background: rgba(255, 255, 255, 0.035);
+  font-size: 0.84rem;
+  font-weight: 700;
 }
 
 .actionArticleHero .blogMetaRow {
@@ -1402,23 +1422,27 @@ h3 {
 
 .actionArticleLayout {
   display: grid;
-  grid-template-columns: 270px minmax(0, 860px);
-  gap: 50px;
+  grid-template-columns: 290px minmax(0, 830px);
+  gap: 64px;
   justify-content: center;
   padding-block: 64px 100px;
 }
 
 .actionArticleToc {
-  position: static;
+  position: sticky;
+  top: 106px;
   align-self: start;
-  padding: 8px 14px 20px 0;
+  padding: 20px 18px;
+  border: 1px solid var(--action-line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.025);
 }
 
 .actionArticleToc > strong {
   display: block;
-  margin-bottom: 14px;
+  margin-bottom: 13px;
   color: var(--action-text);
-  font-size: 0.96rem;
+  font-size: 0.86rem;
   text-transform: uppercase;
   letter-spacing: 0.11em;
 }
@@ -1432,10 +1456,10 @@ h3 {
 .actionArticleToc a {
   position: relative;
   display: block;
-  padding: 8px 0 8px 17px;
-  color: #b8afc0;
-  font-size: 0.94rem;
-  line-height: 1.42;
+  padding: 8px 0 8px 16px;
+  color: #cec6d6;
+  font-size: 0.96rem;
+  line-height: 1.38;
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -1474,17 +1498,18 @@ h3 {
 
 .actionArticleIntro p:first-child {
   color: var(--action-text);
-  font-size: 1.52rem;
-  line-height: 1.55;
+  font-size: 1.56rem;
+  line-height: 1.5;
+  letter-spacing: -0.018em;
 }
 
 .actionArticleIntro p,
 .actionArticleSection > p,
 .actionArticleConclusion > p {
   margin: 0 0 22px;
-  color: var(--action-muted);
-  font-size: 1.18rem;
-  line-height: 1.82;
+  color: #d1c9d8;
+  font-size: 1.2rem;
+  line-height: 1.8;
 }
 
 .actionArticleBody p a {
@@ -1500,8 +1525,9 @@ h3 {
 .actionArticleSection,
 .actionWorkflowVisual {
   scroll-margin-top: 100px;
-  margin-top: 66px;
-  padding-top: 20px;
+  margin-top: 76px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(210, 187, 255, 0.1);
 }
 
 .actionArticleSection h2,
@@ -1509,7 +1535,7 @@ h3 {
 .actionArticleCta h2 {
   margin: 0 0 21px;
   color: var(--action-text);
-  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-size: clamp(2rem, 3vw, 2.7rem);
   line-height: 1.12;
   letter-spacing: -0.045em;
 }
@@ -2089,7 +2115,7 @@ h3 {
   .actionArticleHeroCopy > p,
   .actionArticleIntro p,
   .actionArticleSection > p {
-    font-size: 1rem;
+    font-size: 1.06rem;
   }
 
   .actionDashboardFlow,
