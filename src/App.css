@@ -1293,7 +1293,7 @@ h3 {
   --action-violet: #bca6ff;
   --action-cyan: #4cd7f6;
   --action-orange: #ff9d52;
-  overflow: clip;
+  overflow: visible;
   color: var(--action-text);
   background:
     radial-gradient(circle at 85% 2%, rgba(76, 215, 246, 0.08), transparent 25%),
@@ -1416,9 +1416,8 @@ h3 {
 .actionHeroVisual img {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 1200 / 630;
-  object-fit: cover;
+  height: clamp(480px, 34vw, 590px);
+  object-fit: fill;
   border-radius: 21px;
 }
 
@@ -2027,6 +2026,12 @@ h3 {
 
   .actionArticleHeroCopy {
     max-width: 850px;
+  }
+
+  .actionHeroVisual img {
+    height: auto;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
   }
 
   .actionArticleLayout {
