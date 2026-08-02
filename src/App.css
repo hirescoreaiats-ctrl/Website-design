@@ -1448,16 +1448,16 @@ h3 {
 
 .actionArticleToc {
   position: sticky;
-  top: 24px;
+  /* Preserve the TOC's natural height. On shorter desktop viewports, the
+     negative top inset makes its bottom edge—not its top edge—the sticky
+     threshold, without introducing an internal scroll container. */
+  top: min(24px, calc(100vh - 921px));
   align-self: start;
   display: block;
-  max-height: calc(100vh - 48px);
-  min-height: 0;
   padding: 22px 20px;
   border: 1px solid var(--action-line);
   border-radius: 18px;
-  overflow-y: auto;
-  scrollbar-width: none;
+  overflow: visible;
   background:
     radial-gradient(circle at 18% 88%, rgba(124, 58, 237, 0.2), transparent 30%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012));
@@ -1471,16 +1471,6 @@ h3 {
   font-size: 0.86rem;
   text-transform: uppercase;
   letter-spacing: 0.11em;
-}
-
-.actionArticleToc::-webkit-scrollbar {
-  display: none;
-}
-
-.actionArticleToc::-webkit-scrollbar-thumb {
-  border: 2px solid transparent;
-  border-radius: 999px;
-  background: linear-gradient(var(--action-violet), var(--action-cyan)) padding-box;
 }
 
 .actionArticleToc nav {
@@ -2092,10 +2082,8 @@ h3 {
 
   .actionArticleToc {
     position: static;
-    float: none;
     width: auto;
     margin: 0;
-    max-height: none;
     display: none;
   }
 
