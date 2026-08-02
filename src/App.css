@@ -1423,14 +1423,22 @@ h3 {
 
 .actionArticleLayout {
   display: grid;
-  grid-template-columns: minmax(0, 960px);
-  gap: 0;
+  width: min(1480px, calc(100% - 64px));
+  grid-template-columns: 350px minmax(0, 880px);
+  gap: 72px;
   justify-content: center;
   padding-block: 64px 100px;
 }
 
 .actionArticleToc {
-  display: none;
+  position: sticky;
+  top: 106px;
+  align-self: start;
+  display: block;
+  padding: 22px 20px;
+  border: 1px solid var(--action-line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.025);
 }
 
 .actionArticleToc > strong {
@@ -1480,12 +1488,7 @@ h3 {
 }
 
 .actionMobileToc {
-  display: block;
-  margin: 0 0 42px;
-  padding: 16px 20px;
-  border: 1px solid var(--action-line);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.025);
+  display: none;
 }
 
 .actionMobileToc summary {
@@ -2027,7 +2030,21 @@ h3 {
 
   .actionArticleLayout {
     grid-template-columns: 1fr;
+    width: min(100% - 48px, 850px);
     max-width: 850px;
+  }
+
+  .actionArticleToc {
+    display: none;
+  }
+
+  .actionMobileToc {
+    display: block;
+    margin: 0 0 38px;
+    padding: 16px 20px;
+    border: 1px solid var(--action-line);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.025);
   }
 
 }
