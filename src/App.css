@@ -1450,10 +1450,7 @@ h3 {
   padding: 22px 20px;
   border: 1px solid var(--action-line);
   border-radius: 18px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  scrollbar-color: rgba(188, 166, 255, 0.5) transparent;
-  scrollbar-width: thin;
+  overflow: hidden;
   background:
     radial-gradient(circle at 18% 88%, rgba(124, 58, 237, 0.2), transparent 30%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012));
@@ -1545,12 +1542,18 @@ h3 {
 .actionArticleBody {
   min-width: 0;
   height: 100%;
+  direction: rtl;
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-gutter: stable;
-  padding-right: 18px;
+  padding-left: 18px;
+  padding-right: 0;
   scrollbar-color: rgba(188, 166, 255, 0.65) rgba(255, 255, 255, 0.05);
   scrollbar-width: thin;
+}
+
+.actionArticleBody > * {
+  direction: ltr;
 }
 
 .actionArticleBody::-webkit-scrollbar {
@@ -2104,7 +2107,9 @@ h3 {
 
   .actionArticleBody {
     height: auto;
+    direction: ltr;
     overflow: visible;
+    padding-left: 0;
     padding-right: 0;
   }
 
