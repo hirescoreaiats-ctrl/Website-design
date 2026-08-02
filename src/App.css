@@ -1301,6 +1301,13 @@ h3 {
     var(--action-bg);
 }
 
+/* The shared command wrapper normally clips decorative effects. This article
+   needs the viewport as its sticky containing block, so only this route lets
+   the wrapper remain visible. */
+.commandInner:has(.actionArticle) {
+  overflow: visible;
+}
+
 .actionArticleShell {
   width: min(1320px, calc(100% - 48px));
   margin-inline: auto;
@@ -1430,30 +1437,27 @@ h3 {
 }
 
 .actionArticleLayout {
+  display: grid;
   width: min(1480px, calc(100% - 64px));
-  margin-inline: auto;
+  grid-template-columns: 350px minmax(0, 880px);
+  gap: 72px;
+  align-items: start;
+  justify-content: center;
   padding-block: 64px 100px;
 }
 
-.actionArticleLayout::after {
-  display: block;
-  clear: both;
-  content: "";
-}
-
 .actionArticleToc {
-  float: left;
-  width: 350px;
-  margin: 0 72px 36px 0;
+  position: sticky;
+  top: 24px;
+  align-self: start;
   display: block;
+  max-height: calc(100vh - 48px);
   min-height: 0;
   padding: 22px 20px;
   border: 1px solid var(--action-line);
   border-radius: 18px;
-  /* Keep the table of contents in the normal document flow. The article page
-     itself owns scrolling, so the full right-hand article stays visible after
-     the shorter TOC ends. */
-  overflow: visible;
+  overflow-y: auto;
+  scrollbar-width: none;
   background:
     radial-gradient(circle at 18% 88%, rgba(124, 58, 237, 0.2), transparent 30%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012));
@@ -1470,7 +1474,7 @@ h3 {
 }
 
 .actionArticleToc::-webkit-scrollbar {
-  width: 8px;
+  display: none;
 }
 
 .actionArticleToc::-webkit-scrollbar-thumb {
@@ -2079,6 +2083,7 @@ h3 {
   }
 
   .actionArticleLayout {
+    grid-template-columns: 1fr;
     width: min(100% - 48px, 850px);
     height: auto;
     max-width: 850px;
@@ -2086,9 +2091,11 @@ h3 {
   }
 
   .actionArticleToc {
+    position: static;
     float: none;
     width: auto;
     margin: 0;
+    max-height: none;
     display: none;
   }
 
