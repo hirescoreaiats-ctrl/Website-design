@@ -1284,7 +1284,7 @@ h3 {
 
 /* Action AI Agent editorial */
 .actionArticle {
-  --action-bg: #100d17;
+  --action-bg: #09070e;
   --action-card: #191521;
   --action-soft: #211c2b;
   --action-line: rgba(210, 187, 255, 0.14);
@@ -1296,8 +1296,8 @@ h3 {
   overflow: visible;
   color: var(--action-text);
   background:
-    radial-gradient(circle at 85% 2%, rgba(76, 215, 246, 0.08), transparent 25%),
-    radial-gradient(circle at 18% 5%, rgba(124, 58, 237, 0.18), transparent 30%),
+    radial-gradient(circle at 85% 2%, rgba(76, 215, 246, 0.035), transparent 25%),
+    radial-gradient(circle at 18% 5%, rgba(124, 58, 237, 0.075), transparent 30%),
     var(--action-bg);
 }
 
@@ -1455,47 +1455,72 @@ h3 {
   align-self: start;
   display: block;
   padding: 22px 20px;
-  border: 1px solid var(--action-line);
-  border-radius: 18px;
+  border: 1px solid rgba(188, 166, 255, 0.18);
+  border-radius: 22px;
   overflow: visible;
   background:
-    radial-gradient(circle at 18% 88%, rgba(124, 58, 237, 0.2), transparent 30%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    radial-gradient(circle at 8% 4%, rgba(124, 58, 237, 0.13), transparent 30%),
+    linear-gradient(165deg, rgba(26, 22, 36, 0.98), rgba(13, 11, 19, 0.98));
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055);
+}
+
+.actionArticleToc::after {
+  position: absolute;
+  top: -1px;
+  right: 26px;
+  left: 26px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--action-violet), var(--action-cyan), transparent);
+  content: "";
 }
 
 .actionArticleToc > strong {
-  display: block;
-  margin-bottom: 13px;
-  color: var(--action-text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  color: #f8f4ff;
   font-size: 0.86rem;
   text-transform: uppercase;
   letter-spacing: 0.11em;
 }
 
+.actionArticleToc > strong::before {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--action-cyan);
+  box-shadow: 0 0 16px rgba(76, 215, 246, 0.72);
+  content: "";
+}
+
 .actionArticleToc nav {
   display: grid;
   gap: 2px;
-  border-left: 1px solid var(--action-line);
 }
 
 .actionArticleToc a {
   position: relative;
   display: block;
-  padding: 8px 0 8px 16px;
-  color: #cec6d6;
+  padding: 8px 12px 8px 16px;
+  border-radius: 10px;
+  color: #c9c1d2;
   font-size: 0.96rem;
   line-height: 1.38;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
 .actionArticleToc a::before {
   position: absolute;
   top: 8px;
   bottom: 8px;
-  left: -1px;
-  width: 2px;
+  left: 0;
+  width: 3px;
   border-radius: 2px;
   background: transparent;
   content: "";
@@ -1503,11 +1528,17 @@ h3 {
 
 .actionArticleToc a:hover,
 .actionArticleToc a.isActive {
-  color: var(--action-text);
+  color: #ffffff;
+  background: linear-gradient(90deg, rgba(124, 58, 237, 0.17), rgba(76, 215, 246, 0.055));
+}
+
+.actionArticleToc a:hover {
+  transform: translateX(2px);
 }
 
 .actionArticleToc a.isActive::before {
   background: linear-gradient(var(--action-violet), var(--action-cyan));
+  box-shadow: 0 0 12px rgba(76, 215, 246, 0.45);
 }
 
 .actionMobileToc {
