@@ -2479,6 +2479,34 @@ function BlogList() {
 
 function BlogPost({ post }) {
   if (post.isActionAgentArticle) return <ActionAgentBlogPost post={post} />
+  return <StandardEditorialBlogPost post={post} />
+}
+
+function blogSectionId(heading, index) {
+  const slug = heading
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+  return `article-${index + 1}-${slug || 'section'}`
+}
+
+function StandardEditorialBlogPost({ post }) {
+  const articleToc = post.sections.map(([heading], index) => [blogSectionId(heading, index), heading])
+  const [activeSection, setActiveSection] = useState(articleToc[0]?.[0] || '')
+
+  useEffect(() => {
+    const sections = articleToc.map(([id]) => document.getElementById(id)).filter(Boolean)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+        if (visible[0]) setActiveSection(visible[0].target.id)
+      },
+      { rootMargin: '-18% 0px -68% 0px', threshold: [0, 0.2, 0.6] },
+    )
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
+  }, [post.slug])
+
   const contextualLinks = blogContextLinks(post)
   return (
     <>
@@ -2489,65 +2517,79 @@ function BlogPost({ post }) {
         schemaHeadline={post.title}
       />
 
-      <Breadcrumbs
-        items={[
-          ['/resources/blogs', 'Blogs'],
-          [post.slug, post.title],
-        ]}
-      />
-
-      <article className="blogDetail">
-        <div className="container">
-          <div className="blogDetailHero">
-            <div className="blogMetaRow">
-              <span className="blogCategory">{post.category}</span>
-              <span className="blogReadTime">{post.readTime}</span>
-              <span>By HireScoreAI</span>
+      <article className="actionArticle standardActionBlog">
+        <header className="actionArticleHero">
+          <div className="actionArticleShell actionArticleHeroGrid">
+            <div className="actionArticleHeroCopy">
+              <div className="blogMetaRow">
+                <span className="blogCategory">{post.category}</span>
+                <span className="blogReadTime">{post.readTime}</span>
+              </div>
+              <h1>{post.title}</h1>
+              <p>{post.meta}</p>
+              <ul className="actionHeroHighlights" aria-label="Article highlights">
+                <li>{post.category}</li>
+                <li>Practical recruiter guide</li>
+                <li>AI hiring workflow</li>
+              </ul>
+              <div className="actionArticleByline"><span className="actionArticleAuthor">H</span><span><strong>By HireScoreAI</strong><small>AI recruitment workflow insights</small></span></div>
             </div>
-
-            <h1>{post.title}</h1>
-            <p className="blogDetailIntro">{post.meta}</p>
-
-            <img
-              className="blogDetailImage"
-              src={post.image}
-              alt={post.title}
-            />
+            <div className="actionHeroVisual standardBlogHeroVisual">
+              <img
+                src={post.image}
+                alt={post.title}
+                loading="eager"
+              />
+            </div>
           </div>
+        </header>
 
-          <div className="blogContent">
-            {post.sections.map(([heading, text]) => (
-              <section className="blogContentSection" key={heading}>
+        <div className="actionArticleShell actionArticleLayout">
+          <aside className="actionArticleToc" aria-label="Article contents">
+            <strong>In this article</strong>
+            <nav>
+              {articleToc.map(([id, label]) => (
+                <a className={activeSection === id ? 'isActive' : ''} href={`#${id}`} key={id}>{label}</a>
+              ))}
+            </nav>
+          </aside>
+
+          <div className="actionArticleBody standardArticleBody">
+            <details className="actionMobileToc">
+              <summary>Article contents <ChevronDown size={18} /></summary>
+              <nav>{articleToc.map(([id, label]) => <a href={`#${id}`} key={id}>{label}</a>)}</nav>
+            </details>
+
+            {post.sections.map(([heading, text], index) => (
+              <section className="actionArticleSection standardBlogSection" id={articleToc[index][0]} key={heading}>
+                <span className="actionSectionEyebrow">Section {String(index + 1).padStart(2, '0')}</span>
                 <h2>{heading}</h2>
                 <p>{text}</p>
               </section>
             ))}
-          </div>
 
-          <div className="blogRelatedBox">
-            <h2>Related HireScoreAI pages</h2>
-            <div className="blogRelatedLinks">
-              {contextualLinks.map((href) => (
-                <Link href={href} key={href}>
-                  {titleByPath(href)}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <div className="blogCtaBox">
-            <div>
-              <span className="blogCtaEyebrow">HireScoreAI</span>
-              <h2>Ready to screen resumes faster?</h2>
-              <p>
-                Use HireScoreAI to create jobs, collect resumes, rank candidates,
-                and shortlist better profiles with AI.
-              </p>
+            <div className="blogRelatedBox standardBlogRelatedBox">
+              <h2>Related HireScoreAI pages</h2>
+              <div className="blogRelatedLinks">
+                {contextualLinks.map((href) => (
+                  <Link href={href} key={href}>
+                    {titleByPath(href)}
+                  </Link>
+                ))}
+              </div>
             </div>
 
-            <Link href="/pricing" className="blogCtaButton">
-              Review pricing and pilot options <ArrowRight size={18} />
-            </Link>
+            <div className="blogCtaBox standardBlogCtaBox">
+              <div>
+                <span className="blogCtaEyebrow">HireScoreAI</span>
+                <h2>Ready to screen resumes faster?</h2>
+                <p>Use HireScoreAI to create jobs, collect resumes, rank candidates, and shortlist better profiles with AI.</p>
+              </div>
+
+              <Link href="/pricing" className="blogCtaButton">
+                Review pricing and pilot options <ArrowRight size={18} />
+              </Link>
+            </div>
           </div>
         </div>
       </article>
