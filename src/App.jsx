@@ -2783,12 +2783,6 @@ function ActionAgentBlogPost({ post }) {
   return (
     <>
       <SEO path={post.slug} schemaHeadline={post.title} />
-      <nav className="breadcrumbs container" aria-label="Breadcrumb">
-        <Link href="/">Home</Link>
-        <span>/<Link href="/resources">Resources</Link></span>
-        <span>/<Link href="/resources/blogs">Blogs</Link></span>
-        <span aria-current="page">/ Hire Through Conversation</span>
-      </nav>
 
       <article className="actionArticle">
         <header className="actionArticleHero">
