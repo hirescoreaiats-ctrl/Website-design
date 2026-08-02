@@ -1424,7 +1424,7 @@ h3 {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 1402 / 1122;
   object-fit: contain;
   border-radius: 21px;
 }
@@ -1432,19 +1432,16 @@ h3 {
 .actionArticleLayout {
   display: grid;
   width: min(1480px, calc(100% - 64px));
-  height: calc(100vh - 32px);
-  box-sizing: border-box;
   grid-template-columns: 350px minmax(0, 880px);
   gap: 72px;
-  align-items: stretch;
+  align-items: start;
   justify-content: center;
-  padding-block: 24px;
+  padding-block: 64px 100px;
 }
 
 .actionArticleToc {
-  position: relative;
-  top: auto;
-  align-self: stretch;
+  position: static;
+  align-self: start;
   display: block;
   min-height: 0;
   padding: 22px 20px;
@@ -1541,15 +1538,14 @@ h3 {
 
 .actionArticleBody {
   min-width: 0;
-  height: 100%;
+  height: calc(100vh - 48px);
   direction: rtl;
   overflow-y: auto;
   overscroll-behavior: contain;
-  scrollbar-gutter: stable;
+  scrollbar-gutter: auto;
   padding-left: 18px;
   padding-right: 0;
-  scrollbar-color: rgba(188, 166, 255, 0.65) rgba(255, 255, 255, 0.05);
-  scrollbar-width: thin;
+  scrollbar-width: none;
 }
 
 .actionArticleBody > * {
@@ -1557,7 +1553,7 @@ h3 {
 }
 
 .actionArticleBody::-webkit-scrollbar {
-  width: 10px;
+  display: none;
 }
 
 .actionArticleBody::-webkit-scrollbar-track {
@@ -2084,7 +2080,7 @@ h3 {
 
   .actionHeroVisual img {
     height: auto;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 1402 / 1122;
     object-fit: cover;
   }
 
