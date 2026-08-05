@@ -3,8 +3,8 @@ export const BRAND_NAME = 'HireScoreAI'
 export const ORGANIZATION_ID = `${SITE_URL}/#organization`
 export const FOUNDER_ID = `${SITE_URL}/#sachin-yadav`
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/hirescore-logo-full.png`
-export const DEFAULT_DESCRIPTION = 'HireScoreAI is an AI recruitment workflow platform for resume screening, JD matching, candidate ranking, explainable shortlisting, communication, and interview scheduling.'
-export const HOME_H1 = 'AI Resume Screening and Candidate Ranking Software for Recruiters'
+export const DEFAULT_DESCRIPTION = 'HireScoreAI is an AI recruitment platform with managed candidate sourcing, resume screening, JD matching, candidate ranking, explainable shortlisting, communication, and interview scheduling.'
+export const HOME_H1 = 'AI-Powered Recruitment Platform with Candidate Sourcing'
 export const OFFICIAL_SOCIAL_LINKS = {
   youtube: 'https://www.youtube.com/@HireScoreAI',
   linkedin: 'https://www.linkedin.com/company/hire-score-a',
@@ -21,6 +21,7 @@ export const STATIC_ROUTE_H1S = {
   '/product/ai-candidate-scoring': 'JD-Based AI Candidate Scoring for Recruiters',
   '/product/ai-candidate-ranking': 'AI Candidate Ranking Tool for Faster Shortlists',
   '/resources/blogs': 'AI recruitment insights for faster, smarter hiring',
+  '/request-candidate-sourcing': 'Request Candidate Sourcing for an Active Role',
   '/resources/blogs/how-ai-resume-screening-helps-recruiters-save-time': 'How AI Resume Screening Helps Recruiters Save Time and Improve Shortlist Quality',
 }
 
@@ -30,7 +31,7 @@ export function canonicalUrlForPath(path = '/') {
 }
 
 const staticRoutes = [
-  ['/', 'AI Resume Screening Software for Recruiters | HireScoreAI', 'HireScoreAI is AI resume screening software for JD-based candidate scoring, explainable ranking, shortlisting, and connected recruitment automation.', 'WebPage'],
+  ['/', 'AI Recruitment Platform with Candidate Sourcing | HireScoreAI', 'Source candidates, screen resumes, rank applicants with explainable JD-based AI, and manage the complete hiring workflow with HireScoreAI.', 'WebPage'],
   ['/product/hirescore-ai', 'HireScoreAI Product | AI Resume Screening Software', 'Explore HireScoreAI for AI resume screening, JD-based candidate scoring, candidate ranking, smart shortlisting, and recruiter-ready explanations.', 'WebPage'],
   ['/solutions', 'AI Hiring Solutions for Recruiters & Staffing Agencies | HireScoreAI', 'HireScoreAI helps recruitment agencies, HR teams, staffing firms, startups, and high-volume hiring teams screen resumes, rank candidates, shortlist talent, and manage hiring workflows with AI.', 'CollectionPage'],
   ['/resources', 'AI Recruitment Resources, Guides & Case Studies | HireScoreAI', 'Explore practical AI recruitment guides, articles, sample case studies, FAQs, and product updates from HireScoreAI.', 'CollectionPage'],
@@ -41,6 +42,7 @@ const staticRoutes = [
   ['/resources/release-notes', 'HireScoreAI Release Notes | Product Updates', 'Follow HireScoreAI product updates for resume screening, candidate ranking, public apply pages, communication, and interview workflows.', 'CollectionPage'],
   ['/pricing', 'HireScoreAI Pricing | INR Plans from 599 per Month', 'Compare HireScoreAI pricing: Free Pilot for 7 days, Starter at INR 599/month, Growth at INR 1,599/month, and Enterprise custom pricing.', 'WebPage'],
   ['/contact', 'Contact HireScoreAI | Book a Demo or Request a Pilot', 'Contact HireScoreAI to book a demo, request pilot access, or discuss AI resume screening, candidate ranking, and recruitment automation.', 'ContactPage'],
+  ['/request-candidate-sourcing', 'Request Candidate Sourcing | HireScoreAI', 'Share an active hiring requirement and request managed candidate sourcing through HireScoreAI internal sourcing efforts and selected recruitment partners.', 'WebPage'],
   ['/privacy', 'Privacy Policy | HireScoreAI', 'Read the HireScoreAI privacy policy for information about website and recruitment platform data practices.', 'WebPage', true],
   ['/terms', 'Terms of Use | HireScoreAI', 'Read the terms that apply to the HireScoreAI website and recruitment workflow platform.', 'WebPage', true],
 ]
@@ -291,6 +293,11 @@ const primarySoftware = {
 }
 
 export const HOME_FAQS = [
+  ['Does HireScoreAI provide candidate sourcing?', 'Yes. Candidate sourcing support is available for selected roles through internal HireScoreAI sourcing efforts and selected recruitment partners. Organizations can also bring their own candidates or collect applications through public apply pages.'],
+  ['Is candidate sourcing fully AI-powered?', 'No. Candidate discovery and outreach are currently handled by people and recruitment partners. HireScoreAI uses AI for resume parsing, JD-based evaluation, scoring, ranking, explanations, shortlisting, and workflow management.'],
+  ['Can I use HireScoreAI without candidate sourcing?', 'Yes. HireScoreAI can be used as a self-service recruitment platform for resume screening, candidate ranking, shortlisting, communication, interviews, and hiring pipeline management.'],
+  ['How is candidate sourcing priced?', 'Sourcing pricing depends on the role, hiring difficulty, location, number of candidates required, timeline, and engagement model. Every request is reviewed before being accepted.'],
+  ['Does HireScoreAI make the final hiring decision?', 'No. HireScoreAI supports recruiters with structured evaluation and workflow automation. Final review, verification, interview, and hiring decisions remain under recruiter and employer control.'],
   ['What is HireScoreAI?', 'HireScoreAI is an independent AI recruitment workflow platform for job creation, public apply pages, resume screening, candidate ranking, explainable shortlisting, communication, tests, and interview scheduling.'],
   ['How does AI resume screening software help recruiters?', 'AI resume screening software structures resume data, compares candidates with job requirements, and helps recruiters prioritize profiles for human review.'],
   ['How does HireScoreAI perform JD-based candidate scoring?', 'HireScoreAI evaluates job requirements, matched skills, relevant experience, and skill gaps to produce a role-specific score with recruiter-readable evidence.'],

@@ -876,6 +876,7 @@ function Header({ isHome = false }) {
           <a href={isHome ? '#about' : '/#about'}>About Us</a>
           <Dropdown label="Product" base="/product/hirescore-ai" items={productNavItems} />
           <Dropdown label="Solutions" base="/solutions" items={solutionNavItems} />
+          <Link href="/request-candidate-sourcing">Candidate Sourcing</Link>
           <Link href="/resources">Resources</Link>
           <Link href="/pricing">Pricing</Link>
           <Link href="/contact">Contact Us</Link>
@@ -890,7 +891,7 @@ function Header({ isHome = false }) {
       </div>
       {open && (
         <nav className="mobileNav" aria-label="Mobile navigation">
-          {['/', '/product/hirescore-ai', '/product/jd-manager', '/solutions', '/resources', '/pricing', '/contact'].map((path) => (
+          {['/', '/product/hirescore-ai', '/product/jd-manager', '/solutions', '/request-candidate-sourcing', '/resources', '/pricing', '/contact'].map((path) => (
             <Link key={path} href={path} onClick={() => setOpen(false)}>{labelFor(path)}</Link>
           ))}
           <a className="btn btnPrimary" href={PILOT_MAILTO}>Start Free Pilot</a>
@@ -918,6 +919,7 @@ function labelFor(path) {
     '/product/hirescore-ai': 'HireScoreAI',
     '/product/jd-manager': 'JD Manager',
     '/solutions': 'Solutions',
+    '/request-candidate-sourcing': 'Candidate Sourcing',
     '/resources': 'Resources',
     '/resources/user-guide': 'User Guide',
     '/resources/blogs': 'Blogs',
@@ -1153,10 +1155,10 @@ function HomePage() {
   }, [])
 
   const advantageCards = [
-    [Network, 'HireScoreAI Ingestion', 'Centralize resumes from LinkedIn, Indeed, Naukri, and your own custom “Instant Apply” pages automatically via HireScoreAI Sync.', '01'],
-    [BrainCircuit, 'Neural Engine', 'Explainable ranking powered by HireScoreAI Neural Intelligence. Understand exactly why a candidate is or isn’t a match.', 'AI VERIFIED'],
-    [BarChart3, 'Executive Reporting', 'Generate board-ready reports tracking ROI, funnel conversion, and source attribution with HireScoreAI Analytics.', 'PREVIEW ANALYTICS'],
-    [CalendarCheck, 'HireScoreAI Automation', 'Autonomous booking for top-tier candidates. Zero-friction workflow from shortlist to first interview.', 'LIVE'],
+    [UsersRound, 'Candidate Sourcing Support', 'Request candidate sourcing for selected active roles through HireScoreAI internal sourcing efforts and selected recruitment partners.', 'MANAGED SERVICE'],
+    [BrainCircuit, 'Explainable JD Matching', 'Review matched skills, relevant experience, gaps, and role-specific evidence behind every candidate score.', 'RECRUITER REVIEW'],
+    [Files, 'Flexible Candidate Intake', 'Upload existing resumes, collect applications through a public apply page, or add profiles supplied through an accepted sourcing engagement.', 'THREE OPTIONS'],
+    [CalendarCheck, 'Connected Hiring Workflow', 'Move candidates from structured review to communication and interview scheduling while keeping important actions under recruiter control.', 'ONE WORKSPACE'],
   ]
   const shortlistSteps = [
     [SearchCheck, 'Deep Context Parsing', 'HireScoreAI analyzes resumes against specific scorecard criteria, extracting intent and achievements beyond keywords.'],
@@ -1172,14 +1174,14 @@ function HomePage() {
         <div className="commandGlow commandGlowOne" />
         <div className="commandContainer commandHeroGrid">
           <div className="commandHeroCopy">
-            <span className="commandPill"><Rocket size={12} /> The recruitment command center</span>
+            <span className="commandPill"><Rocket size={12} /> Software plus managed sourcing support</span>
             <h1>{HOME_H1}</h1>
-            <p>Use AI recruitment software to screen resumes, apply JD-based candidate scoring, rank stronger applicants, and move hiring forward from one explainable, recruiter-controlled workspace.</p>
+            <p>Source candidates through HireScoreAI's internal team and recruitment partners, evaluate every applicant with explainable JD-based scoring, and manage the complete hiring workflow from one platform.</p>
             <div className="commandActions">
-              <a className="commandButton commandButtonPrimary" href={PILOT_MAILTO}>Start Free Pilot <ArrowRight size={17} /></a>
-              <Link className="commandButton commandButtonGhost" href="/contact">Book Product Demo</Link>
+              <Link className="commandButton commandButtonPrimary" href="/request-candidate-sourcing">Request Candidate Sourcing <ArrowRight size={17} /></Link>
+              <Link className="commandButton commandButtonGhost" href="/product/hirescore-ai">Explore HireScoreAI</Link>
             </div>
-            <div className="heroProof"><span><BadgeCheck size={15} /> Explainable AI</span><i /><span><Zap size={15} /> Recruiter controlled</span></div>
+            <div className="heroProof heroSourcingProof"><span><UsersRound size={15} /> Managed sourcing for selected roles</span><i /><span><BadgeCheck size={15} /> Explainable AI scoring</span><i /><span><Zap size={15} /> Recruiter-controlled hiring decisions</span></div>
           </div>
           <div className="commandHeroVisual">
             <div className="commandHeroVisualTop"><span><i /> Live candidate intelligence</span><small>One connected workspace</small></div>
@@ -1189,12 +1191,17 @@ function HomePage() {
         </div>
       </section>
       <AboutCommandSection />
+      <CandidateSourcingSection />
+      <TwoWaysSection />
       <CompleteHiringWorkflowSection />
       <ActionAiAgentSection surface="home" />
       <JDMatchIntelligence />
       <section className="commandSection advantageSection" id="advantage">
         <div className="commandContainer">
-          <CommandHeading title={<>AI recruitment software built for <span>practical hiring work</span></>} text="Use one connected platform for resume intelligence, evidence-led ranking, recruiter review, communication, and interviews." />
+          <CommandHeading
+            title={<>AI recruitment software built for <span>practical hiring work</span></>}
+            text={<>Use one connected platform for <Link href="/product/ai-resume-parsing">AI resume screening</Link>, recruiter review, <Link href="/product/candidate-communication">candidate communication</Link>, <Link href="/product/ai-screening-test">screening tests</Link>, and <Link href="/product/interview-scheduling">interview scheduling</Link> within an organized <Link href="/product/hiring-pipeline">hiring pipeline</Link>.</>}
+          />
           <div className="advantageGrid commandReveal commandDelay1">
             {advantageCards.map(([Icon, title, text, label], index) => (
               <article className="advantageCard" key={title} style={{ '--card-delay': `${index * 90}ms` }}>
@@ -1205,41 +1212,75 @@ function HomePage() {
           </div>
         </div>
       </section>
-      <section className="commandSection sourcingSection" id="product">
-        <div className="commandContainer sourcingGrid">
-          <div className="sourcingCopy commandReveal">
-            <h2>Precision Sourcing by<br /><span>HireScoreAI</span></h2>
-            <p>Eliminate guesswork. The HireScoreAI Command Center tracks exactly which source yields your highest-quality hires, allowing you to optimize your recruitment spend with total confidence.</p>
-            <div className="yieldCard"><small>Yield by channel</small>{[['LinkedIn',76],['Indeed',48],['Naukri',66]].map(([name,value]) => <div className="yieldRow" key={name}><b>{name}</b><i><span className="commandBar" style={{ '--bar-width': `${value}%` }} /></i><em><span className="counterAnimate" data-target={value}>0</span>%</em></div>)}</div>
-            <div className="statusPills"><span>● HireScoreAI Command Center Active</span><span>↻ Multi-Source Sync</span></div>
-          </div>
-          <div className="pipelineCard commandReveal commandDelay2">
-            <div className="pipelineTop"><small>HireScoreAI pipeline stream</small><b>Syncing sources...</b></div>
-            {[['AS','Alice Smith',88],['RK','Rahul Kumar',82],['LJ','Leo Jackson',71]].map(([initials,name,score], i) => <div className={`pipelineRow p${i+1}`} key={name}><span>{initials}</span><div><strong>{name}</strong><small>via HireScoreAI talent cloud</small></div><b><span className="counterAnimate" data-target={score}>0</span><small>match</small></b></div>)}
-          </div>
-        </div>
-      </section>
       <section className="commandSection shortlistSection">
         <div className="commandContainer">
-          <CommandHeading title={<>Candidate ranking software for <span>explainable shortlisting</span></>} text="Turn large applicant pools into prioritized candidates using role-fit evidence, matched skills, and recruiter-controlled decisions." />
+          <CommandHeading
+            title={<>Candidate ranking software for <span>explainable shortlisting</span></>}
+            text={<>Turn large applicant pools into prioritized candidates with <Link href="/product/ai-candidate-ranking">explainable candidate ranking</Link>, role-fit evidence, matched skills, and a recruiter-controlled <Link href="/product/ai-shortlisting">shortlisting workflow</Link>.</>}
+          />
           <div className="shortlistGrid commandReveal commandDelay1">
             {shortlistSteps.map(([Icon,title,text], index) => <article className="shortlistCard" key={title}><b className="stepNumber">{index+1}</b><div className="commandIcon"><Icon size={20} /></div><h3>{title}</h3><p>{text}</p></article>)}
           </div>
         </div>
       </section>
-      <section className="commandSection intelligenceSection" id="intelligence">
-        <div className="commandContainer">
-          <CommandHeading title={<>Board-Ready <span>HireScoreAI Intelligence</span></>} text="Transform raw recruitment data into sophisticated executive insights. Demonstrate hire quality and efficiency gains with HireScoreAI’s data-driven clarity." />
-          <div className="intelligenceGrid commandReveal commandDelay1"><AnalyticsCard /><div className="qualityStack"><MetricCard label="Hire quality index" value="4.9" suffix="/ 5.0" text="Average stakeholder rating for shortlists sourced via HireScoreAI Intelligence." /><MetricCard label="Efficiency multiplier" value="72" suffix="%" text="Reduction in manual screening hours per role since HireScoreAI deployment." /></div></div>
-        </div>
-      </section>
+      <HomepageFeatureGrid />
       <HomepageFaqSection />
-      <section className="commandCta"><div className="commandContainer commandCtaBox commandReveal"><h2>Scale Your Global<br /><span>HireScoreAI Talent Engine</span></h2><p>Join hundreds of world-class recruitment teams using the HireScoreAI Command Center to build elite organizations.</p><div className="commandActions"><a className="commandButton commandButtonPrimary" href={PILOT_MAILTO}>Request Free Access</a><Link className="commandButton commandButtonGhost" href="/contact">Consult With Specialists</Link></div></div></section>
+      <section className="commandCta"><div className="commandContainer commandCtaBox commandReveal"><h2>Need software, candidates, <span>or both?</span></h2><p>Use HireScoreAI to screen and manage your existing applicants, or request candidate sourcing support for an active hiring requirement.</p><div className="commandActions"><a className="commandButton commandButtonPrimary" href={PILOT_MAILTO}>Start Platform Pilot</a><Link className="commandButton commandButtonGhost" href="/request-candidate-sourcing">Request Candidate Sourcing</Link></div></div></section>
     </div>
   )
 }
 
 function CommandHeading({ title, text }) { return <div className="commandHeading commandReveal"><h2>{title}</h2><p>{text}</p></div> }
+
+function CandidateSourcingSection() {
+  const cards = [
+    [UsersRound, 'Share Your Requirement', 'Provide the job title, required skills, experience, location, salary range, notice period, and hiring timeline.'],
+    [Network, 'Candidates Are Sourced', 'Our internal sourcing efforts and selected recruitment partners identify and engage relevant candidates for approved roles.'],
+    [SearchCheck, 'Receive a Qualified Shortlist', 'HireScoreAI evaluates candidates against the exact job description and helps prepare a structured, prioritized shortlist.'],
+  ]
+  return (
+    <section className="commandSection candidateSourcingSection" id="candidate-sourcing">
+      <div className="commandContainer">
+        <CommandHeading title={<>Need candidates, not just <span>screening software?</span></>} text="Share an active hiring requirement and HireScoreAI can support candidate sourcing through internal sourcing efforts and selected recruitment partners. Every sourced candidate then enters the same AI-powered screening, ranking, shortlisting, communication, and interview workflow." />
+        <div className="sourcingServiceGrid commandReveal commandDelay1">
+          {cards.map(([Icon, title, text], index) => <article className="sourcingServiceCard" key={title}><span>{String(index + 1).padStart(2, '0')}</span><div className="commandIcon"><Icon size={21} /></div><h3>{title}</h3><p>{text}</p></article>)}
+        </div>
+        <div className="sourcingServiceAction commandReveal"><Link className="commandButton commandButtonPrimary" href="/request-candidate-sourcing">Request Sourcing for a Role <ArrowRight size={17} /></Link><p><ShieldCheck size={15} /> Candidate sourcing is currently available for selected roles and is subject to requirement review.</p></div>
+      </div>
+    </section>
+  )
+}
+
+function TwoWaysSection() {
+  return (
+    <section className="commandSection twoWaysSection">
+      <div className="commandContainer">
+        <CommandHeading title={<>Two ways to use <span>HireScoreAI</span></>} text="Choose the operating model that matches your current hiring need." />
+        <div className="twoWaysGrid commandReveal commandDelay1">
+          <article><span className="sectionKicker"><Zap size={13} /> Platform only</span><h3>Self-Service Recruitment Platform</h3><p>Bring your own candidates, upload resumes, collect applications through public job pages, and use HireScoreAI for AI screening, ranking, shortlisting, communication, and interview management.</p><Link href="/product/hirescore-ai">Explore the Platform <ArrowRight size={15} /></Link></article>
+          <article className="isFeatured"><span className="sectionKicker"><UsersRound size={13} /> Optional sourcing support</span><h3>Managed Candidate Sourcing</h3><p>Share an active hiring requirement and receive candidate sourcing support through HireScoreAI's internal efforts and selected recruitment partners.</p><Link href="/request-candidate-sourcing">Request Candidate Sourcing <ArrowRight size={15} /></Link></article>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function HomepageFeatureGrid() {
+  const features = [
+    [UsersRound, 'Managed Candidate Sourcing'], [Globe2, 'Public Application Pages'], [Bot, 'AI Resume Parsing'],
+    [Target, 'Explainable JD-Based Scoring'], [Trophy, 'Candidate Ranking'], [BadgeCheck, 'Candidate Shortlisting'],
+    [ShieldCheck, 'Candidate Verification'], [Bot, 'AI Action Agents'], [MessageSquareText, 'Candidate Communication'],
+    [CalendarCheck, 'Interview Scheduling'], [ClipboardCheck, 'AI Screening Tests'], [GitBranch, 'Hiring Pipeline Management'],
+  ]
+  return (
+    <section className="commandSection homeFeatureSection" id="features">
+      <div className="commandContainer">
+        <CommandHeading title={<>One platform for the <span>complete hiring workflow</span></>} text="Use only the capabilities you need, while keeping candidate review and final hiring decisions with your team." />
+        <div className="homeFeatureGrid commandReveal commandDelay1">{features.map(([Icon, title]) => <article key={title}><Icon size={20} /><h3>{title}</h3></article>)}</div>
+      </div>
+    </section>
+  )
+}
 
 function HomepageFaqSection() {
   return (
@@ -1247,47 +1288,16 @@ function HomepageFaqSection() {
       <div className="commandContainer">
         <div className="commandHeading commandReveal">
           <h2 id="home-faq-title">AI resume screening software FAQs</h2>
-          <p>Clear answers about candidate scoring, AI ATS workflows, recruitment automation, and recruiter control.</p>
+          <p>Clear answers about candidate sourcing, scoring, AI ATS workflows, recruitment automation, and recruiter control. Explore the <Link href="/resources/user-guide/review-ai-ranked-candidates">candidate ranking guide</Link>, browse <Link href="/resources">recruitment resources</Link> and <Link href="/resources/blogs">AI recruitment articles</Link>, review <Link href="/pricing">HireScoreAI pricing</Link>, or <Link href="/contact">contact our team</Link>.</p>
         </div>
-        <div className="homeFaqLayout commandReveal commandDelay1">
-          <div className="homeFaqList">
-            {HOME_FAQS.map(([question, answer]) => (
-              <details key={question}>
-                <summary>{question}<ChevronDown size={18} /></summary>
-                <p>{answer}</p>
-              </details>
-            ))}
-          </div>
-          <aside className="homeSeoLinks">
-            <span>Explore connected workflows</span>
-            <Link href="/product/hirescore-ai">HireScoreAI product overview <ArrowRight size={15} /></Link>
-            <Link href="/product/ai-resume-parsing">AI resume screening <ArrowRight size={15} /></Link>
-            <Link href="/product/ai-candidate-scoring">JD-based candidate scoring <ArrowRight size={15} /></Link>
-            <Link href="/solutions/bulk-resume-screening">Bulk resume screening <ArrowRight size={15} /></Link>
-            <Link href="/resources/user-guide/review-ai-ranked-candidates">Candidate ranking guide <ArrowRight size={15} /></Link>
-            <Link href="/resources">Recruitment resources <ArrowRight size={15} /></Link>
-            <Link href="/resources/blogs">AI recruitment blog <ArrowRight size={15} /></Link>
-            <Link href="/pricing">HireScoreAI pricing <ArrowRight size={15} /></Link>
-          </aside>
+        <div className="homeFaqList commandReveal commandDelay1">
+          {HOME_FAQS.map(([question, answer]) => (
+            <details key={question}>
+              <summary>{question}<ChevronDown size={18} /></summary>
+              <p>{answer}</p>
+            </details>
+          ))}
         </div>
-        <nav className="inlineLinks" aria-label="HireScoreAI product capabilities">
-          <Link href="/product/public-apply-page">Public apply pages</Link>
-          <Link href="/product/resume-upload">Resume upload</Link>
-          <Link href="/product/ai-candidate-ranking">Candidate ranking</Link>
-          <Link href="/product/ai-shortlisting">Candidate shortlisting</Link>
-          <Link href="/product/candidate-communication">Candidate communication</Link>
-          <Link href="/product/interview-scheduling">Interview scheduling</Link>
-          <Link href="/product/ai-screening-test">AI screening tests</Link>
-          <Link href="/product/hiring-pipeline">Hiring pipeline</Link>
-        </nav>
-        <nav className="inlineLinks" aria-label="HireScoreAI solutions">
-          <Link href="/solutions/recruitment-agencies">Recruitment agency screening</Link>
-          <Link href="/solutions/staffing-companies">Staffing company workflows</Link>
-          <Link href="/solutions/hr-teams">In-house HR teams</Link>
-          <Link href="/solutions/startups">Startup hiring</Link>
-          <Link href="/solutions/bulk-resume-screening">High-volume resume screening</Link>
-          <Link href="/solutions/tech-hiring">Technical hiring</Link>
-        </nav>
       </div>
     </section>
   )
@@ -1305,7 +1315,8 @@ function AboutCommandSection() {
         <div className="aboutCommandCopy commandReveal">
           <span className="sectionKicker"><Sparkles size={13} /> About HireScoreAI</span>
           <h2>AI recruitment software built for <span>clarity, speed, and better decisions.</span></h2>
-          <p>HireScoreAI is an independent AI recruitment workflow platform that turns disconnected hiring activity into one explainable command center—from job creation and resume screening to candidate ranking and interview coordination.</p>
+          <p>The <Link href="/product/hirescore-ai">HireScoreAI product</Link> turns disconnected hiring activity into one explainable command center, from job creation and resume screening to candidate ranking and interview coordination.</p>
+          <p>Its connected workflows support <Link href="/solutions/recruitment-agencies">recruitment agencies</Link>, <Link href="/solutions/staffing-companies">staffing companies</Link>, <Link href="/solutions/hr-teams">in-house HR teams</Link>, and <Link href="/solutions/startups">growing startups</Link>, including teams handling <Link href="/solutions/bulk-resume-screening">high-volume resume screening</Link> or specialist <Link href="/solutions/tech-hiring">technical hiring</Link>.</p>
           <div className="aboutFounderIdentity" id="sachin-yadav">
             <span><UsersRound size={18} /></span>
             <div><small>Founder</small><strong>Sachin Yadav</strong><p>Founder of HireScoreAI, focused on building a clearer, connected, and recruiter-controlled AI hiring workflow.</p></div>
@@ -1327,13 +1338,17 @@ function AboutCommandSection() {
 function CompleteHiringWorkflowSection() {
   const hiringWorkflow = [
     [BriefcaseBusiness, 'Create Job', 'Define the role and requirements'],
-    [Globe2, 'Apply Page', 'Publish and share the opening'],
-    [Files, 'Collect Resumes', 'Centralize every applicant'],
-    [SearchCheck, 'AI Screening', 'Parse skills and experience'],
-    [Target, 'JD Matching', 'Score and rank role fit'],
-    [BadgeCheck, 'Shortlist', 'Advance the best candidates'],
-    [Send, 'Communicate', 'Keep candidates engaged'],
-    [CalendarCheck, 'Schedule Interview', 'Move confidently to interview'],
+    [UsersRound, 'Choose Candidate Source', 'Upload Existing Resumes · Share Public Apply Page · Request Candidate Sourcing'],
+    [Files, 'Upload, Apply, or Source', 'Use the selected candidate intake route'],
+    [Globe2, 'Collect Candidate Profiles', 'Keep profiles with the active role'],
+    [Bot, 'AI Resume Parsing', 'Structure skills and experience'],
+    [Target, 'JD-Based Candidate Scoring', 'Evaluate role-specific evidence'],
+    [Trophy, 'Ranking and Explanation', 'Prioritize candidates with clear reasons'],
+    [ShieldCheck, 'Candidate Verification', 'Recruiters verify the strongest profiles'],
+    [BadgeCheck, 'Shortlisting', 'Recruiters choose who advances'],
+    [Send, 'Communication', 'Prepare and send candidate updates'],
+    [CalendarCheck, 'Interview Scheduling', 'Coordinate available times'],
+    [GitBranch, 'Hiring Pipeline Management', 'Track the active pipeline'],
   ]
   return (
     <section className="commandSection completeWorkflowSection" id="complete-workflow">
@@ -1341,10 +1356,10 @@ function CompleteHiringWorkflowSection() {
         <div className="workflowSectionIntro commandReveal">
           <span className="sectionKicker"><Workflow size={13}/> How HireScoreAI works</span>
           <h2>AI ATS software that keeps <span>every hiring step connected.</span></h2>
-          <p>Follow the complete hiring journey from creating a job to scheduling an interview. As the live signal moves, the active stage lights up to show exactly what HireScoreAI is doing.</p>
+          <p>Create a role, share a <Link href="/product/public-apply-page">public apply page</Link>, or use <Link href="/product/resume-upload">resume upload</Link> to bring applicants into the same workflow. HireScoreAI then supports <Link href="/product/ai-candidate-scoring">JD-based candidate scoring</Link> through to interview scheduling.</p>
         </div>
         <div className="aboutWorkflowPanel commandReveal commandDelay1">
-          <div className="aboutWorkflowHeading"><div><small>Complete hiring process in one place</small><h3>From job creation to interview scheduling</h3></div><span className="workflowLive"><i/> Live workflow</span></div>
+          <div className="aboutWorkflowHeading"><div><small>Complete hiring process in one place</small><h3>From candidate source to hiring decision</h3></div><span className="workflowLive"><i/> Recruiter controlled</span></div>
           <div className="workflowRail">
             {hiringWorkflow.map(([Icon,title,text],index)=><div className="workflowNode" key={title} style={{'--workflow-index':index}}><div className="workflowNodeIcon"><Icon size={19}/><span>{index+1}</span></div><strong>{title}</strong><small>{text}</small>{index < hiringWorkflow.length-1 && <ArrowRight className="workflowArrow" size={14}/>}</div>)}
           </div>
@@ -1377,7 +1392,7 @@ function ActionAiAgentSection({ surface = 'product' }) {
         <div className="actionAgentCopy">
           <span className="actionAgentEyebrow"><Bot size={15} /> HireScoreAI Action Agent</span>
           <h2 id={`action-agent-title-${surface}`}>{heading}</h2>
-          <p>The HireScoreAI Action Agent is not limited to a fixed list of commands. Tell it what you want to accomplish and it can work across every connected HireScoreAI feature available in your workspace. Creating jobs, generating apply pages, analyzing applicants, shortlisting, emailing, and scheduling interviews are just a few examples.</p>
+          <p>{surface === 'home' ? 'Ask the HireScoreAI Action Agent to prepare connected recruiting work in plain English—including drafting a sourcing request for human review. Candidate discovery and outreach remain a managed, human-led service; the agent does not scrape or automatically source candidates from external networks.' : 'The HireScoreAI Action Agent is not limited to a fixed list of commands. Tell it what you want to accomplish and it can work across every connected HireScoreAI feature available in your workspace. Creating jobs, generating apply pages, analyzing applicants, shortlisting, emailing, and scheduling interviews are just a few examples.'}</p>
           <div className="actionAgentCapabilities">
             {capabilities.map(([Icon, title, text]) => (
               <article key={title}>
@@ -1398,22 +1413,22 @@ function ActionAiAgentSection({ surface = 'product' }) {
           <div className="actionAgentConversation">
             <div className="actionAgentMessage isUser">
               <small>You</small>
-              <p>Create a Senior React Developer job in Bengaluru and make a public apply page.</p>
+              <p>{surface === 'home' ? 'We need five Backend Developers in Noida with 3–5 years of experience. Prepare the job and start a sourcing request.' : 'Create a Senior React Developer job in Bengaluru and make a public apply page.'}</p>
             </div>
             <div className="actionAgentMessage isAgent">
               <small>AI Agent</small>
-              <p>Job and public apply page prepared. I used your role requirements and added the required React, TypeScript, and API skills.</p>
-              <div className="actionAgentResult"><CheckCircle2 size={15} /><span><strong>Senior React Developer</strong><small>Job active · Apply page ready</small></span></div>
+              <p>{surface === 'home' ? 'I’ve prepared the job and sourcing request. Please review the mandatory skills, salary range, notice period, number of candidates required, and sourcing deadline before submission.' : 'Job and public apply page prepared. I used your role requirements and added the required React, TypeScript, and API skills.'}</p>
+              <div className="actionAgentResult"><CheckCircle2 size={15} /><span><strong>{surface === 'home' ? 'Sourcing request draft' : 'Senior React Developer'}</strong><small>{surface === 'home' ? 'Human review required before submission' : 'Job active · Apply page ready'}</small></span></div>
             </div>
             <div className="actionAgentMessage isUser">
               <small>You</small>
-              <p>How many candidates applied? Shortlist everyone scoring above 70, email them, and schedule interviews.</p>
+              <p>{surface === 'home' ? 'Show me the sourced candidates scoring above 75 and prepare the strongest profiles for verification.' : 'How many candidates applied? Shortlist everyone scoring above 70, email them, and schedule interviews.'}</p>
             </div>
             <div className="actionAgentPlan">
-              <div><UsersRound size={16} /><span><strong>48 applicants reviewed</strong><small>Skills and JD-fit checked</small></span><CheckCircle2 size={15} /></div>
-              <div><BadgeCheck size={16} /><span><strong>12 candidates shortlisted</strong><small>Score threshold: above 70</small></span><CheckCircle2 size={15} /></div>
-              <div><MailCheck size={16} /><span><strong>Candidate email prepared</strong><small>Ready for recruiter approval</small></span><CheckCircle2 size={15} /></div>
-              <div><CalendarCheck size={16} /><span><strong>Interview slots coordinated</strong><small>Availability matched</small></span><CheckCircle2 size={15} /></div>
+              <div><UsersRound size={16} /><span><strong>{surface === 'home' ? 'Profiles above 75 identified' : '48 applicants reviewed'}</strong><small>{surface === 'home' ? 'From candidates attached to this sourcing request' : 'Skills and JD-fit checked'}</small></span><CheckCircle2 size={15} /></div>
+              <div><BadgeCheck size={16} /><span><strong>{surface === 'home' ? 'JD criteria structured' : '12 candidates shortlisted'}</strong><small>{surface === 'home' ? 'Must-have skills and evidence identified' : 'Score threshold: above 70'}</small></span><CheckCircle2 size={15} /></div>
+              <div><MailCheck size={16} /><span><strong>{surface === 'home' ? 'Strongest profiles prepared' : 'Candidate email prepared'}</strong><small>{surface === 'home' ? 'Ready for recruiter verification' : 'Ready for recruiter approval'}</small></span><CheckCircle2 size={15} /></div>
+              <div><CalendarCheck size={16} /><span><strong>{surface === 'home' ? 'Next actions remain controlled' : 'Interview slots coordinated'}</strong><small>{surface === 'home' ? 'Your team makes the final decisions' : 'Availability matched'}</small></span><CheckCircle2 size={15} /></div>
             </div>
           </div>
           <footer><MessageSquareText size={16} /><span>Ask anything about your HireScoreAI workspace...</span><button type="button" aria-label="Send example command"><ArrowRight size={16} /></button></footer>
@@ -2755,6 +2770,66 @@ function ContactPage() {
         ]}
         note="Your demo can focus on the HireScoreAI features and approval controls that matter to your team."
       />
+    </>
+  )
+}
+
+function CandidateSourcingRequestPage() {
+  const [formState, setFormState] = useState({ status: 'idle', message: '' })
+  const submitRequest = async (event) => {
+    event.preventDefault()
+    const form = event.currentTarget
+    setFormState({ status: 'submitting', message: 'Sending your sourcing request…' })
+    try {
+      const data = Object.fromEntries(new FormData(form).entries())
+      data.consent = form.elements.consent.checked
+      const response = await fetch('/api/sourcing-requests', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      const result = await response.json().catch(() => ({}))
+      if (!response.ok) throw new Error(result.message || 'The request could not be delivered. Please try again or contact us by email.')
+      form.reset()
+      setFormState({ status: 'success', message: 'Your sourcing request has been submitted. Our team will review the requirement and contact you regarding availability, process, and pricing.' })
+    } catch (error) {
+      setFormState({ status: 'error', message: error.message })
+    }
+  }
+
+  return (
+    <>
+      <SEO path="/request-candidate-sourcing" />
+      <PageHero eyebrow="Managed candidate sourcing" title="Request Candidate Sourcing for an Active Role" intro="Share a genuine hiring requirement for review by the HireScoreAI team. Accepted engagements may be supported by our internal sourcing efforts and selected recruitment partners." cta={false} />
+      <section className="section sourcingRequestSection">
+        <div className="container sourcingRequestLayout">
+          <form className="demoForm sourcingRequestForm" onSubmit={submitRequest}>
+            <label>Full name<input name="fullName" type="text" autoComplete="name" required /></label>
+            <label>Work email<input name="workEmail" type="email" autoComplete="email" required /></label>
+            <label>Phone number<input name="phone" type="tel" autoComplete="tel" required /></label>
+            <label>Company name<input name="companyName" type="text" autoComplete="organization" required /></label>
+            <label>Company website<input name="companyWebsite" type="url" placeholder="https://" /></label>
+            <label>Job title to hire<input name="jobTitle" type="text" required /></label>
+            <label>Number of open positions<input name="openings" type="number" min="1" step="1" required /></label>
+            <label>Hiring location<input name="location" type="text" required /></label>
+            <label>Work mode<select name="workMode" defaultValue="" required><option value="" disabled>Select work mode</option><option>On-site</option><option>Hybrid</option><option>Remote</option></select></label>
+            <label>Required experience<input name="experienceRange" type="text" placeholder="For example: 5–8 years" required /></label>
+            <label className="fullField">Mandatory skills<textarea name="mustHaveSkills" rows="4" required /></label>
+            <label className="fullField">Preferred skills<textarea name="preferredSkills" rows="3" /></label>
+            <label>Salary or CTC range<input name="budgetRange" type="text" required /></label>
+            <label>Maximum notice period<input name="maximumNoticePeriod" type="text" required /></label>
+            <label>Number of candidates required<input name="candidatesRequired" type="number" min="1" step="1" required /></label>
+            <label>Target shortlist date<input name="targetShortlistDate" type="date" required /></label>
+            <label>Hiring urgency<select name="hiringUrgency" defaultValue="" required><option value="" disabled>Select timeline</option><option>Within 2 weeks</option><option>Within 30 days</option><option>Within 60 days</option><option>Flexible</option></select></label>
+            <label className="fullField">Job description<textarea name="jobDescription" rows="6" required /></label>
+            <label className="fullField">Additional notes<textarea name="additionalDetails" rows="5" placeholder="Share role context, interview process, preferred industries, or other useful information." /></label>
+            <label className="fullField sourcingConsent"><input name="consent" type="checkbox" required /><span>I confirm that the information provided is accurate and I agree to be contacted regarding this sourcing request.</span></label>
+            <button className="btn btnPrimary" type="submit" disabled={formState.status === 'submitting'}>{formState.status === 'submitting' ? 'Sending…' : 'Submit Sourcing Request'}</button>
+            <p className={`sourcingFormStatus is-${formState.status}`} role="status" aria-live="polite">{formState.message}</p>
+          </form>
+          <aside className="sideCard sourcingRequestAside"><span className="eyebrow"><ShieldCheck size={14} /> Clear service boundaries</span><h2>What happens after submission</h2><ol><li>We review the role, location, skills, hiring volume, timeline, and budget.</li><li>We contact you if clarification is needed.</li><li>If the request is feasible, we explain the sourcing scope, engagement model, pricing, and next steps before work begins.</li></ol><p>HireScoreAI does not claim to automatically source candidates from LinkedIn, Naukri, Indeed, or the open internet. Submission does not guarantee acceptance or hiring outcomes.</p><a href={`mailto:${CONTACT_EMAIL}`}>Prefer email? Contact {CONTACT_EMAIL}</a></aside>
+        </div>
+      </section>
     </>
   )
 }
@@ -4305,6 +4380,7 @@ function renderRoute(path) {
   if (path === '/resources/case-studies') return <CaseStudyList />
   if (path === '/pricing') return <PricingPage />
   if (path === '/contact') return <ContactPage />
+  if (path === '/request-candidate-sourcing') return <CandidateSourcingRequestPage />
   if (['/resources/faqs', '/resources/release-notes', '/privacy', '/terms'].includes(path)) return <SimplePage type={path} />
   const product = productPages.find((page) => page.slug === path)
   if (product) return <ProductDetail page={product} />
