@@ -873,7 +873,6 @@ function Header({ isHome = false }) {
       <div className="navShell">
         <Link className="homeFullLogo" href="/" aria-label="HireScoreAI home"><img src="/hirescore-logo-white.png" alt="HireScoreAI" /></Link>
         <nav className="desktopNav homeNav unifiedNav" aria-label="Primary navigation">
-          <a href={isHome ? '#about' : '/#about'}>About Us</a>
           <Dropdown label="Product" base="/product/hirescore-ai" items={productNavItems} />
           <Dropdown label="Solutions" base="/solutions" items={solutionNavItems} />
           <Link href="/request-candidate-sourcing">Candidate Sourcing</Link>
@@ -881,7 +880,6 @@ function Header({ isHome = false }) {
           <Link href="/contact">Contact Us</Link>
         </nav>
         <div className="navActions">
-          <a className="homeLogin" href={APP_URL}>Login</a>
           <a className="btn btnPrimary" href={PILOT_MAILTO}>Start Free Pilot</a>
         </div>
         <button className="menuButton" type="button" aria-label="Toggle navigation" onClick={() => setOpen(!open)}>
