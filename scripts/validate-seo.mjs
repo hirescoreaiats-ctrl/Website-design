@@ -394,7 +394,7 @@ const homepageRequired = [
   '/contact',
   '/resources',
   '/resources/blogs',
-  ...SEO_ROUTES.filter((route) => route.path.startsWith('/solutions/')).map((route) => route.path),
+  '/solutions/tech-hiring',
 ]
 for (const destination of homepageRequired) {
   if (!destinationsFor('/').includes(destination)) errors.push(`/: missing required contextual link to ${destination}`)

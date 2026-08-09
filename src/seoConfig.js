@@ -4,7 +4,7 @@ export const ORGANIZATION_ID = `${SITE_URL}/#organization`
 export const FOUNDER_ID = `${SITE_URL}/#sachin-yadav`
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/hirescore-logo-full.png`
 export const DEFAULT_DESCRIPTION = 'HireScoreAI is an AI-powered tech hiring platform connecting candidate sourcing, AI resume screening, candidate intelligence, Action Agents, hiring pipelines, analytics, interviews, offers, and joining.'
-export const HOME_H1 = 'Source, Screen and Hire Tech Talent in One Place'
+export const HOME_H1 = 'Source, Evaluate and Move Tech Talent from Requirement to Joining'
 export const OFFICIAL_SOCIAL_LINKS = {
   youtube: 'https://www.youtube.com/@HireScoreAI',
   linkedin: 'https://www.linkedin.com/company/hire-score-a',
@@ -31,7 +31,7 @@ export function canonicalUrlForPath(path = '/') {
 }
 
 const staticRoutes = [
-  ['/', 'AI-Powered Tech Hiring Platform | HireScoreAI', 'Source, screen and hire technical talent with candidate intelligence, Action Agents, connected hiring pipelines and operational hiring analytics.', 'WebPage'],
+  ['/', 'AI-Powered Tech Hiring Platform | HireScoreAI', 'Source, evaluate and move technical talent from requirement to joining with candidate intelligence, hiring actions, pipeline management and analytics in one workspace.', 'WebPage'],
   ['/product/hirescore-ai', 'HireScoreAI Product | AI Resume Screening Software', 'Explore HireScoreAI for AI resume screening, JD-based candidate scoring, candidate ranking, smart shortlisting, and recruiter-ready explanations.', 'WebPage'],
   ['/solutions', 'AI Hiring Solutions for Recruiters & Staffing Agencies | HireScoreAI', 'HireScoreAI helps recruitment agencies, HR teams, staffing firms, startups, and high-volume hiring teams screen resumes, rank candidates, shortlist talent, and manage hiring workflows with AI.', 'CollectionPage'],
   ['/resources', 'AI Recruitment Resources, Guides & Case Studies | HireScoreAI', 'Explore practical AI recruitment guides, articles, sample case studies, FAQs, and product updates from HireScoreAI.', 'CollectionPage'],
@@ -293,7 +293,7 @@ const primarySoftware = {
 }
 
 export const HOME_FAQS = [
-  ['What is HireScoreAI?', 'HireScoreAI is an AI-powered tech hiring platform that helps teams source, evaluate, shortlist and move technical candidates from requirement to hire through one connected workflow.'],
+  ['What is HireScoreAI?', 'HireScoreAI is an AI-powered tech hiring platform that connects candidate sourcing, candidate intelligence, hiring actions, pipeline management and analytics from requirement to joining.'],
   ['How does HireScoreAI evaluate candidates?', 'HireScoreAI uses AI resume screening, JD-based candidate scoring, matched skills, relevant experience and skill-gap evidence to help teams understand role fit and prioritize candidates for review.'],
   ['How does HireScoreAI support tech hiring?', 'HireScoreAI connects the technical hiring journey across candidate sourcing, structured evaluation, shortlisting, communication, interviews, offers and joining visibility.'],
   ['What can the HireScoreAI Action Agent do?', 'The Action Agent lets teams interact with their connected HireScoreAI workspace in natural language, review candidate intelligence and prepare supported hiring actions while keeping important decisions reviewable.'],

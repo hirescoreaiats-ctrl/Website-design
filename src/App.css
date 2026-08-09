@@ -1332,6 +1332,33 @@ h3 {
 .techHome .homeFaqSection .commandHeading,.techHome .homeFaqList{opacity:1}
 @media(max-width:700px){.techHome .aboutCommandCopy{padding:24px 20px;border-radius:20px}}
 
+/* Homepage positioning refinement */
+.techHeroGrid{grid-template-columns:minmax(0,.82fr) minmax(580px,1.18fr);gap:52px}
+.techHeroCopy h1{font-size:clamp(3rem,4.65vw,4.7rem);line-height:1.01}
+.journeyReady{display:flex;align-items:center;justify-self:end;gap:7px;padding:9px 12px;border:1px solid rgba(99,216,244,.18);border-radius:999px;color:#bceefa;background:rgba(99,216,244,.06);font-size:.62rem;font-weight:800;white-space:nowrap}
+.candidateRanking{display:grid;gap:7px;max-width:470px;margin-top:28px;padding:17px;border:1px solid var(--tech-border);border-radius:17px;background:rgba(255,255,255,.022)}
+.candidateRanking>small{margin-bottom:3px;color:#968da2;font-size:.62rem;font-weight:850;letter-spacing:.09em;text-transform:uppercase}
+.candidateRanking>div{display:grid;grid-template-columns:25px 1fr auto;gap:9px;align-items:center;padding:9px 10px;border-radius:10px;background:rgba(255,255,255,.025)}
+.candidateRanking span{display:grid;width:24px;height:24px;place-items:center;border-radius:7px;color:#17111f;background:linear-gradient(135deg,var(--tech-cyan),#c7a7ff);font-size:.58rem;font-weight:900}
+.candidateRanking strong{font-size:.72rem}.candidateRanking b{color:var(--tech-cyan);font-size:.76rem}
+.intelligenceReason{display:flex;gap:11px;align-items:center;margin-top:14px;padding:16px;border:1px solid rgba(170,136,255,.13);border-radius:14px;background:rgba(170,136,255,.05)}
+.intelligenceReason svg{flex:none;color:#c4a4ff}.intelligenceReason span{display:grid;gap:4px}.intelligenceReason strong{font-size:.75rem;line-height:1.45}
+.analyticsWorkspaceGrid{grid-template-columns:1.15fr 1fr .82fr}
+.analyticsTime{grid-column:2}.analyticsTime>div{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:13px}
+.analyticsTime span{display:grid;gap:4px;padding:11px 8px;border-radius:9px;background:#211b2b;text-align:center}
+.analyticsTime strong{color:var(--tech-cyan);font-size:.8rem}.analyticsTime em{color:#aaa0b4;font-size:.5rem;font-style:normal}
+.analyticsSources{grid-column:3;grid-row:2}.analyticsSources>div{grid-template-columns:1fr}
+.capabilityGroups{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:42px}
+.capabilityGroups>section{padding:20px;border:1px solid var(--tech-border);border-radius:18px;background:var(--tech-panel)}
+.capabilityGroups>section>small{display:block;margin-bottom:15px;color:var(--tech-cyan);font-size:.62rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.capabilityGroups>section>div{display:grid;gap:7px}.capabilityGroups a{display:grid;grid-template-columns:22px 1fr auto;gap:8px;align-items:center;padding:11px 9px;border-radius:10px;color:#d8d1df;background:rgba(255,255,255,.026);font-size:.67rem;font-weight:750;text-decoration:none;transition:background .2s ease,color .2s ease}
+.capabilityGroups a:hover{color:#fff;background:rgba(99,216,244,.075)}.capabilityGroups a svg:first-child{color:var(--tech-cyan)}.capabilityGroups a svg:last-child{color:#736a7d}
+.techHome .aboutCapabilityStack article{padding:20px}.techHome .aboutCapabilityStack article h3{font-size:1rem}.techHome .aboutCapabilityStack article p{font-size:.76rem}
+@media(max-width:1050px){.capabilityGroups{grid-template-columns:1fr 1fr}.analyticsTime{grid-column:1}.analyticsSources{grid-column:2;grid-row:auto}}
+@media(max-width:780px){.techHeroGrid{grid-template-columns:1fr}.techHeroCopy h1{font-size:clamp(2.65rem,11vw,4rem)}.journeyReady{grid-column:1/-1;justify-self:start}.analyticsTime,.analyticsSources{grid-column:auto}.capabilityGroups{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.capabilityGroups{grid-template-columns:1fr}.analyticsTime>div{grid-template-columns:1fr 1fr}}
+@media(max-width:780px){.techHome .analyticsWorkspaceGrid{grid-template-columns:1fr}.techHome .analyticsHealth,.techHome .analyticsTime,.techHome .analyticsSources{grid-column:auto;grid-row:auto}}
+
 /* Candidate sourcing homepage rollout */
 .heroSourcingProof { flex-wrap: wrap; row-gap: 10px; }
 .candidateSourcingSection { background: linear-gradient(180deg, rgba(12, 8, 30, .18), rgba(42, 24, 88, .22)); }
