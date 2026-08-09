@@ -1348,15 +1348,16 @@ h3 {
 .analyticsTime span{display:grid;gap:4px;padding:11px 8px;border-radius:9px;background:#211b2b;text-align:center}
 .analyticsTime strong{color:var(--tech-cyan);font-size:.8rem}.analyticsTime em{color:#aaa0b4;font-size:.5rem;font-style:normal}
 .analyticsSources{grid-column:3;grid-row:2}.analyticsSources>div{grid-template-columns:1fr}
-.capabilityGroups{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:42px}
-.capabilityGroups>section{padding:22px;border:1px solid rgba(192,176,222,.24);border-radius:18px;background:linear-gradient(145deg,#191522,#12101a);box-shadow:0 18px 45px rgba(0,0,0,.16)}
-.capabilityGroups>section>small{display:block;margin-bottom:17px;color:#72e3fb;font-size:.72rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
-.capabilityGroups>section>div{display:grid;gap:8px}.capabilityGroups a{display:grid;grid-template-columns:24px 1fr auto;gap:10px;align-items:center;min-height:52px;padding:13px 12px;border:1px solid rgba(255,255,255,.035);border-radius:11px;color:#f0eaf5;background:rgba(255,255,255,.04);font-size:.78rem;font-weight:800;line-height:1.35;text-decoration:none;transition:background .2s ease,border-color .2s ease,color .2s ease}
-.capabilityGroups a:hover{color:#fff;border-color:rgba(99,216,244,.22);background:rgba(99,216,244,.09)}.capabilityGroups a svg:first-child{color:#63def8}.capabilityGroups a svg:last-child{color:#aaa0b8}
+.techCapabilities .techSectionIntro>p{color:#d2cad9;font-size:1.08rem}
+.capabilityGroups{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:42px}
+.capabilityGroups>section{padding:26px;border:1px solid rgba(192,176,222,.3);border-radius:20px;background:linear-gradient(145deg,#1c1727,#13101b);box-shadow:0 18px 45px rgba(0,0,0,.2)}
+.capabilityGroups>section>small{display:block;margin-bottom:19px;color:#7ce8ff;font-size:.8rem;font-weight:950;letter-spacing:.1em;text-transform:uppercase}
+.capabilityGroups>section>div{display:grid;grid-template-columns:1fr 1fr;gap:10px}.capabilityGroups a{display:grid;grid-template-columns:28px 1fr auto;gap:11px;align-items:center;min-height:62px;padding:15px 14px;border:1px solid rgba(255,255,255,.08);border-radius:12px;color:#fff;background:rgba(255,255,255,.055);font-size:.92rem;font-weight:850;line-height:1.35;text-decoration:none;text-shadow:0 1px 1px rgba(0,0,0,.25);transition:background .2s ease,border-color .2s ease,color .2s ease}
+.capabilityGroups a:hover{color:#fff;border-color:rgba(99,216,244,.32);background:rgba(99,216,244,.11)}.capabilityGroups a svg:first-child{color:#6ee6ff}.capabilityGroups a svg:last-child{color:#d8cfdf}
 .techHome .aboutCapabilityStack article{padding:20px}.techHome .aboutCapabilityStack article h3{font-size:1rem}.techHome .aboutCapabilityStack article p{font-size:.76rem}
 @media(max-width:1050px){.capabilityGroups{grid-template-columns:1fr 1fr}.analyticsTime{grid-column:1}.analyticsSources{grid-column:2;grid-row:auto}}
-@media(max-width:780px){.techHeroGrid{grid-template-columns:1fr}.techHeroCopy h1{font-size:clamp(2.65rem,11vw,4rem)}.journeyReady{grid-column:1/-1;justify-self:start}.analyticsTime,.analyticsSources{grid-column:auto}.capabilityGroups{grid-template-columns:1fr 1fr}}
-@media(max-width:520px){.capabilityGroups{grid-template-columns:1fr}.analyticsTime>div{grid-template-columns:1fr 1fr}}
+@media(max-width:780px){.techHeroGrid{grid-template-columns:1fr}.techHeroCopy h1{font-size:clamp(2.65rem,11vw,4rem)}.journeyReady{grid-column:1/-1;justify-self:start}.analyticsTime,.analyticsSources{grid-column:auto}.capabilityGroups{grid-template-columns:1fr}.capabilityGroups>section>div{grid-template-columns:1fr}}
+@media(max-width:520px){.analyticsTime>div{grid-template-columns:1fr 1fr}.capabilityGroups>section{padding:20px}.capabilityGroups a{font-size:.88rem}}
 @media(max-width:780px){.techHome .analyticsWorkspaceGrid{grid-template-columns:1fr}.techHome .analyticsHealth,.techHome .analyticsTime,.techHome .analyticsSources{grid-column:auto;grid-row:auto}}
 
 /* Candidate sourcing homepage rollout */
