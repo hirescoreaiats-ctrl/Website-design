@@ -1232,6 +1232,88 @@ function HomePage() {
 
 function CommandHeading({ title, text }) { return <div className="commandHeading commandReveal"><h2>{title}</h2><p>{text}</p></div> }
 
+function TechHiringHomePage() {
+  return (
+    <div className="commandHome techHome">
+      <SEO path="/" />
+      <TechHero />
+      <TechHiringProblem />
+      <HiringJourney />
+      <TechCandidateIntelligence />
+      <TechActionAgent />
+      <HiringCommandCenter />
+      <JourneyCapabilities />
+      <HiringSupport />
+      <AboutCommandSection />
+      <HomepageFaqSection />
+      <section className="commandCta techFinalCta"><div className="commandContainer commandCtaBox"><span className="sectionKicker"><Sparkles size={13} /> One connected hiring workflow</span><h2>Hire Tech Talent Without the <span>Fragmented Workflow.</span></h2><p>Bring sourcing, candidate intelligence and hiring movement into one connected HireScoreAI workflow.</p><div className="commandActions"><a className="commandButton commandButtonPrimary" href={PILOT_MAILTO}>Start Free Pilot <ArrowRight size={17} /></a><Link className="commandButton commandButtonGhost" href="/contact">Book a Demo</Link></div></div></section>
+    </div>
+  )
+}
+
+function TechHero() {
+  const stages = [['Candidates', '128'], ['Evaluated', '84'], ['Shortlisted', '16'], ['Interviewing', '6'], ['Offer', '2'], ['Joining', '1']]
+  return (
+    <section className="techHero">
+      <div className="commandContainer techHeroGrid">
+        <div className="techHeroCopy">
+          <span className="sectionKicker"><Sparkles size={13} /> AI-Powered Tech Hiring</span>
+          <h1>{HOME_H1}</h1>
+          <p>HireScoreAI connects the hiring journey from requirement to joining, helping teams source, evaluate and move stronger technical candidates forward through one connected workflow.</p>
+          <div className="commandActions"><a className="commandButton commandButtonPrimary" href={PILOT_MAILTO}>Start Free Pilot <ArrowRight size={17} /></a><Link className="commandButton commandButtonGhost" href="/contact">Book a Demo</Link></div>
+          <div className="techHeroNote"><ShieldCheck size={16} /> Candidate intelligence, hiring actions and pipeline visibility in one workspace.</div>
+        </div>
+        <div className="techCommandVisual" aria-label="Example HireScoreAI hiring command center for a Senior Software Engineer role">
+          <header><div><small>Active role</small><strong>Senior Software Engineer</strong></div><span><i /> Hiring workflow</span></header>
+          <div className="techPipelineStages">{stages.map(([label, value], index) => <div key={label} className={index === 3 ? 'isCurrent' : ''}><span>{value}</span><small>{label}</small></div>)}</div>
+          <div className="techHeroPanels">
+            <article><small>Top match</small><div className="techTopMatch"><span>AR</span><div><strong>Aditi Rao</strong><small>Senior Software Engineer</small></div><b>91<small>% role fit</small></b></div><p><CheckCircle2 size={15} /> Strong architecture experience and close alignment with the role.</p></article>
+            <aside><small>Next actions</small><ul><li><BadgeCheck size={15} /><span>Review strong matches</span><b>8</b></li><li><CalendarCheck size={15} /><span>Confirm interviews</span><b>3</b></li><li><MailCheck size={15} /><span>Check pending offer</span><b>1</b></li></ul></aside>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function TechHiringProblem() {
+  const pains = [[SearchCheck, 'Finding relevant technical candidates'], [Files, 'Reviewing large applicant pools'], [Target, 'Identifying actual role fit'], [CalendarCheck, 'Keeping interviews and follow-ups moving'], [GitBranch, 'Maintaining visibility between stages']]
+  return <section className="techStorySection techProblem"><div className="commandContainer"><div className="techSectionIntro"><span className="sectionKicker">The challenge</span><h2>Tech hiring shouldn't slow down because the workflow is fragmented.</h2><p>Strong candidates are easy to lose when sourcing, evaluation, coordination and decisions live in disconnected tools.</p></div><div className="techPainGrid">{pains.map(([Icon, text]) => <article key={text}><Icon size={20} /><span>{text}</span></article>)}</div><p className="techBridge"><Workflow size={18} /> HireScoreAI brings the hiring journey into one connected workflow.</p></div></section>
+}
+
+function HiringJourney() {
+  const journey = [
+    ['Requirement', 'Turn the hiring need into a clear role and evaluation context.'], ['Sourcing', 'Build and organize the technical candidate pipeline.'],
+    ['Screening', 'Evaluate candidates against the role with structured evidence.'], ['Shortlisting', 'Prioritize the strongest profiles for team review.'],
+    ['Interviews', 'Keep interview steps, coordination and candidate movement visible.'], ['Offer', 'Track offers and the decisions that need attention.'],
+    ['Joining', 'Follow the selected candidate through hiring closure.'],
+  ]
+  const [active, setActive] = useState(0)
+  return <section className="techStorySection hiringJourney" id="hiring-journey"><div className="commandContainer"><div className="techSectionIntro"><span className="sectionKicker">From requirement to joining</span><h2>One connected path from requirement to hire.</h2><p>A clear lifecycle keeps candidate intelligence and the next hiring action connected at every stage.</p></div><div className="journeyShell"><div className="journeyStages" role="tablist" aria-label="Hiring journey stages">{journey.map(([label], index) => <button type="button" role="tab" aria-selected={active === index} className={active === index ? 'isActive' : ''} onClick={() => setActive(index)} key={label}><span>{String(index + 1).padStart(2, '0')}</span><strong>{label}</strong></button>)}</div><div className="journeyContext" role="tabpanel"><span>{journey[active][0]}</span><h3>{journey[active][1]}</h3><div className="journeyProgress" aria-hidden="true"><i style={{ width: `${((active + 1) / journey.length) * 100}%` }} /></div><small>Stage {active + 1} of {journey.length}</small></div></div></div></section>
+}
+
+function TechCandidateIntelligence() {
+  return <section className="techStorySection techIntelligence" id="candidate-intelligence"><div className="commandContainer techSplit"><div className="techSectionIntro"><span className="sectionKicker"><BrainCircuit size={13} /> Candidate Intelligence · Who</span><h2>Know who actually fits the role.</h2><p>HireScoreAI supports <Link href="/product/ai-resume-parsing">AI resume screening</Link>, <Link href="/product/ai-candidate-scoring">JD-based candidate scoring</Link> and <Link href="/product/ai-candidate-ranking">candidate ranking</Link> with recruiter-readable evidence—not just a number.</p><ul className="techCheckList"><li><CheckCircle2 size={16} /> Matched skills and relevant experience</li><li><CheckCircle2 size={16} /> Important skill gaps and role context</li><li><CheckCircle2 size={16} /> Explainable reasons for prioritization</li><li><ShieldCheck size={16} /> Final decisions remain with the hiring team</li></ul></div><div className="intelligenceCard"><header><div><small>Role-fit analysis</small><strong>Senior Software Engineer</strong></div><span>Ready for review</span></header><div className="intelligenceProfile"><span>AR</span><div><h3>Aditi Rao</h3><p>Platform engineering · 7 years</p></div><b>91<small>% role fit</small></b></div><div className="intelligenceEvidence"><div><small>Matched evidence</small><span>Distributed systems</span><span>API architecture</span><span>Technical ownership</span></div><div><small>Review context</small><p>Strong experience across scalable backend systems and cross-functional technical leadership. One preferred cloud certification is not listed.</p></div></div><footer><BrainCircuit size={17} /><span><small>Candidate intelligence</small><strong>Strong match for team review</strong></span></footer></div></div></section>
+}
+
+function TechActionAgent() {
+  return <section className="techStorySection techActionSection" id="action-agent"><div className="commandContainer techSplit"><div className="actionConversation"><header><span><Bot size={18} /></span><div><strong>HireScoreAI Action Agent</strong><small><i /> Connected to this hiring workspace</small></div></header><div className="actionBubble isUser"><small>Hiring team</small><p>Show me the strongest candidates for this role and prepare the next interview steps.</p></div><div className="actionBubble isAgent"><small>Action Agent</small><p>I reviewed the current candidate intelligence and prepared the strongest profiles for your review.</p></div><div className="actionOutcome"><div><UsersRound size={16} /><span><strong>Strong matches identified</strong><small>Evidence and fit context ready</small></span></div><div><CalendarCheck size={16} /><span><strong>Interview steps prepared</strong><small>Awaiting team confirmation</small></span></div><div><ShieldCheck size={16} /><span><strong>Important actions remain reviewable</strong><small>Your team stays in control</small></span></div></div></div><div className="techSectionIntro"><span className="sectionKicker"><Bot size={13} /> Action Agent · What next</span><h2>Move hiring forward through conversation.</h2><p>The HireScoreAI Action Agent helps teams interact with their workspace in natural language and prepare connected hiring actions while keeping important decisions reviewable.</p><p>It connects <strong>Candidate Intelligence</strong> with the <strong>Hiring Pipeline</strong>, so the team can understand who deserves attention and what should happen next.</p><Link className="techTextLink" href="/resources/blogs/hire-through-conversation-action-ai-agent">Explore the Action Agent <ArrowRight size={15} /></Link></div></div></section>
+}
+
+function HiringCommandCenter() {
+  const candidates = [['Aditi Rao', '91', 'Shortlisted'], ['Rahul Mehta', '87', 'Interviewing'], ['Neha Kapoor', '84', 'Review']]
+  return <section className="techStorySection commandCenterSection" id="hiring-pipeline"><div className="commandContainer"><div className="techSectionIntro"><span className="sectionKicker"><GitBranch size={13} /> Hiring Pipeline · Where</span><h2>See what is happening—and what needs attention.</h2><p>One operational view connects candidate stages, role-fit context and next actions without turning the homepage into an analytics wall.</p></div><div className="masterDashboard"><header><div><small>Role workspace</small><strong>Senior Software Engineer</strong></div><Link href="/product/hiring-pipeline">View hiring pipeline <ArrowRight size={14} /></Link></header><div className="masterDashboardGrid"><div className="pipelineFunnel">{[['Candidates','128'],['Screened','84'],['Shortlisted','16'],['Interviewed','6'],['Offered','2'],['Joined','1']].map(([label,value]) => <div key={label}><span>{value}</span><small>{label}</small></div>)}</div><div className="topCandidateList"><small>Top candidates</small>{candidates.map(([name, score, status]) => <div key={name}><span>{name.split(' ').map((part) => part[0]).join('')}</span><strong>{name}</strong><b>{score}</b><em>{status}</em></div>)}</div><aside className="nextActionPanel"><small>Next actions</small><ul><li><span>Review strong matches</span><b>8</b></li><li><span>Confirm interviews</span><b>3</b></li><li><span>Candidate follow-ups</span><b>2</b></li><li><span>Pending offer</span><b>1</b></li></ul></aside></div></div></div></section>
+}
+
+function JourneyCapabilities() {
+  const items = [[Network, 'Find', 'Build and organize candidate pipelines.'], [BrainCircuit, 'Evaluate', 'Understand role fit with explainable candidate intelligence.'], [Route, 'Move', 'Shortlist, coordinate and progress candidates through hiring.'], [Bot, 'Act', 'Use the Action Agent to prepare connected workflow actions.'], [GitBranch, 'See', 'Understand the pipeline and what needs attention.']]
+  return <section className="techStorySection techCapabilities"><div className="commandContainer"><div className="techSectionIntro"><span className="sectionKicker">Supporting capabilities</span><h2>Everything supports one hiring journey.</h2><p>From <Link href="/product/public-apply-page">public application pages</Link> and resume intake to <Link href="/product/candidate-communication">candidate communication</Link>, <Link href="/product/interview-scheduling">interview scheduling</Link> and hiring closure.</p></div><div className="journeyCapabilityGrid">{items.map(([Icon,title,text]) => <article key={title}><Icon size={21} /><span>{title}</span><p>{text}</p></article>)}</div></div></section>
+}
+
+function HiringSupport() {
+  return <section className="techStorySection hiringSupport"><div className="commandContainer hiringSupportBox"><div><span className="sectionKicker"><UsersRound size={13} /> Additional capacity when needed</span><h2>Need More Hiring Support?</h2><p>Get additional support across candidate sourcing, screening, coordination and hiring operations when your team needs more capacity.</p></div><Link className="commandButton commandButtonGhost" href="/request-candidate-sourcing">Discuss Your Hiring Needs <ArrowRight size={16} /></Link></div></section>
+}
+
 function CandidateSourcingSection() {
   const cards = [
     [UsersRound, 'Share Your Requirement', 'Provide the job title, required skills, experience, location, salary range, notice period, and hiring timeline.'],
@@ -1287,8 +1369,8 @@ function HomepageFaqSection() {
     <section className="commandSection homeFaqSection" id="home-faq" aria-labelledby="home-faq-title">
       <div className="commandContainer">
         <div className="commandHeading commandReveal">
-          <h2 id="home-faq-title">AI resume screening software FAQs</h2>
-          <p>Clear answers about candidate sourcing, scoring, AI ATS workflows, recruitment automation, and recruiter control. Explore the <Link href="/resources/user-guide/review-ai-ranked-candidates">candidate ranking guide</Link>, browse <Link href="/resources">recruitment resources</Link> and <Link href="/resources/blogs">AI recruitment articles</Link>, review <Link href="/pricing">HireScoreAI pricing</Link>, or <Link href="/contact">contact our team</Link>.</p>
+          <h2 id="home-faq-title">HireScoreAI tech hiring platform FAQs</h2>
+          <p>Clear answers about sourcing, candidate intelligence, the Action Agent and connected hiring workflows. Explore <Link href="/resources">recruitment resources</Link> and <Link href="/resources/blogs">tech hiring insights</Link>, review <Link href="/pricing">HireScoreAI pricing</Link>, or <Link href="/contact">contact our team</Link>.</p>
         </div>
         <div className="homeFaqList commandReveal commandDelay1">
           {HOME_FAQS.map(([question, answer]) => (
@@ -1314,17 +1396,17 @@ function AboutCommandSection() {
       <div className="commandContainer aboutCommandGrid">
         <div className="aboutCommandCopy commandReveal">
           <span className="sectionKicker"><Sparkles size={13} /> About HireScoreAI</span>
-          <h2>AI recruitment software built for <span>clarity, speed, and better decisions.</span></h2>
-          <p>The <Link href="/product/hirescore-ai">HireScoreAI product</Link> turns disconnected hiring activity into one explainable command center, from job creation and resume screening to candidate ranking and interview coordination.</p>
-          <p>Its connected workflows support <Link href="/solutions/recruitment-agencies">recruitment agencies</Link>, <Link href="/solutions/staffing-companies">staffing companies</Link>, <Link href="/solutions/hr-teams">in-house HR teams</Link>, and <Link href="/solutions/startups">growing startups</Link>, including teams handling <Link href="/solutions/bulk-resume-screening">high-volume resume screening</Link> or specialist <Link href="/solutions/tech-hiring">technical hiring</Link>.</p>
+          <h2>Built around a clearer, more connected <span>tech hiring journey.</span></h2>
+          <p>The <Link href="/product/hirescore-ai">HireScoreAI platform</Link> connects candidate sourcing, evaluation, hiring actions and pipeline movement from requirement to joining.</p>
+          <p>It is designed broadly for modern hiring teams and organizations hiring technical talent—from <Link href="/solutions/hr-teams">internal HR teams</Link> and <Link href="/solutions/startups">growing companies</Link> to <Link href="/solutions/recruitment-agencies">recruitment agencies</Link> and <Link href="/solutions/staffing-companies">staffing companies</Link>—including teams managing <Link href="/solutions/bulk-resume-screening">high-volume candidate review</Link> or focused <Link href="/solutions/tech-hiring">technical hiring workflows</Link>.</p>
           <div className="aboutFounderIdentity" id="sachin-yadav">
             <span><UsersRound size={18} /></span>
             <div><small>Founder</small><strong>Sachin Yadav</strong><p>Founder of HireScoreAI, focused on building a clearer, connected, and recruiter-controlled AI hiring workflow.</p></div>
           </div>
           <div className="aboutStats">
-            <div><strong><span className="counterAnimate" data-target="12">0</span><em>+</em></strong><small>Connected workflow modules</small></div>
-            <div><strong><span className="counterAnimate" data-target="1">0</span></strong><small>Unified hiring workspace</small></div>
-            <div><strong><span className="counterAnimate" data-target="24">0</span><em>/7</em></strong><small>Recruitment intelligence</small></div>
+            <div><strong>WHO</strong><small>Candidate intelligence</small></div>
+            <div><strong>NEXT</strong><small>Action Agent guidance</small></div>
+            <div><strong>WHERE</strong><small>Hiring pipeline visibility</small></div>
           </div>
         </div>
         <div className="aboutCapabilityStack commandReveal commandDelay2">
@@ -4264,7 +4346,7 @@ function Footer() {
           <Link className="homeFullLogo footerLogo" href="/" aria-label="HireScoreAI home">
             <img src="/hirescore-logo-white.png" alt="HireScoreAI" />
           </Link>
-          <p>AI resume screening, JD matching, candidate ranking, and hiring workflow automation for modern recruiting teams.</p>
+          <p>AI-powered tech hiring from candidate sourcing and evaluation to interviews and hiring closure.</p>
           <a className="footerMail" href={PILOT_MAILTO}><MailCheck size={16} />Free access: {CONTACT_EMAIL}</a>
           <div className="footerDots">
             <a href={OFFICIAL_SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" aria-label="HireScoreAI on YouTube"><Youtube size={14} /></a>
@@ -4364,7 +4446,7 @@ function usePath() {
 }
 
 function renderRoute(path) {
-  if (path === '/') return <HomePage />
+  if (path === '/') return <TechHiringHomePage />
   if (path === '/product') return <RedirectPage to="/product/hirescore-ai" />
   if (path === '/product/hirescore-ai') return <ProductOverview />
   if (path === '/product/jd-manager') return <JDManagerPage />
