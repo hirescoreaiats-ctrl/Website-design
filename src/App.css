@@ -1322,6 +1322,16 @@ h3 {
 @media(max-width:520px){.heroProductMain .techPipelineStages div:nth-child(n+5){display:none}.heroProductMain .techPipelineStages{grid-template-columns:repeat(2,1fr)}.heroProductMain .techHeroPanels>article .heroCandidateRow:nth-of-type(n+3){display:none}.heroAgentOverlay{position:relative;right:auto;bottom:auto;width:100%;margin-top:12px}.heroProductMain{padding-bottom:18px}.kanbanAttention ul,.analyticsSources>div,.journeyCapabilityGrid{grid-template-columns:1fr}.kanbanWorkspace>header>span{display:none}.analyticsWorkspace>header nav{order:3;width:100%}.analyticsWorkspace>header>span{display:none}}
 @media(prefers-reduced-motion:reduce){.journeyCapabilityGrid>a{transition:none}}
 
+/* Tech homepage uses visible static storytelling sections; the legacy observer belongs to the retired homepage. */
+.techHome .commandReveal{opacity:1;transform:none}
+.techHome .aboutCommandSection{position:relative;overflow:hidden;background:radial-gradient(circle at 82% 28%,rgba(99,216,244,.08),transparent 28%),radial-gradient(circle at 12% 72%,rgba(170,136,255,.1),transparent 32%),#0f0c17}
+.techHome .aboutCommandSection::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.2;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:72px 72px}
+.techHome .aboutCommandSection .commandContainer{position:relative}
+.techHome .aboutCommandCopy{padding:34px;border:1px solid rgba(170,136,255,.16);border-radius:26px;background:rgba(17,13,28,.72);box-shadow:0 24px 70px rgba(0,0,0,.16)}
+.techHome .aboutCapabilityStack article{border-color:rgba(99,216,244,.12);background:linear-gradient(135deg,rgba(99,216,244,.04),rgba(170,136,255,.045))}
+.techHome .homeFaqSection .commandHeading,.techHome .homeFaqList{opacity:1}
+@media(max-width:700px){.techHome .aboutCommandCopy{padding:24px 20px;border-radius:20px}}
+
 /* Candidate sourcing homepage rollout */
 .heroSourcingProof { flex-wrap: wrap; row-gap: 10px; }
 .candidateSourcingSection { background: linear-gradient(180deg, rgba(12, 8, 30, .18), rgba(42, 24, 88, .22)); }
