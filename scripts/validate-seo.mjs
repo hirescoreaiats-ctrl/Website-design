@@ -8,7 +8,7 @@ const titles = new Map()
 const descriptions = new Map()
 const canonicals = new Map()
 const staticParagraphs = new Map()
-const intentionalNoindexRoutes = new Set(['/privacy', '/terms'])
+const intentionalNoindexRoutes = new Set(['/privacy', '/terms', '/product/jd-manager'])
 const routePaths = new Set(SEO_ROUTES.map((route) => route.path))
 const inboundLinks = new Map(SEO_ROUTES.map((route) => [route.path, new Set()]))
 const linkRecords = []

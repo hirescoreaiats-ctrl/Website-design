@@ -47,17 +47,8 @@ const CONTACT_EMAIL = 'Info@hireScoreAi.com'
 const PILOT_MAILTO = `mailto:${CONTACT_EMAIL}?subject=HireScore%20AI%20Free%20Pilot%20Access&body=Hi%20HireScore%20AI%20team%2C%0A%0AI%20want%20free%20pilot%20access%20for%20HireScore%20AI.%0A%0ACompany%3A%0AHiring%20roles%3A%0AExpected%20resume%20volume%3A%0A`
 
 const solutionNavItems = [
-  ['/solutions/recruitment-agencies', 'Recruitment Agencies'],
-  ['/solutions/staffing-companies', 'Staffing Companies'],
-  ['/solutions/hr-teams', 'HR Teams'],
-  ['/solutions/startups', 'Startups'],
-  ['/solutions/bulk-resume-screening', 'Bulk Resume Screening'],
-  ['/solutions/tech-hiring', 'IT & Tech Hiring'],
-]
-
-const productNavItems = [
-  ['/product/hirescore-ai', 'HireScoreAI'],
-  ['/product/jd-manager', 'JD Manager'],
+  ['/solutions/tech-hiring', 'Tech Hiring'],
+  ['/solutions/bulk-resume-screening', 'High-Volume Candidate Review'],
 ]
 
 const iconMap = {
@@ -873,14 +864,14 @@ function Header({ isHome = false }) {
       <div className="navShell">
         <Link className="homeFullLogo" href="/" aria-label="HireScoreAI home"><img src="/hirescore-logo-white.png" alt="HireScoreAI" /></Link>
         <nav className="desktopNav homeNav unifiedNav" aria-label="Primary navigation">
-          <Dropdown label="Product" base="/product/hirescore-ai" items={productNavItems} />
+          <Link href="/product/hirescore-ai">Product</Link>
           <Dropdown label="Solutions" base="/solutions" items={solutionNavItems} />
           <Link href="/request-candidate-sourcing">Candidate Sourcing</Link>
           <Link href="/resources">Resources</Link>
           <Link href="/contact">Contact Us</Link>
         </nav>
         <div className="navActions">
-          <a className="btn btnPrimary" href={PILOT_MAILTO}>Start Free Pilot</a>
+          <a className="btn btnPrimary" href={PILOT_MAILTO}>Request Pilot Access</a>
         </div>
         <button className="menuButton" type="button" aria-label="Toggle navigation" onClick={() => setOpen(!open)}>
           {open ? <X size={22} /> : <Menu size={22} />}
@@ -888,10 +879,10 @@ function Header({ isHome = false }) {
       </div>
       {open && (
         <nav className="mobileNav" aria-label="Mobile navigation">
-          {['/', '/product/hirescore-ai', '/product/jd-manager', '/solutions', '/request-candidate-sourcing', '/resources', '/contact'].map((path) => (
+          {['/', '/product/hirescore-ai', '/solutions', '/request-candidate-sourcing', '/resources', '/contact'].map((path) => (
             <Link key={path} href={path} onClick={() => setOpen(false)}>{labelFor(path)}</Link>
           ))}
-          <a className="btn btnPrimary" href={PILOT_MAILTO}>Start Free Pilot</a>
+          <a className="btn btnPrimary" href={PILOT_MAILTO}>Request Pilot Access</a>
         </nav>
       )}
     </header>
@@ -1244,7 +1235,7 @@ function TechHiringHomePage() {
       <HiringSupport />
       <AboutCommandSection />
       <HomepageFaqSection />
-      <section className="commandCta techFinalCta"><div className="commandContainer commandCtaBox"><span className="sectionKicker"><Sparkles size={13} /> AI-powered tech hiring platform</span><h2>Your Next Tech Hire <span>Starts Here</span></h2><p>Bring candidate sourcing, intelligence, hiring actions and pipeline visibility into one HireScoreAI workspace.</p><div className="commandActions"><a className="commandButton commandButtonPrimary" href={PILOT_MAILTO}>Start Free Pilot <ArrowRight size={17} /></a><Link className="commandButton commandButtonGhost" href="/contact">Book a Demo</Link></div></div></section>
+      <section className="commandCta techFinalCta"><div className="commandContainer commandCtaBox"><span className="sectionKicker"><Sparkles size={13} /> AI-powered tech hiring platform</span><h2>Your Next Tech Hire <span>Starts Here</span></h2><p>Bring candidate sourcing, intelligence, hiring actions and pipeline visibility into one HireScoreAI workspace.</p><div className="commandActions"><a className="commandButton commandButtonPrimary" href={PILOT_MAILTO}>Request Pilot Access <ArrowRight size={17} /></a><Link className="commandButton commandButtonGhost" href="/contact">Book a Demo</Link></div></div></section>
     </div>
   )
 }
@@ -1258,19 +1249,19 @@ function TechHero() {
           <span className="sectionKicker"><Sparkles size={13} /> AI-Powered Tech Hiring Platform</span>
           <h1>{HOME_H1}</h1>
           <p>HireScoreAI brings candidate sourcing, AI-powered candidate intelligence, hiring actions, pipeline management and analytics into one workspace.</p>
-          <div className="commandActions"><a className="commandButton commandButtonPrimary" href={PILOT_MAILTO}>Start Free Pilot <ArrowRight size={17} /></a><Link className="commandButton commandButtonGhost" href="/contact">Book a Demo</Link></div>
+          <div className="commandActions"><a className="commandButton commandButtonPrimary" href={PILOT_MAILTO}>Request Pilot Access <ArrowRight size={17} /></a><Link className="commandButton commandButtonGhost" href="/contact">Book a Demo</Link></div>
           <div className="techHeroNote"><ShieldCheck size={16} /> Candidate intelligence, hiring actions and pipeline visibility in one workspace.</div>
         </div>
         <div className="techCommandVisual heroProductShell" aria-label="Illustrative HireScoreAI hiring command center for a Senior Software Engineer role">
-          <aside className="heroProductNav"><img src="/hirescore-logo-mark.png" alt="" /><nav>{[[BarChart3,'Overview'],[BriefcaseBusiness,'Jobs'],[UsersRound,'Candidates'],[BadgeCheck,'Shortlist'],[CalendarCheck,'Interviews'],[PieChart,'Analytics']].map(([Icon,label],index)=><span className={index===0?'isActive':''} key={label}><Icon size={14}/>{label}</span>)}</nav><button type="button"><Bot size={15}/> Action Agent</button></aside>
+          <aside className="heroProductNav"><img src="/hirescore-logo-mark.png" alt="" /><nav>{[[Network,'Sourcing'],[BriefcaseBusiness,'Jobs'],[UsersRound,'Candidates'],[BadgeCheck,'Shortlist'],[CalendarCheck,'Interviews'],[PieChart,'Analytics']].map(([Icon,label],index)=><span className={index===0?'isActive':''} key={label}><Icon size={14}/>{label}</span>)}</nav><button type="button"><Bot size={15}/> Action Agent</button></aside>
           <div className="heroProductMain">
-            <header><div><small>Active role</small><strong>Senior Software Engineer</strong></div><span><i /> Hiring</span></header>
+            <header><div><small>Active role · Illustrative demo</small><strong>Senior Software Engineer</strong></div><span><i /> Hiring</span></header>
             <div className="techPipelineStages">{stages.map(([label, value], index) => <div key={label} className={index === 3 ? 'isCurrent' : ''}><span>{value}</span><small>{label}</small></div>)}</div>
             <div className="techHeroPanels">
               <article><small>Top candidates</small>{[['AR','Aditi Rao','91','Strong match'],['RM','Rahul Mehta','87','Strong match'],['NK','Neha Kapoor','84','Review']].map(([initials,name,score,status])=><div className="heroCandidateRow" key={name}><span>{initials}</span><div><strong>{name}</strong><small>{status}</small></div><b>{score}<small>% fit</small></b></div>)}</article>
-              <aside><small>Next actions</small><ul><li><BadgeCheck size={15} /><span>Review strong matches</span><b>8</b></li><li><CalendarCheck size={15} /><span>Confirm interviews</span><b>3</b></li><li><MessageSquareText size={15} /><span>Candidate follow-ups</span><b>2</b></li><li><MailCheck size={15} /><span>Check pending offer</span><b>1</b></li></ul></aside>
+              <aside><small>Workspace coverage</small><ul><li><Network size={15} /><span>Candidate sourcing</span><b>Active</b></li><li><BrainCircuit size={15} /><span>Candidate intelligence</span><b>Ready</b></li><li><GitBranch size={15} /><span>Hiring pipeline</span><b>Live</b></li><li><BarChart3 size={15} /><span>Hiring analytics</span><b>Available</b></li></ul></aside>
             </div>
-            <div className="heroAgentOverlay"><header><Bot size={15}/><strong>Action Agent</strong><span>Workspace ready</span></header><p>Show me the strongest candidates for this role.</p><div><CheckCircle2 size={14}/><span><strong>12 strong matches identified</strong><small>Candidate intelligence ready to review</small></span></div><footer>Ask HireScoreAI… <ArrowRight size={14}/></footer></div>
+            <div className="heroAgentOverlay"><header><Bot size={15}/><strong>Action Agent</strong><span>Workspace ready</span></header><p>Prepare the next interview steps for shortlisted candidates.</p><div><CheckCircle2 size={14}/><span><strong>2 interview plans prepared</strong><small>Ready for hiring-team review</small></span></div><footer>Ask HireScoreAI… <ArrowRight size={14}/></footer></div>
           </div>
         </div>
       </div>
@@ -1305,11 +1296,11 @@ function TechActionAgent() {
 
 function HiringCommandCenter() {
   const columns = [
-    ['New', [['Ishaan Shah','78'],['Kavya Nair','76']]], ['Screened', [['Neha Kapoor','84'],['Arjun Bose','82']]],
-    ['Shortlisted', [['Rahul Mehta','87'],['Zoya Khan','85']]], ['Interview', [['Aditi Rao','91'],['Dev Iyer','86']]],
-    ['Offer', [['Meera Joshi','89']]], ['Joining', [['Rohan Das','88']]],
+    ['New', [['Ishaan Shah','78'],['Kavya Nair','76']]], ['Screened', [['Arjun Bose','82'],['Tanvi Rao','80']]],
+    ['Shortlisted', [['Zoya Khan','85'],['Dev Iyer','84']]], ['Interview', [['Meera Joshi','89'],['Rohan Das','88']]],
+    ['Offer', [['Farhan Ali','90']]], ['Joining', [['Nisha Menon','87']]],
   ]
-  return <section className="techStorySection commandCenterSection" id="hiring-pipeline"><div className="commandContainer pipelineSectionLayout"><div className="techSectionIntro"><span className="sectionKicker"><GitBranch size={13} /> Hiring pipeline</span><h2>Keep Every Candidate Moving</h2><p>See every candidate, hiring stage and outstanding action in one connected workspace.</p><Link className="techTextLink" href="/product/hiring-pipeline">Explore the hiring pipeline <ArrowRight size={14}/></Link></div><div className="kanbanWorkspace"><header><div><small>Role pipeline</small><strong>Senior Software Engineer</strong></div><span><SearchCheck size={14}/> Search candidates</span><button type="button">Filter</button></header><div className="kanbanContent"><div className="kanbanBoard">{columns.map(([title,cards])=><div className="kanbanColumn" key={title}><header><strong>{title}</strong><span>{cards.length}</span></header>{cards.map(([name,score],index)=><article key={`${title}-${name}`}><div><span>{name.split(' ').map(part=>part[0]).join('')}</span><strong>{name}</strong></div><small>Senior Software Engineer</small><footer><b>{score}% match</b><em>{index===0?'Needs action':'In progress'}</em></footer></article>)}</div>)}</div><aside className="kanbanAttention"><small>Needs Attention</small><ul><li><span>Strong matches waiting for review</span><b>8</b></li><li><span>Interviews awaiting confirmation</span><b>3</b></li><li><span>Candidate follow-ups</span><b>2</b></li><li><span>Pending offer</span><b>1</b></li></ul></aside></div></div></div></section>
+  return <section className="techStorySection commandCenterSection" id="hiring-pipeline"><div className="commandContainer pipelineSectionLayout"><div className="techSectionIntro"><span className="sectionKicker"><GitBranch size={13} /> Hiring pipeline</span><h2>Keep Every Candidate Moving</h2><p>See every candidate, hiring stage and outstanding action in one connected workspace.</p><Link className="techTextLink" href="/product/hiring-pipeline">Explore the hiring pipeline <ArrowRight size={14}/></Link></div><div className="kanbanWorkspace"><header><div><small>Role pipeline · Illustrative sample view</small><strong>Data Engineer</strong></div><span><SearchCheck size={14}/> Search candidates</span><button type="button">Filter</button></header><div className="kanbanContent"><div className="kanbanBoard">{columns.map(([title,cards])=><div className="kanbanColumn" key={title}><header><strong>{title}</strong><span>{cards.length}</span></header>{cards.map(([name,score],index)=><article key={`${title}-${name}`}><div><span>{name.split(' ').map(part=>part[0]).join('')}</span><strong>{name}</strong></div><small>Data Engineer</small><footer><b>{score}% match</b><em>{index===0?'Needs action':'In progress'}</em></footer></article>)}</div>)}</div><aside className="kanbanAttention"><small>Needs Attention</small><ul><li><span>Strong matches waiting for review</span><b>8</b></li><li><span>Interviews awaiting confirmation</span><b>3</b></li><li><span>Candidate follow-ups</span><b>2</b></li><li><span>Pending offer</span><b>1</b></li></ul></aside></div></div></div></section>
 }
 
 function HiringAnalytics() {
@@ -1322,7 +1313,7 @@ function JourneyCapabilities() {
 }
 
 function HiringSupport() {
-  return <section className="techStorySection hiringSupport"><div className="commandContainer hiringSupportBox"><div><span className="sectionKicker"><UsersRound size={13} /> Additional capacity when needed</span><h2>More Hiring Capacity When You Need It</h2><p>Need additional capacity for a hiring requirement? HireScoreAI can support the hiring workflow alongside your team.</p></div><Link className="commandButton commandButtonGhost" href="/request-candidate-sourcing">Discuss Your Hiring Needs <ArrowRight size={16} /></Link></div></section>
+  return <section className="techStorySection hiringSupport"><div className="commandContainer hiringSupportBox"><div><span className="sectionKicker"><UsersRound size={13} /> Optional platform support</span><h2>Need Extra Capacity for an Active Role?</h2><p>For selected requirements, candidate sourcing support can bring additional profiles into the same HireScoreAI evaluation and pipeline workspace. It is an optional add-on, not a separate recruitment agency offering.</p></div><Link className="commandButton commandButtonGhost" href="/request-candidate-sourcing">Review Sourcing Support <ArrowRight size={16} /></Link></div></section>
 }
 
 function CandidateSourcingSection() {
@@ -4364,7 +4355,6 @@ function Footer() {
           <div>
             <h3>Product</h3>
             <Link href="/product/hirescore-ai">HireScoreAI</Link>
-            <Link href="/product/jd-manager">JD Manager</Link>
             <Link href="/product/ai-resume-parsing">AI Resume Screening</Link>
             <Link href="/product/ai-candidate-ranking">Candidate Ranking</Link>
             <Link href="/pricing">Pricing</Link>

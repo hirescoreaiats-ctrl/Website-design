@@ -4,7 +4,7 @@ export const ORGANIZATION_ID = `${SITE_URL}/#organization`
 export const FOUNDER_ID = `${SITE_URL}/#sachin-yadav`
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/hirescore-logo-full.png`
 export const DEFAULT_DESCRIPTION = 'HireScoreAI is an AI-powered tech hiring platform connecting candidate sourcing, AI resume screening, candidate intelligence, Action Agents, hiring pipelines, analytics, interviews, offers, and joining.'
-export const HOME_H1 = 'Source, Evaluate and Move Tech Talent from Requirement to Joining'
+export const HOME_H1 = 'HireScoreAI: Source, Evaluate and Move Tech Talent from Requirement to Joining'
 export const OFFICIAL_SOCIAL_LINKS = {
   youtube: 'https://www.youtube.com/@HireScoreAI',
   linkedin: 'https://www.linkedin.com/company/hire-score-a',
@@ -31,7 +31,7 @@ export function canonicalUrlForPath(path = '/') {
 }
 
 const staticRoutes = [
-  ['/', 'AI-Powered Tech Hiring Platform | HireScoreAI', 'Source, evaluate and move technical talent from requirement to joining with candidate intelligence, hiring actions, pipeline management and analytics in one workspace.', 'WebPage'],
+  ['/', 'HireScoreAI | AI-Powered Tech Hiring Platform', 'HireScoreAI helps teams source, evaluate and move technical talent from requirement to joining with candidate intelligence, hiring actions, pipeline management and analytics in one workspace.', 'WebPage'],
   ['/product/hirescore-ai', 'HireScoreAI Product | AI Resume Screening Software', 'Explore HireScoreAI for AI resume screening, JD-based candidate scoring, candidate ranking, smart shortlisting, and recruiter-ready explanations.', 'WebPage'],
   ['/solutions', 'AI Hiring Solutions for Recruiters & Staffing Agencies | HireScoreAI', 'HireScoreAI helps recruitment agencies, HR teams, staffing firms, startups, and high-volume hiring teams screen resumes, rank candidates, shortlist talent, and manage hiring workflows with AI.', 'CollectionPage'],
   ['/resources', 'AI Recruitment Resources, Guides & Case Studies | HireScoreAI', 'Explore practical AI recruitment guides, articles, sample case studies, FAQs, and product updates from HireScoreAI.', 'CollectionPage'],
@@ -48,7 +48,7 @@ const staticRoutes = [
 ]
 
 const productRoutes = [
-  ['/product/jd-manager', 'JD Manager for Recruitment Agencies | HireScoreAI', 'Use JD Manager, a free open-source JD workspace for recruitment agencies and staffing teams to manage clients, JDs, candidates, shortlist scores, submissions, and pipeline status.'],
+  ['/product/jd-manager', 'JD Manager for Recruitment Agencies | HireScoreAI', 'Use JD Manager, a free open-source JD workspace for recruitment agencies and staffing teams to manage clients, JDs, candidates, shortlist scores, submissions, and pipeline status.', true],
   ['/product/create-job', 'AI Job Creation Software for Recruiters | HireScoreAI', 'Create structured jobs in HireScoreAI so recruiters can collect applications, screen resumes, and manage every hiring stage from one connected workflow.'],
   ['/product/public-apply-page', 'Public Job Apply Pages for Recruiters | HireScoreAI', 'Generate shareable public job apply pages to collect candidate details and resumes directly into an organized hiring pipeline.'],
   ['/product/resume-upload', 'Bulk Resume Upload for Hiring Teams | HireScoreAI', 'Upload and organize resumes in HireScoreAI for AI parsing, JD matching, candidate scoring, ranking, and shortlisting.'],
@@ -170,7 +170,7 @@ const breadcrumbFor = (path, label, parentPath, parentLabel) => [
 
 export const SEO_ROUTES = [
   ...staticRoutes.map(([path, title, description, pageType, noindex = false]) => ({ path, title, description, pageType: pageType === 'FAQPage' ? 'WebPage' : pageType, schemaKind: pageType === 'FAQPage' ? 'faq' : undefined, noindex })),
-  ...productRoutes.map(([path, title, description]) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, title.replace(/ \|.*$/, ''), '/product/hirescore-ai', 'HireScoreAI') })),
+  ...productRoutes.map(([path, title, description, noindex = false]) => ({ path, title, description, pageType: 'WebPage', noindex, breadcrumbs: breadcrumbFor(path, title.replace(/ \|.*$/, ''), '/product/hirescore-ai', 'HireScoreAI') })),
   ...solutionSegmentRoutes.map(({ path, title, description, navLabel }) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, navLabel, '/solutions', 'Solutions') })),
   ...comparisonRoutes.map(({ path, title, description, navLabel }) => ({ path, title, description, pageType: 'WebPage', breadcrumbs: breadcrumbFor(path, navLabel) })),
   ...guideRoutes.map(([path, title, description, steps]) => ({ path, title: `${title} | HireScoreAI Guide`, description, pageType: 'WebPage', schemaKind: 'howto', steps, breadcrumbs: breadcrumbFor(path, title, '/resources/user-guide', 'User Guide') })),
@@ -242,7 +242,7 @@ const organization = {
   },
   image: { '@id': `${SITE_URL}/#logo` },
   email: 'info@hirescoreai.com',
-  description: 'HireScoreAI is an independent AI recruitment workflow platform for recruiters, HR teams, staffing agencies, and growing companies.',
+  description: 'HireScoreAI is an independent AI-powered tech hiring platform connecting candidate sourcing, candidate intelligence, hiring actions, pipeline management, and analytics from requirement to joining.',
   disambiguatingDescription: 'HireScoreAI is independent and is not affiliated with HiredScore, HireScore.com, Workday, or similarly named products.',
   founder: { '@id': FOUNDER_ID },
   sameAs: Object.values(OFFICIAL_SOCIAL_LINKS),
@@ -294,11 +294,11 @@ const primarySoftware = {
 
 export const HOME_FAQS = [
   ['What is HireScoreAI?', 'HireScoreAI is an AI-powered tech hiring platform that connects candidate sourcing, candidate intelligence, hiring actions, pipeline management and analytics from requirement to joining.'],
+  ['Can HireScoreAI support candidate sourcing?', 'Yes. Candidate sourcing can form the beginning of the connected HireScoreAI hiring workflow for selected active requirements. HireScoreAI does not claim unsupported autonomous sourcing integrations with external platforms.'],
   ['How does HireScoreAI evaluate candidates?', 'HireScoreAI uses AI resume screening, JD-based candidate scoring, matched skills, relevant experience and skill-gap evidence to help teams understand role fit and prioritize candidates for review.'],
   ['How does HireScoreAI support tech hiring?', 'HireScoreAI connects the technical hiring journey across candidate sourcing, structured evaluation, shortlisting, communication, interviews, offers and joining visibility.'],
   ['What can the HireScoreAI Action Agent do?', 'The Action Agent lets teams interact with their connected HireScoreAI workspace in natural language, review candidate intelligence and prepare supported hiring actions while keeping important decisions reviewable.'],
   ['Does HireScoreAI provide hiring analytics?', 'Yes. HireScoreAI provides operational hiring analytics for candidate progression, role pipelines, intake sources and work that needs attention.'],
-  ['Can HireScoreAI support candidate sourcing?', 'Yes. Candidate sourcing can form the beginning of the connected HireScoreAI hiring workflow for selected active requirements. HireScoreAI does not claim unsupported autonomous sourcing integrations with external platforms.'],
 ]
 
 export function buildRouteSchema(config) {

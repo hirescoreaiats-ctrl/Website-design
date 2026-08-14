@@ -1334,7 +1334,7 @@ h3 {
 
 /* Homepage positioning refinement */
 .techHeroGrid{grid-template-columns:minmax(0,.82fr) minmax(580px,1.18fr);gap:52px}
-.techHeroCopy h1{font-size:clamp(3rem,4.65vw,4.7rem);line-height:1.01}
+.techHeroCopy h1{font-size:clamp(2.85rem,4.15vw,4.2rem);line-height:1.01}
 .journeyReady{display:flex;align-items:center;justify-self:end;gap:7px;padding:9px 12px;border:1px solid rgba(99,216,244,.18);border-radius:999px;color:#bceefa;background:rgba(99,216,244,.06);font-size:.62rem;font-weight:800;white-space:nowrap}
 .candidateRanking{display:grid;gap:7px;max-width:470px;margin-top:28px;padding:17px;border:1px solid var(--tech-border);border-radius:17px;background:rgba(255,255,255,.022)}
 .candidateRanking>small{margin-bottom:3px;color:#968da2;font-size:.62rem;font-weight:850;letter-spacing:.09em;text-transform:uppercase}
