@@ -41,6 +41,7 @@ import {
 } from 'lucide-react'
 import './App.css'
 import { BRAND_NAME, HOME_FAQS, HOME_H1, OFFICIAL_SOCIAL_LINKS, buildRouteSchema, comparisonRoutes, getSeoConfig, solutionSegmentRoutes } from './seoConfig.js'
+import { RequirementPlatformLanding } from './RequirementPlatformLanding.jsx'
 
 const APP_URL = 'https://app.hirescoreai.com'
 const CONTACT_EMAIL = 'Info@hireScoreAi.com'
@@ -867,6 +868,7 @@ function Header({ isHome = false }) {
           <Link href="/product/hirescore-ai">Product</Link>
           <Dropdown label="Solutions" base="/solutions" items={solutionNavItems} />
           <Link href="/request-candidate-sourcing">Candidate Sourcing</Link>
+          <Link href="/requirement-platform">Requirement Platform</Link>
           <Link href="/resources">Resources</Link>
           <Link href="/contact">Contact Us</Link>
         </nav>
@@ -879,7 +881,7 @@ function Header({ isHome = false }) {
       </div>
       {open && (
         <nav className="mobileNav" aria-label="Mobile navigation">
-          {['/', '/product/hirescore-ai', '/solutions', '/request-candidate-sourcing', '/resources', '/contact'].map((path) => (
+          {['/', '/product/hirescore-ai', '/solutions', '/request-candidate-sourcing', '/requirement-platform', '/resources', '/contact'].map((path) => (
             <Link key={path} href={path} onClick={() => setOpen(false)}>{labelFor(path)}</Link>
           ))}
           <a className="btn btnPrimary" href={PILOT_MAILTO}>Request Pilot Access</a>
@@ -908,6 +910,7 @@ function labelFor(path) {
     '/product/jd-manager': 'JD Manager',
     '/solutions': 'Solutions',
     '/request-candidate-sourcing': 'Candidate Sourcing',
+    '/requirement-platform': 'Requirement Platform',
     '/resources': 'Resources',
     '/resources/user-guide': 'User Guide',
     '/resources/blogs': 'Blogs',
@@ -4459,6 +4462,7 @@ function renderRoute(path) {
   if (path === '/pricing') return <PricingPage />
   if (path === '/contact') return <ContactPage />
   if (path === '/request-candidate-sourcing') return <CandidateSourcingRequestPage />
+  if (path === '/requirement-platform') return <RequirementPlatformLanding SEO={SEO} />
   if (['/resources/faqs', '/resources/release-notes', '/privacy', '/terms'].includes(path)) return <SimplePage type={path} />
   const product = productPages.find((page) => page.slug === path)
   if (product) return <ProductDetail page={product} />

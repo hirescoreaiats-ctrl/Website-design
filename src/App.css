@@ -150,6 +150,7 @@
 .navActions .btn {
   min-height: 40px;
   padding-inline: 16px;
+  white-space: nowrap;
 }
 
 .btn {

@@ -22,6 +22,7 @@ export const STATIC_ROUTE_H1S = {
   '/product/ai-candidate-ranking': 'AI Candidate Ranking Tool for Faster Shortlists',
   '/resources/blogs': 'AI recruitment insights for faster, smarter hiring',
   '/request-candidate-sourcing': 'Request Candidate Sourcing for an Active Role',
+  '/requirement-platform': 'Vendor Requirements meet Verified Recruiters & HR',
   '/resources/blogs/how-ai-resume-screening-helps-recruiters-save-time': 'How AI Resume Screening Helps Recruiters Save Time and Improve Shortlist Quality',
 }
 
@@ -43,6 +44,7 @@ const staticRoutes = [
   ['/pricing', 'HireScoreAI Pricing | INR Plans from 599 per Month', 'Compare HireScoreAI pricing: Free Pilot for 7 days, Starter at INR 599/month, Growth at INR 1,599/month, and Enterprise custom pricing.', 'WebPage'],
   ['/contact', 'Contact HireScoreAI | Book a Demo or Request a Pilot', 'Contact HireScoreAI to book a demo, request pilot access, or discuss AI resume screening, candidate ranking, and recruitment automation.', 'ContactPage'],
   ['/request-candidate-sourcing', 'Request Candidate Sourcing | HireScoreAI', 'Share an active hiring requirement and request managed candidate sourcing through HireScoreAI internal sourcing efforts and selected recruitment partners.', 'WebPage'],
+  ['/requirement-platform', 'Requirement Platform | Verified Recruiters & Vendor Requirements', 'Connect verified vendor recruitment requirements with approved recruiters, HR professionals, and recruitment agencies through a secure sourcing collaboration workspace.', 'WebPage'],
   ['/privacy', 'Privacy Policy | HireScoreAI', 'Read the HireScoreAI privacy policy for information about website and recruitment platform data practices.', 'WebPage', true],
   ['/terms', 'Terms of Use | HireScoreAI', 'Read the terms that apply to the HireScoreAI website and recruitment workflow platform.', 'WebPage', true],
 ]
