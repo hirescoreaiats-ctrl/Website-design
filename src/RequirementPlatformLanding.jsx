@@ -1,14 +1,15 @@
 import { ArrowRight, BadgeCheck, BriefcaseBusiness, Building2, CheckCircle2, Globe2, Network, SearchCheck, ShieldCheck, Sparkles, UserRoundCheck, UsersRound, Workflow } from 'lucide-react'
 import './RequirementPlatformLanding.css'
 
-const PLATFORM_ENTRY = 'https://app.hirescoreai.com/enterprise.html?route='
-const platformHref = (path) => `${PLATFORM_ENTRY}${encodeURIComponent(`/requirement-platform/${path}`)}`
+// Keep Requirement Platform access separate from the existing screening app.
+// Until its isolated app is deployed, all access requests stay on the public site.
+const platformHref = (intent) => `/contact/?interest=requirement-platform&intent=${encodeURIComponent(intent)}`
 
 const actions = [
-  ['Explore Requirements', platformHref('requirements'), SearchCheck],
-  ['Find Recruiters & HR', platformHref('professionals'), UsersRound],
-  ['Post a Requirement', platformHref('post-requirement'), BriefcaseBusiness],
-  ['Join as Sourcing Partner', platformHref('onboarding'), UserRoundCheck],
+  ['Request Marketplace Access', platformHref('marketplace-access'), SearchCheck],
+  ['Find Recruiters & HR', platformHref('find-professionals'), UsersRound],
+  ['Request Vendor Access', platformHref('vendor-access'), BriefcaseBusiness],
+  ['Join as Sourcing Partner', platformHref('sourcing-partner'), UserRoundCheck],
 ]
 
 const participants = [
@@ -29,8 +30,8 @@ export function RequirementPlatformLanding({ SEO }) {
             <h1>Vendor Requirements <em>meet</em> Verified Recruiters &amp; HR</h1>
             <p>HireScoreAI Requirement Platform connects genuine recruitment requirements with verified sourcing professionals—and gives both sides one focused workspace to collaborate securely.</p>
             <div className="rpLandingActions">
-              <a className="rpLandingPrimary" href={platformHref('requirements')}>Explore Requirements <ArrowRight size={18} /></a>
-              <a className="rpLandingSecondary" href={platformHref('professionals')}>Find Recruiters &amp; HR</a>
+              <a className="rpLandingPrimary" href={platformHref('marketplace-access')}>Request Marketplace Access <ArrowRight size={18} /></a>
+              <a className="rpLandingSecondary" href={platformHref('find-professionals')}>Find Recruiters &amp; HR</a>
             </div>
             <div className="rpLandingTrustLine"><BadgeCheck size={18} /><span>Marketplace access requires profile review and approval. Profile completion alone does not create a verified account.</span></div>
           </div>
@@ -60,7 +61,7 @@ export function RequirementPlatformLanding({ SEO }) {
       <section className="rpLandingSection rpLandingRoles">
         <div className="container">
           <div className="rpLandingSectionHead"><span>Professional account types</span><h2>One account system, role-aware capabilities</h2><p>Different professional details and permissions—without four disconnected user systems.</p></div>
-          <div className="rpLandingRoleGrid">{participants.map(([title, text, Icon]) => <article key={title}><span><Icon size={21} /></span><h3>{title}</h3><p>{text}</p><a href={platformHref('onboarding')}>Create profile <ArrowRight size={15} /></a></article>)}</div>
+          <div className="rpLandingRoleGrid">{participants.map(([title, text, Icon]) => <article key={title}><span><Icon size={21} /></span><h3>{title}</h3><p>{text}</p><a href={platformHref(`profile-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`)}>Request access <ArrowRight size={15} /></a></article>)}</div>
         </div>
       </section>
 
@@ -80,7 +81,7 @@ export function RequirementPlatformLanding({ SEO }) {
 
       <section className="rpLandingSection rpLandingActionSection">
         <div className="container">
-          <div className="rpLandingSectionHead"><span>Choose your next step</span><h2>Open the verified recruitment network</h2><p>If you are not signed in, HireScoreAI will take you through Login or Sign Up before protected marketplace access.</p></div>
+          <div className="rpLandingSectionHead"><span>Choose your next step</span><h2>Request access to the verified recruitment network</h2><p>The Requirement Platform is being deployed separately from HireScoreAI's existing screening app. Send your access request and our team will guide you through onboarding.</p></div>
           <div className="rpLandingActionGrid">{actions.map(([label, href, Icon]) => <a href={href} key={label}><Icon size={22} /><span>{label}</span><ArrowRight size={17} /></a>)}</div>
         </div>
       </section>
