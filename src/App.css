@@ -4908,7 +4908,8 @@ h3 {
 }
 
 .siteHeader,
-.commandInner .siteHeader {
+.commandInner .siteHeader,
+.stitchHome .siteHeader {
   border-bottom-color: transparent;
   background: transparent;
   box-shadow: none;
@@ -4919,7 +4920,9 @@ h3 {
 .siteHeader.isScrolled,
 .siteHeader.isOpen,
 .commandInner .siteHeader.isScrolled,
-.commandInner .siteHeader.isOpen {
+.commandInner .siteHeader.isOpen,
+.stitchHome .siteHeader.isScrolled,
+.stitchHome .siteHeader.isOpen {
   border-bottom-color: rgba(148, 163, 184, 0.16);
   background: rgba(9, 10, 17, 0.88);
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14);

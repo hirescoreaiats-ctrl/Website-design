@@ -8,6 +8,7 @@ import {
   CircleDollarSign,
   Clock3,
   Code2,
+  ExternalLink,
   MapPin,
   Sparkles,
   UsersRound,
@@ -100,7 +101,11 @@ export function RequirementPlatformLanding({ SEO }) {
                   <div className="requirementCardHeader">
                     <div className="requirementCompany">
                       <span className="requirementIcon"><Building2 size={21} /></span>
-                      <div><small>Hiring company</small><strong>{item.company_name || 'Company details available'}</strong></div>
+                      <div>
+                        <small>Hiring company</small>
+                        <strong>{item.company_name || 'Company details available'}</strong>
+                        {item.company_website && <a href={item.company_website} target="_blank" rel="noreferrer">Visit website <ExternalLink size={12} /></a>}
+                      </div>
                     </div>
                     <div className="requirementStatusGroup">
                       {item.published_at && <small>Published {formatDate(item.published_at)}</small>}

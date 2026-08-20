@@ -251,6 +251,22 @@
   font-size: 0.84rem;
 }
 
+.requirementCompany a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+  color: #7dd3fc;
+  font-size: 0.64rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.requirementCompany a:hover {
+  color: #bae6fd;
+  text-decoration: underline;
+}
+
 .requirementStatusGroup {
   gap: 16px;
 }
