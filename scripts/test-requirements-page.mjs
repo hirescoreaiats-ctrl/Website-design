@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises'
 const page = await readFile(new URL('../src/RequirementPlatformLanding.jsx', import.meta.url), 'utf8')
 const styles = await readFile(new URL('../src/RequirementPlatformLanding.css', import.meta.url), 'utf8')
 const app = await readFile(new URL('../src/App.jsx', import.meta.url), 'utf8')
+const appStyles = await readFile(new URL('../src/App.css', import.meta.url), 'utf8')
 
 assert.match(page, /fetch\(`\/api\/sourcing-requests\?\$\{query\}`/)
 assert.match(page, /requirementsGrid/)
@@ -19,5 +20,10 @@ assert.match(styles, /\.requirementFacts/)
 assert.match(styles, /@media \(max-width: 620px\)/)
 assert.doesNotMatch(app, />Candidate Sourcing<\/Link>/)
 assert.match(app, /href="\/requirement-platform">Requirements<\/Link>/)
+assert.match(app, /window\.scrollY > 12/)
+assert.match(app, /siteHeader\$\{scrolled \? ' isScrolled'/)
+assert.match(appStyles, /\.siteHeader\.isScrolled/)
+assert.match(appStyles, /font-size: 0\.94rem/)
+assert.match(appStyles, /\.commandInner \{\s*overflow: clip;/)
 
 console.log('Requirements-only page validation passed.')

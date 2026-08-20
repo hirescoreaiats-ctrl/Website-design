@@ -859,10 +859,18 @@ function Logo() {
 
 function Header({ isHome = false, currentPath = '/' }) {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(() => window.scrollY > 12)
   const navClass = (path) => currentPath === path ? 'navActive' : undefined
 
+  useEffect(() => {
+    const updateHeader = () => setScrolled(window.scrollY > 12)
+    updateHeader()
+    window.addEventListener('scroll', updateHeader, { passive: true })
+    return () => window.removeEventListener('scroll', updateHeader)
+  }, [])
+
   return (
-    <header className="siteHeader">
+    <header className={`siteHeader${scrolled ? ' isScrolled' : ''}${open ? ' isOpen' : ''}`}>
       <div className="navShell">
         <Link className="homeFullLogo" href="/" aria-label="HireScoreAI home"><img src="/hirescore-logo-white.png" alt="HireScoreAI" /></Link>
         <nav className="desktopNav homeNav unifiedNav" aria-label="Primary navigation">
