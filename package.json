@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "test:requirements": "node scripts/test-requirements-page.mjs",
     "test:sourcing": "node scripts/test-sourcing-worker.mjs",
     "dev": "vite",
     "build": "vite build && node scripts/generate-seo-pages.mjs && node scripts/validate-seo.mjs",

@@ -4902,6 +4902,75 @@ h3 {
   }
 }
 
+/* Compact primary navigation shared by public website pages. */
+.siteHeader {
+  border-bottom-color: rgba(210, 187, 255, 0.09);
+  background: rgba(12, 10, 18, 0.9);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.14);
+  backdrop-filter: blur(22px);
+}
+
+.siteHeader .navShell,
+.commandInner .navShell {
+  width: min(1280px, calc(100% - 48px));
+  min-height: 72px;
+  gap: 28px;
+}
+
+.siteHeader .homeFullLogo {
+  flex: 0 0 auto;
+  width: 166px;
+}
+
+.siteHeader .desktopNav.unifiedNav,
+.commandInner .desktopNav.unifiedNav,
+.stitchHome .desktopNav.unifiedNav {
+  flex: 1 1 auto;
+  justify-content: center;
+  gap: clamp(14px, 1.8vw, 28px);
+}
+
+.siteHeader .desktopNav a,
+.siteHeader .dropTrigger,
+.commandInner .desktopNav > a {
+  padding: 9px 2px;
+  color: #d8d2df;
+  background: transparent;
+  font-size: 0.83rem;
+  font-weight: 750;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.siteHeader .desktopNav a:hover,
+.siteHeader .dropTrigger:hover,
+.commandInner .desktopNav > a:hover {
+  color: #fff;
+  background: transparent;
+}
+
+.siteHeader .navActions {
+  flex: 0 0 auto;
+}
+
+.siteHeader .navActions .btnPrimary {
+  min-height: 44px;
+  padding-inline: 22px;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 1120px) {
+  .siteHeader .navShell,
+  .commandInner .navShell {
+    width: min(100% - 28px, 1180px);
+    min-height: 64px;
+  }
+
+  .siteHeader .homeFullLogo {
+    width: 148px;
+  }
+}
+
 /* Resource center and SaaS footer polish. */
 .resourcesHero {
   position: relative;

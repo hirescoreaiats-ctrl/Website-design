@@ -867,8 +867,7 @@ function Header({ isHome = false }) {
         <nav className="desktopNav homeNav unifiedNav" aria-label="Primary navigation">
           <Link href="/product/hirescore-ai">Product</Link>
           <Dropdown label="Solutions" base="/solutions" items={solutionNavItems} />
-          <Link href="/request-candidate-sourcing">Candidate Sourcing</Link>
-          <Link href="/requirement-platform">Requirement Platform</Link>
+          <Link href="/requirement-platform">Requirements</Link>
           <Link href="/resources">Resources</Link>
           <Link href="/contact">Contact Us</Link>
         </nav>
@@ -881,7 +880,7 @@ function Header({ isHome = false }) {
       </div>
       {open && (
         <nav className="mobileNav" aria-label="Mobile navigation">
-          {['/', '/product/hirescore-ai', '/solutions', '/request-candidate-sourcing', '/requirement-platform', '/resources', '/contact'].map((path) => (
+          {['/', '/product/hirescore-ai', '/solutions', '/requirement-platform', '/resources', '/contact'].map((path) => (
             <Link key={path} href={path} onClick={() => setOpen(false)}>{labelFor(path)}</Link>
           ))}
           <a className="btn btnPrimary" href={PILOT_MAILTO}>Request Pilot Access</a>
