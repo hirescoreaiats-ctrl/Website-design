@@ -3,8 +3,8 @@ export const BRAND_NAME = 'HireScoreAI'
 export const ORGANIZATION_ID = `${SITE_URL}/#organization`
 export const FOUNDER_ID = `${SITE_URL}/#sachin-yadav`
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/hirescore-logo-full.png`
-export const DEFAULT_DESCRIPTION = 'HireScoreAI is an AI-powered tech hiring platform connecting candidate sourcing, AI resume screening, candidate intelligence, Action Agents, hiring pipelines, analytics, interviews, offers, and joining.'
-export const HOME_H1 = 'HireScoreAI: Source, Evaluate and Move Tech Talent from Requirement to Joining'
+export const DEFAULT_DESCRIPTION = 'HireScoreAI is an AI-powered recruitment platform for IT and non-IT hiring, connecting candidate sourcing, resume screening, candidate intelligence, hiring pipelines, analytics, interviews, offers, and joining.'
+export const HOME_H1 = 'Source, Screen and Move Talent Across IT & Non-IT Roles'
 export const OFFICIAL_SOCIAL_LINKS = {
   youtube: 'https://www.youtube.com/@HireScoreAI',
   linkedin: 'https://www.linkedin.com/company/hire-score-a',
@@ -32,7 +32,7 @@ export function canonicalUrlForPath(path = '/') {
 }
 
 const staticRoutes = [
-  ['/', 'HireScoreAI | AI-Powered Tech Hiring Platform', 'HireScoreAI helps teams source, evaluate and move technical talent from requirement to joining with candidate intelligence, hiring actions, pipeline management and analytics in one workspace.', 'WebPage'],
+  ['/', 'HireScoreAI | AI Bulk Hiring & Sourcing for IT and Non-IT Roles', 'HireScoreAI helps bulk hiring teams, staffing firms, agencies, and HR teams source candidates, screen resume volumes, rank talent, and manage IT and non-IT hiring pipelines.', 'WebPage'],
   ['/product/hirescore-ai', 'HireScoreAI Product | AI Resume Screening Software', 'Explore HireScoreAI for AI resume screening, JD-based candidate scoring, candidate ranking, smart shortlisting, and recruiter-ready explanations.', 'WebPage'],
   ['/solutions', 'AI Hiring Solutions for Recruiters & Staffing Agencies | HireScoreAI', 'HireScoreAI helps recruitment agencies, HR teams, staffing firms, startups, and high-volume hiring teams screen resumes, rank candidates, shortlist talent, and manage hiring workflows with AI.', 'CollectionPage'],
   ['/resources', 'AI Recruitment Resources, Guides & Case Studies | HireScoreAI', 'Explore practical AI recruitment guides, articles, sample case studies, FAQs, and product updates from HireScoreAI.', 'CollectionPage'],
@@ -244,7 +244,7 @@ const organization = {
   },
   image: { '@id': `${SITE_URL}/#logo` },
   email: 'info@hirescoreai.com',
-  description: 'HireScoreAI is an independent AI-powered tech hiring platform connecting candidate sourcing, candidate intelligence, hiring actions, pipeline management, and analytics from requirement to joining.',
+  description: 'HireScoreAI is an independent AI-powered recruitment platform connecting candidate sourcing, candidate intelligence, hiring actions, pipeline management, and analytics across IT and non-IT hiring.',
   disambiguatingDescription: 'HireScoreAI is independent and is not affiliated with HiredScore, HireScore.com, Workday, or similarly named products.',
   founder: { '@id': FOUNDER_ID },
   sameAs: Object.values(OFFICIAL_SOCIAL_LINKS),
@@ -295,10 +295,10 @@ const primarySoftware = {
 }
 
 export const HOME_FAQS = [
-  ['What is HireScoreAI?', 'HireScoreAI is an AI-powered tech hiring platform that connects candidate sourcing, candidate intelligence, hiring actions, pipeline management and analytics from requirement to joining.'],
+  ['What is HireScoreAI?', 'HireScoreAI is an AI-powered recruitment platform for IT and non-IT hiring that connects candidate sourcing, candidate intelligence, hiring actions, pipeline management and analytics from requirement to joining.'],
   ['Can HireScoreAI support candidate sourcing?', 'Yes. Candidate sourcing can form the beginning of the connected HireScoreAI hiring workflow for selected active requirements. HireScoreAI does not claim unsupported autonomous sourcing integrations with external platforms.'],
   ['How does HireScoreAI evaluate candidates?', 'HireScoreAI uses AI resume screening, JD-based candidate scoring, matched skills, relevant experience and skill-gap evidence to help teams understand role fit and prioritize candidates for review.'],
-  ['How does HireScoreAI support tech hiring?', 'HireScoreAI connects the technical hiring journey across candidate sourcing, structured evaluation, shortlisting, communication, interviews, offers and joining visibility.'],
+  ['Can HireScoreAI support both IT and non-IT hiring?', 'Yes. HireScoreAI supports skill-based and experience-based evaluation for IT, sales, finance, operations, healthcare, manufacturing, support, and other role families using each job description as the hiring context.'],
   ['What can the HireScoreAI Action Agent do?', 'The Action Agent lets teams interact with their connected HireScoreAI workspace in natural language, review candidate intelligence and prepare supported hiring actions while keeping important decisions reviewable.'],
   ['Does HireScoreAI provide hiring analytics?', 'Yes. HireScoreAI provides operational hiring analytics for candidate progression, role pipelines, intake sources and work that needs attention.'],
 ]
