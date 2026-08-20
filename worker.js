@@ -7,6 +7,18 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url)
     if (url.pathname !== '/api/sourcing-requests') return env.ASSETS.fetch(request)
+    if (request.method === 'GET') {
+      const apiBase = clean(env.ATS_PUBLIC_API_BASE_URL || 'https://api.hirescoreai.com', 500).replace(/\/$/, '')
+      const upstream = await fetch(`${apiBase}/public-sourcing-requirements${url.search}`, { headers: { accept: 'application/json' } })
+      const body = await upstream.text()
+      return new Response(body, {
+        status: upstream.status,
+        headers: {
+          'content-type': upstream.headers.get('content-type') || 'application/json; charset=utf-8',
+          'cache-control': 'public, max-age=30, s-maxage=60',
+        },
+      })
+    }
     if (request.method !== 'POST') return reply('Method not allowed.', 405)
     if (!env.RESEND_API_KEY || !env.SOURCING_REQUEST_TO_EMAIL || !env.SOURCING_REQUEST_FROM_EMAIL) return reply('Candidate sourcing email delivery is not configured. Please contact HireScoreAI by email.', 503)
     let payload

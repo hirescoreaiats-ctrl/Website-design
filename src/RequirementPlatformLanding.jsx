@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { ArrowRight, BadgeCheck, BriefcaseBusiness, Building2, CheckCircle2, Globe2, Network, SearchCheck, ShieldCheck, Sparkles, UserRoundCheck, UsersRound, Workflow } from 'lucide-react'
 import './RequirementPlatformLanding.css'
 
@@ -94,12 +95,6 @@ export function RequirementPlatformLanding({ SEO }) {
   )
 }
 
-const requirementPreviews = [
-  ['Senior Backend Engineer', 'Bengaluru · Hybrid', '5–8 years', ['Python', 'FastAPI', 'AWS']],
-  ['US IT Recruiter', 'Remote · India', '3–6 years', ['US Staffing', 'W2', 'Boolean Search']],
-  ['Salesforce Developer', 'Pune · Hybrid', '4–7 years', ['Apex', 'LWC', 'Integrations']],
-]
-
 const professionalPreviews = [
   ['RS', 'Rahul Sharma', 'US IT Recruitment', '8 years experience'],
   ['AM', 'Ananya Mehta', 'Technology Hiring', '6 years experience'],
@@ -110,6 +105,28 @@ function RequirementMarketplace({ SEO, activeView }) {
   const isRequirements = activeView === 'requirements'
   const isProfessionals = activeView === 'professionals'
   const isAccess = activeView === 'post-requirement' || activeView === 'join'
+  const [requirements, setRequirements] = useState([])
+  const [requirementsState, setRequirementsState] = useState('idle')
+  const focusedJobId = new URLSearchParams(window.location.search).get('job_id')
+
+  useEffect(() => {
+    if (!isRequirements) return
+    const controller = new AbortController()
+    const query = new URLSearchParams({ limit: '60' })
+    if (focusedJobId) query.set('job_id', focusedJobId)
+    setRequirementsState('loading')
+    fetch(`/api/sourcing-requests?${query}`, { signal: controller.signal })
+      .then(async (response) => {
+        const payload = await response.json().catch(() => ({}))
+        if (!response.ok) throw new Error(payload.message || 'Could not load requirements')
+        setRequirements(Array.isArray(payload.results) ? payload.results : [])
+        setRequirementsState('ready')
+      })
+      .catch((error) => {
+        if (error.name !== 'AbortError') setRequirementsState('error')
+      })
+    return () => controller.abort()
+  }, [isRequirements, focusedJobId])
   return (
     <div className="rpMarketplace">
       <SEO path="/requirement-platform" schemaHeadline="HireScoreAI Requirement Platform marketplace" />
@@ -129,9 +146,12 @@ function RequirementMarketplace({ SEO, activeView }) {
         </aside>
         <main className="rpMarketplaceMain">
           {isRequirements && <>
-            <div className="rpMarketplaceHeading"><div><span>PUBLIC MARKETPLACE PREVIEW</span><h1>Recruitment Requirements</h1><p>Discover structured requirements published for verified sourcing professionals.</p></div><a href={platformHref('post-requirement')}>Post a Requirement <ArrowRight size={16} /></a></div>
-            <div className="rpMarketplaceNotice"><Sparkles size={18} /><span><strong>Preview listings</strong> — Live requirements will appear here after vendor verification and the isolated marketplace backend launch.</span></div>
-            <div className="rpMarketplaceCards">{requirementPreviews.map(([role, location, experience, skills]) => <article key={role}><div className="rpMarketplaceCardTop"><span><BriefcaseBusiness size={20} /></span><small>PREVIEW</small></div><h2>{role}</h2><p>{location}</p><p>{experience}</p><div>{skills.map((skill) => <i key={skill}>{skill}</i>)}</div><button disabled>Verification required</button></article>)}</div>
+            <div className="rpMarketplaceHeading"><div><span>LIVE REQUIREMENT FEED</span><h1>Recruitment Requirements</h1><p>Structured sourcing requirements published from HireScoreAI ATS.</p></div><a href={platformHref('post-requirement')}>Post a Requirement <ArrowRight size={16} /></a></div>
+            <div className="rpMarketplaceNotice"><Sparkles size={18} /><span><strong>Live listings</strong> — Jobs appear here only when the creator explicitly requests candidate sourcing.</span></div>
+            {requirementsState === 'loading' && <div className="rpRequirementState">Loading current requirements…</div>}
+            {requirementsState === 'error' && <div className="rpRequirementState is-error">Requirements are temporarily unavailable. Please refresh or contact info@hirescoreai.com.</div>}
+            {requirementsState === 'ready' && !requirements.length && <div className="rpRequirementState">No active sourcing requirements match this link.</div>}
+            {requirementsState === 'ready' && requirements.length > 0 && <div className="rpMarketplaceCards">{requirements.map((item) => <article key={item.id} className={item.id === focusedJobId ? 'is-focused' : ''}><div className="rpMarketplaceCardTop"><span><BriefcaseBusiness size={20} /></span><small>LIVE</small></div><h2>{item.title}</h2><p>{[item.company_name, item.location, item.work_mode].filter(Boolean).join(' · ')}</p><p>{item.experience_required || 'Experience shared in JD'} · {item.employment_type || 'Employment type open'}</p><div>{(item.primary_skills || []).slice(0, 8).map((skill) => <i key={skill}>{skill}</i>)}</div>{item.apply_url ? <a className="rpRequirementApply" href={item.apply_url}>View &amp; Apply <ArrowRight size={15} /></a> : <span className="rpRequirementUnavailable">Apply link unavailable</span>}</article>)}</div>}
           </>}
           {isProfessionals && <>
             <div className="rpMarketplaceHeading"><div><span>VERIFIED NETWORK PREVIEW</span><h1>Recruiters &amp; HR Professionals</h1><p>Find sourcing professionals by specialization, market, experience, and availability.</p></div><a href={platformHref('join')}>Join the Network <ArrowRight size={16} /></a></div>
