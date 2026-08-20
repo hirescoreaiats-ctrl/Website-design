@@ -857,19 +857,20 @@ function Logo() {
   )
 }
 
-function Header({ isHome = false }) {
+function Header({ isHome = false, currentPath = '/' }) {
   const [open, setOpen] = useState(false)
+  const navClass = (path) => currentPath === path ? 'navActive' : undefined
 
   return (
     <header className="siteHeader">
       <div className="navShell">
         <Link className="homeFullLogo" href="/" aria-label="HireScoreAI home"><img src="/hirescore-logo-white.png" alt="HireScoreAI" /></Link>
         <nav className="desktopNav homeNav unifiedNav" aria-label="Primary navigation">
-          <Link href="/product/hirescore-ai">Product</Link>
-          <Dropdown label="Solutions" base="/solutions" items={solutionNavItems} />
-          <Link href="/requirement-platform">Requirements</Link>
-          <Link href="/resources">Resources</Link>
-          <Link href="/contact">Contact Us</Link>
+          <Link className={navClass('/product/hirescore-ai')} href="/product/hirescore-ai">Product</Link>
+          <Dropdown label="Solutions" base="/solutions" items={solutionNavItems} active={currentPath === '/solutions' || currentPath.startsWith('/solutions/')} />
+          <Link className={navClass('/requirement-platform')} href="/requirement-platform">Requirements</Link>
+          <Link className={navClass('/resources')} href="/resources">Resources</Link>
+          <Link className={navClass('/contact')} href="/contact">Contact Us</Link>
         </nav>
         <div className="navActions">
           <a className="btn btnPrimary" href={PILOT_MAILTO}>Request Pilot Access</a>
@@ -890,10 +891,10 @@ function Header({ isHome = false }) {
   )
 }
 
-function Dropdown({ label, base, items }) {
+function Dropdown({ label, base, items, active = false }) {
   return (
     <div className="dropdown">
-      <Link href={base} className="dropTrigger">{label}<ChevronDown size={15} /></Link>
+      <Link href={base} className={`dropTrigger${active ? ' navActive' : ''}`}>{label}<ChevronDown size={15} /></Link>
       <div className="dropMenu" role="menu" aria-label={`${label} menu`}>
         {items.map(([href, text]) => <Link href={href} key={href}>{text}</Link>)}
       </div>
@@ -4481,7 +4482,7 @@ export default function App() {
   const isJdManager = path === '/product/jd-manager'
   return (
     <div className={`app ${isHome ? 'stitchHome' : 'commandInner'} ${isProductOverview ? 'productView' : ''} ${isJdManager ? 'jdManagerView' : ''}`}>
-      <Header isHome={isHome} />
+      <Header isHome={isHome} currentPath={path} />
       <main>{renderRoute(path)}</main>
       <Footer />
     </div>

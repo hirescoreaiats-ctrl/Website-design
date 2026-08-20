@@ -4,8 +4,13 @@ import {
   BriefcaseBusiness,
   Building2,
   CalendarClock,
+  ChevronDown,
+  CircleDollarSign,
+  Clock3,
+  Code2,
   MapPin,
   Sparkles,
+  UsersRound,
 } from 'lucide-react'
 import './RequirementPlatformLanding.css'
 
@@ -13,6 +18,7 @@ export function RequirementPlatformLanding({ SEO }) {
   const [requirements, setRequirements] = useState([])
   const [requirementsState, setRequirementsState] = useState('loading')
   const focusedJobId = new URLSearchParams(window.location.search).get('job_id')
+  const roleCount = requirements.length
 
   useEffect(() => {
     const controller = new AbortController()
@@ -39,9 +45,17 @@ export function RequirementPlatformLanding({ SEO }) {
 
       <section className="requirementsHero">
         <div className="container requirementsHeroInner">
-          <span className="requirementsEyebrow"><Sparkles size={15} /> Live hiring opportunities</span>
-          <h1>Recruitment <span>Requirements</span></h1>
-          <p>Browse live, structured job requirements shared by hiring teams that have requested candidate sourcing through HireScoreAI. Review the role, location, experience expectations, employment type, and core skills in one clear view, then open the official application link when a position matches your profile.</p>
+          <div>
+            <span className="requirementsEyebrow"><Sparkles size={15} /> Candidate sourcing marketplace</span>
+            <h1>Active recruitment <span>requirements</span></h1>
+            <p>Explore verified hiring requirements shared through HireScoreAI. Review complete role details, required and preferred skills, compensation, experience, deadlines, and application information. Every listing comes directly from an active candidate-sourcing request, helping you evaluate the opportunity clearly before applying.</p>
+          </div>
+          <aside className="requirementsSummary" aria-label="Requirement feed summary">
+            <span><i /> Live feed</span>
+            <strong>{requirementsState === 'ready' ? roleCount : '—'}</strong>
+            <p>{roleCount === 1 ? 'active requirement' : 'active requirements'}</p>
+            <small>Only sourcing-enabled roles are published here.</small>
+          </aside>
         </div>
       </section>
 
@@ -72,47 +86,102 @@ export function RequirementPlatformLanding({ SEO }) {
           )}
 
           {requirementsState === 'ready' && requirements.length > 0 && (
-            <div className="requirementsGrid">
+            <>
+              <div className="requirementsFeedHeader">
+                <div><span>Open positions</span><strong>{requirements.length} {requirements.length === 1 ? 'role' : 'roles'} available</strong></div>
+                <small>Most recently published first</small>
+              </div>
+              <div className="requirementsGrid">
               {requirements.map((item) => (
                 <article
                   key={item.id}
                   className={`requirementCard${item.id === focusedJobId ? ' isFocused' : ''}`}
                 >
                   <div className="requirementCardHeader">
-                    <span className="requirementIcon"><BriefcaseBusiness size={21} /></span>
-                    <span className="requirementLive"><i /> Active</span>
-                  </div>
-
-                  <h2>{item.title}</h2>
-
-                  <div className="requirementMeta">
-                    {item.company_name && <span><Building2 size={15} />{item.company_name}</span>}
-                    {(item.location || item.work_mode) && (
-                      <span><MapPin size={15} />{[item.location, item.work_mode].filter(Boolean).join(' · ')}</span>
-                    )}
-                    <span><CalendarClock size={15} />{item.experience_required || 'Experience shared in JD'}</span>
-                  </div>
-
-                  {(item.primary_skills || []).length > 0 && (
-                    <div className="requirementSkills">
-                      {(item.primary_skills || []).slice(0, 8).map((skill) => <span key={skill}>{skill}</span>)}
+                    <div className="requirementCompany">
+                      <span className="requirementIcon"><Building2 size={21} /></span>
+                      <div><small>Hiring company</small><strong>{item.company_name || 'Company details available'}</strong></div>
                     </div>
-                  )}
-
-                  <div className="requirementCardFooter">
-                    <span>{item.employment_type || 'Role details available'}</span>
-                    {item.apply_url ? (
-                      <a href={item.apply_url}>View &amp; Apply <ArrowRight size={16} /></a>
-                    ) : (
-                      <small>Apply link unavailable</small>
-                    )}
+                    <div className="requirementStatusGroup">
+                      {item.published_at && <small>Published {formatDate(item.published_at)}</small>}
+                      <span className="requirementLive"><i /> Active</span>
+                    </div>
                   </div>
+
+                  <div className="requirementCardBody">
+                    <div className="requirementCardMain">
+                      <span className="requirementDepartment">{item.department || 'Open role'}</span>
+                      <h2>{item.title}</h2>
+
+                      <div className="requirementMeta">
+                        {(item.location || item.work_mode) && <span><MapPin size={16} />{[item.location, item.work_mode].filter(Boolean).join(' · ')}</span>}
+                        <span><BriefcaseBusiness size={16} />{item.employment_type || 'Employment type in JD'}</span>
+                        <span><Clock3 size={16} />{item.experience_required || 'Experience shared in JD'}</span>
+                      </div>
+
+                      {item.description && <p className="requirementDescription">{descriptionPreview(item.description)}</p>}
+
+                      {(item.primary_skills || []).length > 0 && (
+                        <section className="requirementSkillSection">
+                          <h3><Code2 size={15} /> Required skills</h3>
+                          <div className="requirementSkills">
+                            {(item.primary_skills || []).slice(0, 10).map((skill) => <span key={skill}>{skill}</span>)}
+                            {(item.primary_skills || []).length > 10 && <span>+{item.primary_skills.length - 10} more</span>}
+                          </div>
+                        </section>
+                      )}
+
+                      {(item.secondary_skills || []).length > 0 && (
+                        <section className="requirementSkillSection isPreferred">
+                          <h3><Sparkles size={15} /> Good to have</h3>
+                          <div className="requirementSkills">
+                            {(item.secondary_skills || []).slice(0, 7).map((skill) => <span key={skill}>{skill}</span>)}
+                          </div>
+                        </section>
+                      )}
+                    </div>
+
+                    <aside className="requirementFacts">
+                      <h3>Role overview</h3>
+                      <div><span><CircleDollarSign size={16} /> Compensation</span><strong>{item.salary_range || 'Shared during process'}</strong></div>
+                      <div><span><UsersRound size={16} /> Experience</span><strong>{item.experience_required || 'See job description'}</strong></div>
+                      <div><span><BriefcaseBusiness size={16} /> Work type</span><strong>{[item.employment_type, item.work_mode].filter(Boolean).join(' · ') || 'See job description'}</strong></div>
+                      <div><span><CalendarClock size={16} /> Apply by</span><strong>{item.application_deadline ? formatDate(item.application_deadline) : 'Open until filled'}</strong></div>
+                      {item.apply_url ? <a href={item.apply_url}>Apply for this role <ArrowRight size={16} /></a> : <small>Application link unavailable</small>}
+                    </aside>
+                  </div>
+
+                  {item.description && (
+                    <details className="requirementFullDescription">
+                      <summary>View complete job description <ChevronDown size={17} /></summary>
+                      <div>{item.description}</div>
+                    </details>
+                  )}
                 </article>
               ))}
-            </div>
+              </div>
+            </>
           )}
         </div>
       </section>
     </div>
   )
+}
+
+function formatDate(value) {
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return value
+  return new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }).format(date)
+}
+
+function descriptionPreview(value) {
+  const text = String(value || '').replace(/\r/g, '')
+  const about = text.split(/about the role/i)[1]
+  const useful = (about || text)
+    .split(/key responsibilities|required skills|responsibilities/i)[0]
+    .replace(/^(?:\s*[:—-]?\s*)/, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+  if (!useful) return 'Review the complete job description below for responsibilities, qualifications, and application details.'
+  return useful.length > 420 ? `${useful.slice(0, 417).trimEnd()}…` : useful
 }

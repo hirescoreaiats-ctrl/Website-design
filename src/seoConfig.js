@@ -22,7 +22,7 @@ export const STATIC_ROUTE_H1S = {
   '/product/ai-candidate-ranking': 'AI Candidate Ranking Tool for Faster Shortlists',
   '/resources/blogs': 'AI recruitment insights for faster, smarter hiring',
   '/request-candidate-sourcing': 'Request Candidate Sourcing for an Active Role',
-  '/requirement-platform': 'Recruitment Requirements',
+  '/requirement-platform': 'Active recruitment requirements',
   '/resources/blogs/how-ai-resume-screening-helps-recruiters-save-time': 'How AI Resume Screening Helps Recruiters Save Time and Improve Shortlist Quality',
 }
 
