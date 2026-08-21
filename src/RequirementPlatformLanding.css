@@ -73,6 +73,33 @@
   line-height: 1.7;
 }
 
+.requirementsHeroActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.requirementsHeroActions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 16px;
+  border-radius: 10px;
+  color: #08111f;
+  background: linear-gradient(100deg, #67e8f9, #a78bfa);
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.requirementsHeroActions small {
+  max-width: 310px;
+  color: #8293aa;
+  font-size: 0.68rem;
+  line-height: 1.45;
+}
+
 .requirementsSummary {
   padding: 20px 22px;
   border: 1px solid rgba(148, 163, 184, 0.15);
@@ -130,6 +157,31 @@
   position: relative;
   z-index: 1;
   padding: 36px 0 90px;
+}
+
+.requirementsPending {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding: 18px 20px;
+  border: 1px solid rgba(167, 139, 250, 0.32);
+  border-radius: 14px;
+  color: #c4b5fd;
+  background: rgba(76, 29, 149, 0.16);
+}
+
+.requirementsPending strong {
+  display: block;
+  color: #f5f3ff;
+  font-size: 0.9rem;
+}
+
+.requirementsPending p {
+  margin: 5px 0 0;
+  color: #a9b8cc;
+  font-size: 0.75rem;
+  line-height: 1.55;
 }
 
 .requirementsFeedHeader {

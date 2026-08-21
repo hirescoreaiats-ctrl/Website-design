@@ -19,6 +19,7 @@ export function RequirementPlatformLanding({ SEO }) {
   const [requirements, setRequirements] = useState([])
   const [requirementsState, setRequirementsState] = useState('loading')
   const focusedJobId = new URLSearchParams(window.location.search).get('job_id')
+  const submissionStatus = new URLSearchParams(window.location.search).get('submission')
   const roleCount = requirements.length
 
   useEffect(() => {
@@ -50,6 +51,10 @@ export function RequirementPlatformLanding({ SEO }) {
             <span className="requirementsEyebrow"><Sparkles size={15} /> Candidate sourcing marketplace</span>
             <h1>Active recruitment <span>requirements</span></h1>
             <p>Explore verified hiring requirements shared through HireScoreAI. Review complete role details, required and preferred skills, compensation, experience, deadlines, and application information. Every listing comes directly from an active candidate-sourcing request, helping you evaluate the opportunity clearly before applying.</p>
+            <div className="requirementsHeroActions">
+              <a href="/request-candidate-sourcing/">Submit a requirement <ArrowRight size={16} /></a>
+              <small>Vendors can submit complete role details. Admin approval is required before publishing.</small>
+            </div>
           </div>
           <aside className="requirementsSummary" aria-label="Requirement feed summary">
             <span><i /> Live feed</span>
@@ -62,6 +67,12 @@ export function RequirementPlatformLanding({ SEO }) {
 
       <section className="requirementsFeed" aria-label="Active recruitment requirements">
         <div className="container">
+          {submissionStatus === 'pending' && (
+            <div className="requirementsPending" role="status">
+              <Clock3 size={22} />
+              <div><strong>Requirement submitted for approval</strong><p>The complete request has been sent to HireScoreAI. It will appear publicly only after admin approval.</p></div>
+            </div>
+          )}
           {requirementsState === 'loading' && (
             <div className="requirementsState" role="status">
               <span className="requirementsLoader" />
@@ -78,7 +89,7 @@ export function RequirementPlatformLanding({ SEO }) {
             </div>
           )}
 
-          {requirementsState === 'ready' && requirements.length === 0 && (
+          {requirementsState === 'ready' && requirements.length === 0 && submissionStatus !== 'pending' && (
             <div className="requirementsState">
               <BriefcaseBusiness size={24} />
               <strong>No active requirements right now</strong>
