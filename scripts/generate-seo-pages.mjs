@@ -4,18 +4,58 @@ import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { createServer } from 'vite'
 import { SEO_ROUTES, buildRouteSchema } from '../src/seoConfig.js'
+import { buildJobSeo, preparePublicJobs } from '../src/jobSeo.js'
 
 const root = process.cwd()
 const dist = path.join(root, 'dist')
 const templatePath = path.join(dist, 'index.html')
 const template = await readFile(templatePath, 'utf8')
 const lastmod = new Date().toISOString().slice(0, 10)
+const apiBase = String(process.env.ATS_PUBLIC_API_BASE_URL || 'https://api.hirescoreai.com').replace(/\/$/, '')
+
+async function loadPublicJobs() {
+  try {
+    const response = await fetch(`${apiBase}/public-sourcing-requirements?limit=100`, { headers: { accept: 'application/json' } })
+    if (!response.ok) throw new Error(`HTTP ${response.status}`)
+    const payload = await response.json()
+    return preparePublicJobs(Array.isArray(payload.results) ? payload.results : [])
+  } catch (error) {
+    console.warn(`Public job prerender skipped: ${error.message}`)
+    return []
+  }
+}
+
+const publicJobs = await loadPublicJobs()
+const jobRoutes = publicJobs.map((job) => {
+  const seo = buildJobSeo(job)
+  return {
+    path: job.canonical_path,
+    title: seo.title,
+    description: seo.description,
+    canonical: seo.canonical,
+    pageType: 'WebPage',
+    ogType: 'website',
+    image: 'https://hirescoreai.com/hirescore-logo-full.png',
+    job,
+    breadcrumbs: [
+      { name: 'Home', path: '/' },
+      { name: 'Active recruitment requirements', path: '/requirement-platform' },
+      { name: job.title, path: job.canonical_path },
+    ],
+  }
+})
+const allRoutes = [...SEO_ROUTES, ...jobRoutes]
 
 const escapeHtml = (value) => String(value)
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
   .replaceAll('>', '&gt;')
   .replaceAll('"', '&quot;')
+
+const safeJson = (value) => JSON.stringify(value)
+  .replaceAll('<', '\\u003c')
+  .replaceAll('\u2028', '\\u2028')
+  .replaceAll('\u2029', '\\u2029')
 
 globalThis.window = {
   location: { pathname: '/' },
@@ -30,6 +70,8 @@ globalThis.window = {
   devicePixelRatio: 1,
   innerWidth: 1440,
   innerHeight: 900,
+  __PUBLIC_JOBS__: publicJobs,
+  __PUBLIC_JOB__: null,
 }
 
 const vite = await createServer({
@@ -94,16 +136,20 @@ function renderUrlset(routes) {
 }
 
 function renderSitemapIndex() {
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <sitemap><loc>https://hirescoreai.com/page-sitemap.xml</loc><lastmod>${lastmod}</lastmod></sitemap>\n  <sitemap><loc>https://hirescoreai.com/blog-sitemap.xml</loc><lastmod>${lastmod}</lastmod></sitemap>\n</sitemapindex>\n`
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <sitemap><loc>https://hirescoreai.com/page-sitemap.xml</loc><lastmod>${lastmod}</lastmod></sitemap>\n  <sitemap><loc>https://hirescoreai.com/blog-sitemap.xml</loc><lastmod>${lastmod}</lastmod></sitemap>\n  <sitemap><loc>https://hirescoreai.com/jobs-sitemap.xml</loc><lastmod>${lastmod}</lastmod></sitemap>\n</sitemapindex>\n`
 }
 
 try {
-  for (const config of SEO_ROUTES) {
+  for (const config of allRoutes) {
+    window.__PUBLIC_JOB__ = config.job || null
     const staticContent = renderStaticContent(config)
     const schemaConfig = { ...config, renderedH1: renderedH1(staticContent) }
     const html = template.replace(
       /<!-- route-seo:start -->[\s\S]*?<!-- route-seo:end -->/,
       renderSeo(schemaConfig),
+    ).replace(
+      '<script type="module"',
+      `<script>window.__PUBLIC_JOBS__=${safeJson(publicJobs)};window.__PUBLIC_JOB__=${safeJson(config.job || null)};</script><script type="module"`,
     ).replace('<div id="root"></div>', staticContent)
     const outputPath = config.path === '/'
       ? templatePath
@@ -122,5 +168,7 @@ const pageRoutes = indexableRoutes.filter((route) => !route.path.startsWith('/re
 await writeFile(path.join(dist, 'sitemap.xml'), renderSitemapIndex())
 await writeFile(path.join(dist, 'page-sitemap.xml'), renderUrlset(pageRoutes))
 await writeFile(path.join(dist, 'blog-sitemap.xml'), renderUrlset(blogRoutes))
+await writeFile(path.join(dist, 'jobs-sitemap.xml'), renderUrlset(jobRoutes))
+await writeFile(path.join(dist, 'jobs-manifest.json'), `${JSON.stringify(publicJobs, null, 2)}\n`)
 
-console.log(`Generated route-specific SEO HTML and sitemaps for ${SEO_ROUTES.length} routes.`)
+console.log(`Generated route-specific SEO HTML for ${SEO_ROUTES.length} static routes and ${jobRoutes.length} active public jobs.`)

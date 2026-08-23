@@ -42,6 +42,8 @@ import {
 import './App.css'
 import { BRAND_NAME, HOME_FAQS, HOME_H1, OFFICIAL_SOCIAL_LINKS, buildRouteSchema, comparisonRoutes, getSeoConfig, solutionSegmentRoutes } from './seoConfig.js'
 import { RequirementPlatformLanding } from './RequirementPlatformLanding.jsx'
+import { ActiveRequirementsPage, JobCategoryPage, PublicJobPage, RecruitmentVendorsPage, SourcingPartnersPage } from './PublicJobs.jsx'
+import { categoryBySlug } from './jobSeo.js'
 
 const APP_URL = 'https://app.hirescoreai.com'
 const CONTACT_EMAIL = 'Info@hireScoreAi.com'
@@ -4471,6 +4473,13 @@ function renderRoute(path) {
   if (path === '/contact') return <ContactPage />
   if (path === '/request-candidate-sourcing') return <CandidateSourcingRequestPage />
   if (path === '/requirement-platform') return <RequirementPlatformLanding SEO={SEO} />
+  if (path === '/recruitment-vendors') return <RecruitmentVendorsPage SEO={SEO} />
+  if (path === '/sourcing-partners') return <SourcingPartnersPage SEO={SEO} />
+  if (path === '/active-recruitment-requirements') return <ActiveRequirementsPage SEO={SEO} />
+  if (path.startsWith('/jobs/')) {
+    const slug = path.slice('/jobs/'.length)
+    return categoryBySlug(slug) ? <JobCategoryPage slug={slug} SEO={SEO} /> : <PublicJobPage slug={slug} />
+  }
   if (['/resources/faqs', '/resources/release-notes', '/privacy', '/terms'].includes(path)) return <SimplePage type={path} />
   const product = productPages.find((page) => page.slug === path)
   if (product) return <ProductDetail page={product} />

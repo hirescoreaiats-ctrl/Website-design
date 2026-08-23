@@ -1,16 +1,24 @@
 import { readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { FOUNDER_ID, HOME_FAQS, HOME_H1, OFFICIAL_SOCIAL_LINKS, ORGANIZATION_ID, SEO_ROUTES, SITE_URL, STATIC_ROUTE_H1S } from '../src/seoConfig.js'
+import { buildJobSeo } from '../src/jobSeo.js'
 
 const dist = path.join(process.cwd(), 'dist')
+let publicJobs = []
+try { publicJobs = JSON.parse(await readFile(path.join(dist, 'jobs-manifest.json'), 'utf8')) } catch {}
+const dynamicJobRoutes = publicJobs.map((job) => {
+  const seo = buildJobSeo(job, SITE_URL)
+  return { path: job.canonical_path, title: seo.title, description: seo.description, canonical: seo.canonical, pageType: 'WebPage', image: `${SITE_URL}/hirescore-logo-full.png`, job }
+})
+const ALL_SEO_ROUTES = [...SEO_ROUTES, ...dynamicJobRoutes]
 const errors = []
 const titles = new Map()
 const descriptions = new Map()
 const canonicals = new Map()
 const staticParagraphs = new Map()
 const intentionalNoindexRoutes = new Set(['/privacy', '/terms', '/product/jd-manager'])
-const routePaths = new Set(SEO_ROUTES.map((route) => route.path))
-const inboundLinks = new Map(SEO_ROUTES.map((route) => [route.path, new Set()]))
+const routePaths = new Set(ALL_SEO_ROUTES.map((route) => route.path))
+const inboundLinks = new Map(ALL_SEO_ROUTES.map((route) => [route.path, new Set()]))
 const linkRecords = []
 const blogBodies = []
 const routeMetrics = []
@@ -73,7 +81,7 @@ const requiredRepresentativePaths = new Set([
   '/compare/hirescoreai-vs-hiredscore',
 ])
 
-for (const route of SEO_ROUTES) {
+for (const route of ALL_SEO_ROUTES) {
   const outputPath = route.path === '/'
     ? path.join(dist, 'index.html')
     : path.join(dist, route.path.slice(1), 'index.html')
@@ -352,7 +360,7 @@ for (const route of SEO_ROUTES) {
 }
 
 for (const [paragraph, routes] of staticParagraphs) {
-  if (routes.length === SEO_ROUTES.length) errors.push(`Generic paragraph duplicated across every route: ${paragraph.slice(0, 80)}`)
+  if (routes.length === ALL_SEO_ROUTES.length) errors.push(`Generic paragraph duplicated across every route: ${paragraph.slice(0, 80)}`)
 }
 
 for (let index = 0; index < blogBodies.length; index += 1) {
@@ -365,7 +373,7 @@ for (let index = 0; index < blogBodies.length; index += 1) {
   }
 }
 
-const sitemapFiles = ['page-sitemap.xml', 'blog-sitemap.xml']
+const sitemapFiles = ['page-sitemap.xml', 'blog-sitemap.xml', 'jobs-sitemap.xml']
 const sitemapUrls = new Set()
 for (const filename of sitemapFiles) {
   const xml = await readFile(path.join(dist, filename), 'utf8')
@@ -376,7 +384,7 @@ for (const filename of sitemapFiles) {
     if (!url.endsWith('/')) errors.push(`${filename}: sitemap URL must use trailing slash: ${url}`)
   }
 }
-const indexableUrls = new Set(SEO_ROUTES.filter((route) => !route.noindex).map((route) => route.canonical))
+const indexableUrls = new Set(ALL_SEO_ROUTES.filter((route) => !route.noindex).map((route) => route.canonical))
 for (const url of indexableUrls) if (!sitemapUrls.has(url)) errors.push(`Sitemap missing ${url}`)
 for (const url of sitemapUrls) if (!indexableUrls.has(url)) errors.push(`Sitemap contains non-indexable or unknown URL ${url}`)
 
@@ -400,7 +408,7 @@ for (const destination of homepageRequired) {
   if (!destinationsFor('/').includes(destination)) errors.push(`/: missing required contextual link to ${destination}`)
 }
 
-for (const route of SEO_ROUTES.filter((item) => item.path.startsWith('/product/') && !['/product/hirescore-ai', '/product/jd-manager'].includes(item.path))) {
+for (const route of ALL_SEO_ROUTES.filter((item) => item.path.startsWith('/product/') && !['/product/hirescore-ai', '/product/jd-manager'].includes(item.path))) {
   requireLinkGroup(route.path, 'product overview', (destination) => destination === '/product/hirescore-ai')
   requireLinkGroup(route.path, 'related product', (destination) => destination.startsWith('/product/') && destination !== route.path && destination !== '/product/hirescore-ai', 2)
   requireLinkGroup(route.path, 'relevant solution', (destination) => destination.startsWith('/solutions/'))
@@ -408,14 +416,14 @@ for (const route of SEO_ROUTES.filter((item) => item.path.startsWith('/product/'
   requireLinkGroup(route.path, 'pricing or contact', (destination) => ['/pricing', '/contact'].includes(destination))
 }
 
-for (const route of SEO_ROUTES.filter((item) => item.path.startsWith('/solutions/'))) {
+for (const route of ALL_SEO_ROUTES.filter((item) => item.path.startsWith('/solutions/'))) {
   requireLinkGroup(route.path, 'solutions overview', (destination) => destination === '/solutions')
   requireLinkGroup(route.path, 'relevant product', (destination) => destination.startsWith('/product/'), 2)
   requireLinkGroup(route.path, 'resource or guide', (destination) => destination.startsWith('/resources/'))
   requireLinkGroup(route.path, 'pricing or contact', (destination) => ['/pricing', '/contact'].includes(destination))
 }
 
-const articleRoutes = SEO_ROUTES.filter((route) => route.schemaKind === 'article')
+const articleRoutes = ALL_SEO_ROUTES.filter((route) => route.schemaKind === 'article')
 for (const route of articleRoutes) {
   requireLinkGroup(route.path, 'relevant product', (destination) => destination.startsWith('/product/'), 2)
   requireLinkGroup(route.path, 'relevant solution', (destination) => destination.startsWith('/solutions/'))
@@ -430,7 +438,7 @@ for (const article of articleRoutes) {
   if (hubLinks.length < 3) errors.push(`/resources/blogs: blog card for ${article.path} must link its image, title, and CTA`)
 }
 
-const orphanRoutes = SEO_ROUTES
+const orphanRoutes = ALL_SEO_ROUTES
   .filter((route) => !route.noindex && route.path !== '/' && inboundLinks.get(route.path).size === 0)
   .map((route) => route.path)
 for (const orphan of orphanRoutes) errors.push(`${orphan}: indexable route has no internal inbound links`)
@@ -461,4 +469,4 @@ if (errors.length) {
   process.exit(1)
 }
 
-console.log(`SEO validation passed: ${SEO_ROUTES.length} route pages, ${indexableUrls.size} indexable URLs, unique titles/descriptions, valid canonicals, schemas, and sitemaps.`)
+console.log(`SEO validation passed: ${ALL_SEO_ROUTES.length} route pages, ${indexableUrls.size} indexable URLs, unique titles/descriptions, valid canonicals, schemas, and sitemaps.`)

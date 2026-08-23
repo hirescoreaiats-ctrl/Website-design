@@ -2,3 +2,6 @@ RESEND_API_KEY=re_your_api_key
 SOURCING_REQUEST_TO_EMAIL=Info@hireScoreAi.com
 SOURCING_REQUEST_FROM_EMAIL=HireScoreAI Sourcing <sourcing@your-verified-domain.example>
 ATS_PUBLIC_API_BASE_URL=https://api.hirescoreai.com
+GOOGLE_INDEXING_WEBHOOK_SECRET=replace_with_a_long_random_secret
+GOOGLE_INDEXING_CLIENT_EMAIL=service-account@your-project.iam.gserviceaccount.com
+GOOGLE_INDEXING_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"

@@ -1,3 +1,5 @@
+import { buildJobPostingSchema, JOB_CATEGORIES } from './jobSeo.js'
+
 export const SITE_URL = 'https://hirescoreai.com'
 export const BRAND_NAME = 'HireScoreAI'
 export const ORGANIZATION_ID = `${SITE_URL}/#organization`
@@ -22,7 +24,10 @@ export const STATIC_ROUTE_H1S = {
   '/product/ai-candidate-ranking': 'AI Candidate Ranking Tool for Faster Shortlists',
   '/resources/blogs': 'AI recruitment insights for faster, smarter hiring',
   '/request-candidate-sourcing': 'Request Candidate Sourcing for an Active Role',
-  '/requirement-platform': 'Active recruitment requirements',
+  '/requirement-platform': 'Active IT & Non-IT Jobs & Recruitment Requirements',
+  '/recruitment-vendors': 'Post Recruitment Requirements & Find Sourcing Partners',
+  '/sourcing-partners': 'Find Active Requirements & Submit Relevant Candidates',
+  '/active-recruitment-requirements': 'Active Recruitment Requirements for Hiring & Sourcing Partners',
   '/resources/blogs/how-ai-resume-screening-helps-recruiters-save-time': 'How AI Resume Screening Helps Recruiters Save Time and Improve Shortlist Quality',
 }
 
@@ -44,7 +49,11 @@ const staticRoutes = [
   ['/pricing', 'HireScoreAI Pricing | INR Plans from 599 per Month', 'Compare HireScoreAI pricing: Free Pilot for 7 days, Starter at INR 599/month, Growth at INR 1,599/month, and Enterprise custom pricing.', 'WebPage'],
   ['/contact', 'Contact HireScoreAI | Book a Demo or Request a Pilot', 'Contact HireScoreAI to book a demo, request pilot access, or discuss AI resume screening, candidate ranking, and recruitment automation.', 'ContactPage'],
   ['/request-candidate-sourcing', 'Request Candidate Sourcing | HireScoreAI', 'Share an active hiring requirement and request managed candidate sourcing through HireScoreAI internal sourcing efforts and selected recruitment partners.', 'WebPage'],
-  ['/requirement-platform', 'Active Recruitment Requirements | HireScoreAI', 'Browse active hiring requirements where companies have requested candidate sourcing through HireScoreAI, with role details, locations, experience expectations, skills, and application links.', 'CollectionPage'],
+  ['/requirement-platform', 'IT & Non-IT Jobs, Recruitment Requirements & Sourcing Partners | HireScoreAI', 'Explore active IT, Non-IT, Engineering, BPO and Sales job requirements. Candidates can apply for jobs, recruitment vendors can post requirements, and sourcing partners can submit candidates on HireScoreAI.', 'CollectionPage'],
+  ['/recruitment-vendors', 'Recruitment Vendors, Staffing Partners & Hiring Requirements | HireScoreAI', 'Recruitment vendors, staffing companies, hiring partners, agencies, and employers can post active recruitment requirements and connect with sourcing partners through HireScoreAI.', 'WebPage'],
+  ['/sourcing-partners', 'Sourcing Partners & Active Recruitment Requirements | HireScoreAI', 'Recruitment sourcing partners and independent recruiters can find active staffing requirements, review vendor needs, and submit relevant candidates through HireScoreAI.', 'WebPage'],
+  ['/active-recruitment-requirements', 'Active Recruitment Requirements for Sourcing Partners | HireScoreAI', 'Browse active recruitment and staffing requirements across IT, Non-IT, engineering, BPO, sales, and operations roles on HireScoreAI.', 'CollectionPage'],
+  ...JOB_CATEGORIES.map((category) => [`/jobs/${category.slug}`, category.title, category.description, 'CollectionPage']),
   ['/privacy', 'Privacy Policy | HireScoreAI', 'Read the HireScoreAI privacy policy for information about website and recruitment platform data practices.', 'WebPage', true],
   ['/terms', 'Terms of Use | HireScoreAI', 'Read the terms that apply to the HireScoreAI website and recruitment workflow platform.', 'WebPage', true],
 ]
@@ -384,6 +393,12 @@ export function buildRouteSchema(config) {
       '@id': `${config.canonical}#faq`,
       mainEntity: HOME_FAQS.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } })),
     })
+  }
+
+  if (config.job) {
+    graph.unshift(organization)
+    page.about = { '@id': `${config.canonical}#jobposting` }
+    graph.push(buildJobPostingSchema(config.job, SITE_URL))
   }
 
   return { '@context': 'https://schema.org', '@graph': graph }
