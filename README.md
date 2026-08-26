@@ -33,7 +33,9 @@ The deployable output will be generated in `dist/`.
    - Output directory: `dist`
 4. Deploy.
 
-No backend integration is required for the current contact form. The form UI is ready for future API wiring.
+The Request Demo form posts to the same-origin Cloudflare Worker route `/api/demo-requests`, which proxies the validated lead to the ATS backend route `/api/v1/demo/request`. A static-only deployment must provide an equivalent server-side route; email credentials must never be added to the Vite frontend.
+
+The Worker needs `ATS_PUBLIC_API_BASE_URL`. The ATS backend sends the email using its existing transactional email service (Brevo first, then Resend or SMTP fallback) and needs `DEMO_REQUEST_TO_EMAIL=info@hirescoreai.com` plus a configured provider such as `BREVO_API_KEY`, `DEFAULT_FROM_EMAIL`, and `DEFAULT_FROM_NAME`.
 
 ## Deploy to Cloudflare Pages
 

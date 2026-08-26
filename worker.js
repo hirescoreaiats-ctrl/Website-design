@@ -10,6 +10,7 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url)
     if (url.pathname === '/api/sourcing-requests') return handleSourcingApi(request, env, url)
+    if (url.pathname === '/api/demo-requests') return handleDemoRequestApi(request, env, url)
     if (url.pathname === '/api/indexing/jobs') return handleIndexingNotification(request, env)
 
     if (url.pathname === '/jobs-sitemap.xml') {
@@ -30,6 +31,38 @@ export default {
     }
     return env.ASSETS.fetch(request)
   },
+}
+
+async function handleDemoRequestApi(request, env, url) {
+  if (request.method !== 'POST') return reply('Method not allowed.', 405)
+  let payload
+  try { payload = await request.json() } catch { return reply('Please submit a valid demo request.', 400) }
+  const normalized = {
+    name: clean(payload.name, 120),
+    workEmail: clean(payload.workEmail, 320).toLowerCase(),
+    companyName: clean(payload.companyName, 200),
+    hiringVolume: clean(payload.hiringVolume, 100),
+    message: clean(payload.message, 5000),
+    sourcePage: clean(payload.sourcePage || request.headers.get('referer') || `${url.origin}/contact`, 1000),
+  }
+  if (!normalized.name || !normalized.companyName || !normalized.hiringVolume || !/^\S+@\S+\.\S+$/.test(normalized.workEmail)) {
+    return reply('Please complete your name, valid work email, company name, and hiring volume.', 400)
+  }
+  let upstream
+  try {
+    upstream = await fetch(`${apiBaseUrl(env)}/api/v1/demo/request`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', accept: 'application/json' },
+      body: JSON.stringify(normalized),
+    })
+  } catch {
+    return reply('The demo request service is temporarily unavailable. Please try again.', 502)
+  }
+  const body = await upstream.text()
+  return new Response(body, {
+    status: upstream.status,
+    headers: { 'content-type': upstream.headers.get('content-type') || 'application/json; charset=utf-8', 'cache-control': 'no-store' },
+  })
 }
 
 async function handleSourcingApi(request, env, url) {

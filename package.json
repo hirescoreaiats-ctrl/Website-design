@@ -6,6 +6,7 @@
   "scripts": {
     "test:requirements": "node scripts/test-requirements-page.mjs",
     "test:sourcing": "node scripts/test-sourcing-worker.mjs",
+    "test:demo": "node scripts/test-demo-request.mjs",
     "test:jobs-seo": "node scripts/test-public-jobs-seo.mjs",
     "dev": "vite",
     "build": "vite build && node scripts/generate-seo-pages.mjs && node scripts/validate-seo.mjs",

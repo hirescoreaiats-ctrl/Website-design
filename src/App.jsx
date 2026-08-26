@@ -2831,19 +2831,43 @@ function PricingCard({ plan }) {
 }
 
 function ContactPage() {
+  const [formState, setFormState] = useState({ status: 'idle', message: '' })
+  const submitDemoRequest = async (event) => {
+    event.preventDefault()
+    if (formState.status === 'submitting') return
+    const form = event.currentTarget
+    setFormState({ status: 'submitting', message: 'Sending your demo request…' })
+    try {
+      const data = Object.fromEntries(new FormData(form).entries())
+      data.sourcePage = window.location.href
+      const response = await fetch('/api/demo-requests', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(data),
+      })
+      const result = await response.json().catch(() => ({}))
+      if (!response.ok) throw new Error(result.message || 'Your demo request could not be sent. Please try again or email info@hirescoreai.com.')
+      form.reset()
+      setFormState({ status: 'success', message: 'Thank you. Your demo request has been sent to the HireScoreAI team. We will contact you shortly.' })
+    } catch (error) {
+      setFormState({ status: 'error', message: error.message || 'Your demo request could not be sent. Please try again.' })
+    }
+  }
+
   return (
     <>
       <SEO path="/contact" />
       <PageHero eyebrow="Contact" title="Request a HireScoreAI demo or free pilot" intro="Recruiters, HR teams, startups, staffing agencies, and hiring managers can request pilot access or ask questions about the platform." cta={false} />
       <section className="section">
         <div className="container contactGrid">
-          <form className="demoForm" onSubmit={(event) => event.preventDefault()}>
-            <label>Name<input type="text" placeholder="Your name" required /></label>
-            <label>Work email<input type="email" placeholder="you@company.com" required /></label>
-            <label>Company name<input type="text" placeholder="Company" /></label>
-            <label>Hiring volume<select defaultValue=""><option value="" disabled>Select hiring volume</option><option>1 to 5 roles</option><option>6 to 20 roles</option><option>20+ roles</option></select></label>
-            <label className="fullField">Message<textarea rows="5" placeholder="Tell us about your hiring workflow" /></label>
-            <button className="btn btnPrimary" type="submit">Request Demo</button>
+          <form className="demoForm" onSubmit={submitDemoRequest}>
+            <label>Name<input name="name" type="text" autoComplete="name" placeholder="Your name" required /></label>
+            <label>Work email<input name="workEmail" type="email" autoComplete="email" placeholder="you@company.com" required /></label>
+            <label>Company name<input name="companyName" type="text" autoComplete="organization" placeholder="Company" required /></label>
+            <label>Hiring volume<select name="hiringVolume" defaultValue="" required><option value="" disabled>Select hiring volume</option><option>1 to 5 roles</option><option>6 to 20 roles</option><option>20+ roles</option></select></label>
+            <label className="fullField">Message<textarea name="message" rows="5" placeholder="Tell us about your hiring workflow" /></label>
+            <button className="btn btnPrimary" type="submit" disabled={formState.status === 'submitting'}>{formState.status === 'submitting' ? 'Sending…' : 'Request Demo'}</button>
+            <p className={`sourcingFormStatus is-${formState.status}`} role="status" aria-live="polite">{formState.message}</p>
           </form>
           <aside className="sideCard">
             <h2>Book demo or start pilot</h2>
